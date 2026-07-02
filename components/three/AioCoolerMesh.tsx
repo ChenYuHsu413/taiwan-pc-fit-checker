@@ -41,7 +41,7 @@ export function AioCoolerMesh({
       const position: [number, number, number] = [
         toUnits(cooler.totalThicknessMm) / 2 + toUnits(10),
         toUnits(layout.caseHeightMm / 2),
-        toUnits(TRAY_THICKNESS_MM) + toUnits(cooler.radiatorWidthMm) / 2,
+        toUnits(TRAY_THICKNESS_MM + layout.compSideMm / 2),
       ];
       return { args, position, axis: "x" as const };
     }
@@ -54,7 +54,7 @@ export function AioCoolerMesh({
     const position: [number, number, number] = [
       toUnits(layout.trayXMm - lengthMm / 2 - 20),
       toUnits(layout.caseHeightMm) - toUnits(cooler.totalThicknessMm) / 2 - toUnits(10),
-      toUnits(TRAY_THICKNESS_MM) + toUnits(cooler.radiatorWidthMm) / 2,
+      toUnits(TRAY_THICKNESS_MM + layout.compSideMm / 2),
     ];
     return { args, position, axis: "y" as const };
   }, [cooler, mountLocation, layout]);

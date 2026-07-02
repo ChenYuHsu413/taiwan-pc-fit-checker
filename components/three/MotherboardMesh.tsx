@@ -47,20 +47,44 @@ export function MotherboardMesh({
             <meshStandardMaterial color="#94a3b8" />
           </mesh>
 
-          {/* 記憶體插槽示意 */}
+          {/* 後方 I/O 散熱裝甲（主機板上緣、靠機殼後壁的直立區塊） */}
+          <mesh
+            position={[
+              toUnits(layout.trayXMm - 20),
+              toUnits(layout.boardTopMm - 78),
+              toUnits(TRAY_THICKNESS_MM + 11),
+            ]}
+          >
+            <boxGeometry args={[toUnits(38), toUnits(150), toUnits(20)]} />
+            <meshStandardMaterial color="#1e293b" metalness={0.5} roughness={0.4} />
+          </mesh>
+
+          {/* 記憶體插槽：CPU 腳位「前方」的四根直立 DIMM（長邊沿垂直方向） */}
           {[0, 1, 2, 3].map((i) => (
             <mesh
               key={i}
               position={[
-                toUnits(layout.coolerBaseXMm + 55 + i * 8),
-                toUnits(layout.coolerBaseYMm + 45),
-                toUnits(TRAY_THICKNESS_MM + 16),
+                toUnits(layout.coolerBaseXMm - 52 - i * 10),
+                toUnits(layout.coolerBaseYMm),
+                toUnits(TRAY_THICKNESS_MM + 17),
               ]}
             >
-              <boxGeometry args={[toUnits(4), toUnits(32), toUnits(32)]} />
+              <boxGeometry args={[toUnits(6), toUnits(133), toUnits(34)]} />
               <meshStandardMaterial color="#0f172a" />
             </mesh>
           ))}
+
+          {/* 晶片組散熱片（主機板中下段的扁平區塊） */}
+          <mesh
+            position={[
+              toUnits(layout.coolerBaseXMm + 10),
+              toUnits(layout.boardBottomMm + 55),
+              toUnits(TRAY_THICKNESS_MM + 5),
+            ]}
+          >
+            <boxGeometry args={[toUnits(60), toUnits(60), toUnits(8)]} />
+            <meshStandardMaterial color="#1e293b" metalness={0.5} roughness={0.4} />
+          </mesh>
         </>
       )}
     </group>

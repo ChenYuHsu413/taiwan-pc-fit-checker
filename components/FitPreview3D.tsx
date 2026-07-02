@@ -2,7 +2,7 @@
 
 import { Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { ContactShadows, OrbitControls } from "@react-three/drei";
 import type { BuildSelection, CompatibilityResult, CompatibilityStatus } from "@/types/parts";
 import { computeLayout, toUnits } from "@/lib/three/layout";
 import { STATUS_COLOR, NEUTRAL_COLOR } from "@/lib/statusColor";
@@ -40,63 +40,74 @@ function Scene({ selection, results }: { selection: BuildSelection; results: Com
 
   return (
     <>
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[6, 10, 8]} intensity={1.1} />
-      <directionalLight position={[-6, 4, -6]} intensity={0.4} />
-
-      <CaseFrame layout={layout} cableStatus={cableStatus} />
-      <MotherboardMesh
-        motherboard={motherboard}
-        layout={layout}
-        color={motherboard && motherboardStatus ? STATUS_COLOR[motherboardStatus] : undefined}
+      <ambientLight intensity={0.55} />
+      <directionalLight position={[6, 12, 8]} intensity={1.3} />
+      <directionalLight position={[-6, 5, -6]} intensity={0.45} />
+      <pointLight position={[center[0], center[1], 7]} intensity={1.1} distance={26} />
+      <ContactShadows
+        position={[center[0], -0.6, 0]}
+        opacity={0.5}
+        scale={Math.max(toUnits(layout.caseDepthMm), toUnits(layout.caseHeightMm)) * 2.4}
+        blur={2.4}
+        far={3}
       />
 
-      {gpu && (
-        <GpuMesh
-          gpu={gpu}
-          lengthMm={overrides.gpuLengthMm ?? gpu.lengthMm}
-          thicknessMm={overrides.gpuThicknessMm ?? gpu.thicknessMm}
+      {/* 機殼慣例 X 軸為前(x=0)→後(tray)；透過側透玻璃看的標準視角是前面板在右、
+          後方 I/O 在左，故整組沿 X 中心鏡射。燈光與地面陰影留在群組外維持打光方向。 */}
+      <group position={[toUnits(layout.caseDepthMm), 0, 0]} scale={[-1, 1, 1]}>
+        <CaseFrame layout={layout} cableStatus={cableStatus} />
+        <MotherboardMesh
+          motherboard={motherboard}
           layout={layout}
-          color={gpuStatus ? STATUS_COLOR[gpuStatus] : NEUTRAL_COLOR}
+          color={motherboard && motherboardStatus ? STATUS_COLOR[motherboardStatus] : undefined}
         />
-      )}
 
-      {gpu && (gpu.powerConnectorType === "12VHPWR" || gpu.powerConnectorType === "12V-2x6") && (
-        <CableBend
-          gpu={gpu}
-          gpuLengthMm={overrides.gpuLengthMm ?? gpu.lengthMm}
-          gpuThicknessMm={overrides.gpuThicknessMm ?? gpu.thicknessMm}
-          layout={layout}
-          color={STATUS_COLOR[connectorStatus ?? "warning"]}
-        />
-      )}
+        {gpu && (
+          <GpuMesh
+            gpu={gpu}
+            lengthMm={overrides.gpuLengthMm ?? gpu.lengthMm}
+            thicknessMm={overrides.gpuThicknessMm ?? gpu.thicknessMm}
+            layout={layout}
+            color={gpuStatus ? STATUS_COLOR[gpuStatus] : NEUTRAL_COLOR}
+          />
+        )}
 
-      {cooler.kind === "air" && (
-        <AirCoolerMesh
-          cooler={cooler.cooler}
-          heightMm={overrides.cpuCoolerHeightMm ?? cooler.cooler.heightMm}
-          layout={layout}
-          color={STATUS_COLOR[coolerStatus ?? "warning"]}
-        />
-      )}
+        {gpu && (gpu.powerConnectorType === "12VHPWR" || gpu.powerConnectorType === "12V-2x6") && (
+          <CableBend
+            gpu={gpu}
+            gpuLengthMm={overrides.gpuLengthMm ?? gpu.lengthMm}
+            layout={layout}
+            color={STATUS_COLOR[connectorStatus ?? "warning"]}
+          />
+        )}
 
-      {cooler.kind === "aio" && (
-        <AioCoolerMesh
-          cooler={cooler.cooler}
-          mountLocation={cooler.mountLocation}
-          layout={layout}
-          color={STATUS_COLOR[(cooler.mountLocation === "front" ? radiatorStatus : undefined) ?? "safe"]}
-        />
-      )}
+        {cooler.kind === "air" && (
+          <AirCoolerMesh
+            cooler={cooler.cooler}
+            heightMm={overrides.cpuCoolerHeightMm ?? cooler.cooler.heightMm}
+            layout={layout}
+            color={STATUS_COLOR[coolerStatus ?? "warning"]}
+          />
+        )}
 
-      {psu && (
-        <PsuMesh
-          psu={psu}
-          lengthMm={overrides.psuLengthMm ?? psu.lengthMm}
-          layout={layout}
-          color={psuStatus ? STATUS_COLOR[psuStatus] : NEUTRAL_COLOR}
-        />
-      )}
+        {cooler.kind === "aio" && (
+          <AioCoolerMesh
+            cooler={cooler.cooler}
+            mountLocation={cooler.mountLocation}
+            layout={layout}
+            color={STATUS_COLOR[(cooler.mountLocation === "front" ? radiatorStatus : undefined) ?? "safe"]}
+          />
+        )}
+
+        {psu && (
+          <PsuMesh
+            psu={psu}
+            lengthMm={overrides.psuLengthMm ?? psu.lengthMm}
+            layout={layout}
+            color={psuStatus ? STATUS_COLOR[psuStatus] : NEUTRAL_COLOR}
+          />
+        )}
+      </group>
 
       <OrbitControls target={center} minDistance={2} maxDistance={30} />
     </>
@@ -133,6 +144,7 @@ export function FitPreview3D({
       <div style={{ height: "calc(100% - 40px)" }}>
         <Canvas
           frameloop="demand"
+          gl={{ preserveDrawingBuffer: true, antialias: true }}
           camera={{
             position: [
               toUnits(layout.caseDepthMm) * 0.9,

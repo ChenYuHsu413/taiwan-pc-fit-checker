@@ -45,8 +45,8 @@ export function AirCoolerMesh({
         </mesh>
       ))}
 
-      {/* 中央風扇 */}
-      <mesh position={[toUnits(baseX), toUnits(baseY), centerZ]} rotation={[Math.PI / 2, 0, 0]}>
+      {/* 中央風扇（軸向前後，風道由前往後吹向機殼後方排風口） */}
+      <mesh position={[toUnits(baseX), toUnits(baseY), centerZ]} rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[finHeight * 0.45, finHeight * 0.45, 0.03, 20]} />
         <meshStandardMaterial color="#0f172a" transparent opacity={0.85} />
       </mesh>

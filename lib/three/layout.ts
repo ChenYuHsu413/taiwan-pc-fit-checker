@@ -36,7 +36,7 @@ export interface SceneLayout {
   boardTopMm: number;
   /** 主機板前後方向深度 */
   boardDepthMm: number;
-  /** 顯卡底邊 Y（坐落於電源分艙上方，顯卡由此往上延伸） */
+  /** PCIe x16 插槽線 Y（顯卡上緣＝PCB 面，卡身由此往下延伸，風扇朝下） */
   gpuYMm: number;
   coolerBaseXMm: number;
   /** CPU 腳位／散熱器安裝基準 Y（靠近主機板上緣） */
@@ -72,8 +72,9 @@ export function computeLayout(selection: BuildSelection): SceneLayout | null {
     boardBottomMm,
     boardTopMm,
     boardDepthMm,
-    // 顯卡薄帶（厚度＝插槽數的垂直高度）的下緣 Y，坐落於電源分艙上方並留進氣間隙
-    gpuYMm: PSU_SHROUD_HEIGHT_MM + 45,
+    // PCIe x16 插槽線：真實 ATX 佈局中第一條 x16 槽約在主機板上緣往下 165mm
+    // （上方為 I/O 區），顯卡由插槽線往下延伸，與電源分艙之間留有明顯間隙
+    gpuYMm: Math.max(boardTopMm - 165, PSU_SHROUD_HEIGHT_MM + 80),
     coolerBaseXMm: trayXMm - 90,
     coolerBaseYMm: boardTopMm - 72,
     psuYMm: PSU_VISUAL_HEIGHT_MM / 2 + 12,

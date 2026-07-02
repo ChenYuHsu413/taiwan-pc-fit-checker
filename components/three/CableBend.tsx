@@ -9,19 +9,18 @@ const SLOT_GAP_MM = 8;
 export function CableBend({
   gpu,
   gpuLengthMm,
-  gpuThicknessMm,
   layout,
   color,
 }: {
   gpu: GpuPart;
   gpuLengthMm: number;
-  gpuThicknessMm: number;
   layout: SceneLayout;
   color: string;
 }) {
   // 12VHPWR / 12V-2x6 接頭位於顯卡「頂面」（+Y，背板側），約長度中前段、靠近外緣（玻璃側）。
+  // layout.gpuYMm 即插槽線＝卡身頂面。
   const connectorX = toUnits(layout.trayXMm - gpuLengthMm * 0.55);
-  const connectorY = toUnits(layout.gpuYMm + gpuThicknessMm);
+  const connectorY = toUnits(layout.gpuYMm);
   const connectorZ = toUnits(TRAY_THICKNESS_MM + SLOT_GAP_MM) + toUnits(gpu.heightMm) * 0.7;
 
   const clearance = toUnits(gpu.recommendedSideClearanceMm);

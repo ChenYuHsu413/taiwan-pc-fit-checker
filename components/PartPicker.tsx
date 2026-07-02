@@ -12,10 +12,24 @@ import { PartCard } from "./PartCard";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="mb-6">
+    <div className="mb-4">
       <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-white/40">{title}</h3>
       <div className="space-y-2">{children}</div>
     </div>
+  );
+}
+
+function PartDetails({ part }: { part: AnyPart }) {
+  return (
+    <details className="group">
+      <summary className="cursor-pointer list-none text-[11px] text-white/40 hover:text-white/70">
+        <span className="group-open:hidden">▸ 詳細資訊</span>
+        <span className="hidden group-open:inline">▾ 收合資訊</span>
+      </summary>
+      <div className="mt-1">
+        <PartCard part={part} />
+      </div>
+    </details>
   );
 }
 
@@ -85,6 +99,14 @@ export function PartPicker({
     setSelection((prev) => ({ ...prev, overrides: { ...prev.overrides, [key]: value } }));
   };
 
+  const totalTwd = [
+    selection.case,
+    selection.motherboard,
+    selection.gpu,
+    selection.cooler.kind === "none" ? undefined : selection.cooler.cooler,
+    selection.psu,
+  ].reduce((sum, part) => sum + (part?.priceTwd ?? 0), 0);
+
   return (
     <div className="h-full overflow-y-auto rounded-xl border border-white/10 bg-bg-panel p-4">
       <h2 className="mb-4 text-sm font-bold">Part Picker 零件選擇</h2>
@@ -96,7 +118,7 @@ export function PartPicker({
           placeholder="請選擇機殼"
           onSelect={(c) => setSelection((prev) => ({ ...prev, case: c }))}
         />
-        {selection.case && <PartCard part={selection.case} />}
+        {selection.case && <PartDetails part={selection.case} />}
       </Section>
 
       <Section title="主機板 Motherboard">
@@ -106,7 +128,7 @@ export function PartPicker({
           placeholder="請選擇主機板"
           onSelect={(m) => setSelection((prev) => ({ ...prev, motherboard: m }))}
         />
-        {selection.motherboard && <PartCard part={selection.motherboard} />}
+        {selection.motherboard && <PartDetails part={selection.motherboard} />}
       </Section>
 
       <Section title="顯示卡 GPU">
@@ -116,7 +138,7 @@ export function PartPicker({
           placeholder="請選擇顯示卡"
           onSelect={(g) => setSelection((prev) => ({ ...prev, gpu: g }))}
         />
-        {selection.gpu && <PartCard part={selection.gpu} />}
+        {selection.gpu && <PartDetails part={selection.gpu} />}
       </Section>
 
       <Section title="散熱器 CPU Cooler">
@@ -149,7 +171,7 @@ export function PartPicker({
               placeholder="請選擇空冷散熱器"
               onSelect={(c) => setSelection((prev) => ({ ...prev, cooler: { kind: "air", cooler: c } }))}
             />
-            <PartCard part={selection.cooler.cooler} />
+            <PartDetails part={selection.cooler.cooler} />
           </>
         )}
 
@@ -184,7 +206,7 @@ export function PartPicker({
                     )
                   }
                 />
-                <PartCard part={aioState.cooler} />
+                <PartDetails part={aioState.cooler} />
               </>
             );
           })()}
@@ -197,10 +219,14 @@ export function PartPicker({
           placeholder="請選擇電源供應器"
           onSelect={(p) => setSelection((prev) => ({ ...prev, psu: p }))}
         />
-        {selection.psu && <PartCard part={selection.psu} />}
+        {selection.psu && <PartDetails part={selection.psu} />}
       </Section>
 
-      <Section title="手動覆蓋尺寸 Manual Overrides（選填）">
+      <details className="mb-4">
+        <summary className="cursor-pointer list-none text-xs font-bold uppercase tracking-wide text-white/40 hover:text-white/70">
+          ▸ 手動覆蓋尺寸 Manual Overrides（選填）
+        </summary>
+        <div className="mt-2 space-y-2">
         <OverrideInput
           label="GPU length (mm)"
           value={selection.overrides.gpuLengthMm}
@@ -236,7 +262,15 @@ export function PartPicker({
           value={selection.overrides.psuLengthMm}
           onChange={(v) => updateOverride("psuLengthMm", v)}
         />
-      </Section>
+        </div>
+      </details>
+
+      <div className="mt-2 flex items-center justify-between border-t border-white/10 pt-3">
+        <span className="text-xs text-white/50">預估總價（參考價）</span>
+        <span className="text-base font-bold text-accent-cyan">
+          NT$ {totalTwd.toLocaleString("zh-TW")}
+        </span>
+      </div>
     </div>
   );
 }

@@ -15,6 +15,7 @@ import {
   motherboardFormFactorSchema,
   nonNegativeCountSchema,
   partIdSchema,
+  cpuGenerationSchema,
   pcieGenSchema,
   pcieLanesSchema,
   psuFormFactorSchema,
@@ -42,8 +43,10 @@ export type PartCategory = z.infer<typeof partCategorySchema>;
 /** 單一水冷排安裝位置。sizes = [] 表示官方明確不支援；整個位置缺值表示官方未說明。 */
 const radiatorMountSchema = z.object({
   sizes: z.array(radiatorSizeSchema),
-  /** 水冷排＋風扇合計厚度上限（mm） */
+  /** 水冷排＋風扇合計厚度上限（官方寫合計時填這個） */
   maxTotalThicknessMm: mmSchema.optional(),
+  /** 只算水冷排本體的厚度上限（官方只寫排厚時填這個）。兩者都允許缺值 */
+  maxRadiatorThicknessMm: mmSchema.optional(),
   /** 官方量測條件原文或補充，例如「360 需拆除硬碟籠」 */
   conditionText: z.string().optional(),
 });
@@ -76,6 +79,8 @@ export const caseSchema = z.object({
   /** 顯卡高度（由 PCIe 槽往側板方向）上限 */
   gpuMaxHeightMm: mmSchema.optional(),
   maxCpuCoolerHeightMm: mmSchema.optional(),
+  /** 塔散高度上限的官方量測條件原文（例如是否含側板玻璃） */
+  cpuCoolerHeightConditionText: z.string().optional(),
   expansionSlots: countSchema.optional(),
   radiatorMounts: z.object({
     front: radiatorMountSchema.optional(),
@@ -102,6 +107,8 @@ export const caseSchema = z.object({
 // ---------- Motherboard ----------
 
 const pcieX16SlotSchema = z.object({
+  /** 說明書上的槽位名稱，例如 `PCIEX16_1`；laneSharing 以此引用 */
+  label: z.string().min(1).optional(),
   /** 由上往下第幾個擴充槽位（1 起算） */
   slotIndex: countSchema.optional(),
   gen: pcieGenSchema.optional(),
@@ -112,6 +119,8 @@ const pcieX16SlotSchema = z.object({
 });
 
 const m2SlotSchema = z.object({
+  /** 說明書上的槽位名稱，例如 `M2_1`；laneSharing 以此引用 */
+  label: z.string().min(1).optional(),
   /** PCIe 世代；SATA-only 槽位填 null */
   pcieGen: pcieGenSchema.nullable().optional(),
   pcieLanes: pcieLanesSchema.optional(),
@@ -120,6 +129,31 @@ const m2SlotSchema = z.object({
   laneSource: z.enum(["cpu", "chipset"]).optional(),
   /** 主機板是否為該槽附散熱片 */
   hasHeatsink: z.boolean().optional(),
+});
+
+/**
+ * 共用通道：「when 所指的槽位被使用時，affects 所指的槽位變成 effect」。
+ * 例：M2_2 安裝裝置時，PCIEX16_1 降為 x8 →
+ *   { when: { kind: "m2Slot", label: "M2_2" }, affects: { kind: "pcieSlot", label: "PCIEX16_1" },
+ *     effect: { kind: "reducedLanes", lanes: 8 } }
+ */
+const slotRefSchema = z.object({
+  kind: z.enum(["pcieSlot", "m2Slot", "sataPort"]),
+  /** 說明書上的名稱，例如 `PCIEX16_2`、`M2_3`、`SATA6G_1` */
+  label: z.string().min(1),
+});
+const laneSharingSchema = z.object({
+  when: slotRefSchema.extend({
+    /** 觸發條件補充，例如「僅在安裝 SATA 規格 SSD 時」 */
+    condition: z.string().optional(),
+  }),
+  affects: slotRefSchema,
+  effect: z.discriminatedUnion("kind", [
+    z.object({ kind: z.literal("disabled") }),
+    z.object({ kind: z.literal("reducedLanes"), lanes: pcieLanesSchema }),
+  ]),
+  /** 說明書原文 */
+  sourceText: z.string().optional(),
 });
 
 export const motherboardSchema = z.object({
@@ -140,6 +174,7 @@ export const motherboardSchema = z.object({
   maxMemoryCapacityGb: countSchema.optional(),
   pcieX16Slots: z.array(pcieX16SlotSchema).optional(),
   m2Slots: z.array(m2SlotSchema).optional(),
+  laneSharing: z.array(laneSharingSchema).optional(),
   biosFlashback: z.boolean().optional(),
   /** 是否有影像輸出（HDMI/DP），給內顯使用 */
   hasVideoOutput: z.boolean().optional(),
@@ -152,17 +187,19 @@ export const cpuSchema = z.object({
   category: z.literal("cpu"),
   socket: socketSchema,
   /** 世代／系列 slug，用於 BIOS 規則表比對，例如 `ryzen-9000`、`core-ultra-200s` */
-  generation: partIdSchema,
+  generation: cpuGenerationSchema,
   hasIntegratedGraphics: z.boolean().optional(),
   /** 支援的記憶體類型（Intel 12–14 代可同時支援兩種） */
   memoryTypes: z.array(memoryTypeSchema).min(1).optional(),
-  /** 官方支援的記憶體速度（MT/s），依類型分開 */
+  /** 官方標示的最高記憶體速度（MT/s），依類型分開。通常是「每通道 1 條」的條件 */
   officialMemorySpeedMts: z
     .object({ DDR4: countSchema.optional(), DDR5: countSchema.optional() })
     .optional(),
   /** AMD Default TDP / Intel Processor Base Power */
   tdpW: wattSchema.optional(),
-  /** AMD PPT / Intel Maximum Turbo Power (PL2) */
+  /** CPU 官方最大支援記憶體容量 */
+  maxMemoryCapacityGb: countSchema.optional(),
+  /** 官方公開的最大功耗（Intel Maximum Turbo Power / AMD 若有公開 PPT）。不可自行用倍率推算 */
   maxPowerW: wattSchema.optional(),
   maxPowerDefinition: z.enum(["PPT", "PL2", "other"]).optional(),
   /** CPU 直接提供的 PCIe 世代 */
@@ -266,6 +303,7 @@ export const psuSchema = z.object({
   modularType: z.enum(["non", "semi", "full"]).optional(),
   /** 原生 12V-2x6 / 12VHPWR 接頭數；0 = 確定沒有，缺值 = 未知 */
   native16PinCount: nonNegativeCountSchema.optional(),
+  /** 顯卡端可以插的 PCIe 8-pin（6+2）接頭總數；一條線分兩個頭算 2 */
   pcie8PinCount: nonNegativeCountSchema.optional(),
 });
 

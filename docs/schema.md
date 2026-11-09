@@ -1,4 +1,4 @@
-# 資料 Schema 說明（v1，Phase 1）
+# 資料 Schema 說明（v1.1，Phase 2a）
 
 - 原始碼：`lib/schema/common.ts`、`lib/schema/parts.ts`、`lib/schema/biosSupport.ts`
 - TS 型別一律由 `z.infer` 推導；`types/parts.ts` 只做 re-export，以及 UI 用的組合型別
@@ -54,10 +54,12 @@
 | `gpuLength.conditionText` | text | 官方量測條件原文 | R02 |
 | `gpuMaxHeightMm` | mm | `GPU height/width`（少數品牌提供） | R04、R12 |
 | `maxCpuCoolerHeightMm` | mm | `CPU Cooler Height` | R05 |
+| `cpuCoolerHeightConditionText` | text | 量測條件原文（例如是否含側板玻璃）；不拆欄位 | R05 |
 | `expansionSlots` | 個 | `Expansion Slots: 7` | R03 |
 | `radiatorMounts.{front,top,rear,bottom,side}` | — | `Radiator Support: Front 360/280/240 …` | R08、R09 |
 | └ `.sizes[]` | 120/140/240/280/360/420 | | R08 |
-| └ `.maxTotalThicknessMm` | mm | 頂部常見寫法 `Top radiator + fan max 55mm` | R08、R09 |
+| └ `.maxTotalThicknessMm` | mm | 排＋扇合計，例如 `Top radiator + fan max 55mm` | R08、R09 |
+| └ `.maxRadiatorThicknessMm` | mm | 只算排，例如 `Radiator thickness max 30mm`。**官方寫哪個就填哪個**，兩者都允許缺值 | R08、R09 |
 | └ `.conditionText` | text | 例如「360 需拆除硬碟籠」 | R08 |
 | `psu.formFactors[]` | ATX/SFX/SFX-L | `PSU Support: ATX` | R10 |
 | `psu.withDriveCageMm` | mm | `PSU length 160mm (with HDD cage)` | R10 |
@@ -74,9 +76,7 @@
 
 **水冷排位置**用「位置 → 支援尺寸 + 合計厚度上限 + 條件原文」的物件表達，5 個位置各自 optional。
 
-**待確認**：
-- `maxTotalThicknessMm` 定義為「排＋扇合計」。部分官方只寫水冷排厚度（不含風扇），遇到時需要在 `conditionText` 註明。是否要拆成兩個欄位，等 Phase 2 看實際資料再決定
-- `maxCpuCoolerHeightMm` 各品牌量到側板內側還是玻璃，目前無法區分
+**已決定（Phase 2a）**：水冷厚度分成 `maxTotalThicknessMm`（排＋扇）與 `maxRadiatorThicknessMm`（只算排），照官方寫法填；塔散高度的量測條件寫進 `cpuCoolerHeightConditionText`，不另外拆欄位。
 
 ### 3.2 Motherboard（`motherboard`）
 
@@ -92,10 +92,12 @@
 | `maxMemorySpeedMts` | MT/s | `up to 8000+(OC)` → 取數字，`(OC)` 寫入 notes | R26 |
 | `maxMemoryCapacityGb` | GB | `Max. 192GB` | R25 |
 | `pcieX16Slots[]` | — | `1 x PCIe 5.0 x16 slot`、`1 x PCIe 4.0 x16 (x4 mode)` | R03、R29 |
+| └ `.label` | text | 說明書上的槽位名稱，例如 `PCIEX16_1`（`laneSharing` 以此引用） | R29 |
 | └ `.slotIndex` | 第 n 槽 | 通常要看手冊的佈局圖 | R03 |
 | └ `.gen` / `.electricalLanes` | 3–6 / 1–16 | 實體 x16 但電氣 x4 時填 4 | R29 |
 | └ `.laneSource` | cpu/chipset | | R29 |
 | `m2Slots[]` | — | `M.2_1 (PCIe 5.0 x4, 2242/2260/2280)` | R13、R30–R32 |
+| └ `.label` | text | 說明書上的槽位名稱，例如 `M2_1` | R30–R32 |
 | └ `.pcieGen` | 3–6 \| null | SATA-only 槽填 `null` | R30 |
 | └ `.pcieLanes` / `.supportsSata` / `.formFactors[]` / `.laneSource` / `.hasHeatsink` | | | R30、R31、R13 |
 | `biosFlashback` | bool | `BIOS FlashBack™`、`Q-Flash Plus`、`Flash BIOS Button` | R27 |
@@ -107,23 +109,57 @@ M.2 數量 = `m2Slots.length`（只在 `m2Slots` 有填時才有意義）。
 
 **待確認**：
 - 各品牌的 BIOS Flashback 名稱很多，Phase 2 需要整理一份對照表
-- 「實體 x16、電氣 x8」以及共用通道（插 M.2 後顯卡槽降成 x8）目前無法表達，是否需要：待確認
+- ~~共用通道無法表達~~ → 已新增 `laneSharing[]`（見下）
+
+**`laneSharing[]`（共用通道）**：一筆描述「`when` 的槽位被使用時，`affects` 的槽位變成 `effect`」。資料來源是說明書的頻寬分配表。
+
+| 欄位 | 說明 |
+|---|---|
+| `when.kind` / `when.label` | `pcieSlot` / `m2Slot` / `sataPort` + 說明書名稱 |
+| `when.condition` | 觸發條件補充，例如「僅在安裝 SATA SSD 時」 |
+| `affects.kind` / `affects.label` | 受影響的槽位 |
+| `effect` | `{ kind: "disabled" }` 或 `{ kind: "reducedLanes", lanes }` |
+| `sourceText` | 說明書原文 |
+
+```json
+{ "when": { "kind": "m2Slot", "label": "M2_2" },
+  "affects": { "kind": "pcieSlot", "label": "PCIEX16_1" },
+  "effect": { "kind": "reducedLanes", "lanes": 8 },
+  "sourceText": "說明書原文" }
+```
 
 ### 3.3 CPU（`cpu`）
 
 | 欄位 | 單位 | 官方常見寫法 | 規則 |
 |---|---|---|---|
 | `socket` | string | AMD `CPU Socket: AM5`；Intel `Sockets Supported: FCLGA1851` → 存 `LGA1851` | R22 |
-| `generation` | slug | 沒有官方欄位，由專案定義，例如 `ryzen-9000`、`core-ultra-200s` | R27 |
+| `generation` | enum | 沒有官方欄位，由專案定義；可用值見下方命名表 | R27 |
 | `hasIntegratedGraphics` | bool | AMD `Graphics Model`；Intel `Processor Graphics`（F 型號沒有內顯） | R28 |
 | `memoryTypes[]` | DDR4/DDR5 | Intel `Memory Types: Up to DDR5 5600 MT/s, Up to DDR4 3200 MT/s` | R23 |
-| `officialMemorySpeedMts.{DDR4,DDR5}` | MT/s | 同上；AMD `Max Memory Speed`（不同條數與 rank 會有不同值，**待確認**取哪一個） | R26 |
+| `officialMemorySpeedMts.{DDR4,DDR5}` | MT/s | 取官方標示的**最高值**；這通常是「每通道 1 條（1DPC）」的條件，插滿 4 條時官方支援速度通常更低。原文條件寫進 `notes` | R26 |
+| `maxMemoryCapacityGb` | GB | Intel `Max Memory Size`；AMD 官方頁若有就填 | R25 |
 | `tdpW` | W | AMD `Default TDP`；Intel `Processor Base Power` | R15 |
-| `maxPowerW` | W | AMD 規格頁通常沒有 PPT（**待確認**來源）；Intel `Maximum Turbo Power` | R15 |
+| `maxPowerW` | W | **只填官方公開的數字**：Intel `Maximum Turbo Power`；AMD 官方頁沒有 PPT 時留空，**不可用 TDP × 倍率推算** | R15 |
 | `maxPowerDefinition` | PPT/PL2/other | | R15 |
 | `pcieGen.gpu` / `pcieGen.m2` | 3–6 | `PCI Express Version: PCIe 5.0`；部分 CPU 給顯卡和 M.2 的世代不同 | R29、R30 |
 
-**待確認**：`generation` 的 slug 命名表（例如 Raptor Lake Refresh 是否要和 Raptor Lake 分開）。這決定 BIOS 規則表的粒度，建議 Phase 2 整理 BIOS 資料時一併定案。
+**`generation` 命名表**（`lib/schema/common.ts` 的 `CPU_GENERATIONS`；BIOS 規則表共用）
+
+歸類原則：**依官方型號命名歸類，不依核心微架構**（例如部分 13/14 代 i5 使用上一代核心，仍歸在型號所屬的世代）。13 代與 14 代分開；X3D 與 APU 另外分，因為它們需要的最低 BIOS 常與同代一般型號不同。
+
+| 值 | 包含的系列 | 腳位 |
+|---|---|---|
+| `intel-core-12` | Core i3/i5/i7/i9 12xxx（含 F / K / KF / T） | LGA1700 |
+| `intel-core-13` | Core i3/i5/i7/i9 13xxx | LGA1700 |
+| `intel-core-14` | Core i3/i5/i7/i9 14xxx | LGA1700 |
+| `intel-core-ultra-200s` | Core Ultra 5/7/9 2xx 桌上型（K / KF / F / 無後綴） | LGA1851 |
+| `amd-ryzen-7000` | Ryzen 5/7/9 7xxx 桌上型，**不含** X3D | AM5 |
+| `amd-ryzen-7000-x3d` | Ryzen 7xxxX3D | AM5 |
+| `amd-ryzen-8000` | Ryzen 8xxxG / 8xxxF（AM5 APU 系列） | AM5 |
+| `amd-ryzen-9000` | Ryzen 5/7/9 9xxx 桌上型，**不含** X3D | AM5 |
+| `amd-ryzen-9000-x3d` | Ryzen 9xxxX3D | AM5 |
+
+新世代上市時，在 enum 加值並更新此表。本表的系列範圍依據 Phase 2a 官網調查結果修訂（見回報）。
 
 ### 3.4 RAM（`ram`）
 
@@ -153,10 +189,39 @@ M.2 數量 = `m2Slots.length`（只在 `m2Slots` 有填時才有意義）。
 | 欄位 | 單位 | 官方常見寫法 | 規則 |
 |---|---|---|---|
 | `heightMm` | mm | `Height (with fan)`；部分品牌只列 heatsink 高度 | R05 |
-| `widthMm` / `depthMm` | mm | `Dimensions L x W x H`；**待確認**各家的 L/W 與本專案 width/depth 的對應 | R07、3D |
+| `widthMm` / `depthMm` | mm | `Dimensions L x W x H`；換算方式見下方 | R07、3D |
 | `supportedSockets[]` | string | `Socket Compatibility: Intel LGA1851/1700, AMD AM5/AM4` | R14 |
 | `ramClearance.defaultMm` | mm | Noctua 等品牌提供 `max RAM height` | R06 |
 | `ramClearance.withFanRaisedMm` | mm | 上移風扇後的值 | R06 |
+
+**塔散官方 L / W / H 換算（以風扇氣流方向為準，寫死）**
+
+塔散的三個欄位以**散熱器本身**定義，不套用 §0 的機殼座標軸（裝機後 `heightMm` 其實是機殼的左右方向）：
+
+| 本專案欄位 | 定義 | 官方對應 |
+|---|---|---|
+| `heightMm` | 由 CPU 表面往外（往側板）的高度，含風扇 | 官方 **H**（Height） |
+| `depthMm` | **沿風扇氣流方向**的尺寸（含風扇厚度；雙塔就是兩塔加風扇的總厚） | 官方 L 或 W 中「沿氣流」的那個 |
+| `widthMm` | **垂直於氣流、平行於主機板**的尺寸（約等於風扇框寬度） | 官方 L 或 W 中的另一個 |
+
+```
+          俯視（從側板往主機板看，標準塔散，風由前往後吹）
+
+   機殼前方                                   機殼後方（I/O）
+                ┌──────┬──┬──────┬──┐
+                │      │F │      │F │   ↑
+     氣流 ───▶  │ 鰭片 │a │ 鰭片 │a │   │ widthMm（垂直氣流、平行主機板）
+                │      │n │      │n │   ↓
+                └──────┴──┴──────┴──┘
+                ◀──────── depthMm ────────▶（沿氣流）
+
+          heightMm：垂直於紙面，由主機板往你的方向
+```
+
+判斷規則：
+1. 官方尺寸圖或文字有標示氣流方向（或標出風扇面）→ 依圖決定 L/W 哪個是 `depthMm`
+2. 官方有寫「with fan / without fan」→ `depthMm` 取含風扇的值
+3. 官方只給三個數字、沒有圖也沒有說明 → `heightMm` 照填，`widthMm` / `depthMm` **留空**，原文寫進 `notes`（不靠「通常 L 是氣流方向」這類常識推斷）
 
 舊欄位 `ramClearanceMm` 的語意不明，搬遷時暫時放進 `ramClearance.defaultMm`（mock 值，未驗證）。
 
@@ -180,9 +245,9 @@ M.2 數量 = `m2Slots.length`（只在 `m2Slots` 有填時才有意義）。
 | `lengthMm` | mm | `Dimensions: 150 x 86 x 140 mm`（長度的位置不固定） | R10 |
 | `modularType` | non/semi/full | `Fully Modular` | R11 |
 | `native16PinCount` | 個 | `12V-2x6 (16-pin) x 1`；0 = 確定沒有 | R33 |
-| `pcie8PinCount` | 個 | `PCIe 8-pin (6+2) x 4` | R33 |
+| `pcie8PinCount` | 個 | `PCIe 8-pin (6+2) x 4`。定義為**顯卡端可以插的 8-pin 接頭總數**：一條線分兩個頭算 2 | R33 |
 
-**待確認**：部分 PSU 的 8-pin 是「一條線兩個頭」（daisy-chain），算 1 個還是 2 個會影響 R33。建議以「PSU 端的插座數」為準，但需要你確認。
+**已決定（Phase 2a）**：`pcie8PinCount` 以顯卡端接頭數計算（daisy-chain 一條線兩個頭算 2）。
 
 ### 3.9 M.2 SSD（`m2Ssd`）
 

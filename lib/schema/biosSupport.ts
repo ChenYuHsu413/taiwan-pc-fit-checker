@@ -3,15 +3,15 @@
 // Phase 1 只定格式；真實對照關係在 Phase 2 由官方 CPU 支援清單整理，不憑記憶填寫。
 
 import { z } from "zod";
-import { isoDateSchema, partIdSchema } from "./common";
+import { cpuGenerationSchema, isoDateSchema, partIdSchema } from "./common";
 
 export const biosSupportLevelSchema = z.enum(["native", "biosUpdate", "unsupported"]);
 
 export const biosSupportEntrySchema = z.object({
   /** 晶片組名稱，需與 motherboard.chipset 完全一致，例如 `B650` */
   chipset: z.string().min(1),
-  /** 需與 cpu.generation 一致，例如 `ryzen-9000` */
-  cpuGeneration: partIdSchema,
+  /** 需與 cpu.generation 一致，例如 `amd-ryzen-9000` */
+  cpuGeneration: cpuGenerationSchema,
   support: biosSupportLevelSchema,
   /** 需更新 BIOS 時的補充，例如官方列出的最低 BIOS / AGESA 版本 */
   minBiosNote: z.string().optional(),

@@ -53,6 +53,24 @@ export const m2FormFactorSchema = z.enum(["2230", "2242", "2260", "2280", "22110
  */
 export const socketSchema = z.string().regex(/^[A-Za-z]+\d+$/, "腳位格式不符，例如 AM5、LGA1851");
 
+/**
+ * CPU 世代（細分命名，BIOS 規則表以此比對）。每個值包含哪些系列見 docs/schema.md §3.3。
+ * X3D 與 APU 另外分，因為它們需要的最低 BIOS 常與同代一般型號不同。
+ */
+export const CPU_GENERATIONS = [
+  "intel-core-12",
+  "intel-core-13",
+  "intel-core-14",
+  "intel-core-ultra-200s",
+  "amd-ryzen-7000",
+  "amd-ryzen-7000-x3d",
+  "amd-ryzen-8000",
+  "amd-ryzen-9000",
+  "amd-ryzen-9000-x3d",
+] as const;
+export const cpuGenerationSchema = z.enum(CPU_GENERATIONS);
+export type CpuGeneration = z.infer<typeof cpuGenerationSchema>;
+
 /** 所有零件共用欄位 */
 export const basePartShape = {
   id: partIdSchema,

@@ -42,6 +42,8 @@ npm test
 
 沒通過就不要 commit，並回報錯誤內容。
 
+**Phase 3 完成之前一律不要 push。** 真實資料只填有條件的欄位（例如機殼的 `gpuLength.noFrontMm`）時，現行規則只讀 `unspecifiedMm`，會顯示 Unknown；必須等 Phase 3 改完規則才能部署。
+
 ## 工作原則
 
 - **遇到不確定的狀況就停下來回報，不要自行假設。** 包括：規格數值、業界門檻、欄位語意、使用者意圖。文件裡標成「待確認」並列入回報。
@@ -67,4 +69,12 @@ npm test
 | 2026-11-09 | 零件 `id` 為全站唯一的 slug（不加類別前綴），發布後不可修改 | 分享 URL 依賴 |
 | 2026-11-09 | 相容性狀態 6 級：safe / info / tight / warning / incompatible / unknown；規則分組 spatial / platform | compatibility-spec §0 |
 | 2026-11-09 | 價格 `source` 多一個 `mock` 值 | 避免把 mock 假價格標成「人工參考價」；Phase 2 移除 |
+| 2026-11-09 | Phase 3 完成前不 push | 真實資料與現行規則不相容（會顯示 Unknown） |
+| 2026-11-09 | 機殼水冷厚度分 `maxTotalThicknessMm`（排＋扇）與 `maxRadiatorThicknessMm`（只算排），官方寫哪個填哪個 | schema.md §3.1 |
+| 2026-11-09 | 塔散高度上限的量測條件寫進 `cpuCoolerHeightConditionText`，不拆欄位 | |
+| 2026-11-09 | 主機板新增 `laneSharing[]`，以及 PCIe / M.2 槽的 `label` | schema.md §3.2 |
+| 2026-11-09 | CPU `generation` 採細分命名 enum（13/14 代分開，X3D 與 APU 另外分），BIOS 規則表共用 | schema.md §3.3 |
+| 2026-11-09 | CPU 新增 `maxMemoryCapacityGb`；`maxPowerW` 只填官方公開數字；`officialMemorySpeedMts` 取官方最高值（通常是 1DPC 條件） | |
+| 2026-11-09 | PSU `pcie8PinCount` = 顯卡端可插的 8-pin 接頭總數（一線兩頭算 2） | |
+| 2026-11-09 | 塔散 L/W/H 換算以風扇氣流方向為準；無法判斷時 width/depth 留空 | schema.md §3.6 |
 | （待定） | 相容性門檻數值 | 見 `docs/compatibility-spec.md` §0.2 |

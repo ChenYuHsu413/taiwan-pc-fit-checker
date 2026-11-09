@@ -1,6 +1,6 @@
 # 相容性規則規格（草案 v0）
 
-- 狀態：草案，Phase 1 定型別時會再修訂
+- 狀態：草案 v1（Phase 1 已加入 `info` / `unknown` 狀態、規則分組，以及平台規則 R22–R33）
 - 單位：全部為 mm；功率單位為 W
 - 「已實作」欄對照的是 commit `6c30241` 的 `lib/compatibility.ts`
 
@@ -16,7 +16,12 @@
 | `tight` | 物理上放得下，但餘裕低於緩衝值，需要實際確認 |
 | `warning` | 無法用尺寸確定、或已知有風險（例如需要拆硬碟籠、需要調整風扇位置） |
 | `incompatible` | 確定裝不下或不相容 |
-| `unknown`（**新增提案**） | 資料不足、零件未選齊，**不計入**整體警示。現行程式把這種情況歸成 `warning`，造成誤報 |
+| `info` | 可以用，但效能會打折，或有使用者需要知道的事（例如 PCIe 降速、需開 XMP/EXPO） |
+| `unknown` | 資料不足、零件未選齊，**不計入**整體警示 |
+
+嚴重度由高到低：`incompatible` > `warning` > `tight` > `info` > `safe`；`unknown` 獨立，不參與排序。
+
+> Phase 1 已加入型別與 UI 樣式，但**判斷邏輯未改**。目前仍有兩處在缺資料時誤報 `warning`（R01 只選了機殼或只選了主機板、R05 尚未選擇散熱器），留到 Phase 3 改回傳 `unknown`。
 
 ### 0.2 門檻參數（提案）
 
@@ -32,9 +37,11 @@ remaining < 0               → incompatible
 
 各規則的 `tightBelowMm` 都是**提案值，待確認**。業界沒有統一標準，這些數字屬於產品決策，要由你拍板。現行程式一律使用 10 mm。
 
-### 0.3 結果必須帶穩定的 `ruleId`
+### 0.3 `ruleId` 與分組
 
-例如 `gpu.length`。2D/3D/走線建議改用 `ruleId` 對應，不再比對中文字串前綴。
+- 每個檢查結果都帶固定的 `ruleId`（`R01`…`R33`），定義於 `lib/compatibility/rules.ts`；2D/3D/走線建議一律用 `ruleId` 找結果（Phase 1 已完成）
+- 每條規則都有 `group`：`spatial`（空間）或 `platform`（平台），報告 UI 依分組顯示（Phase 3）
+- 下文各規則標題中的 `gpu.length` 等是語意標籤，程式中使用 `ruleId`
 
 ---
 
@@ -164,16 +171,18 @@ remaining < 0               → incompatible
 - **待確認**：PCIe 槽在板面上的高度，以及顯卡背板的實際離板距離，官方幾乎都不會公開。建議只做**提醒型**規則（「此 M.2 位於顯卡下方，請確認散熱片高度」）
 - **已實作**：❌ 缺漏
 
-### R14 CPU 腳位 vs 主機板／散熱器扣具 — `socket`
-- **欄位**：`cpu.socket` *(新)*、`mb.socket`、`cooler.supportedSockets[]` *(新)*
+### R14 主機板腳位 vs 散熱器扣具 — `socket.cooler`（分組：**platform**）
+> Phase 1 調整：CPU vs 主機板腳位拆到 R22；本條只檢查散熱器
+- **欄位**：`motherboard.socket`、`airCooler.supportedSockets[]` / `aio.supportedSockets[]`
 - **邏輯**：
-  - `cpu.socket === mb.socket`，否則 incompatible
+  - `supportedSockets` 缺值 → unknown
   - `mb.socket ∈ cooler.supportedSockets`，或屬於同一個「扣具相容群組」→ safe
   - 不在清單內 → incompatible；若需要另購扣具 → warning
 - **扣具相容群組**：AM4/AM5 孔距相同、LGA1700/LGA1851 孔距相同，這兩點我有把握；但個別散熱器是否需要額外扣具，**一律以官方支援清單為準**，不靠群組推論
 - **已實作**：❌ 缺漏（散熱器沒有 socket 欄位，也沒有 CPU 類別）
 
-### R15 PSU 瓦數估算 — `psu.wattage`
+### R15 PSU 瓦數估算 — `psu.wattage`（分組：**platform**）
+> Phase 1 調整：瓦數屬於電氣相容，改歸 platform
 - **欄位**：`cpu.maxPowerW` *(新，AMD PPT / Intel PL2)*、`gpu.tbpW` *(新)*、`gpu.recommendedPsuW` *(新，官方建議)*、`psu.wattage`
 - **邏輯（提案）**：
   ```
@@ -189,9 +198,9 @@ remaining < 0               → incompatible
 
 | ID | 規則 | 說明 | 優先度 |
 |---|---|---|---|
-| R16 | RAM 代數 vs 主機板 | DDR4/DDR5 不能混用 → incompatible | 高（簡單） |
+| R16 | ~~RAM 代數 vs 主機板~~ | **已併入 R23** | — |
 | R17 | AIO 水管長度 vs 安裝位置 | 前置 360 + 長機殼時水管可能不夠長；資料取得困難 | 低 |
-| R18 | 顯卡供電接頭數 vs PSU | 原生 12V-2x6 接頭或 8-pin 的數量 | 中 |
+| R18 | ~~顯卡供電接頭數 vs PSU~~ | **已併入 R33** | — |
 | R19 | 主機板寬度 vs 走線孔（E-ATX） | 併入 R01 | — |
 | R20 | 直立顯卡 | 需要機殼支援與轉接線；之後再做 | 低 |
 | R21 | 底部進風風扇 vs 顯卡厚度 | 部分機殼底部可裝風扇，會吃掉 R03 的空間 | 中 |
@@ -209,3 +218,106 @@ remaining < 0               → incompatible
 | 新增建議 | 6 | R16–R21 |
 
 另外還有 2 個語意 bug（資料不足時回傳 `warning`），在 §0.1 以 `unknown` 狀態處理。
+
+---
+
+## 4. 平台相容性規則（R22–R33，分組皆為 `platform`）
+
+> 欄位名稱對應 `docs/schema.md`。全部在 Phase 3 實作。任何必要欄位缺值時，一律回傳 `unknown`。
+
+### R22 CPU 腳位 vs 主機板腳位 — `socket.cpu`
+- **欄位**：`cpu.socket`、`motherboard.socket`
+- **邏輯**：字串完全相等 → safe；否則 → incompatible
+- **已實作**：❌
+
+### R23 記憶體類型 — `memory.type`
+- **欄位**：`ram.memoryType`、`motherboard.memoryType`、`cpu.memoryTypes[]`
+- **邏輯**：`ram.memoryType !== mb.memoryType` → incompatible；`cpu.memoryTypes` 有值且不包含 `mb.memoryType` → incompatible（例如只支援 DDR5 的 CPU 配上 DDR4 主機板）；`cpu.memoryTypes` 缺值 → 只檢查 RAM vs 主機板，CPU 部分附註 unknown
+- **已實作**：❌（取代 R16）
+
+### R24 記憶體條數 vs 插槽數 — `memory.slots`
+- **欄位**：`ram.moduleCount`、`motherboard.memorySlots`
+- **邏輯**：`moduleCount > memorySlots` → incompatible
+- **已實作**：❌
+
+### R25 總容量 vs 主機板上限 — `memory.capacity`
+- **欄位**：`ram.moduleCapacityGb × ram.moduleCount`、`motherboard.maxMemoryCapacityGb`
+- **邏輯**：超過 → incompatible；`maxMemoryCapacityGb` 缺值 → unknown
+- **待確認**：是否也要比對 CPU 的最大容量（需要新增 `cpu.maxMemoryCapacityGb` 欄位，目前沒有）
+- **已實作**：❌
+
+### R26 記憶體速度 — `memory.speed`
+- **欄位**：`ram.speedMts`、`ram.requiresXmpExpo`、`motherboard.maxMemorySpeedMts`、`cpu.officialMemorySpeedMts[ram.memoryType]`
+- **邏輯**：
+  - `speedMts > cpu 官方速度` → info「超出 CPU 官方支援，需要 XMP/EXPO 超頻，穩定性不保證」
+  - `speedMts > mb.maxMemorySpeedMts` → info「超出主機板上限，會降速」
+  - 未超出但 `requiresXmpExpo` → info「需在 BIOS 開啟 XMP/EXPO 才能跑到標稱速度」
+  - 都沒有 → safe
+- **待確認**：主機板的上限常含 `(OC)`，CPU 官方速度也依條數與 rank 而不同（例如 4 條時會更低）。第一版只用單一數字，是否要考慮條數：待確認
+- **已實作**：❌
+
+### R27 晶片組 × CPU 世代 BIOS — `bios.support`
+- **欄位**：`motherboard.chipset`、`motherboard.id`、`motherboard.biosFlashback`、`cpu.generation`；規則表 `data/rules/bios-support.json`
+- **邏輯**：查表（`boardOverrides` 優先）
+  - `native` → safe
+  - `biosUpdate` 且 `biosFlashback === true` → warning「可能需要更新 BIOS，此主機板支援免 CPU 更新（BIOS Flashback）」
+  - `biosUpdate` 且 `biosFlashback !== true` → warning「可能需要更新 BIOS，此主機板無 Flashback，需要舊 CPU 開機更新或請店家代刷」（訊息依 Flashback 有無而不同）
+  - `unsupported` → incompatible
+  - 查不到 → unknown
+- **已實作**：❌（Phase 1 只定規則表格式）
+
+### R28 影像輸出 — `display.output`
+- **欄位**：`cpu.hasIntegratedGraphics`、`motherboard.hasVideoOutput`、是否選擇顯卡
+- **邏輯**：有顯卡 → safe（不檢查）；沒有顯卡時：
+  - `hasIntegratedGraphics === false` → incompatible「沒有任何影像輸出」
+  - 有內顯但 `hasVideoOutput === false` → incompatible
+  - 任一欄位缺值 → unknown
+- **已實作**：❌
+
+### R29 顯卡 PCIe 世代與通道 — `pcie.gpu`
+- **欄位**：`gpu.pcieGen`、`gpu.pcieLanes`、`motherboard.pcieX16Slots[0]`（`gen`、`electricalLanes`、`laneSource`）、`cpu.pcieGen.gpu`
+- **邏輯**：
+  - 有效世代 = `min(slot.gen, laneSource === "cpu" ? cpu.pcieGen.gpu : slot.gen)`
+  - `gpu.pcieGen > 有效世代`，或 `gpu.pcieLanes > slot.electricalLanes` → info「向下相容，頻寬降低」
+  - 否則 → safe
+- **待確認**：顯卡插在哪一個 x16 槽。第一版假設第一條（`pcieX16Slots[0]`），之後是否讓使用者選擇：待確認
+- **已實作**：❌
+
+### R30 SSD 介面 vs M.2 槽 — `m2.interface`
+- **欄位**：`m2Ssd.interface`、`motherboard.m2Slots[]`（`pcieGen`、`supportsSata`、`laneSource`）、`cpu.pcieGen.m2`
+- **邏輯**（對每支 SSD 找出它被分配到的槽）：
+  - SATA SSD，但槽位 `supportsSata === false` → incompatible
+  - PCIe SSD 插在 SATA-only 槽（`pcieGen === null`）→ incompatible
+  - `ssd.gen > 槽位的有效世代` → info「向下相容，速度受限」
+- **待確認**：多支 SSD 時如何分配槽位。提案是先依世代由高到低貪婪分配，讓結果對使用者最有利
+- **已實作**：❌
+
+### R31 SSD 尺寸規格 — `m2.formFactor`
+- **欄位**：`m2Ssd.formFactor`、`motherboard.m2Slots[].formFactors[]`
+- **邏輯**：沒有任何槽位支援此尺寸 → incompatible；有支援，但被分配到的槽不支援 → 重新分配（與 R30 共用分配邏輯）
+- **已實作**：❌
+
+### R32 SSD 數量 vs M.2 槽數 — `m2.count`
+- **欄位**：所選 SSD 數量、`motherboard.m2Slots.length`
+- **邏輯**：數量 > 槽數 → incompatible；`m2Slots` 缺值 → unknown
+- **待確認**：共用通道（插了某個 M.2 之後 SATA 埠或 PCIe 槽被停用）暫時不處理
+- **已實作**：❌
+
+### R33 顯卡供電接頭 vs PSU — `power.connector`
+- **欄位**：`gpu.powerConnectors[]`、`psu.native16PinCount`、`psu.pcie8PinCount`
+- **邏輯**：
+  - 顯卡需要 16-pin（`12V-2x6` / `12VHPWR` / `16-pin`），且 `native16PinCount === 0` → warning「需要使用轉接線（通常由顯卡附贈），請確認 8-pin 數量足夠」
+  - 顯卡需要 n 個 8-pin，且 `pcie8PinCount < n` → incompatible
+  - PSU 欄位缺值 → unknown
+- **待確認**：轉接線需要幾個 8-pin（依顯卡而定，通常寫在顯卡的盒裝內容裡），本條是否要檢查；以及 daisy-chain 線怎麼計數（見 schema.md §3.8）
+- **已實作**：❌（取代 R18）
+
+---
+
+## 5. 規則分組總表
+
+| 分組 | 規則 |
+|---|---|
+| spatial | R01、R02、R03、R04、R05、R06、R07、R08、R09、R10、R11、R12、R13、R17、R20、R21 |
+| platform | R14、R15、R22、R23、R24、R25、R26、R27、R28、R29、R30、R31、R32、R33 |
+| 已併入其他規則（保留編號，不再使用） | R16 → R23、R18 → R33、R19 → R01 |

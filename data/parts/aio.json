@@ -1,0 +1,44 @@
+[
+  {
+    "id": "thermalright-frozen-warframe-240",
+    "category": "aio",
+    "brand": "利民 Thermalright",
+    "model": "Frozen Warframe 240",
+    "twName": "利民 Frozen Warframe 240 一體式水冷",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "radiatorSize": 240,
+    "radiatorLengthMm": 277,
+    "radiatorWidthMm": 120,
+    "radiatorThicknessMm": 27,
+    "fanThicknessMm": 25
+  },
+  {
+    "id": "deepcool-lt720",
+    "category": "aio",
+    "brand": "九州風神 DeepCool",
+    "model": "LT720",
+    "twName": "DeepCool LT720 360 一體式水冷",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "radiatorSize": 360,
+    "radiatorLengthMm": 397,
+    "radiatorWidthMm": 120,
+    "radiatorThicknessMm": 27,
+    "fanThicknessMm": 25
+  },
+  {
+    "id": "nzxt-kraken-280",
+    "category": "aio",
+    "brand": "NZXT",
+    "model": "Kraken 280",
+    "twName": "NZXT Kraken 280 一體式水冷（含 LCD 顯示器）",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "radiatorSize": 280,
+    "radiatorLengthMm": 316,
+    "radiatorWidthMm": 140,
+    "radiatorThicknessMm": 30,
+    "fanThicknessMm": 26
+  }
+]

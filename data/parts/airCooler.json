@@ -1,0 +1,48 @@
+[
+  {
+    "id": "thermalright-peerless-assassin-120-se",
+    "category": "airCooler",
+    "brand": "利民 Thermalright",
+    "model": "Peerless Assassin 120 SE",
+    "twName": "利民 Peerless Assassin 120 SE 雙塔散熱器",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "heightMm": 155,
+    "widthMm": 130,
+    "depthMm": 135,
+    "ramClearance": {
+      "defaultMm": 33
+    }
+  },
+  {
+    "id": "deepcool-ak620",
+    "category": "airCooler",
+    "brand": "九州風神 DeepCool",
+    "model": "AK620",
+    "twName": "DeepCool AK620 雙塔散熱器",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "heightMm": 160,
+    "widthMm": 129,
+    "depthMm": 138,
+    "ramClearance": {
+      "defaultMm": 45
+    }
+  },
+  {
+    "id": "noctua-nh-d15-chromax-black",
+    "category": "airCooler",
+    "brand": "Noctua",
+    "model": "NH-D15 chromax.black",
+    "twName": "Noctua NH-D15 chromax.black 雙塔散熱器",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "雙風扇配置對記憶體高度較敏感，安裝前建議確認記憶體高度",
+    "heightMm": 165,
+    "widthMm": 150,
+    "depthMm": 161,
+    "ramClearance": {
+      "defaultMm": 32
+    }
+  }
+]

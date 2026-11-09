@@ -1,0 +1,63 @@
+[
+  {
+    "id": "msi-geforce-rtx-4070-super-gaming-x-slim",
+    "category": "gpu",
+    "brand": "微星 MSI",
+    "model": "GeForce RTX 4070 SUPER GAMING X SLIM",
+    "twName": "微星 RTX 4070 SUPER GAMING X SLIM 顯示卡",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "lengthMm": 302,
+    "heightMm": 128,
+    "thicknessMm": 51,
+    "slotWidth": 2,
+    "powerConnectors": [
+      {
+        "type": "12V-2x6",
+        "count": 1
+      }
+    ],
+    "legacyRecommendedSideClearanceMm": 10
+  },
+  {
+    "id": "asus-tuf-gaming-rtx-4080-super-oc",
+    "category": "gpu",
+    "brand": "華碩 ASUS",
+    "model": "TUF Gaming RTX 4080 SUPER OC",
+    "twName": "華碩 TUF Gaming RTX 4080 SUPER OC 顯示卡",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "使用 12VHPWR 供電線，注意側板彎折空間",
+    "lengthMm": 348,
+    "heightMm": 150,
+    "thicknessMm": 63,
+    "slotWidth": 3,
+    "powerConnectors": [
+      {
+        "type": "12VHPWR",
+        "count": 1
+      }
+    ],
+    "legacyRecommendedSideClearanceMm": 15
+  },
+  {
+    "id": "gigabyte-radeon-rx-7800-xt-gaming-oc",
+    "category": "gpu",
+    "brand": "技嘉 GIGABYTE",
+    "model": "Radeon RX 7800 XT GAMING OC",
+    "twName": "技嘉 Radeon RX 7800 XT GAMING OC 顯示卡",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "lengthMm": 328,
+    "heightMm": 138,
+    "thicknessMm": 55,
+    "slotWidth": 3,
+    "powerConnectors": [
+      {
+        "type": "8-pin",
+        "count": 2
+      }
+    ],
+    "legacyRecommendedSideClearanceMm": 10
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "amd-ryzen-5-9600x",
+    "category": "cpu",
+    "brand": "AMD",
+    "model": "Ryzen 5 9600X",
+    "twName": "AMD Ryzen 5 9600X 處理器",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "Phase 1 mock：僅填腳位等確定欄位，其餘待 Phase 2 由官方頁補齊",
+    "socket": "AM5",
+    "generation": "ryzen-9000",
+    "hasIntegratedGraphics": true,
+    "memoryTypes": ["DDR5"]
+  },
+  {
+    "id": "amd-ryzen-7-9800x3d",
+    "category": "cpu",
+    "brand": "AMD",
+    "model": "Ryzen 7 9800X3D",
+    "twName": "AMD Ryzen 7 9800X3D 處理器",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "Phase 1 mock：僅填腳位等確定欄位，其餘待 Phase 2 由官方頁補齊",
+    "socket": "AM5",
+    "generation": "ryzen-9000",
+    "hasIntegratedGraphics": true,
+    "memoryTypes": ["DDR5"]
+  },
+  {
+    "id": "intel-core-i5-14400f",
+    "category": "cpu",
+    "brand": "Intel",
+    "model": "Core i5-14400F",
+    "twName": "Intel Core i5-14400F 處理器（無內顯）",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "Phase 1 mock：F 型號無內顯；其餘待 Phase 2 由官方頁補齊",
+    "socket": "LGA1700",
+    "generation": "core-14th",
+    "hasIntegratedGraphics": false,
+    "memoryTypes": ["DDR4", "DDR5"]
+  }
+]

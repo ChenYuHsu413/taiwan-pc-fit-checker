@@ -1,0 +1,119 @@
+[
+  {
+    "id": "antec-p20c-argb",
+    "category": "case",
+    "brand": "安鈦克 Antec",
+    "model": "P20C ARGB",
+    "twName": "Antec P20C ARGB 中塔機殼（玻璃側板）",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "external": {},
+    "supportedFormFactors": [
+      "ATX",
+      "M-ATX",
+      "ITX"
+    ],
+    "gpuLength": {
+      "unspecifiedMm": 400
+    },
+    "maxCpuCoolerHeightMm": 172,
+    "radiatorMounts": {
+      "front": {
+        "sizes": [
+          240,
+          280,
+          360
+        ]
+      },
+      "top": {
+        "sizes": [
+          240,
+          280
+        ]
+      }
+    },
+    "psu": {
+      "unspecifiedMm": 200,
+      "driveCageRemovable": true
+    },
+    "cableSpaceMm": 25
+  },
+  {
+    "id": "jonsbo-d31-mesh",
+    "category": "case",
+    "brand": "喬思伯 Jonsbo",
+    "model": "D31 Mesh",
+    "twName": "Jonsbo D31 Mesh 中塔網孔機殼",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "背板走線空間偏窄，建議搭配全模組化電源",
+    "external": {},
+    "supportedFormFactors": [
+      "ATX",
+      "M-ATX",
+      "ITX"
+    ],
+    "gpuLength": {
+      "unspecifiedMm": 355
+    },
+    "maxCpuCoolerHeightMm": 165,
+    "radiatorMounts": {
+      "front": {
+        "sizes": [
+          240,
+          280
+        ]
+      },
+      "top": {
+        "sizes": [
+          240
+        ]
+      }
+    },
+    "psu": {
+      "unspecifiedMm": 160,
+      "driveCageRemovable": true
+    },
+    "cableSpaceMm": 18
+  },
+  {
+    "id": "lian-li-lancool-216",
+    "category": "case",
+    "brand": "聯力 Lian Li",
+    "model": "LANCOOL 216",
+    "twName": "Lian Li LANCOOL 216 中塔機殼（雙面網孔）",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "external": {},
+    "supportedFormFactors": [
+      "ATX",
+      "M-ATX",
+      "ITX"
+    ],
+    "gpuLength": {
+      "unspecifiedMm": 384
+    },
+    "maxCpuCoolerHeightMm": 181,
+    "radiatorMounts": {
+      "front": {
+        "sizes": [
+          240,
+          280,
+          360
+        ]
+      },
+      "top": {
+        "sizes": [
+          240,
+          280,
+          360
+        ]
+      }
+    },
+    "psu": {
+      "unspecifiedMm": 220,
+      "driveCageRemovable": true
+    },
+    "cableSpaceMm": 28
+  }
+]

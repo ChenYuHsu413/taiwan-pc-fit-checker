@@ -1,0 +1,23 @@
+[
+  {
+    "partId": "seasonic-focus-gx-750",
+    "priceTwd": 3390,
+    "updatedAt": "2026-06-08",
+    "source": "mock",
+    "note": "Phase 1 由 mock 搬遷，原 sourceName：原價屋參考"
+  },
+  {
+    "partId": "fsp-hydro-ptm-pro-850w",
+    "priceTwd": 4290,
+    "updatedAt": "2026-06-08",
+    "source": "mock",
+    "note": "Phase 1 由 mock 搬遷，原 sourceName：原價屋參考"
+  },
+  {
+    "partId": "cooler-master-mwe-650-bronze-v2",
+    "priceTwd": 1990,
+    "updatedAt": "2026-06-08",
+    "source": "mock",
+    "note": "Phase 1 由 mock 搬遷，原 sourceName：原價屋參考"
+  }
+]

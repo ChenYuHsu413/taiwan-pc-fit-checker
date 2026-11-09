@@ -1,0 +1,23 @@
+[
+  {
+    "partId": "asus-rog-strix-b650-a-gaming-wifi",
+    "priceTwd": 7990,
+    "updatedAt": "2026-06-15",
+    "source": "mock",
+    "note": "Phase 1 由 mock 搬遷，原 sourceName：原價屋參考"
+  },
+  {
+    "partId": "msi-pro-b760m-a-wifi",
+    "priceTwd": 3990,
+    "updatedAt": "2026-06-15",
+    "source": "mock",
+    "note": "Phase 1 由 mock 搬遷，原 sourceName：原價屋參考"
+  },
+  {
+    "partId": "gigabyte-b650i-aorus-ultra",
+    "priceTwd": 8490,
+    "updatedAt": "2026-06-15",
+    "source": "mock",
+    "note": "Phase 1 由 mock 搬遷，原 sourceName：原價屋參考"
+  }
+]

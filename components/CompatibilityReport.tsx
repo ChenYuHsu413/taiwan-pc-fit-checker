@@ -1,17 +1,14 @@
 import type { CompatibilityResult, CompatibilityStatus } from "@/types/parts";
-
-const STATUS_LABEL: Record<CompatibilityStatus, string> = {
-  safe: "Safe 安全",
-  tight: "Tight 緊繃",
-  warning: "Warning 注意",
-  incompatible: "Incompatible 不相容",
-};
+import { RULES } from "@/lib/compatibility/rules";
+import { STATUS_LABEL } from "@/lib/compatibility/messages";
 
 const STATUS_STYLE: Record<CompatibilityStatus, string> = {
   safe: "border-status-safe/40 bg-status-safe/10 text-status-safe",
+  info: "border-status-info/40 bg-status-info/10 text-status-info",
   tight: "border-status-tight/40 bg-status-tight/10 text-status-tight",
   warning: "border-status-warning/40 bg-status-warning/10 text-status-warning",
   incompatible: "border-status-incompatible/40 bg-status-incompatible/10 text-status-incompatible",
+  unknown: "border-status-unknown/40 bg-status-unknown/10 text-status-unknown",
 };
 
 export function CompatibilityReport({ results }: { results: CompatibilityResult[] }) {
@@ -23,10 +20,10 @@ export function CompatibilityReport({ results }: { results: CompatibilityResult[
         <p className="text-sm text-white/40">請選擇零件以產生報告。</p>
       ) : (
         <div className="space-y-3">
-          {results.map((r, i) => (
-            <div key={i} className={`rounded-lg border p-3 ${STATUS_STYLE[r.status]}`}>
+          {results.map((r) => (
+            <div key={r.ruleId} className={`rounded-lg border p-3 ${STATUS_STYLE[r.status]}`}>
               <div className="flex items-center justify-between gap-2">
-                <p className="text-sm font-semibold text-white">{r.item}</p>
+                <p className="text-sm font-semibold text-white">{RULES[r.ruleId].title}</p>
                 <span className="whitespace-nowrap rounded-full bg-black/30 px-2 py-0.5 text-[10px] font-bold">
                   {STATUS_LABEL[r.status]}
                 </span>

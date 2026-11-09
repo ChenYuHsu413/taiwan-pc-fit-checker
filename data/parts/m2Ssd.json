@@ -1,0 +1,39 @@
+[
+  {
+    "id": "samsung-990-pro-2tb",
+    "category": "m2Ssd",
+    "brand": "Samsung",
+    "model": "990 PRO 2TB",
+    "twName": "三星 990 PRO 2TB M.2 PCIe 4.0 SSD",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "Phase 1 mock：不含散熱片版本",
+    "interface": { "kind": "pcie", "gen": 4, "lanes": 4 },
+    "formFactor": "2280",
+    "hasHeatsink": false
+  },
+  {
+    "id": "wd-black-sn850x-1tb",
+    "category": "m2Ssd",
+    "brand": "WD",
+    "model": "WD_BLACK SN850X 1TB",
+    "twName": "WD_BLACK SN850X 1TB M.2 PCIe 4.0 SSD",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "Phase 1 mock：散熱片版本與否未確認",
+    "interface": { "kind": "pcie", "gen": 4, "lanes": 4 },
+    "formFactor": "2280"
+  },
+  {
+    "id": "crucial-t705-2tb",
+    "category": "m2Ssd",
+    "brand": "Crucial",
+    "model": "T705 2TB",
+    "twName": "美光 Crucial T705 2TB M.2 PCIe 5.0 SSD",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "Phase 1 mock：用於測試 PCIe 5.0 SSD 降速（R30）；散熱片版本與否未確認",
+    "interface": { "kind": "pcie", "gen": 5, "lanes": 4 },
+    "formFactor": "2280"
+  }
+]

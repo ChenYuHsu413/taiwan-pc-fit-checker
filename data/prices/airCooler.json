@@ -1,0 +1,23 @@
+[
+  {
+    "partId": "thermalright-peerless-assassin-120-se",
+    "priceTwd": 990,
+    "updatedAt": "2026-06-10",
+    "source": "mock",
+    "note": "Phase 1 由 mock 搬遷，原 sourceName：原價屋參考"
+  },
+  {
+    "partId": "deepcool-ak620",
+    "priceTwd": 1590,
+    "updatedAt": "2026-06-10",
+    "source": "mock",
+    "note": "Phase 1 由 mock 搬遷，原 sourceName：原價屋參考"
+  },
+  {
+    "partId": "noctua-nh-d15-chromax-black",
+    "priceTwd": 4790,
+    "updatedAt": "2026-06-10",
+    "source": "mock",
+    "note": "Phase 1 由 mock 搬遷，原 sourceName：品牌官網"
+  }
+]

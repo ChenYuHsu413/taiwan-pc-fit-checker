@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import {
-  mockAioCoolers,
-  mockCases,
-  mockCpuCoolers,
-  mockGpus,
-  mockMotherboards,
-  mockPsus,
-} from "@/data/taiwanMockParts";
+import { catalog } from "@/lib/data/catalog";
 import { PartCard } from "@/components/PartCard";
 import type { AnyPart } from "@/types/parts";
 
@@ -44,18 +37,18 @@ export default function PartsPage() {
     <main className="mx-auto max-w-6xl px-6 py-10">
       <h1 className="mb-2 text-2xl font-bold">零件資料庫 Local Parts Database</h1>
       <p className="mb-8 text-sm text-white/50">
-        本頁為本地 mock data，價格為參考價，實際貨況與價格請以通路現場公告為準。第一版已完整支援機殼／主機板／顯示卡／散熱器／電源，其餘分類將於後續版本擴充。
+        本頁目前為本地 mock data（規格未驗證、尚無官方來源），價格為參考價，超過 30 天會標示「可能過時」。實際貨況與價格請以通路現場公告為準。
       </p>
 
-      <CategorySection title="機殼 Case" parts={mockCases} />
-      <CategorySection title="主機板 MB" parts={mockMotherboards} />
-      <CategorySection title="顯示卡 GPU" parts={mockGpus} />
-      <CategorySection title="CPU 散熱器（空冷）" parts={mockCpuCoolers} />
-      <CategorySection title="水冷散熱器 AIO" parts={mockAioCoolers} />
-      <CategorySection title="電源供應器 PSU" parts={mockPsus} />
-      <CategorySection title="CPU 處理器" parts={[]} />
-      <CategorySection title="記憶體 RAM" parts={[]} />
-      <CategorySection title="SSD / HDD" parts={[]} />
+      <CategorySection title="機殼 Case" parts={catalog.case} />
+      <CategorySection title="主機板 MB" parts={catalog.motherboard} />
+      <CategorySection title="CPU 處理器" parts={catalog.cpu} />
+      <CategorySection title="記憶體 RAM" parts={catalog.ram} />
+      <CategorySection title="顯示卡 GPU" parts={catalog.gpu} />
+      <CategorySection title="CPU 散熱器（空冷）" parts={catalog.airCooler} />
+      <CategorySection title="水冷散熱器 AIO" parts={catalog.aio} />
+      <CategorySection title="電源供應器 PSU" parts={catalog.psu} />
+      <CategorySection title="M.2 SSD" parts={catalog.m2Ssd} />
     </main>
   );
 }

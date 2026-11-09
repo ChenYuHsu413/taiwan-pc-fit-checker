@@ -35,8 +35,10 @@ npm run build    # 產出正式版
 | `app/` | 頁面路由（首頁 / builder / parts） |
 | `components/` | UI 元件（PartPicker、報告、走線建議等） |
 | `components/three/` | 3D 場景零件網格 |
-| `data/taiwanMockParts.ts` | 台灣化本地 mock data（機殼／主機板／顯卡／散熱器／AIO／PSU） |
-| `lib/compatibility.ts` | 相容性判斷邏輯 |
+| `data/parts/`、`data/prices/`、`data/rules/` | 零件規格、參考價、BIOS 規則表（JSON，目前為 mock） |
+| `lib/schema/` | zod schema（型別由此推導），欄位說明見 `docs/schema.md` |
+| `lib/data/` | 資料載入與共用驗證 |
+| `lib/compatibility/` | 相容性判斷邏輯、規則清單（ruleId）、文案 |
 | `lib/three/layout.ts` | 3D 場景座標換算 |
 | `types/parts.ts` | 核心 TypeScript 型別 |
 

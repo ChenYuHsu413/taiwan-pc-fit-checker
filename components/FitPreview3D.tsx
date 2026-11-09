@@ -4,7 +4,9 @@ import { Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, OrbitControls } from "@react-three/drei";
 import type { BuildSelection, CompatibilityResult, CompatibilityStatus } from "@/types/parts";
-import { computeLayout, toUnits } from "@/lib/three/layout";
+import { computeLayout, toUnits, VISUAL_FALLBACK_MM } from "@/lib/three/layout";
+import { gpuHighPowerConnector, statusOf } from "@/lib/compatibility";
+import { STATUS_SHORT_LABEL } from "@/lib/compatibility/messages";
 import { STATUS_COLOR, NEUTRAL_COLOR } from "@/lib/statusColor";
 import { CaseFrame } from "./three/CaseFrame";
 import { MotherboardMesh } from "./three/MotherboardMesh";
@@ -14,23 +16,20 @@ import { AioCoolerMesh } from "./three/AioCoolerMesh";
 import { PsuMesh } from "./three/PsuMesh";
 import { CableBend } from "./three/CableBend";
 
-function statusOf(results: CompatibilityResult[], prefix: string): CompatibilityStatus | undefined {
-  return results.find((r) => r.item.startsWith(prefix))?.status;
-}
-
 function Scene({ selection, results }: { selection: BuildSelection; results: CompatibilityResult[] }) {
   const layout = computeLayout(selection);
   if (!layout) return null;
 
   const { motherboard, gpu, cooler, psu, overrides } = selection;
 
-  const motherboardStatus = statusOf(results, "主機板尺寸相容性");
-  const gpuStatus = statusOf(results, "顯卡長度空間");
-  const coolerStatus = statusOf(results, "CPU 空冷高度");
-  const radiatorStatus = statusOf(results, "前置水冷排相容性");
-  const psuStatus = statusOf(results, "電源供應器長度");
-  const cableStatus: CompatibilityStatus = statusOf(results, "背板走線空間") ?? "safe";
-  const connectorStatus = statusOf(results, "顯卡供電線彎折空間");
+  const motherboardStatus = statusOf(results, "R01");
+  const gpuStatus = statusOf(results, "R02");
+  const coolerStatus = statusOf(results, "R05");
+  const radiatorStatus = statusOf(results, "R08");
+  const psuStatus = statusOf(results, "R10");
+  const cableStatus: CompatibilityStatus = statusOf(results, "R11") ?? "safe";
+  const connectorStatus = statusOf(results, "R12");
+  const gpuLengthMm = gpu ? overrides.gpuLengthMm ?? gpu.lengthMm ?? VISUAL_FALLBACK_MM.gpuLength : 0;
 
   const center: [number, number, number] = [
     toUnits(layout.caseDepthMm) / 2,
@@ -65,17 +64,17 @@ function Scene({ selection, results }: { selection: BuildSelection; results: Com
         {gpu && (
           <GpuMesh
             gpu={gpu}
-            lengthMm={overrides.gpuLengthMm ?? gpu.lengthMm}
-            thicknessMm={overrides.gpuThicknessMm ?? gpu.thicknessMm}
+            lengthMm={gpuLengthMm}
+            thicknessMm={overrides.gpuThicknessMm ?? gpu.thicknessMm ?? VISUAL_FALLBACK_MM.gpuThickness}
             layout={layout}
             color={gpuStatus ? STATUS_COLOR[gpuStatus] : NEUTRAL_COLOR}
           />
         )}
 
-        {gpu && (gpu.powerConnectorType === "12VHPWR" || gpu.powerConnectorType === "12V-2x6") && (
+        {gpu && gpuHighPowerConnector(gpu) && (
           <CableBend
             gpu={gpu}
-            gpuLengthMm={overrides.gpuLengthMm ?? gpu.lengthMm}
+            gpuLengthMm={gpuLengthMm}
             layout={layout}
             color={STATUS_COLOR[connectorStatus ?? "warning"]}
           />
@@ -84,7 +83,7 @@ function Scene({ selection, results }: { selection: BuildSelection; results: Com
         {cooler.kind === "air" && (
           <AirCoolerMesh
             cooler={cooler.cooler}
-            heightMm={overrides.cpuCoolerHeightMm ?? cooler.cooler.heightMm}
+            heightMm={overrides.cpuCoolerHeightMm ?? cooler.cooler.heightMm ?? VISUAL_FALLBACK_MM.coolerHeight}
             layout={layout}
             color={STATUS_COLOR[coolerStatus ?? "warning"]}
           />
@@ -102,7 +101,7 @@ function Scene({ selection, results }: { selection: BuildSelection; results: Com
         {psu && (
           <PsuMesh
             psu={psu}
-            lengthMm={overrides.psuLengthMm ?? psu.lengthMm}
+            lengthMm={overrides.psuLengthMm ?? psu.lengthMm ?? VISUAL_FALLBACK_MM.psuLength}
             layout={layout}
             color={psuStatus ? STATUS_COLOR[psuStatus] : NEUTRAL_COLOR}
           />
@@ -164,7 +163,7 @@ export function FitPreview3D({
         {(Object.keys(STATUS_COLOR) as CompatibilityStatus[]).map((s) => (
           <span key={s} className="flex items-center gap-1">
             <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: STATUS_COLOR[s] }} />
-            {s === "safe" ? "Safe" : s === "tight" ? "Tight" : s === "warning" ? "Warning" : "Incompatible"}
+            {STATUS_SHORT_LABEL[s]}
           </span>
         ))}
       </div>

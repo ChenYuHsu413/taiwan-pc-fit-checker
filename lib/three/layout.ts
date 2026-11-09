@@ -18,6 +18,30 @@ export const PSU_VISUAL_HEIGHT_MM = 86;
 export const PSU_VISUAL_DEPTH_MM = 150;
 export const FRONT_BUFFER_MM = 20;
 
+/**
+ * 官方規格缺值時，僅供 3D/2D 繪圖用的視覺預設尺寸（不是規格、不參與相容性判斷）。
+ * Phase 1 的 mock 資料全部有值，不會用到；Phase 5 改為「缺值時以虛線/灰色標示」。
+ */
+export const VISUAL_FALLBACK_MM = {
+  caseMaxGpuLength: 380,
+  caseMaxCpuCoolerHeight: 165,
+  caseMaxPsuLength: 180,
+  caseCableSpace: 20,
+  motherboardHeight: 305,
+  motherboardDepth: 244,
+  gpuLength: 300,
+  gpuHeight: 130,
+  gpuThickness: 50,
+  coolerHeight: 155,
+  coolerWidth: 125,
+  coolerDepth: 135,
+  radiatorLength: 277,
+  radiatorWidth: 120,
+  radiatorThickness: 27,
+  fanThickness: 25,
+  psuLength: 150,
+} as const;
+
 export function toUnits(mm: number): number {
   return mm * MM_TO_UNIT;
 }
@@ -48,19 +72,28 @@ export function computeLayout(selection: BuildSelection): SceneLayout | null {
   const { case: pcCase, motherboard, overrides } = selection;
   if (!pcCase) return null;
 
-  const maxGpu = overrides.caseMaxGpuLengthMm ?? pcCase.maxGpuLengthMm;
-  const maxPsu = pcCase.maxPsuLengthMm;
-  const compSideMm = overrides.caseMaxCpuCoolerHeightMm ?? pcCase.maxCpuCoolerHeightMm;
-  const cableSideMm = overrides.caseCableManagementSpaceMm ?? pcCase.cableManagementSpaceMm;
+  const maxGpu =
+    overrides.caseMaxGpuLengthMm ?? pcCase.gpuLength.unspecifiedMm ?? VISUAL_FALLBACK_MM.caseMaxGpuLength;
+  const maxPsu = pcCase.psu.unspecifiedMm ?? VISUAL_FALLBACK_MM.caseMaxPsuLength;
+  const compSideMm =
+    overrides.caseMaxCpuCoolerHeightMm ?? pcCase.maxCpuCoolerHeightMm ?? VISUAL_FALLBACK_MM.caseMaxCpuCoolerHeight;
+  const cableSideMm =
+    overrides.caseCableManagementSpaceMm ?? pcCase.cableSpaceMm ?? VISUAL_FALLBACK_MM.caseCableSpace;
 
   const caseDepthMm = Math.max(maxGpu, maxPsu) + TRAY_THICKNESS_MM + FRONT_BUFFER_MM;
   const trayXMm = caseDepthMm - TRAY_THICKNESS_MM;
 
-  // 主機板坐落於電源分艙上方，垂直高度依實際板型（widthMm）縮放
+  // 主機板坐落於電源分艙上方，垂直高度依實際板型（dimensions.heightMm，上下方向）縮放
   const boardBottomMm = PSU_SHROUD_HEIGHT_MM + 5;
-  const boardVerticalMm = Math.min(motherboard?.widthMm ?? 305, CASE_HEIGHT_MM - 18 - boardBottomMm);
+  const boardVerticalMm = Math.min(
+    motherboard?.dimensions.heightMm ?? VISUAL_FALLBACK_MM.motherboardHeight,
+    CASE_HEIGHT_MM - 18 - boardBottomMm
+  );
   const boardTopMm = boardBottomMm + boardVerticalMm;
-  const boardDepthMm = Math.min(motherboard?.heightMm ?? 244, caseDepthMm - 40);
+  const boardDepthMm = Math.min(
+    motherboard?.dimensions.depthMm ?? VISUAL_FALLBACK_MM.motherboardDepth,
+    caseDepthMm - 40
+  );
 
   return {
     caseDepthMm,

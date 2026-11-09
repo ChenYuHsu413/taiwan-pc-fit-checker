@@ -1,12 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import {
-  mockAioCoolers,
-  mockCases,
-  mockCpuCoolers,
-  mockGpus,
-  mockMotherboards,
-  mockPsus,
-} from "@/data/taiwanMockParts";
+import { catalog, getPrice } from "@/lib/data/catalog";
 import type { AnyPart, BuildSelection, DimensionOverrides } from "@/types/parts";
 import { PartCard } from "./PartCard";
 
@@ -58,11 +51,16 @@ function PartSelect<T extends AnyPart>({
       </option>
       {parts.map((p) => (
         <option key={p.id} value={p.id}>
-          {p.brand} · {p.model}（NT$ {p.priceTwd.toLocaleString("zh-TW")}）
+          {p.brand} · {p.model}（{priceLabel(p.id)}）
         </option>
       ))}
     </select>
   );
+}
+
+function priceLabel(partId: string): string {
+  const price = getPrice(partId);
+  return price ? `NT$ ${price.priceTwd.toLocaleString("zh-TW")}` : "無參考價";
 }
 
 function OverrideInput({
@@ -102,10 +100,13 @@ export function PartPicker({
   const totalTwd = [
     selection.case,
     selection.motherboard,
+    selection.cpu,
+    selection.ram,
     selection.gpu,
     selection.cooler.kind === "none" ? undefined : selection.cooler.cooler,
     selection.psu,
-  ].reduce((sum, part) => sum + (part?.priceTwd ?? 0), 0);
+    ...selection.m2Ssds,
+  ].reduce((sum, part) => sum + (part ? getPrice(part.id)?.priceTwd ?? 0 : 0), 0);
 
   return (
     <div className="h-full overflow-y-auto rounded-xl border border-white/10 bg-bg-panel p-4">
@@ -113,7 +114,7 @@ export function PartPicker({
 
       <Section title="機殼 Case">
         <PartSelect
-          parts={mockCases}
+          parts={catalog.case}
           selectedId={selection.case?.id}
           placeholder="請選擇機殼"
           onSelect={(c) => setSelection((prev) => ({ ...prev, case: c }))}
@@ -123,7 +124,7 @@ export function PartPicker({
 
       <Section title="主機板 Motherboard">
         <PartSelect
-          parts={mockMotherboards}
+          parts={catalog.motherboard}
           selectedId={selection.motherboard?.id}
           placeholder="請選擇主機板"
           onSelect={(m) => setSelection((prev) => ({ ...prev, motherboard: m }))}
@@ -131,9 +132,29 @@ export function PartPicker({
         {selection.motherboard && <PartDetails part={selection.motherboard} />}
       </Section>
 
+      <Section title="處理器 CPU">
+        <PartSelect
+          parts={catalog.cpu}
+          selectedId={selection.cpu?.id}
+          placeholder="請選擇處理器"
+          onSelect={(c) => setSelection((prev) => ({ ...prev, cpu: c }))}
+        />
+        {selection.cpu && <PartDetails part={selection.cpu} />}
+      </Section>
+
+      <Section title="記憶體 RAM">
+        <PartSelect
+          parts={catalog.ram}
+          selectedId={selection.ram?.id}
+          placeholder="請選擇記憶體"
+          onSelect={(r) => setSelection((prev) => ({ ...prev, ram: r }))}
+        />
+        {selection.ram && <PartDetails part={selection.ram} />}
+      </Section>
+
       <Section title="顯示卡 GPU">
         <PartSelect
-          parts={mockGpus}
+          parts={catalog.gpu}
           selectedId={selection.gpu?.id}
           placeholder="請選擇顯示卡"
           onSelect={(g) => setSelection((prev) => ({ ...prev, gpu: g }))}
@@ -152,8 +173,8 @@ export function PartPicker({
                 kind === "none"
                   ? { kind: "none" }
                   : kind === "air"
-                  ? { kind: "air", cooler: mockCpuCoolers[0] }
-                  : { kind: "aio", cooler: mockAioCoolers[0], mountLocation: "front" },
+                  ? { kind: "air", cooler: catalog.airCooler[0] }
+                  : { kind: "aio", cooler: catalog.aio[0], mountLocation: "front" },
             }));
           }}
           className="w-full rounded border border-white/10 bg-bg px-2 py-2 text-sm text-white"
@@ -166,7 +187,7 @@ export function PartPicker({
         {selection.cooler.kind === "air" && (
           <>
             <PartSelect
-              parts={mockCpuCoolers}
+              parts={catalog.airCooler}
               selectedId={selection.cooler.cooler.id}
               placeholder="請選擇空冷散熱器"
               onSelect={(c) => setSelection((prev) => ({ ...prev, cooler: { kind: "air", cooler: c } }))}
@@ -195,7 +216,7 @@ export function PartPicker({
                   <option value="top">頂置 Top</option>
                 </select>
                 <PartSelect
-                  parts={mockAioCoolers}
+                  parts={catalog.aio}
                   selectedId={aioState.cooler.id}
                   placeholder="請選擇水冷排"
                   onSelect={(c) =>
@@ -214,12 +235,22 @@ export function PartPicker({
 
       <Section title="電源供應器 PSU">
         <PartSelect
-          parts={mockPsus}
+          parts={catalog.psu}
           selectedId={selection.psu?.id}
           placeholder="請選擇電源供應器"
           onSelect={(p) => setSelection((prev) => ({ ...prev, psu: p }))}
         />
         {selection.psu && <PartDetails part={selection.psu} />}
+      </Section>
+
+      <Section title="M.2 SSD">
+        <PartSelect
+          parts={catalog.m2Ssd}
+          selectedId={selection.m2Ssds[0]?.id}
+          placeholder="請選擇 M.2 SSD"
+          onSelect={(d) => setSelection((prev) => ({ ...prev, m2Ssds: [d] }))}
+        />
+        {selection.m2Ssds[0] && <PartDetails part={selection.m2Ssds[0]} />}
       </Section>
 
       <details className="mb-4">

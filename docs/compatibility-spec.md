@@ -21,7 +21,9 @@
 
 嚴重度由高到低：`incompatible` > `warning` > `tight` > `info` > `safe`；`unknown` 獨立，不參與排序。
 
-> Phase 1 已加入型別與 UI 樣式，但**判斷邏輯未改**。目前仍有兩處在缺資料時誤報 `warning`（R01 只選了機殼或只選了主機板、R05 尚未選擇散熱器），留到 Phase 3 改回傳 `unknown`。
+> Phase 1 已加入型別與 UI 樣式，但**判斷邏輯未改**。零件未選齊時誤報 `warning` 的地方共有**四處**（Phase 0 盤點只寫了兩處，實際上 R02、R10 也是同樣的寫法）：R01（只選機殼或只選主機板）、R02（只選機殼或只選顯卡）、R05（尚未選擇散熱器）、R10（只選機殼或只選電源）。程式中統一經過 `legacyMissingSelection()`，留到 Phase 3 改回傳 `unknown`。
+>
+> Phase 1 新增的部分：新 schema 允許缺值，**官方規格缺值**時會回傳 `unknown`（`missingSpec()`）。mock 資料全部有值，所以實際結果與 Phase 0 相同。
 
 ### 0.2 門檻參數（提案）
 

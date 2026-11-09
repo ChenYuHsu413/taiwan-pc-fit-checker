@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Line } from "@react-three/drei";
 import { CatmullRomCurve3, Vector3 } from "three";
-import { toUnits, TRAY_THICKNESS_MM, type SceneLayout } from "@/lib/three/layout";
+import { toUnits, TRAY_THICKNESS_MM, VISUAL_FALLBACK_MM, type SceneLayout } from "@/lib/three/layout";
 import type { GpuPart } from "@/types/parts";
 
 const SLOT_GAP_MM = 8;
@@ -21,9 +21,10 @@ export function CableBend({
   // layout.gpuYMm 即插槽線＝卡身頂面。
   const connectorX = toUnits(layout.trayXMm - gpuLengthMm * 0.55);
   const connectorY = toUnits(layout.gpuYMm);
-  const connectorZ = toUnits(TRAY_THICKNESS_MM + SLOT_GAP_MM) + toUnits(gpu.heightMm) * 0.7;
+  const connectorZ = toUnits(TRAY_THICKNESS_MM + SLOT_GAP_MM) + toUnits(gpu.heightMm ?? VISUAL_FALLBACK_MM.gpuHeight) * 0.7;
 
-  const clearance = toUnits(gpu.recommendedSideClearanceMm);
+  // legacy mock 欄位；缺值時以 10mm 畫示意線（純視覺）
+  const clearance = toUnits(gpu.legacyRecommendedSideClearanceMm ?? 10);
 
   const points = useMemo(() => {
     // 線材由接頭往上（+Y）並向側板彎折，示意所需的彎折淨空

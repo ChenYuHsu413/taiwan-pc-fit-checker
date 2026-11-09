@@ -1,124 +1,46 @@
-// 台灣版 PC 組裝空間模擬器 - 核心資料型別
-// 注意：所有價格皆為「參考價」，實際價格與貨況請以通路現場公告為準。
+// 零件型別：一律由 zod schema 推導（lib/schema/parts.ts），此處只做 re-export，
+// 並定義 UI 組合用的型別（選擇狀態、手動覆蓋、相容性結果）。
 
-export type PartCategory =
-  | "case"
-  | "motherboard"
-  | "gpu"
-  | "cpuCooler"
-  | "aioCooler"
-  | "psu"
-  | "cpu"
-  | "ram"
-  | "storage";
+export type {
+  AioPart,
+  AirCoolerPart,
+  AnyPart,
+  CasePart,
+  CpuPart,
+  GpuPart,
+  GpuPowerConnectorType,
+  M2SsdPart,
+  MotherboardPart,
+  PartByCategory,
+  PartCategory,
+  PriceEntry,
+  PsuPart,
+  RamPart,
+} from "@/lib/schema/parts";
+export type { MotherboardFormFactor, PsuFormFactor } from "@/lib/schema/common";
 
-export type MotherboardFormFactor = "E-ATX" | "ATX" | "M-ATX" | "ITX";
+import type { RuleId } from "@/lib/compatibility/rules";
+import type {
+  AioPart,
+  AirCoolerPart,
+  CasePart,
+  CpuPart,
+  GpuPart,
+  M2SsdPart,
+  MotherboardPart,
+  PsuPart,
+  RamPart,
+} from "@/lib/schema/parts";
 
-export type GpuPowerConnectorType =
-  | "12VHPWR"
-  | "12V-2x6"
-  | "8pin x1"
-  | "8pin x2"
-  | "8pin x3"
-  | "6pin";
-
-export type PsuFormFactor = "ATX" | "SFX" | "SFX-L";
-
-export type PsuModularType = "非模組化" | "半模組化" | "全模組化";
-
-export type CompatibilityStatus = "safe" | "tight" | "warning" | "incompatible";
-
-/** 所有零件共用的基礎欄位 */
-export interface BasePart {
-  id: string;
-  category: PartCategory;
-  brand: string;
-  model: string;
-  /** 台灣通路常見的商品名稱，例如原價屋列表上的品名 */
-  twName: string;
-  /** 參考價格（新台幣），非即時報價 */
-  priceTwd: number;
-  /** 此筆資料最後更新時間 (ISO 8601) */
-  updatedAt: string;
-  /** 資料來源名稱，例如「原價屋參考」「品牌官網」「手動輸入」 */
-  sourceName: string;
-  /** 資料來源連結（若有） */
-  sourceUrl?: string;
-  /** 備註，例如資料不確定或需使用者自行確認的項目 */
-  notes?: string;
-}
-
-export interface CasePart extends BasePart {
-  category: "case";
-  supportedMotherboards: MotherboardFormFactor[];
-  maxGpuLengthMm: number;
-  maxCpuCoolerHeightMm: number;
-  maxPsuLengthMm: number;
-  cableManagementSpaceMm: number;
-  /** 前置水冷排支援尺寸，例如 [240, 280, 360]，空陣列代表不支援 */
-  frontRadiatorSupport: number[];
-  /** 頂置水冷排支援尺寸 */
-  topRadiatorSupport: number[];
-  driveBayRemovable: boolean;
-}
-
-export interface MotherboardPart extends BasePart {
-  category: "motherboard";
-  formFactor: MotherboardFormFactor;
-  widthMm: number;
-  heightMm: number;
-  socket: string;
-  chipset: string;
-}
-
-export interface GpuPart extends BasePart {
-  category: "gpu";
-  lengthMm: number;
-  heightMm: number;
-  thicknessMm: number;
-  slotCount: number;
-  powerConnectorType: GpuPowerConnectorType;
-  recommendedSideClearanceMm: number;
-}
-
-export interface CpuCoolerPart extends BasePart {
-  category: "cpuCooler";
-  coolerType: "air";
-  heightMm: number;
-  widthMm: number;
-  depthMm: number;
-  ramClearanceMm: number;
-}
-
-export interface AioCoolerPart extends BasePart {
-  category: "aioCooler";
-  coolerType: "aio";
-  radiatorSizeMm: number;
-  radiatorLengthMm: number;
-  radiatorWidthMm: number;
-  radiatorThicknessMm: number;
-  fanThicknessMm: number;
-  totalThicknessMm: number;
-}
-
-export interface PsuPart extends BasePart {
-  category: "psu";
-  psuFormFactor: PsuFormFactor;
-  lengthMm: number;
-  modularType: PsuModularType;
-  wattage: number;
-}
-
-export type AnyPart =
-  | CasePart
-  | MotherboardPart
-  | GpuPart
-  | CpuCoolerPart
-  | AioCoolerPart
-  | PsuPart;
+/**
+ * info = 能用但效能打折或需要知道的事；unknown = 資料不足無法判斷。
+ * 嚴重度：incompatible > warning > tight > info > safe；unknown 不參與排序。
+ */
+export type CompatibilityStatus = "safe" | "info" | "tight" | "warning" | "incompatible" | "unknown";
 
 export interface CompatibilityResult {
-  item: string;
+  /** 對應 docs/compatibility-spec.md；分組與標題見 RULES[ruleId] */
+  ruleId: RuleId;
   status: CompatibilityStatus;
   message: string;
   measuredValue?: number;
@@ -140,14 +62,17 @@ export interface DimensionOverrides {
 
 export type CoolerChoice =
   | { kind: "none" }
-  | { kind: "air"; cooler: CpuCoolerPart }
-  | { kind: "aio"; cooler: AioCoolerPart; mountLocation: "front" | "top" };
+  | { kind: "air"; cooler: AirCoolerPart }
+  | { kind: "aio"; cooler: AioPart; mountLocation: "front" | "top" };
 
 export interface BuildSelection {
   case?: CasePart;
   motherboard?: MotherboardPart;
+  cpu?: CpuPart;
+  ram?: RamPart;
   gpu?: GpuPart;
   cooler: CoolerChoice;
   psu?: PsuPart;
+  m2Ssds: M2SsdPart[];
   overrides: DimensionOverrides;
 }

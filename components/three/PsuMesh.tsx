@@ -38,7 +38,7 @@ export function PsuMesh({
       </mesh>
 
       {/* 非模組化線材示意 */}
-      {psu.modularType === "非模組化" &&
+      {psu.modularType === "non" &&
         [0, 1, 2].map((i) => (
           <mesh
             key={i}

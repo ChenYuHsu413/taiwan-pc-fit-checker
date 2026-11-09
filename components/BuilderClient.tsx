@@ -20,6 +20,7 @@ const FitPreview3D = dynamic(() => import("./FitPreview3D").then((m) => m.FitPre
 
 const INITIAL_SELECTION: BuildSelection = {
   cooler: { kind: "none" },
+  m2Ssds: [],
   overrides: {},
 };
 

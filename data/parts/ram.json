@@ -1,0 +1,44 @@
+[
+  {
+    "id": "kingston-fury-beast-ddr5-6000-32gb-2x16gb",
+    "category": "ram",
+    "brand": "Kingston",
+    "model": "FURY Beast DDR5-6000 32GB (2x16GB)",
+    "twName": "金士頓 FURY Beast DDR5-6000 32GB(16Gx2)",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "Phase 1 mock：模組高度未填",
+    "memoryType": "DDR5",
+    "moduleCapacityGb": 16,
+    "moduleCount": 2,
+    "speedMts": 6000
+  },
+  {
+    "id": "g-skill-trident-z5-rgb-ddr5-6400-32gb-2x16gb",
+    "category": "ram",
+    "brand": "G.SKILL",
+    "model": "Trident Z5 RGB DDR5-6400 32GB (2x16GB)",
+    "twName": "芝奇 Trident Z5 RGB DDR5-6400 32GB(16Gx2)",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "Phase 1 mock：模組高度未填",
+    "memoryType": "DDR5",
+    "moduleCapacityGb": 16,
+    "moduleCount": 2,
+    "speedMts": 6400
+  },
+  {
+    "id": "kingston-fury-beast-ddr4-3200-16gb-2x8gb",
+    "category": "ram",
+    "brand": "Kingston",
+    "model": "FURY Beast DDR4-3200 16GB (2x8GB)",
+    "twName": "金士頓 FURY Beast DDR4-3200 16GB(8Gx2)",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "Phase 1 mock：用於測試 DDR4/DDR5 不相容（R23）",
+    "memoryType": "DDR4",
+    "moduleCapacityGb": 8,
+    "moduleCount": 2,
+    "speedMts": 3200
+  }
+]

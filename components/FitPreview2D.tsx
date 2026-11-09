@@ -1,9 +1,8 @@
 import type { BuildSelection, CompatibilityResult, CompatibilityStatus } from "@/types/parts";
 import { STATUS_COLOR } from "@/lib/statusColor";
-
-function statusOf(results: CompatibilityResult[], prefix: string): CompatibilityStatus | undefined {
-  return results.find((r) => r.item.startsWith(prefix))?.status;
-}
+import { statusOf } from "@/lib/compatibility";
+import { STATUS_SHORT_LABEL } from "@/lib/compatibility/messages";
+import { VISUAL_FALLBACK_MM } from "@/lib/three/layout";
 
 export function FitPreview2D({
   selection,
@@ -30,33 +29,36 @@ export function FitPreview2D({
   const trayW = 18;
   const trayX = caseX + caseW - trayW;
 
-  const caseMaxGpuLength = overrides.caseMaxGpuLengthMm ?? pcCase.maxGpuLengthMm;
+  const caseMaxGpuLength =
+    overrides.caseMaxGpuLengthMm ?? pcCase.gpuLength.unspecifiedMm ?? VISUAL_FALLBACK_MM.caseMaxGpuLength;
   const gpuScale = (caseW - trayW) / caseMaxGpuLength;
 
-  const gpuLength = gpu ? overrides.gpuLengthMm ?? gpu.lengthMm : undefined;
-  const gpuStatus = statusOf(results, "顯卡長度空間") ?? "warning";
+  const gpuLength = gpu ? overrides.gpuLengthMm ?? gpu.lengthMm ?? VISUAL_FALLBACK_MM.gpuLength : undefined;
+  const gpuStatus = statusOf(results, "R02") ?? "warning";
   const gpuWpx = gpuLength ? gpuLength * gpuScale : 0;
   const gpuX = trayX - gpuWpx;
 
   const isFrontAio = cooler.kind === "aio" && cooler.mountLocation === "front";
-  const radiatorStatus = statusOf(results, "前置水冷排相容性");
+  const radiatorStatus = statusOf(results, "R08");
   const radWpx = isFrontAio
-    ? (cooler.cooler.radiatorThicknessMm + cooler.cooler.fanThicknessMm) * gpuScale
+    ? ((cooler.cooler.radiatorThicknessMm ?? VISUAL_FALLBACK_MM.radiatorThickness) +
+        (cooler.cooler.fanThicknessMm ?? VISUAL_FALLBACK_MM.fanThickness)) *
+      gpuScale
     : 0;
 
   const overlapX = Math.max(caseX + radWpx, gpuX);
   const overlapEnd = Math.min(trayX, caseX + radWpx + gpuWpx);
   const hasOverlap = isFrontAio && gpu && overlapX < overlapEnd;
 
-  const caseMaxPsuLength = pcCase.maxPsuLengthMm;
+  const caseMaxPsuLength = pcCase.psu.unspecifiedMm ?? VISUAL_FALLBACK_MM.caseMaxPsuLength;
   const psuScale = (caseW - trayW) / caseMaxPsuLength;
-  const psuLength = psu ? overrides.psuLengthMm ?? psu.lengthMm : undefined;
-  const psuStatus = statusOf(results, "電源供應器長度") ?? "warning";
+  const psuLength = psu ? overrides.psuLengthMm ?? psu.lengthMm ?? VISUAL_FALLBACK_MM.psuLength : undefined;
+  const psuStatus = statusOf(results, "R10") ?? "warning";
   const psuWpx = psuLength ? psuLength * psuScale : 0;
   const psuX = trayX - psuWpx;
 
-  const cableSpace = overrides.caseCableManagementSpaceMm ?? pcCase.cableManagementSpaceMm;
-  const cableStatus = statusOf(results, "背板走線空間") ?? "safe";
+  const cableSpace = overrides.caseCableManagementSpaceMm ?? pcCase.cableSpaceMm ?? VISUAL_FALLBACK_MM.caseCableSpace;
+  const cableStatus = statusOf(results, "R11") ?? "safe";
   const cableStripW = Math.min(40, Math.max(4, cableSpace * 1.2));
 
   const svgW = caseX + caseW + 20 + cableStripW + 20;
@@ -64,8 +66,9 @@ export function FitPreview2D({
 
   // --- CPU 散熱器高度量規 ---
   const coolerHeight = cooler.kind === "air" ? overrides.cpuCoolerHeightMm ?? cooler.cooler.heightMm : undefined;
-  const coolerLimit = overrides.caseMaxCpuCoolerHeightMm ?? pcCase.maxCpuCoolerHeightMm;
-  const coolerStatus = statusOf(results, "CPU 空冷高度");
+  const coolerLimit =
+    overrides.caseMaxCpuCoolerHeightMm ?? pcCase.maxCpuCoolerHeightMm ?? VISUAL_FALLBACK_MM.caseMaxCpuCoolerHeight;
+  const coolerStatus = statusOf(results, "R05");
   const coolerRatio = coolerHeight ? Math.min(1.15, coolerHeight / coolerLimit) : 0;
 
   return (
@@ -196,7 +199,7 @@ export function FitPreview2D({
         {(Object.keys(STATUS_COLOR) as CompatibilityStatus[]).map((s) => (
           <span key={s} className="flex items-center gap-1">
             <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: STATUS_COLOR[s] }} />
-            {s === "safe" ? "Safe" : s === "tight" ? "Tight" : s === "warning" ? "Warning" : "Incompatible"}
+            {STATUS_SHORT_LABEL[s]}
           </span>
         ))}
       </div>

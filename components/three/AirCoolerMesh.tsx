@@ -1,5 +1,5 @@
-import { toUnits, TRAY_THICKNESS_MM, type SceneLayout } from "@/lib/three/layout";
-import type { CpuCoolerPart } from "@/types/parts";
+import { toUnits, TRAY_THICKNESS_MM, VISUAL_FALLBACK_MM, type SceneLayout } from "@/lib/three/layout";
+import type { AirCoolerPart } from "@/types/parts";
 
 export function AirCoolerMesh({
   cooler,
@@ -7,7 +7,7 @@ export function AirCoolerMesh({
   layout,
   color,
 }: {
-  cooler: CpuCoolerPart;
+  cooler: AirCoolerPart;
   heightMm: number;
   layout: SceneLayout;
   color: string;
@@ -19,9 +19,11 @@ export function AirCoolerMesh({
   const zOuter = toUnits(TRAY_THICKNESS_MM + heightMm);
   const centerZ = (zInner + zOuter) / 2;
 
-  const towerOffsetX = toUnits(cooler.depthMm) * 0.28;
-  const finWidth = toUnits(cooler.depthMm) * 0.32;
-  const finHeight = toUnits(cooler.widthMm) * 0.92;
+  const depthMm = cooler.depthMm ?? VISUAL_FALLBACK_MM.coolerDepth;
+  const widthMm = cooler.widthMm ?? VISUAL_FALLBACK_MM.coolerWidth;
+  const towerOffsetX = toUnits(depthMm) * 0.28;
+  const finWidth = toUnits(depthMm) * 0.32;
+  const finHeight = toUnits(widthMm) * 0.92;
 
   return (
     <group>

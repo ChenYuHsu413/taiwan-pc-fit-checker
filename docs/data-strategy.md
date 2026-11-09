@@ -1,6 +1,6 @@
 # 資料策略提案
 
-- 狀態：提案，需要你拍板（決策點見 §6）
+- 狀態：§6 已於 2026-11-09 拍板（見 `CLAUDE.md` 決策紀錄）；檔案結構以 §3 末尾的「Phase 1 定案」為準
 - 本輪未抓取任何網站；以下對各官網欄位的描述來自一般經驗，**實際欄位名稱需在 Phase 2 打開官方頁面逐一核對**
 
 ---
@@ -114,7 +114,8 @@ lib/data/
 - `id` 規則：`<category>-<brand>-<model-slug>`，只用小寫英數與 `-`。一旦發布就不再更動（分享 URL 會依賴 id）
 - `verified: false` 代表有欄位尚未核對，UI 上要標示
 - 所有尺寸欄位以 `Mm` 結尾、功率欄位以 `W` 結尾；驗證函式會拒絕 ≤ 0、NaN，以及超出合理範圍的值（範圍在 Phase 1 定義）
-- **待確認**：是否改成每個型號一個檔案（`data/parts/gpu/<id>.json`）。資料量破百筆後比較好做 diff 與 review，但 import 會比較麻煩。建議第一批先用單一檔案
+- **Phase 1 定案**：每類一個 JSON，規格與價格分開：`data/parts/<category>.json`、`data/prices/<category>.json`、`data/rules/bios-support.json`；schema 用 zod 定義於 `lib/schema/`，欄位說明見 `docs/schema.md`。上方的 `source{}` / `verified` 提案改為 `sourceUrl` + `specVerifiedAt`
+- ~~**待確認**：是否改成每個型號一個檔案（`data/parts/gpu/<id>.json`）。資料量破百筆後比較好做 diff 與 review，但 import 會比較麻煩。建議第一批先用單一檔案~~（已定案：每類一個檔案）
 
 ---
 

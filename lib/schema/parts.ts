@@ -133,8 +133,8 @@ export const motherboardSchema = z.object({
     heightMm: mmSchema.optional(),
     depthMm: mmSchema.optional(),
   }),
-  /** 單選：LGA1700 的 DDR4 / DDR5 版本請拆成兩筆資料 */
-  memoryType: memoryTypeSchema,
+  /** 單選：LGA1700 的 DDR4 / DDR5 版本請拆成兩筆資料。缺值 = 尚未確認是哪個版本 */
+  memoryType: memoryTypeSchema.optional(),
   memorySlots: countSchema.optional(),
   maxMemorySpeedMts: countSchema.optional(),
   maxMemoryCapacityGb: countSchema.optional(),

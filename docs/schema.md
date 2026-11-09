@@ -87,7 +87,7 @@
 | `chipset` | string | `Chipset: AMD B650` → 存 `B650` | R27 |
 | `dimensions.heightMm` | mm | `30.5 cm x 24.4 cm` → **長邊 305**（裝機後上下方向） | 3D、R03 |
 | `dimensions.depthMm` | mm | **短邊 244**（前後方向；E-ATX 會比較大） | R01 |
-| `memoryType` | DDR4/DDR5 | `Memory: 4 x DIMM, DDR5`；**單選**，同型號有 D4/D5 兩版時拆成兩筆 | R23 |
+| `memoryType` | DDR4/DDR5（optional） | `Memory: 4 x DIMM, DDR5`；**單選**，同型號有 D4/D5 兩版時拆成兩筆。缺值 = 尚未確認版本 | R23 |
 | `memorySlots` | 條 | `4 x DIMM` | R24 |
 | `maxMemorySpeedMts` | MT/s | `up to 8000+(OC)` → 取數字，`(OC)` 寫入 notes | R26 |
 | `maxMemoryCapacityGb` | GB | `Max. 192GB` | R25 |

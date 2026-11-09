@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { Line } from "@react-three/drei";
 import { CatmullRomCurve3, Vector3 } from "three";
-import { toUnits, TRAY_THICKNESS_MM, type SceneLayout } from "@/lib/three/layout";
-import type { AioCoolerPart } from "@/types/parts";
+import { toUnits, TRAY_THICKNESS_MM, VISUAL_FALLBACK_MM, type SceneLayout } from "@/lib/three/layout";
+import type { AioPart } from "@/types/parts";
 
 function hosePoints(from: Vector3, to: Vector3): Vector3[] {
   const mid1 = new Vector3(from.x, from.y * 0.4 + to.y * 0.6, from.z + 0.15);
@@ -17,12 +17,18 @@ export function AioCoolerMesh({
   layout,
   color,
 }: {
-  cooler: AioCoolerPart;
+  cooler: AioPart;
   mountLocation: "front" | "top";
   layout: SceneLayout;
   color: string;
 }) {
-  const fanCount = Math.max(1, Math.round(cooler.radiatorSizeMm / 120));
+  const fanCount = Math.max(1, Math.round(cooler.radiatorSize / 120));
+  // 舊 totalThicknessMm 已移除，改由排厚＋扇厚計算（mock 數值相同）
+  const totalThicknessMm =
+    (cooler.radiatorThicknessMm ?? VISUAL_FALLBACK_MM.radiatorThickness) +
+    (cooler.fanThicknessMm ?? VISUAL_FALLBACK_MM.fanThickness);
+  const radiatorLengthMm = cooler.radiatorLengthMm ?? VISUAL_FALLBACK_MM.radiatorLength;
+  const radiatorWidthMm = cooler.radiatorWidthMm ?? VISUAL_FALLBACK_MM.radiatorWidth;
 
   const pumpPos = new Vector3(
     toUnits(layout.coolerBaseXMm),
@@ -32,39 +38,39 @@ export function AioCoolerMesh({
 
   const radiator = useMemo(() => {
     if (mountLocation === "front") {
-      const lengthMm = Math.min(cooler.radiatorLengthMm, layout.caseHeightMm * 0.85);
+      const lengthMm = Math.min(radiatorLengthMm, layout.caseHeightMm * 0.85);
       const args: [number, number, number] = [
-        toUnits(cooler.totalThicknessMm),
+        toUnits(totalThicknessMm),
         toUnits(lengthMm),
-        toUnits(cooler.radiatorWidthMm),
+        toUnits(radiatorWidthMm),
       ];
       const position: [number, number, number] = [
-        toUnits(cooler.totalThicknessMm) / 2 + toUnits(10),
+        toUnits(totalThicknessMm) / 2 + toUnits(10),
         toUnits(layout.caseHeightMm / 2),
         toUnits(TRAY_THICKNESS_MM + layout.compSideMm / 2),
       ];
       return { args, position, axis: "x" as const };
     }
-    const lengthMm = Math.min(cooler.radiatorLengthMm, layout.caseDepthMm * 0.55);
+    const lengthMm = Math.min(radiatorLengthMm, layout.caseDepthMm * 0.55);
     const args: [number, number, number] = [
       toUnits(lengthMm),
-      toUnits(cooler.totalThicknessMm),
-      toUnits(cooler.radiatorWidthMm),
+      toUnits(totalThicknessMm),
+      toUnits(radiatorWidthMm),
     ];
     const position: [number, number, number] = [
       toUnits(layout.trayXMm - lengthMm / 2 - 20),
-      toUnits(layout.caseHeightMm) - toUnits(cooler.totalThicknessMm) / 2 - toUnits(10),
+      toUnits(layout.caseHeightMm) - toUnits(totalThicknessMm) / 2 - toUnits(10),
       toUnits(TRAY_THICKNESS_MM + layout.compSideMm / 2),
     ];
     return { args, position, axis: "y" as const };
   }, [cooler, mountLocation, layout]);
 
   const fanSpacing = radiator.args[radiator.axis === "x" ? 1 : 0] / fanCount;
-  const fanRadius = Math.min(toUnits(cooler.radiatorWidthMm) * 0.42, fanSpacing * 0.42);
+  const fanRadius = Math.min(toUnits(radiatorWidthMm) * 0.42, fanSpacing * 0.42);
 
   const hoseInletPos = new Vector3(
-    radiator.position[0] - (radiator.axis === "x" ? toUnits(cooler.totalThicknessMm) / 2 : 0),
-    radiator.position[1] - (radiator.axis === "y" ? toUnits(cooler.totalThicknessMm) / 2 : radiator.args[1] * 0.3),
+    radiator.position[0] - (radiator.axis === "x" ? toUnits(totalThicknessMm) / 2 : 0),
+    radiator.position[1] - (radiator.axis === "y" ? toUnits(totalThicknessMm) / 2 : radiator.args[1] * 0.3),
     radiator.position[2]
   );
 
@@ -97,8 +103,8 @@ export function AioCoolerMesh({
         const offset = (i - (fanCount - 1) / 2) * fanSpacing;
         const pos: [number, number, number] =
           radiator.axis === "x"
-            ? [radiator.position[0] - toUnits(cooler.totalThicknessMm) / 2 - 0.01, radiator.position[1] + offset, radiator.position[2]]
-            : [radiator.position[0] + offset, radiator.position[1] - toUnits(cooler.totalThicknessMm) / 2 - 0.01, radiator.position[2]];
+            ? [radiator.position[0] - toUnits(totalThicknessMm) / 2 - 0.01, radiator.position[1] + offset, radiator.position[2]]
+            : [radiator.position[0] + offset, radiator.position[1] - toUnits(totalThicknessMm) / 2 - 0.01, radiator.position[2]];
         const rotation: [number, number, number] = radiator.axis === "x" ? [0, Math.PI / 2, 0] : [Math.PI / 2, 0, 0];
         return (
           <mesh key={i} position={pos} rotation={rotation}>

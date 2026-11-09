@@ -1,5 +1,5 @@
 import { RoundedBox } from "@react-three/drei";
-import { toUnits, TRAY_THICKNESS_MM, type SceneLayout } from "@/lib/three/layout";
+import { toUnits, TRAY_THICKNESS_MM, VISUAL_FALLBACK_MM, type SceneLayout } from "@/lib/three/layout";
 import type { GpuPart } from "@/types/parts";
 
 const CONNECTOR_LENGTH_MM = 89; // PCIe x16 金手指長度
@@ -24,16 +24,17 @@ export function GpuMesh({
   //   Y：垂直方向 = 顯卡厚度 thicknessMm（由插槽線往下）
   //   Z：由主機板面往玻璃側立起 = 顯卡高度 heightMm
   const centerX = toUnits(layout.trayXMm - lengthMm / 2);
+  const gpuHeightMm = gpu.heightMm ?? VISUAL_FALLBACK_MM.gpuHeight;
 
   const cardTopY = layout.gpuYMm;
   const centerY = toUnits(cardTopY - thicknessMm / 2);
 
   const zInner = toUnits(TRAY_THICKNESS_MM + SLOT_GAP_MM);
-  const zOuter = zInner + toUnits(gpu.heightMm);
+  const zOuter = zInner + toUnits(gpuHeightMm);
   const centerZ = (zInner + zOuter) / 2;
 
   const fanCount = lengthMm > 285 ? 3 : 2;
-  const fanRadius = Math.min(toUnits(gpu.heightMm) * 0.34, (toUnits(lengthMm) / fanCount) * 0.42);
+  const fanRadius = Math.min(toUnits(gpuHeightMm) * 0.34, (toUnits(lengthMm) / fanCount) * 0.42);
 
   return (
     <group>
@@ -51,7 +52,7 @@ export function GpuMesh({
 
       {/* GPU 本體：長(X) × 厚(Y，由插槽線往下) × 高(Z，由主機板立起往外突出) */}
       <RoundedBox
-        args={[toUnits(lengthMm), toUnits(thicknessMm), toUnits(gpu.heightMm)]}
+        args={[toUnits(lengthMm), toUnits(thicknessMm), toUnits(gpuHeightMm)]}
         radius={0.02}
         smoothness={2}
         position={[centerX, centerY, centerZ]}
@@ -61,7 +62,7 @@ export function GpuMesh({
 
       {/* 背板（頂面，朝上，PCB 背面） */}
       <mesh position={[centerX, toUnits(cardTopY) + 0.004, centerZ]}>
-        <boxGeometry args={[toUnits(lengthMm) * 0.97, 0.014, toUnits(gpu.heightMm) * 0.9]} />
+        <boxGeometry args={[toUnits(lengthMm) * 0.97, 0.014, toUnits(gpuHeightMm) * 0.9]} />
         <meshStandardMaterial color="#111827" metalness={0.6} roughness={0.35} />
       </mesh>
 
@@ -70,10 +71,10 @@ export function GpuMesh({
         position={[
           toUnits(layout.trayXMm) + 0.006,
           centerY,
-          zInner + toUnits(gpu.heightMm) * 0.45,
+          zInner + toUnits(gpuHeightMm) * 0.45,
         ]}
       >
-        <boxGeometry args={[0.012, toUnits(thicknessMm), toUnits(gpu.heightMm) * 0.9]} />
+        <boxGeometry args={[0.012, toUnits(thicknessMm), toUnits(gpuHeightMm) * 0.9]} />
         <meshStandardMaterial color="#64748b" metalness={0.7} roughness={0.3} />
       </mesh>
 

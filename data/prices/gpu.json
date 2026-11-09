@@ -1,0 +1,23 @@
+[
+  {
+    "partId": "msi-geforce-rtx-4070-super-gaming-x-slim",
+    "priceTwd": 24900,
+    "updatedAt": "2026-06-25",
+    "source": "mock",
+    "note": "Phase 1 由 mock 搬遷，原 sourceName：原價屋參考"
+  },
+  {
+    "partId": "asus-tuf-gaming-rtx-4080-super-oc",
+    "priceTwd": 46900,
+    "updatedAt": "2026-06-25",
+    "source": "mock",
+    "note": "Phase 1 由 mock 搬遷，原 sourceName：原價屋參考"
+  },
+  {
+    "partId": "gigabyte-radeon-rx-7800-xt-gaming-oc",
+    "priceTwd": 17900,
+    "updatedAt": "2026-06-25",
+    "source": "mock",
+    "note": "Phase 1 由 mock 搬遷，原 sourceName：原價屋參考"
+  }
+]

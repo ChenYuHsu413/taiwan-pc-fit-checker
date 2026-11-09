@@ -1,0 +1,52 @@
+[
+  {
+    "id": "asus-rog-strix-b650-a-gaming-wifi",
+    "category": "motherboard",
+    "brand": "華碩 ASUS",
+    "model": "ROG STRIX B650-A GAMING WIFI",
+    "twName": "華碩 ROG STRIX B650-A GAMING WIFI 主機板",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "formFactor": "ATX",
+    "socket": "AM5",
+    "chipset": "B650",
+    "dimensions": {
+      "heightMm": 305,
+      "depthMm": 244
+    },
+    "memoryType": "DDR5"
+  },
+  {
+    "id": "msi-pro-b760m-a-wifi",
+    "category": "motherboard",
+    "brand": "微星 MSI",
+    "model": "PRO B760M-A WIFI",
+    "twName": "微星 PRO B760M-A WIFI 主機板（M-ATX）",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "formFactor": "M-ATX",
+    "socket": "LGA1700",
+    "chipset": "B760",
+    "dimensions": {
+      "heightMm": 244,
+      "depthMm": 244
+    }
+  },
+  {
+    "id": "gigabyte-b650i-aorus-ultra",
+    "category": "motherboard",
+    "brand": "技嘉 GIGABYTE",
+    "model": "B650I AORUS ULTRA",
+    "twName": "技嘉 B650I AORUS ULTRA 主機板（ITX）",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "formFactor": "ITX",
+    "socket": "AM5",
+    "chipset": "B650",
+    "dimensions": {
+      "heightMm": 170,
+      "depthMm": 170
+    },
+    "memoryType": "DDR5"
+  }
+]

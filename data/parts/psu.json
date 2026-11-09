@@ -1,0 +1,42 @@
+[
+  {
+    "id": "seasonic-focus-gx-750",
+    "category": "psu",
+    "brand": "海韻 SeaSonic",
+    "model": "FOCUS GX-750",
+    "twName": "海韻 FOCUS GX-750 金牌全模組化電源供應器",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "formFactor": "ATX",
+    "wattage": 750,
+    "lengthMm": 140,
+    "modularType": "full"
+  },
+  {
+    "id": "fsp-hydro-ptm-pro-850w",
+    "category": "psu",
+    "brand": "全漢 FSP",
+    "model": "HYDRO PTM PRO 850W",
+    "twName": "全漢 HYDRO PTM PRO 850W 白金牌全模組化電源供應器",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "formFactor": "ATX",
+    "wattage": 850,
+    "lengthMm": 160,
+    "modularType": "full"
+  },
+  {
+    "id": "cooler-master-mwe-650-bronze-v2",
+    "category": "psu",
+    "brand": "酷媽 Cooler Master",
+    "model": "MWE 650 Bronze V2",
+    "twName": "酷媽 MWE 650 Bronze V2 銅牌電源供應器（非模組化）",
+    "sourceUrl": null,
+    "specVerifiedAt": null,
+    "notes": "非模組化線材較多，背板走線空間不足時整理較費工",
+    "formFactor": "ATX",
+    "wattage": 650,
+    "lengthMm": 140,
+    "modularType": "non"
+  }
+]

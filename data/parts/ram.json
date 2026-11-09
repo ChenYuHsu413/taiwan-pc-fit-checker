@@ -40,5 +40,21 @@
     "moduleCapacityGb": 8,
     "moduleCount": 2,
     "speedMts": 3200
+  },
+  {
+    "id": "kingston-fury-beast-kf560c30bbek2-32",
+    "category": "ram",
+    "brand": "Kingston",
+    "model": "FURY Beast DDR5 KF560C30BBEK2-32",
+    "twName": "Kingston FURY Beast DDR5-6000 32GB (16GBx2)",
+    "sourceUrl": "https://www.kingston.com/datasheets/KF560C30BBEK2-32.pdf",
+    "specVerifiedAt": "2026-11-09",
+    "notes": "1Rx8。Default (JEDEC): DDR5-4800 CL40-39-39 @1.1V；EXPO Profile #0 / XMP Profile #1: DDR5-6000 CL30-36-36 @1.4V；EXPO #1 / XMP #2: DDR5-5600。高度原文『Height 1.37” (34.9mm), w/heatsink』。",
+    "memoryType": "DDR5",
+    "moduleCapacityGb": 16,
+    "moduleCount": 2,
+    "speedMts": 6000,
+    "requiresXmpExpo": true,
+    "moduleHeightMm": 34.9
   }
 ]

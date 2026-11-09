@@ -32,7 +32,7 @@
     ]
   },
   {
-    "id": "intel-core-i5-14400f",
+    "id": "mock-intel-core-i5-14400f",
     "category": "cpu",
     "brand": "Intel",
     "model": "Core i5-14400F",
@@ -47,5 +47,29 @@
       "DDR4",
       "DDR5"
     ]
+  },
+  {
+    "id": "intel-core-i5-14400f",
+    "category": "cpu",
+    "brand": "Intel",
+    "model": "Core i5-14400F",
+    "twName": "Intel Core i5-14400F",
+    "sourceUrl": "https://www.intel.com/content/www/us/en/products/sku/236777/intel-core-i5-processor-14400f-20m-cache-up-to-4-70-ghz/specifications.html",
+    "specVerifiedAt": "2026-11-09",
+    "notes": "ARK 頁面沒有 Processor Graphics 區塊（F 型號），但沒有明文寫『無內顯』，hasIntegratedGraphics 暫不填（判定規則待確認）。記憶體原文『Up to DDR5 4800 MT/s / Up to DDR4 3200 MT/s』，未註明 DPC 條件。PCIe 原文：Revision『5.0 and 4.0』、Configurations『Up to 1x16+4, 2x8+4』、Max lanes『20』，未明寫顯卡/M.2 各用哪個世代，pcieGen 未填。maxPowerW = ARK『Maximum Turbo Power』。",
+    "socket": "LGA1700",
+    "generation": "intel-core-14",
+    "memoryTypes": [
+      "DDR4",
+      "DDR5"
+    ],
+    "officialMemorySpeedMts": {
+      "DDR4": 3200,
+      "DDR5": 4800
+    },
+    "tdpW": 65,
+    "maxPowerW": 148,
+    "maxPowerDefinition": "PL2",
+    "maxMemoryCapacityGb": 192
   }
 ]

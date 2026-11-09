@@ -62,6 +62,7 @@ export const CPU_GENERATIONS = [
   "intel-core-13",
   "intel-core-14",
   "intel-core-ultra-200s",
+  "intel-core-ultra-200s-plus",
   "amd-ryzen-7000",
   "amd-ryzen-7000-x3d",
   "amd-ryzen-8000",

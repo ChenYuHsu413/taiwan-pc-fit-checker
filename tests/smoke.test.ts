@@ -32,6 +32,14 @@ describe("內建資料 smoke test", () => {
     }
   });
 
+  it("已驗證（specVerifiedAt 有值）的零件一定有 sourceUrl", () => {
+    const missing = validated
+      .flatMap((v) => v.result.items)
+      .filter((p) => p.specVerifiedAt !== null && p.sourceUrl === null)
+      .map((p) => p.id);
+    expect(missing).toEqual([]);
+  });
+
   it("BIOS 規則表格式正確", () => {
     expect(biosSupportTableSchema.safeParse(RAW_BIOS_SUPPORT).success).toBe(true);
   });

@@ -1,4 +1,37 @@
 {
   "schemaVersion": 1,
-  "entries": []
+  "entries": [
+    {
+      "chipset": "B650",
+      "cpuGeneration": "amd-ryzen-9000",
+      "support": "biosUpdate",
+      "minBiosNote": "AMD 官方：『A BIOS update may be required for Ryzen 8000 and 9000 series processors on 600 series boards.』最低版本依主機板而異，需查各主機板 CPU 支援清單",
+      "sourceUrl": "https://www.amd.com/en/products/processors/chipsets/am5.html",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "chipset": "B650",
+      "cpuGeneration": "amd-ryzen-9000-x3d",
+      "support": "biosUpdate",
+      "minBiosNote": "同 amd-ryzen-9000（AMD 官方未將 X3D 分開說明）。最低版本依主機板與型號而異",
+      "sourceUrl": "https://www.amd.com/en/products/processors/chipsets/am5.html",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "chipset": "B760",
+      "cpuGeneration": "intel-core-14",
+      "support": "biosUpdate",
+      "minBiosNote": "Intel 官方：『Intel 600 Series and Intel 700 Series chipset-based motherboards require a BIOS update to boot the Intel Core desktop processors (13th and 14th gen)』。最低版本依主機板而異",
+      "sourceUrl": "https://www.intel.com/content/www/us/en/support/articles/000092294/processors.html",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "chipset": "B660",
+      "cpuGeneration": "intel-core-14",
+      "support": "biosUpdate",
+      "minBiosNote": "同上 Intel 官方說明（600 系列）。最低版本依主機板而異",
+      "sourceUrl": "https://www.intel.com/content/www/us/en/support/articles/000092294/processors.html",
+      "verifiedAt": "2026-11-09"
+    }
+  ]
 }

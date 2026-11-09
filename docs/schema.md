@@ -153,13 +153,16 @@ M.2 數量 = `m2Slots.length`（只在 `m2Slots` 有填時才有意義）。
 | `intel-core-13` | Core i3/i5/i7/i9 13xxx | LGA1700 |
 | `intel-core-14` | Core i3/i5/i7/i9 14xxx | LGA1700 |
 | `intel-core-ultra-200s` | Core Ultra 5/7/9 2xx 桌上型（K / KF / F / 無後綴） | LGA1851 |
+| `intel-core-ultra-200s-plus` | Core Ultra 2xx Plus（例：270K Plus、250K/KF Plus，2026 Q1）。官方系列名稱與 200S 相同（Series 2），但記憶體上限不同、BIOS 需求待確認，故分開 | LGA1851 |
 | `amd-ryzen-7000` | Ryzen 5/7/9 7xxx 桌上型，**不含** X3D | AM5 |
 | `amd-ryzen-7000-x3d` | Ryzen 7xxxX3D | AM5 |
 | `amd-ryzen-8000` | Ryzen 8xxxG / 8xxxF（AM5 APU 系列） | AM5 |
 | `amd-ryzen-9000` | Ryzen 5/7/9 9xxx 桌上型，**不含** X3D | AM5 |
 | `amd-ryzen-9000-x3d` | Ryzen 9xxxX3D | AM5 |
 
-新世代上市時，在 enum 加值並更新此表。本表的系列範圍依據 Phase 2a 官網調查結果修訂（見回報）。
+新世代上市時，在 enum 加值並更新此表。
+
+**尚未收錄、待決定是否納入**（Phase 2a 官網調查發現）：Intel Core 5 120/120F（"Series 1"，LGA1700，2025 Q3）、AMD Ryzen AI 400 G/GE（AM5，OEM 供貨，零售與否未知）、AMD Ryzen 5000 / 5000X3D（AM4，官網在推 5800X3D 回歸）。
 
 ### 3.4 RAM（`ram`）
 

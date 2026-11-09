@@ -38,5 +38,21 @@
     "wattage": 650,
     "lengthMm": 140,
     "modularType": "non"
+  },
+  {
+    "id": "cooler-master-mwe-gold-850-v4",
+    "category": "psu",
+    "brand": "Cooler Master",
+    "model": "MWE Gold 850 V4",
+    "twName": "MWE Gold V4 850W",
+    "sourceUrl": "https://www.coolermaster.com/en-global/products/mwe-gold-v4.html",
+    "specVerifiedAt": "2026-11-09",
+    "notes": "型號 MPM-85F4-AFG；ATX 12V Ver. 3.1（規格表無獨立 Form Factor 欄，由 ATX 版本與 150 x 86 尺寸判定）。尺寸原文『(L x W x H) 140 x 150 x 86 mm』。模組化取自說明文字『fully modular』。12V-2x6 原文『12V-2x6(12+4 Pin) Connectors x1 = 1x (600mm)』；PCIe 原文『750W / 850W: x4 = 2x (600+120mm)』→ 4 個頭、2 條線。",
+    "formFactor": "ATX",
+    "wattage": 850,
+    "lengthMm": 140,
+    "modularType": "full",
+    "native16PinCount": 1,
+    "pcie8PinCount": 4
   }
 ]

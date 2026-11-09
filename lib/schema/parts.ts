@@ -186,7 +186,7 @@ export const cpuSchema = z.object({
   ...basePartShape,
   category: z.literal("cpu"),
   socket: socketSchema,
-  /** 世代／系列 slug，用於 BIOS 規則表比對，例如 `ryzen-9000`、`core-ultra-200s` */
+  /** 世代（CPU_GENERATIONS 之一），用於 BIOS 規則表比對，例如 `amd-ryzen-9000`、`intel-core-ultra-200s` */
   generation: cpuGenerationSchema,
   hasIntegratedGraphics: z.boolean().optional(),
   /** 支援的記憶體類型（Intel 12–14 代可同時支援兩種） */

@@ -48,5 +48,129 @@
       "depthMm": 170
     },
     "memoryType": "DDR5"
+  },
+  {
+    "id": "asus-rog-strix-x870e-e-gaming-wifi",
+    "category": "motherboard",
+    "brand": "ASUS",
+    "model": "ROG STRIX X870E-E GAMING WIFI",
+    "twName": "ROG STRIX X870E-E GAMING WIFI",
+    "sourceUrl": "https://rog.asus.com/motherboards/rog-strix/rog-strix-x870e-e-gaming-wifi/spec/",
+    "specVerifiedAt": "2026-11-09",
+    "notes": "尺寸原文『12 inch x 9.6 inch (30.5 cm x 24.4 cm)』。槽位規格依 CPU 系列而異：Ryzen 8000 時 PCIEX16(G5) 為 PCIe 4.0 x8/x4、M.2_1 為 PCIe 4.0 x4、M.2_2/M.2_3 停用（schema 無法表達，以 Ryzen 9000/7000 的值填入）。記憶體速度原文『8000+MT/s(OC) with Ryzen 9000/7000, 8400+MT/s(OC) with Ryzen 8000』，依 CPU 而異且為 OC 值，未填。共用通道：規格頁寫 M.2_2 或 M.2_3 單獨使用即降為 x8，手冊 p.9/p.24 只寫兩者都使用時，以規格頁為準、待確認。影像輸出：1 x HDMI + 2 x USB4 Type-C DP。手冊 E26676 V4：https://dlcdnets.asus.com/pub/ASUS/mb/SocketAM5/ROG_STRIX_X870E-E_GAMING_WIFI/E26676_ROG_STRIX_X870E-E_GAMING_WIFI_EM_V4_WEB.pdf",
+    "formFactor": "ATX",
+    "socket": "AM5",
+    "chipset": "X870E",
+    "dimensions": {
+      "heightMm": 305,
+      "depthMm": 244
+    },
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "maxMemoryCapacityGb": 256,
+    "pcieX16Slots": [
+      {
+        "label": "PCIEX16(G5)",
+        "gen": 5,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      },
+      {
+        "label": "PCIEX16(G4)",
+        "gen": 4,
+        "electricalLanes": 4,
+        "laneSource": "chipset"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M.2_1",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "cpu"
+      },
+      {
+        "label": "M.2_2",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "cpu"
+      },
+      {
+        "label": "M.2_3",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280",
+          "22110"
+        ],
+        "laneSource": "cpu"
+      },
+      {
+        "label": "M.2_4",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280"
+        ],
+        "laneSource": "chipset"
+      },
+      {
+        "label": "M.2_5",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280"
+        ],
+        "laneSource": "chipset"
+      }
+    ],
+    "laneSharing": [
+      {
+        "when": {
+          "kind": "m2Slot",
+          "label": "M.2_2",
+          "condition": "occupied with SSD devices"
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16(G5)"
+        },
+        "effect": {
+          "kind": "reducedLanes",
+          "lanes": 8
+        },
+        "sourceText": "When M.2_2 is enabled, but M.2_3 is not in use, PCIEX16_(G5) will run in x8 mode."
+      },
+      {
+        "when": {
+          "kind": "m2Slot",
+          "label": "M.2_3",
+          "condition": "occupied with SSD devices"
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16(G5)"
+        },
+        "effect": {
+          "kind": "reducedLanes",
+          "lanes": 8
+        },
+        "sourceText": "When M.2_3 is enabled, but M.2_2 is not in use, PCIEX16_(G5) will run in x8 mode."
+      }
+    ],
+    "biosFlashback": true,
+    "hasVideoOutput": true
   }
 ]

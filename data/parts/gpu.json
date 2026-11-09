@@ -59,5 +59,24 @@
       }
     ],
     "legacyRecommendedSideClearanceMm": 10
+  },
+  {
+    "id": "asus-rog-astral-rtx-5090-oc",
+    "category": "gpu",
+    "brand": "ASUS",
+    "model": "ROG Astral GeForce RTX 5090 32GB GDDR7 OC Edition",
+    "twName": "ROG Astral GeForce RTX™ 5090 32GB GDDR7 OC 超頻版",
+    "sourceUrl": "https://rog.asus.com/tw/graphics-cards/graphics-cards/rog-astral/rog-astral-rtx5090-o32g-gaming/spec/",
+    "specVerifiedAt": "2026-11-09",
+    "notes": "尺寸原文『產品尺寸 357.6 x 149.3 x 76 mm』，官方未標示 L/W/H 與是否含擋板，依規則不推斷，長/高/厚留空。建議電源原文『建議電源供應器 1000W』，條件為 fully overclocked GPU and CPU system configuration。PCIe 只寫『PCI Express 5.0』，未寫通道數。TBP 只有 NVIDIA 公版頁有（575W，https://www.nvidia.com/zh-tw/geforce/graphics-cards/50-series/rtx-5090/），與 sourceUrl 不同來源，未填。附 1 x Adapter Cable (1 to 4)。",
+    "slotWidth": 3.8,
+    "powerConnectors": [
+      {
+        "type": "16-pin",
+        "count": 1
+      }
+    ],
+    "recommendedPsuW": 1000,
+    "pcieGen": 5
   }
 ]

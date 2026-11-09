@@ -44,5 +44,33 @@
     "ramClearance": {
       "defaultMm": 32
     }
+  },
+  {
+    "id": "noctua-nh-d15-g2",
+    "category": "airCooler",
+    "brand": "Noctua",
+    "model": "NH-D15 G2",
+    "twName": "Noctua NH-D15 G2",
+    "sourceUrl": "https://www.noctua.at/en/products/nh-d15-g2/specifications",
+    "specVerifiedAt": "2026-11-09",
+    "notes": "Standard 版。規格頁『Depth with fan(s) 152 mm / without 127 mm』、Width 有無風扇皆 150 → Depth 為氣流方向（與資訊單尺寸圖一致）。RAM 淨空來源為官方 FAQ：『Out of the box ... RAM modules with a height of up to 32mm. In this default setup, the cooler height is 168mm.』（https://www.noctua.at/en/support/faqs/how-can-i-ensure-both-case-and-ram-compatibility-with-my-nh-d15）；上移前扇時『上移多少、總高加多少』，換 120mm 前扇可容 52mm、拆前扇可容 59mm，無單一 withFanRaisedMm 值。offset 設計可讓開第一條 PCIe x16。",
+    "heightMm": 168,
+    "widthMm": 150,
+    "depthMm": 152,
+    "supportedSockets": [
+      "AM5",
+      "AM4",
+      "LGA1700",
+      "LGA1851",
+      "LGA1954",
+      "LGA1156",
+      "LGA1155",
+      "LGA1150",
+      "LGA1151",
+      "LGA1200"
+    ],
+    "ramClearance": {
+      "defaultMm": 32
+    }
   }
 ]

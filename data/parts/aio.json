@@ -40,5 +40,26 @@
     "radiatorWidthMm": 140,
     "radiatorThicknessMm": 30,
     "fanThicknessMm": 26
+  },
+  {
+    "id": "arctic-liquid-freezer-iii-pro-360",
+    "category": "aio",
+    "brand": "ARCTIC",
+    "model": "Liquid Freezer III Pro 360",
+    "twName": "ARCTIC Liquid Freezer III Pro 360",
+    "sourceUrl": "https://www.arctic.de/en/Liquid-Freezer-III-Pro-360/ACFRE00180A",
+    "specVerifiedAt": "2026-11-09",
+    "notes": "排尺寸原文『398 (L) x 120 (W) x 38 (H) mm』。風扇厚度 25mm 取自官方 Spec Sheet 尺寸圖（https://www.arctic.de/media/e3/d9/86/1741780098/Spec_Sheet_Liquid_Freezer_III_Pro_360_EN.pdf），文字規格未寫；官方另寫『requires at least 63 mm of clearance』。Tube Length 450 mm。有 VRM 風扇與 offset 安裝；部分主機板 M.2_1 散熱片會衝突。頁面篩選標籤列 115X/1200，與規格表不一致，以規格表為準。",
+    "radiatorSize": 360,
+    "radiatorLengthMm": 398,
+    "radiatorWidthMm": 120,
+    "radiatorThicknessMm": 38,
+    "fanThicknessMm": 25,
+    "supportedSockets": [
+      "LGA1851",
+      "LGA1700",
+      "AM5",
+      "AM4"
+    ]
   }
 ]

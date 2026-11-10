@@ -47,6 +47,21 @@ export interface CompatibilityResult {
   limitValue?: number;
   remainingValue?: number;
   suggestion?: string;
+  /** 官方的其他條件或補充（Info 顯示），例如條件值中 isDefault 以外的條件 */
+  conditions?: string[];
+  /** 相關官方連結，例如主機板 CPU 支援清單 */
+  link?: { label: string; url: string };
+}
+
+/** 沒有可靠依據、不產生判斷結果的項目（報告最下方列出） */
+export interface UncheckedItem {
+  ruleId: RuleId;
+  reason: string;
+}
+
+export interface CompatibilityReportData {
+  results: CompatibilityResult[];
+  unchecked: UncheckedItem[];
 }
 
 /** 使用者可手動覆蓋的尺寸欄位（第一版支援的子集） */

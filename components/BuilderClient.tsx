@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import type { BuildSelection } from "@/types/parts";
-import { buildCablePlanningSuggestions, evaluateBuild } from "@/lib/compatibility";
+import { buildCablePlanningSuggestions, evaluateReport } from "@/lib/compatibility";
 import { PartPicker } from "./PartPicker";
 import { FitPreview2D } from "./FitPreview2D";
 import { CompatibilityReport } from "./CompatibilityReport";
@@ -30,7 +30,8 @@ export function BuilderClient() {
   const [selection, setSelection] = useState<BuildSelection>(INITIAL_SELECTION);
   const [viewMode, setViewMode] = useState<ViewMode>("3d");
 
-  const results = useMemo(() => evaluateBuild(selection), [selection]);
+  const report = useMemo(() => evaluateReport(selection), [selection]);
+  const results = report.results;
   const suggestions = useMemo(
     () => buildCablePlanningSuggestions(selection, results),
     [selection, results]
@@ -65,7 +66,7 @@ export function BuilderClient() {
           </div>
         </div>
         <div className="lg:col-span-3" style={{ minHeight: 500 }}>
-          <CompatibilityReport results={results} />
+          <CompatibilityReport report={report} />
         </div>
       </div>
       <div className="mt-4">

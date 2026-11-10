@@ -1,4 +1,61 @@
-# 相容性規則規格（草案 v0）
+# 相容性規則規格（v2，Phase 3 已實作）
+
+- 狀態：**v2（Phase 3，2026-11-10）**。§P 為現行實作，§0 之後是 Phase 0–1 的草案與背景說明（門檻提案已不採用）
+- 程式：`lib/compatibility/index.ts`（判斷）、`rules.ts`（清單、分組、尚未檢查原因）、`messages.ts`（文案）；測試 `tests/rules.test.ts`、`tests/real-builds.test.ts`
+
+## §P Phase 3 現行實作
+
+### P.1 狀態判定原則
+
+| 狀態 | 何時使用 |
+|---|---|
+| `incompatible` | 官方數值明確顯示裝不下或插不上 |
+| `safe` | 官方數值明確顯示裝得下；報告附「餘裕 X mm」 |
+| `tight` | **本輪不實作**（門檻沒有可靠依據），報告在「尚未檢查的項目」說明 |
+| `warning` | 只用在有明確官方依據的情況：需要更新 BIOS（R27）、需要轉接線（R33）、電源低於顯卡官方建議（R15） |
+| `info` | 能用但會降速（PCIe、記憶體速度），或官方另有條件（conditionText / 條件值的其他條件不是空的） |
+| `unknown` | 需要的資料缺值，或只選了一側零件（原本誤報 warning 的 R01 / R02 / R05 / R10 四處已全部改成 unknown） |
+
+- 條件值欄位：用 `isDefault` 那筆判斷，其他條件列在結果的 `conditions`（有其他條件時 safe → info）
+- 沒有可靠判斷依據的規則**不產生結果**，固定列在報告最下方「尚未檢查的項目」，附原因
+
+### P.2 規則實作表
+
+| 規則 | 狀態 | 實作重點 |
+|---|---|---|
+| R01 | 實作 | 板型清單；E-ATX 且雙方都有寬度時比較 `dimensions.depthMm ≤ maxMotherboardDepthMm` |
+| R02 | 實作 | 依前置實際裝的東西選官方上限：使用者選前置水冷 → `withFrontRadiator` 中同尺寸那筆；機殼內附前置風扇 → `withFrontFanMm`；都沒有 → `noFrontMm`。**不再扣厚度**。對應條件沒有數字時用 `unspecifiedMm` 並加 Info；也沒有 → Unknown。官方沒說是否內附風扇且兩個數字都有時取較嚴格者 |
+| R03 | 部分 | 有 `maxGpuSlotWidth` 時比較槽數；槽數 > 擴充槽總數 → incompatible；只能直立裝 → info。其餘（第一條 x16 槽位置官方不公開）列為尚未檢查 |
+| R04 | 實作 | `gpu.heightMm` vs `gpuHeightLimits`（isDefault） |
+| R05 | 實作 | `airCooler.heightMm` vs `cpuCoolerHeightLimits`（isDefault） |
+| R06 | 實作 | `ram.moduleHeightMm` vs `ramClearance.defaultMm`（出廠風扇位置）；超過 → incompatible，建議參考官方上移風扇做法 |
+| R07 | 尚未檢查 | 鰭片離板高度與 VRM 散熱片高度官方不公開 |
+| R08 | 實作 | 所選位置（前 / 上）的 sizes；有厚度上限且水冷厚度有值時比較；沒有厚度上限 → unknown |
+| R09 | 尚未檢查 | 頂部排與主機板 / RAM 的幾何資料官方不公開（排的尺寸與厚度仍由 R08 檢查） |
+| R10 | 實作 | 電源規格清單（ATX 進 SFX 機殼 → incompatible；SFX 進只列 ATX 的機殼 → unknown，轉接架官方未說明）＋ `psu.lengthLimits`（isDefault） |
+| R11 | 尚未檢查 | 走線空間沒有可靠門檻（舊版 20 mm 沒有出處） |
+| R12 | 尚未檢查 | 供電接頭直線段長度沒有可查證的官方數字 |
+| R13 | 尚未檢查 | PCIe 槽高度與顯卡背板距離官方不公開 |
+| R14 | 實作 | 主機板（沒有則 CPU）腳位 ∈ 散熱器 `supportedSockets` |
+| R15 | 實作 | **只比對**電源瓦數 vs 顯卡官方建議電源（板卡廠沒寫用 `gpu-chips.json`）；不足 → warning。不估算整機功耗 |
+| R17 / R20 / R21 | 尚未檢查 | 機殼內部距離、直立支架、底部風扇距離官方不公開 |
+| R22–R25 | 實作 | 依 §4 |
+| R26 | 實作 | 有 `memorySpeedTable` 且 RAM 有 rank 時依「每通道條數 × rank」查表，否則用 `officialMemorySpeedMts`；超出 CPU / 主機板或需 XMP/EXPO → info |
+| R27 | 實作 | 依 BIOS 表（晶片組 × 世代）；`biosUpdate` 訊息依 `biosFlashback` true / false / 缺值不同；`boardOverrides` 有最低版本時列出；有 `cpuSupportListUrl` 時附連結 |
+| R28 | 實作 | 依 §4 |
+| R29 | 實作 | 預設顯卡插 `pcieX16Slots[0]`；套用 laneSharing（CPU 世代觸發、M.2 佔用觸發，含 allOf）；顯卡 PCIe 缺值用晶片表；世代或通道數不同一律 info |
+| R30–R32 | 實作 | M.2 貪婪分配（世代高的 SSD 先挑；先挑能全速的最低世代槽）；CPU 世代停用的槽不列入可用槽 |
+| R33 | 實作 | 16-pin：PSU 原生 0 個 → warning（需轉接線）；8-pin 不足 → incompatible；缺值 → unknown |
+
+### P.3 已移除
+
+- `TIGHT_THRESHOLD_MM`（10 mm）、走線 20 mm、顯卡剩餘 20 mm 等沒有出處的門檻
+- 走線建議只保留不需要門檻的提醒（16-pin 接頭、非模組化電源）
+- R12 原本的假檢查（一律 warning）
+
+---
+
+# 以下為 Phase 0–1 草案（背景）
 
 - 狀態：草案 v1（Phase 1 已加入 `info` / `unknown` 狀態、規則分組，以及平台規則 R22–R33）
 - 單位：全部為 mm；功率單位為 W

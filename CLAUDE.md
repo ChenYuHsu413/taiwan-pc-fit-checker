@@ -111,5 +111,7 @@ npm test
 | 2026-11-10 | Next.js 維持 14.2.35（已是 14.2.x 最新 patch，無需升級） | |
 | 2026-11-10 | 3D 顯卡方向：橫插 = 長度沿前後、厚度由插槽往下、高度由主機板往玻璃、風扇朝下（與 schema R04 一致）；直立 = 大平面朝玻璃 | 使用者已確認（pending L-01 結案） |
 | 2026-11-10 | 之後的開發直接在 `main` 進行 | |
+| 2026-11-10 | AMD 官方規格來源：amd.com 對自動讀取一律逾時，改由使用者在對話中請 Claude 透過使用者自己的 Chrome 開啟 AMD 官方頁讀取並提供數值；sourceUrl 填 AMD 官方網址，notes 註明「規格由使用者提供，取自 AMD 官方頁面（使用者瀏覽器讀取）」，完整數值存 `docs/sources/amd-2026-11-10.md`。專案的程式與 Agent 不直接讀 amd.com | 沒列到的欄位留空 |
+| 2026-11-10 | CPU 新增 `supportedChipsets`（AMD Supporting Chipsets） | 晶片組不在清單內 → R27 unsupported |
 | 2026-11-10 | 新增 Playwright 為 devDependency（使用者要求） | 截圖驗證用 |
 | （待定） | 相容性門檻數值 | 見 `docs/compatibility-spec.md` §0.2 |

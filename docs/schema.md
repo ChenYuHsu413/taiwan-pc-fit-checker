@@ -168,6 +168,7 @@ M.2 數量 = `m2Slots.length`（只在 `m2Slots` 有填時才有意義）。
 | `officialMemorySpeedMts.{DDR4,DDR5}` | MT/s | 取官方標示的**最高值**；這通常是「每通道 1 條（1DPC）」的條件，插滿 4 條時官方支援速度通常更低。原文條件寫進 `notes` | R26 |
 | `memorySpeedTable[]` | `{memoryType, modulesPerChannel, rank, mts}` | AMD `2x1R DDR5-5600 / 4x2R DDR5-3600`；總條數 2 → modulesPerChannel 1。**有表時 R26 以表為準** | R26 |
 | `maxMemoryCapacityGb` | GB | Intel `Max Memory Size`；AMD 官方頁若有就填 | R25 |
+| `supportedChipsets[]` | text? | AMD `Supporting Chipsets: A620, X670E, …`；晶片組寫法同 `motherboard.chipset` | R27（晶片組不在清單內 → 不支援） |
 | `tdpW` | W | AMD `Default TDP`；Intel `Processor Base Power` | R15 |
 | `maxPowerW` | W | **只填官方公開的數字**：Intel `Maximum Turbo Power`；AMD 官方頁沒有 PPT 時留空，**不可用 TDP × 倍率推算** | R15 |
 | `maxPowerDefinition` | PPT / MTP / other | MTP = Intel `Maximum Turbo Power` | （R15 不估算整機功耗，目前不使用） |

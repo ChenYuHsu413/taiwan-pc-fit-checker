@@ -259,6 +259,11 @@ export const cpuSchema = z.object({
   maxPowerW: wattSchema.optional(),
   /** MTP = Intel ARK「Maximum Turbo Power」；PPT = AMD Package Power Tracking */
   maxPowerDefinition: z.enum(["PPT", "MTP", "other"]).optional(),
+  /**
+   * 官方「支援晶片組」清單（AMD Supporting Chipsets），與 motherboard.chipset 同寫法。
+   * 主機板晶片組不在清單內 → R27 判為不支援；在清單內只代表支援，不代表不用更新 BIOS
+   */
+  supportedChipsets: z.array(z.string().min(1)).min(1).optional(),
   /** CPU 直接提供的 PCIe 世代 */
   pcieGen: z
     .object({ gpu: pcieGenSchema.optional(), m2: pcieGenSchema.optional() })

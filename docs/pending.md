@@ -26,7 +26,7 @@
 | D-18 | FSP Hydro PTM X PRO 1200W 只寫「PCIe 12+4」，分不出 12VHPWR / 12V-2x6 | native16PinCount 填 1 |
 | D-19 | DeepCool AK400：含風扇與不含風扇的 W 差 52 mm（大於單顆風扇 25 mm），原因官方未說明 | 仍依差異判定 W 為氣流方向 |
 | D-20 | Thermalright 兩款塔散氣流方向只畫在圖片 | width / depth 留空 |
-| D-21 | **AMD CPU 全部 7 顆拿不到**（9600X、9800X3D、9850X3D、9950X3D2、8600G、5600、5800X3D）：www.amd.com 對 WebFetch 每次都逾時 60 秒（用一般瀏覽器 User-Agent 才會回應，視為擋自動讀取），找不到其他官方網域的規格 PDF | 不收。AMD 平台（AM5 / AM4）因此沒有 CPU，R22–R28 只能用 Intel 組合驗證；需要你決定是否人工開頁填入 |
+| D-21 | ✅ **已解決（2026-11-10）**：使用者提供 AMD 官方規格（docs/sources/amd-2026-11-10.md），已收 9600X、9800X3D、9850X3D、9950X3D2、8600G、5600，AM4 X3D 改收 5700X3D（取代原清單的 5800X3D）；maxPowerW 官方未列、留空。原記錄：**AMD CPU 全部 7 顆拿不到**（9600X、9800X3D、9850X3D、9950X3D2、8600G、5600、5800X3D）：www.amd.com 對 WebFetch 每次都逾時 60 秒（用一般瀏覽器 User-Agent 才會回應，視為擋自動讀取），找不到其他官方網域的規格 PDF | 不收。AMD 平台（AM5 / AM4）因此沒有 CPU，R22–R28 只能用 Intel 組合驗證；需要你決定是否人工開頁填入 |
 | D-22 | GIGABYTE 顯卡 2 張（AORUS RTX 5090 MASTER、RTX 5060 WINDFORCE OC 8G）：gigabyte.com tw / global / us 皆 403，找不到官方規格 PDF | 不收 |
 | D-23 | MSI 顯卡 2 張：規格頁 403，改用官方 datasheet PDF（storage-asset.msi.com）當 sourceUrl。datasheet 只有「338 x 140 x 50」「227 x 126 x 41」且沒有槽數，無法套用決策 4 判讀厚度 | 只填長度（最大值），高 / 厚 / 槽數留空，原文寫 notes |
 | D-24 | Sapphire 顯卡官方標 L/W/H，W 對應本專案 height、H 對應 thickness | 照標示對應，`dimensionsAxisInferred: false`；官方用詞「Minimum ... Watt Power Supply」填進 recommendedPsuW |
@@ -44,6 +44,9 @@
 | D-36 | ASUS ROG / TUF 部分 CPU 支援清單頁讀不到表格；ASRock CPU 清單頁空白 | `cpuSupportListUrl` 與 boardOverrides 只填讀得到的（TUF B650M-PLUS、TUF B850-PLUS） |
 | D-37 | amd.com 本輪全部逾時：B650 × Ryzen 9000 / 9000X3D / 8000 與 B850 的依據沿用 2026-11-09 讀過的 AMD AM5 頁原文 | `verifiedAt` 保留 2026-11-09 |
 | D-38 | DeepCool AK620 DIGITAL 官方腳位寫「2011-v3/2011」，2011-v3 不符合腳位格式 | 只收 `LGA2011`，notes 說明 |
+| D-39 | AMD CPU 官方只列單一 PCIe 版本（9000 系列 5.0、8600G 與 AM4 4.0），沒有分顯卡 / M.2 | `pcieGen.gpu` 與 `pcieGen.m2` 都填該版本（與 Intel「5.0 and 4.0」分不出的情況不同） |
+| D-40 | 核心數、CPU PCIe 通道數、ECC、上市日、晶片組額外通道沒有對應欄位 | 寫進 notes |
+| D-41 | SAPPHIRE PULSE RX 9060 XT：官方型號『16GB GDDR6（11350-03-20G）』 | 確認為 16GB 版，對應 `amd-radeon-rx-9060-xt-16gb`，不需另建 8GB 版晶片 |
 
 ## BIOS 規則表
 
@@ -77,7 +80,7 @@
 
 | # | 項目 | 目前做法 |
 |---|---|---|
-| O-01 | `gpu-chips.json` 的 RX 9070 XT、RX 9060 XT 數值是用瀏覽器（Claude in Chrome）開 amd.com 官方頁讀到的（WebFetch 逾時）。數值出自官方頁，但讀取方式事後判定可能算繞過自動讀取限制，之後已停止使用瀏覽器 | 數值保留；請確認是否接受，不接受就刪除這兩筆（相關顯卡改回 Unknown） |
+| O-01 | ✅ **已解決（2026-11-10）**：兩筆已刪除，改用使用者提供的 AMD 官方數值重建（docs/sources/amd-2026-11-10.md）。原記錄：`gpu-chips.json` 的 RX 9070 XT、RX 9060 XT 數值是用瀏覽器（Claude in Chrome）開 amd.com 官方頁讀到的（WebFetch 逾時）。數值出自官方頁，但讀取方式事後判定可能算繞過自動讀取限制，之後已停止使用瀏覽器 | 數值保留；請確認是否接受，不接受就刪除這兩筆（相關顯卡改回 Unknown） |
 
 
 ## 3D / 2D 佈局（L 段，2026-11-10）

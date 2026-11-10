@@ -69,5 +69,433 @@
     "maxPowerW": 250,
     "maxPowerDefinition": "MTP",
     "maxMemoryCapacityGb": 256
+  },
+  {
+    "id": "amd-ryzen-5-9600x",
+    "category": "cpu",
+    "brand": "AMD",
+    "model": "Ryzen 5 9600X",
+    "twName": "AMD Ryzen 5 9600X",
+    "sourceUrl": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-5-9600x.html",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "規格由使用者提供，取自 AMD 官方頁面（使用者瀏覽器讀取，2026-11-10，完整數值見 docs/sources/amd-2026-11-10.md）。核心 6；TDP 65W；CPU PCIe 通道（總 / 可用）28 / 24；內顯『AMD Radeon Graphics』；ECC：Yes（需主機板支援）；上市日 2024-08-08。官方只列單一 PCIe 版本『5.0』，未分顯卡 / M.2，故 pcieGen.gpu 與 m2 都填 5。官方未列 PPT，maxPowerW 留空。官方頁另列各晶片組額外提供的 PCIe 通道（晶片組資訊，非 CPU 欄位）：X870E 8x Gen4、X870 4x Gen4、X670E 12x Gen4、X670 12x Gen4、B650E 8x Gen4、B650 8x Gen4。",
+    "socket": "AM5",
+    "generation": "amd-ryzen-9000",
+    "hasIntegratedGraphics": true,
+    "memoryTypes": [
+      "DDR5"
+    ],
+    "officialMemorySpeedMts": {
+      "DDR5": 5600
+    },
+    "memorySpeedTable": [
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 1,
+        "rank": 1,
+        "mts": 5600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 1,
+        "rank": 2,
+        "mts": 5600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 2,
+        "rank": 1,
+        "mts": 3600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 2,
+        "rank": 2,
+        "mts": 3600
+      }
+    ],
+    "tdpW": 65,
+    "maxMemoryCapacityGb": 256,
+    "supportedChipsets": [
+      "A620",
+      "X670E",
+      "X670",
+      "B650E",
+      "B650",
+      "X870E",
+      "X870",
+      "B840",
+      "B850"
+    ],
+    "pcieGen": {
+      "gpu": 5,
+      "m2": 5
+    }
+  },
+  {
+    "id": "amd-ryzen-7-9800x3d",
+    "category": "cpu",
+    "brand": "AMD",
+    "model": "Ryzen 7 9800X3D",
+    "twName": "AMD Ryzen 7 9800X3D",
+    "sourceUrl": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9800x3d.html",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "規格由使用者提供，取自 AMD 官方頁面（使用者瀏覽器讀取，2026-11-10，完整數值見 docs/sources/amd-2026-11-10.md）。核心 8；TDP 120W；CPU PCIe 通道（總 / 可用）28 / 24；內顯『AMD Radeon Graphics』；ECC：Yes（需主機板支援）；上市日 2024-11-07。官方只列單一 PCIe 版本『5.0』，未分顯卡 / M.2，故 pcieGen.gpu 與 m2 都填 5。官方未列 PPT，maxPowerW 留空。",
+    "socket": "AM5",
+    "generation": "amd-ryzen-9000-x3d",
+    "hasIntegratedGraphics": true,
+    "memoryTypes": [
+      "DDR5"
+    ],
+    "officialMemorySpeedMts": {
+      "DDR5": 5600
+    },
+    "memorySpeedTable": [
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 1,
+        "rank": 1,
+        "mts": 5600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 1,
+        "rank": 2,
+        "mts": 5600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 2,
+        "rank": 1,
+        "mts": 3600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 2,
+        "rank": 2,
+        "mts": 3600
+      }
+    ],
+    "tdpW": 120,
+    "maxMemoryCapacityGb": 256,
+    "supportedChipsets": [
+      "A620",
+      "X670E",
+      "X670",
+      "B650E",
+      "B650",
+      "X870E",
+      "X870",
+      "B840",
+      "B850"
+    ],
+    "pcieGen": {
+      "gpu": 5,
+      "m2": 5
+    }
+  },
+  {
+    "id": "amd-ryzen-7-9850x3d",
+    "category": "cpu",
+    "brand": "AMD",
+    "model": "Ryzen 7 9850X3D",
+    "twName": "AMD Ryzen 7 9850X3D",
+    "sourceUrl": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9850x3d.html",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "規格由使用者提供，取自 AMD 官方頁面（使用者瀏覽器讀取，2026-11-10，完整數值見 docs/sources/amd-2026-11-10.md）。核心 8；TDP 120W；CPU PCIe 通道（總 / 可用）28 / 24；內顯『AMD Radeon Graphics』；ECC：Yes（需主機板支援）；上市日 2026-01-29。官方只列單一 PCIe 版本『5.0』，未分顯卡 / M.2，故 pcieGen.gpu 與 m2 都填 5。官方未列 PPT，maxPowerW 留空。",
+    "socket": "AM5",
+    "generation": "amd-ryzen-9000-x3d",
+    "hasIntegratedGraphics": true,
+    "memoryTypes": [
+      "DDR5"
+    ],
+    "officialMemorySpeedMts": {
+      "DDR5": 5600
+    },
+    "memorySpeedTable": [
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 1,
+        "rank": 1,
+        "mts": 5600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 1,
+        "rank": 2,
+        "mts": 5600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 2,
+        "rank": 1,
+        "mts": 3600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 2,
+        "rank": 2,
+        "mts": 3600
+      }
+    ],
+    "tdpW": 120,
+    "maxMemoryCapacityGb": 256,
+    "supportedChipsets": [
+      "A620",
+      "X670E",
+      "X670",
+      "B650E",
+      "B650",
+      "X870E",
+      "X870",
+      "B840",
+      "B850"
+    ],
+    "pcieGen": {
+      "gpu": 5,
+      "m2": 5
+    }
+  },
+  {
+    "id": "amd-ryzen-9-9950x3d2-dual-edition",
+    "category": "cpu",
+    "brand": "AMD",
+    "model": "Ryzen 9 9950X3D2 Dual Edition",
+    "twName": "AMD Ryzen 9 9950X3D2 Dual Edition",
+    "sourceUrl": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x3d2-dual-edition.html",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "規格由使用者提供，取自 AMD 官方頁面（使用者瀏覽器讀取，2026-11-10，完整數值見 docs/sources/amd-2026-11-10.md）。核心 16；TDP 200W；CPU PCIe 通道（總 / 可用）28 / 24；內顯『AMD Radeon Graphics』；ECC：Yes（需主機板支援）；上市日 2026-04-22。官方只列單一 PCIe 版本『5.0』，未分顯卡 / M.2，故 pcieGen.gpu 與 m2 都填 5。官方未列 PPT，maxPowerW 留空。",
+    "socket": "AM5",
+    "generation": "amd-ryzen-9000-x3d",
+    "hasIntegratedGraphics": true,
+    "memoryTypes": [
+      "DDR5"
+    ],
+    "officialMemorySpeedMts": {
+      "DDR5": 5600
+    },
+    "memorySpeedTable": [
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 1,
+        "rank": 1,
+        "mts": 5600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 1,
+        "rank": 2,
+        "mts": 5600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 2,
+        "rank": 1,
+        "mts": 3600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 2,
+        "rank": 2,
+        "mts": 3600
+      }
+    ],
+    "tdpW": 200,
+    "maxMemoryCapacityGb": 256,
+    "supportedChipsets": [
+      "A620",
+      "X670E",
+      "X670",
+      "B650E",
+      "B650",
+      "X870E",
+      "X870",
+      "B840",
+      "B850"
+    ],
+    "pcieGen": {
+      "gpu": 5,
+      "m2": 5
+    }
+  },
+  {
+    "id": "amd-ryzen-5-8600g",
+    "category": "cpu",
+    "brand": "AMD",
+    "model": "Ryzen 5 8600G",
+    "twName": "AMD Ryzen 5 8600G",
+    "sourceUrl": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8600g.html",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "規格由使用者提供，取自 AMD 官方頁面（使用者瀏覽器讀取，2026-11-10，完整數值見 docs/sources/amd-2026-11-10.md）。核心 6；TDP 65W（cTDP 45–65W）；CPU PCIe 通道（總 / 可用）20 / 16；內顯『AMD Radeon 760M』；ECC：官方頁未列；上市日 2024 Q1。官方只列單一 PCIe 版本『4.0』，未分顯卡 / M.2，故 pcieGen.gpu 與 m2 都填 4。官方未列 PPT，maxPowerW 留空。",
+    "socket": "AM5",
+    "generation": "amd-ryzen-8000",
+    "hasIntegratedGraphics": true,
+    "memoryTypes": [
+      "DDR5"
+    ],
+    "officialMemorySpeedMts": {
+      "DDR5": 5200
+    },
+    "memorySpeedTable": [
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 1,
+        "rank": 1,
+        "mts": 5200
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 1,
+        "rank": 2,
+        "mts": 5200
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 2,
+        "rank": 1,
+        "mts": 3600
+      },
+      {
+        "memoryType": "DDR5",
+        "modulesPerChannel": 2,
+        "rank": 2,
+        "mts": 3600
+      }
+    ],
+    "tdpW": 65,
+    "maxMemoryCapacityGb": 256,
+    "supportedChipsets": [
+      "A620",
+      "X670E",
+      "X670",
+      "B650E",
+      "B650",
+      "X870E",
+      "X870",
+      "B840",
+      "B850"
+    ],
+    "pcieGen": {
+      "gpu": 4,
+      "m2": 4
+    }
+  },
+  {
+    "id": "amd-ryzen-7-5700x3d",
+    "category": "cpu",
+    "brand": "AMD",
+    "model": "Ryzen 7 5700X3D",
+    "twName": "AMD Ryzen 7 5700X3D",
+    "sourceUrl": "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-5000-series/amd-ryzen-7-5700x3d.html",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "規格由使用者提供，取自 AMD 官方頁面（使用者瀏覽器讀取，2026-11-10，完整數值見 docs/sources/amd-2026-11-10.md）。舊產品頁已下架，取自 AMD 官方支援頁。核心 8；TDP 105W；CPU PCIe 通道（總 / 可用）24 / 20；內顯：無（官方寫 Discrete Graphics Card Required）；上市日 2024-01-08。官方只列單一 PCIe 版本『4.0』，pcieGen.gpu 與 m2 都填 4。官方未列 PPT，maxPowerW 留空。",
+    "socket": "AM4",
+    "generation": "amd-ryzen-5000-x3d",
+    "hasIntegratedGraphics": false,
+    "memoryTypes": [
+      "DDR4"
+    ],
+    "officialMemorySpeedMts": {
+      "DDR4": 3200
+    },
+    "memorySpeedTable": [
+      {
+        "memoryType": "DDR4",
+        "modulesPerChannel": 1,
+        "rank": 1,
+        "mts": 3200
+      },
+      {
+        "memoryType": "DDR4",
+        "modulesPerChannel": 1,
+        "rank": 2,
+        "mts": 3200
+      },
+      {
+        "memoryType": "DDR4",
+        "modulesPerChannel": 2,
+        "rank": 1,
+        "mts": 2933
+      },
+      {
+        "memoryType": "DDR4",
+        "modulesPerChannel": 2,
+        "rank": 2,
+        "mts": 2667
+      }
+    ],
+    "tdpW": 105,
+    "maxMemoryCapacityGb": 128,
+    "supportedChipsets": [
+      "X570",
+      "X470",
+      "B550",
+      "B450",
+      "A520"
+    ],
+    "pcieGen": {
+      "gpu": 4,
+      "m2": 4
+    }
+  },
+  {
+    "id": "amd-ryzen-5-5600",
+    "category": "cpu",
+    "brand": "AMD",
+    "model": "Ryzen 5 5600",
+    "twName": "AMD Ryzen 5 5600",
+    "sourceUrl": "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-5000-series/amd-ryzen-5-5600.html",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "規格由使用者提供，取自 AMD 官方頁面（使用者瀏覽器讀取，2026-11-10，完整數值見 docs/sources/amd-2026-11-10.md）。舊產品頁已下架，取自 AMD 官方支援頁。核心 6；TDP 65W；CPU PCIe 通道（總 / 可用）24 / 20；內顯：無（官方寫 Discrete Graphics Card Required）；上市日 2022-04-04。官方只列單一 PCIe 版本『4.0』，pcieGen.gpu 與 m2 都填 4。官方未列 PPT，maxPowerW 留空。",
+    "socket": "AM4",
+    "generation": "amd-ryzen-5000",
+    "hasIntegratedGraphics": false,
+    "memoryTypes": [
+      "DDR4"
+    ],
+    "officialMemorySpeedMts": {
+      "DDR4": 3200
+    },
+    "memorySpeedTable": [
+      {
+        "memoryType": "DDR4",
+        "modulesPerChannel": 1,
+        "rank": 1,
+        "mts": 3200
+      },
+      {
+        "memoryType": "DDR4",
+        "modulesPerChannel": 1,
+        "rank": 2,
+        "mts": 3200
+      },
+      {
+        "memoryType": "DDR4",
+        "modulesPerChannel": 2,
+        "rank": 1,
+        "mts": 2933
+      },
+      {
+        "memoryType": "DDR4",
+        "modulesPerChannel": 2,
+        "rank": 2,
+        "mts": 2667
+      }
+    ],
+    "tdpW": 65,
+    "maxMemoryCapacityGb": 128,
+    "supportedChipsets": [
+      "X570",
+      "X470",
+      "X370",
+      "B550",
+      "B450",
+      "B350",
+      "A520"
+    ],
+    "pcieGen": {
+      "gpu": 4,
+      "m2": 4
+    }
   }
 ]

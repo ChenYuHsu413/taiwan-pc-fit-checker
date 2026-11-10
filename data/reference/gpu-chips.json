@@ -93,10 +93,10 @@
       "pcieLanes": 16,
       "tbpW": 304,
       "recommendedPsuW": 750,
-      "psuWording": "Minimum PSU Recommendation",
+      "psuWording": "最低建議電源（Minimum PSU Recommendation）",
       "sourceUrl": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070xt.html",
       "verifiedAt": "2026-11-10",
-      "notes": "官方原文『Typical Board Power (Desktop) 304W』『Minimum PSU Recommendation 750W』『Bus Type PCIe® 5.0 x16』。以瀏覽器讀取（WebFetch 逾時）。"
+      "notes": "規格由使用者提供，取自 AMD 官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/amd-2026-11-10.md）。匯流排 PCIe 5.0 x16；典型功耗（TBP）304W；最低建議電源 750W。"
     },
     {
       "id": "amd-radeon-rx-9060-xt-16gb",
@@ -106,10 +106,10 @@
       "pcieLanes": 16,
       "tbpW": 160,
       "recommendedPsuW": 450,
-      "psuWording": "Minimum PSU Recommendation",
+      "psuWording": "最低建議電源（Minimum PSU Recommendation）",
       "sourceUrl": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt.html",
       "verifiedAt": "2026-11-10",
-      "notes": "官方原文『Typical Board Power (Desktop) 160W』『Minimum PSU Recommendation 450W』『Bus Type PCIe® 5.0 x16』『Max Memory Size 16 GB』。"
+      "notes": "規格由使用者提供，取自 AMD 官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/amd-2026-11-10.md）。16GB 版數值。匯流排 PCIe 5.0 x16；典型功耗（TBP）160W；最低建議電源 450W。"
     }
   ]
 }

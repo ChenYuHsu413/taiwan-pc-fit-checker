@@ -26,6 +26,7 @@ import type { GpuChip } from "@/lib/schema/gpuChips";
 import { biosSupportEntries, gpuChips } from "@/lib/data/catalog";
 import { defaultEntry, otherConditions } from "@/lib/data/conditional";
 import { MSG } from "./messages";
+import { coolerHeightLimitMm, gpuLengthLimit } from "./limits";
 import { RULES, UNCHECKED_RULES, type RuleId } from "./rules";
 
 /** 規則用到的參考表（測試可注入） */
@@ -138,62 +139,16 @@ function r01(s: BuildSelection): RuleOutput {
 }
 
 function r02(s: BuildSelection): RuleOutput {
-  const { case: c, gpu, cooler, overrides } = s;
+  const { case: c, gpu, overrides } = s;
   if (!c && !gpu) return null;
   if (!c) return needPart("R02", "機殼");
   if (!gpu) return needPart("R02", "顯示卡");
 
   const length = overrides.gpuLengthMm ?? gpu.lengthMm;
   if (length === undefined) return unknown("R02", MSG.common.missingSpec("顯卡長度"));
-
-  const g = c.gpuLength;
-  const conditions: string[] = [];
-  if (g.conditionText) conditions.push(`官方條件原文：${g.conditionText}`);
-
-  let limit: number | undefined;
-  let limitLabel = "";
-
-  if (overrides.caseMaxGpuLengthMm !== undefined) {
-    limit = overrides.caseMaxGpuLengthMm;
-    limitLabel = MSG.R02.limitOverride;
-  } else {
-    const radiator = cooler.kind === "aio" && cooler.mountLocation === "front" ? cooler.cooler : undefined;
-    const frontFan = c.includedFans?.front;
-    let specific: number | undefined;
-    let missingMsg: string;
-
-    if (radiator) {
-      specific = g.withFrontRadiator?.find((r) => r.radiatorSize === radiator.radiatorSize)?.maxGpuMm;
-      limitLabel = MSG.R02.limitRadiator(radiator.radiatorSize);
-      missingMsg = MSG.R02.noRadiatorCondition(radiator.radiatorSize);
-    } else if (frontFan) {
-      specific = g.withFrontFanMm;
-      limitLabel = MSG.R02.limitFan;
-      missingMsg = MSG.R02.noFanCondition;
-      conditions.push(MSG.R02.frontFanAssumed(frontFan.count, frontFan.sizeMm));
-    } else if (c.includedFans === undefined && g.noFrontMm !== undefined && g.withFrontFanMm !== undefined) {
-      // 官方沒說是否內附前置風扇：取兩者中較嚴格的值
-      specific = Math.min(g.noFrontMm, g.withFrontFanMm);
-      limitLabel = specific === g.withFrontFanMm ? MSG.R02.limitFan : MSG.R02.limitNoFront;
-      missingMsg = MSG.R02.noFrontCondition;
-    } else {
-      specific = g.noFrontMm;
-      limitLabel = MSG.R02.limitNoFront;
-      missingMsg = MSG.R02.noFrontCondition;
-    }
-
-    if (specific !== undefined) {
-      limit = specific;
-    } else if (g.unspecifiedMm !== undefined) {
-      limit = g.unspecifiedMm;
-      limitLabel = MSG.R02.limitUnspecified;
-      conditions.push(MSG.R02.unspecifiedInfo);
-    } else {
-      return unknown("R02", missingMsg);
-    }
-  }
-
-  return fit("R02", MSG.R02.labelGpu, length, limit, limitLabel, conditions, MSG.R02.incompatibleSuggestion);
+  const lim = gpuLengthLimit(s)!;
+  if (lim.mm === undefined) return unknown("R02", lim.missingMsg);
+  return fit("R02", MSG.R02.labelGpu, length, lim.mm, lim.label, lim.conditions, MSG.R02.incompatibleSuggestion);
 }
 
 function r03(s: BuildSelection): RuleOutput {
@@ -245,7 +200,7 @@ function r05(s: BuildSelection): RuleOutput {
   if (cooler.kind !== "air") return null;
   const height = overrides.cpuCoolerHeightMm ?? cooler.cooler.heightMm;
   const entry = defaultEntry(c.cpuCoolerHeightLimits);
-  const limit = overrides.caseMaxCpuCoolerHeightMm ?? entry?.mm;
+  const limit = coolerHeightLimitMm(s);
   if (height === undefined) return unknown("R05", MSG.common.missingSpec("散熱器高度"));
   if (limit === undefined) return unknown("R05", MSG.common.missingSpec("機殼的散熱器高度上限"));
   const others = overrides.caseMaxCpuCoolerHeightMm !== undefined ? [] : conditionalTexts(c.cpuCoolerHeightLimits);

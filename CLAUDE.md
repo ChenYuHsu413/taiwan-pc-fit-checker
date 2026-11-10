@@ -33,7 +33,8 @@
 - `docs/data-strategy.md` — 資料來源、價格、檔案格式
 - `docs/schema.md` — 資料 schema 逐欄說明（zod，`lib/schema/`）
 - `docs/roadmap.md` — 分階段計畫
-- `docs/pending.md` — 待確認事項（資料、規則、BIOS 表、其他）
+- `docs/3d-layout-spec.md` — 3D / 2D 座標與佈局規格（示意值在 `lib/three/constants.ts`）
+- `docs/pending.md` — 待確認事項（資料、規則、BIOS 表、3D 佈局、其他）
 - `docs/progress.md` — 長任務進度
 
 ## 單位約定
@@ -41,7 +42,7 @@
 - **全專案的長度一律使用 mm**，欄位名稱以 `Mm` 結尾；功率使用 W，以 `W` 結尾；價格使用新台幣**整數**，以 `Twd` 結尾；記憶體速度 MT/s（`Mts`）、容量 GB（`Gb`）。
 - 規格缺值（optional）= 官方未公開，與 0 意義不同；規則遇到缺值應回傳 `unknown`。
 - 來源是 cm 或 inch 的數值，在**資料進入 repo 時**就換算成 mm，原始值記在 `notes`。
-- 3D 場景只能在最後一步使用 `toUnits(mm)` 換算；元件內不得出現未換算的魔術數字。
+- 3D 場景只能在最後一步使用 `toSceneUnits(mm)` 換算；佈局一律用 mm 計算（`lib/three/layout.ts`），示意值集中在 `lib/three/constants.ts`。
 - 日期使用 ISO 8601（`YYYY-MM-DD`）。
 
 ## Gate 規則
@@ -71,7 +72,7 @@ npm test
 
 | 日期 | 決策 | 理由 / 備註 |
 |---|---|---|
-| 2026-11-09 | 全專案長度單位統一為 mm | 避免 cm/inch 混用；3D 換算集中在 `toUnits` |
+| 2026-11-09 | 全專案長度單位統一為 mm | 避免 cm/inch 混用；3D 換算集中在 `toSceneUnits`（原 `toUnits`） |
 | 2026-11-09 | 每個 Phase 都以 `tsc --noEmit` + `build` 作為 Gate | Phase 1 起加上 `npm test` |
 | 2026-11-09 | Phase 0 只做盤點，不修改功能程式碼 | 先確認現況再規劃 |
 | 2026-11-09 | 價格：人工維護參考價（必附 `updatedAt`）＋使用者貼估價單覆蓋，兩者並用 | data-strategy §2 方案 A + B |

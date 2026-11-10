@@ -63,11 +63,12 @@
 | B-07 | ✅ **大部分已解決（2026-11-10）**：使用者提供 ROG STRIX B850-I、ROG STRIX X870E-E、ROG CROSSHAIR X870E EXTREME、MSI MAG B650 TOMAHAWK、ASRock B850M Pro RS、ASRock B550M Pro4 的官方清單（docs/sources/browser-2026-11-10.md），B550 × 5000X3D 改由 B550M Pro4 的 boardOverrides 解決；只剩 GIGABYTE B650 AORUS ELITE AX（B-13）。原記錄：主機板層級 CPU 支援清單只有兩張 ASUS TUF 有 `cpuSupportListUrl`（B650M-PLUS、B850-PLUS）；其他 AM5 / AM4 主機板（ROG STRIX B850-I、ROG STRIX X870E-E、ROG CROSSHAIR X870E EXTREME、MSI MAG B650 TOMAHAWK、ASRock B850M Pro RS WiFi、GIGABYTE B650 AORUS ELITE AX、ASRock B550M Pro4）沒有清單網址 | 這些主機板只依晶片組層級判斷。ASRock B550M Pro4 試讀 asrock.com 的 CPU 清單頁回傳空白，B550 × Ryzen 5000X3D 晶片組層級維持不填（R27 Unknown） |
 | B-08 | X370 / B350 × Ryzen 5000X3D 記為 unsupported，依據是 5700X3D 的官方支援晶片組清單（世代內只收這一顆） | 本專案沒有 X370 / B350 主機板，實際不會觸發；R27 也會直接用 CPU 的 supportedChipsets 判斷 |
 | B-09 | B850 × Ryzen 8000、X870E × Ryzen 8000 晶片組層級仍沒有依據（B-01） | 有主機板清單時（TUF B850-PLUS：8600G all）以清單為準，其他仍 Unknown |
-| B-10 | 使用者提供的 ASRock 清單是「B850M Pro RS」（網址 `B850M%20Pro%20RS`），資料收的是「B850M Pro RS WiFi」；ASRock 對兩款分別有產品頁與 BIOS | 依使用者指示套用到 `asrock-b850m-pro-rs-wifi`，notes 註明；請確認兩款清單是否相同 |
+| B-10 | ✅ **已解決（2026-11-10）**：使用者提供 WiFi 版官方清單（`B850M%20Pro%20RS%20WiFi`），內容與非 WiFi 版完全相同；cpuSupportListUrl 與 5 筆 boardOverrides 的 sourceUrl 已改為 WiFi 版網址。原記錄：使用者提供的 ASRock 清單是「B850M Pro RS」（網址 `B850M%20Pro%20RS`），資料收的是「B850M Pro RS WiFi」；ASRock 對兩款分別有產品頁與 BIOS | 依使用者指示套用到 `asrock-b850m-pro-rs-wifi`，notes 註明；請確認兩款清單是否相同 |
 | B-11 | ASRock B850M Pro RS 清單中 3.12 是最早出現的版本，視為出廠即支援（9600X、9800X3D、8600G 記為 all / native） | 推論；若出廠 BIOS 早於 3.12，實際需要更新 |
 | B-12 | MSI MAG B650 TOMAHAWK 清單只列最低版本，沒有「出廠即支援」標示；板子早於這些 CPU 上市 | 5 顆 CPU 全部判為需要更新 BIOS（biosUpdate） |
-| B-13 | GIGABYTE B650 AORUS ELITE AX：使用者未取得清單（型號是否為 AX 版、PCB 版本無法在官網支援頁對上） | 維持原狀，只依晶片組層級判斷 |
+| B-13 | ⏸ 使用者已提供清單，但因 PCB 版本範圍不符未套用，改見 B-15。原記錄：GIGABYTE B650 AORUS ELITE AX：使用者未取得清單（型號是否為 AX 版、PCB 版本無法在官網支援頁對上） | 維持原狀，只依晶片組層級判斷 |
 | B-14 | ASRock B550M Pro4：B550 早於 Ryzen 5 5600（P2.30）、5700X3D（P3.20）上市 | 判為需要更新 BIOS |
+| B-15 | GIGABYTE B650 AORUS ELITE AX：使用者提供的官方清單（`B650-AORUS-ELITE-AX-rev-10-11`，F20 / F30 / F40）只適用 PCB Rev. 1.0 / 1.1；但資料的 `pcbRevision` 是「1.x」，規格取自涵蓋 PCB 1.0 / 1.1 / 1.2 的手冊 Rev. 1204。依任務條件（空值或 1.0 / 1.1 才套用），1.x 含清單不涵蓋的 1.2 | **未套用**：沒有填 cpuSupportListUrl、沒有新增 boardOverrides、pcbRevision 維持 1.x，R27 仍依晶片組層級判斷（B650 × 9000 / 9000X3D / 8000 → Warning）。清單內容已存 docs/sources/browser-2026-11-10.md。若要套用，請決定：(a) 把這筆資料的範圍縮小為 rev 1.0 / 1.1（pcbRevision 改為 1.0/1.1），或 (b) 另取 rev 1.2 的清單 |
 
 ## 規則
 

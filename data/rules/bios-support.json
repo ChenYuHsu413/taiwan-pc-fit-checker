@@ -360,7 +360,7 @@
       "cpuId": "amd-ryzen-5-9600x",
       "support": "native",
       "minBios": "all",
-      "sourceUrl": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS/index.tw.asp#CPU",
+      "sourceUrl": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/index.tw.asp#CPU",
       "verifiedAt": "2026-11-10"
     },
     {
@@ -368,7 +368,7 @@
       "cpuId": "amd-ryzen-7-9800x3d",
       "support": "native",
       "minBios": "all",
-      "sourceUrl": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS/index.tw.asp#CPU",
+      "sourceUrl": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/index.tw.asp#CPU",
       "verifiedAt": "2026-11-10"
     },
     {
@@ -376,7 +376,7 @@
       "cpuId": "amd-ryzen-5-8600g",
       "support": "native",
       "minBios": "all",
-      "sourceUrl": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS/index.tw.asp#CPU",
+      "sourceUrl": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/index.tw.asp#CPU",
       "verifiedAt": "2026-11-10"
     },
     {
@@ -385,7 +385,7 @@
       "support": "biosUpdate",
       "minBios": "3.50",
       "bootableSinceBios": "3.12",
-      "sourceUrl": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS/index.tw.asp#CPU",
+      "sourceUrl": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/index.tw.asp#CPU",
       "verifiedAt": "2026-11-10"
     },
     {
@@ -394,7 +394,7 @@
       "support": "biosUpdate",
       "minBios": "4.03",
       "bootableSinceBios": "3.12",
-      "sourceUrl": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS/index.tw.asp#CPU",
+      "sourceUrl": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi/index.tw.asp#CPU",
       "verifiedAt": "2026-11-10"
     },
     {

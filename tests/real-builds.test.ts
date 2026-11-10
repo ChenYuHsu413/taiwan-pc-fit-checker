@@ -54,6 +54,11 @@ describe("真實資料組合", () => {
     expect(get({ cpu: part("cpu", "amd-ryzen-5-9600x"), motherboard: mb }, "R27")?.status).toBe("safe");
   });
 
+  it("ASRock B850M Pro RS WiFi：清單連結為 WiFi 版官方頁（B-10）", () => {
+    const r = get({ cpu: part("cpu", "amd-ryzen-9-9950x3d2-dual-edition"), motherboard: part("motherboard", "asrock-b850m-pro-rs-wifi") }, "R27");
+    expect(r?.link?.url).toContain("B850M%20Pro%20RS%20WiFi");
+  });
+
   it("TUF B850-PLUS WIFI：主機板清單優先於晶片組層級", () => {
     const b850 = part("motherboard", "asus-tuf-gaming-b850-plus-wifi");
     const r = get({ cpu: part("cpu", "amd-ryzen-7-9850x3d"), motherboard: b850 }, "R27");

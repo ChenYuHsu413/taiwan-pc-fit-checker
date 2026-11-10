@@ -16,7 +16,6 @@
     "gpuLength": {
       "unspecifiedMm": 400
     },
-    "maxCpuCoolerHeightMm": 172,
     "radiatorMounts": {
       "front": {
         "sizes": [
@@ -33,10 +32,22 @@
       }
     },
     "psu": {
-      "unspecifiedMm": 200,
-      "driveCageRemovable": true
+      "lengthLimits": [
+        {
+          "mm": 200,
+          "condition": "mock（未註明條件）",
+          "isDefault": true
+        }
+      ]
     },
-    "cableSpaceMm": 25
+    "cableSpaceMm": 25,
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 172,
+        "condition": "mock（未註明條件）",
+        "isDefault": true
+      }
+    ]
   },
   {
     "id": "jonsbo-d31-mesh",
@@ -56,7 +67,6 @@
     "gpuLength": {
       "unspecifiedMm": 355
     },
-    "maxCpuCoolerHeightMm": 165,
     "radiatorMounts": {
       "front": {
         "sizes": [
@@ -71,10 +81,22 @@
       }
     },
     "psu": {
-      "unspecifiedMm": 160,
-      "driveCageRemovable": true
+      "lengthLimits": [
+        {
+          "mm": 160,
+          "condition": "mock（未註明條件）",
+          "isDefault": true
+        }
+      ]
     },
-    "cableSpaceMm": 18
+    "cableSpaceMm": 18,
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 165,
+        "condition": "mock（未註明條件）",
+        "isDefault": true
+      }
+    ]
   },
   {
     "id": "lian-li-lancool-216",
@@ -93,7 +115,6 @@
     "gpuLength": {
       "unspecifiedMm": 384
     },
-    "maxCpuCoolerHeightMm": 181,
     "radiatorMounts": {
       "front": {
         "sizes": [
@@ -111,10 +132,22 @@
       }
     },
     "psu": {
-      "unspecifiedMm": 220,
-      "driveCageRemovable": true
+      "lengthLimits": [
+        {
+          "mm": 220,
+          "condition": "mock（未註明條件）",
+          "isDefault": true
+        }
+      ]
     },
-    "cableSpaceMm": 28
+    "cableSpaceMm": 28,
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 181,
+        "condition": "mock（未註明條件）",
+        "isDefault": true
+      }
+    ]
   },
   {
     "id": "fractal-design-north",
@@ -123,8 +156,8 @@
     "model": "North（Mesh 版）",
     "twName": "Fractal Design North",
     "sourceUrl": "https://www.fractal-design.com/products/cases/north/north/",
-    "specVerifiedAt": "2026-11-09",
-    "notes": "Mesh 版（FD-C-NOR1C-01 / -03）。TG 版沒有 fan bracket，應另立 id。外觀尺寸原文『Product dimensions (L × W × H) 447 x 215 x 469 mm』，L 對應 depth。withFrontRadiatorMm 的官方條件只有 360 排（240/280 未寫）。PSU 長度原文『1 HDD tray: 255 mm max; 2 HDD tray: 155 mm max』，手冊 p.26 另有硬碟架位置 × 前置排尺寸對照表（例：位置 B 時 PSU 215mm、前置可到 360），條件不是『有/無硬碟籠』，故未填 psu 長度欄位。前置排寬/厚（手冊 p.33：width up to 125/151mm、thickness max 55/35mm）對應關係待人工看圖確認，未填。手冊：https://assets.fractal-design.com/files/uxzbxy2o/production/6f9ccb3a36843c7b3e696a62dfa5e7370db78da7.pdf ；Product Sheet：https://assets.fractal-design.com/files/uxzbxy2o/production/23a01a08f4b1cecd7b3efda20f85d8dcee09d891.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "Mesh 版（FD-C-NOR1C-01 / -03）。TG 版沒有 fan bracket，應另立 id。外觀尺寸原文『Product dimensions (L × W × H) 447 x 215 x 469 mm』，L 對應 depth。前置水冷時的顯卡上限官方只寫 360 排（240/280 未寫）。PSU 長度原文『1 HDD tray: 255 mm max; 2 HDD tray: 155 mm max』，官方未寫出廠附幾個 HDD 架，預設取較嚴格的 155（待確認）；手冊 p.26 另有硬碟架位置 × 前置排尺寸對照表。顯卡高度 178/148 隨 fan bracket 位置改變，對應關係未確認，未填。前置排寬/厚（手冊 p.33：width up to 125/151mm、thickness max 55/35mm）對應關係待人工看圖確認，未填。側面水冷：產品頁寫『Side radiator compatibility: 2x 120/140 mm』但與手冊矛盾，未填。內附風扇原文『Fans included: 2x Aspect 14 PWM (front)』，風扇厚度未寫。",
     "external": {
       "depthMm": 447,
       "widthMm": 215,
@@ -138,11 +171,14 @@
     "gpuLength": {
       "noFrontMm": 355,
       "withFrontFanMm": 355,
-      "withFrontRadiatorMm": 300,
+      "withFrontRadiator": [
+        {
+          "radiatorSize": 360,
+          "maxGpuMm": 300
+        }
+      ],
       "conditionText": "355 mm with and without front fan mounted / 300 mm with 360 mm front mounted radiator"
     },
-    "maxCpuCoolerHeightMm": 145,
-    "cpuCoolerHeightConditionText": "145 mm with Fan Bracket (Mesh version only) / 170 mm without（產品頁主表 145、手冊 170；Mesh 版出廠附 bracket，取 145）",
     "expansionSlots": 7,
     "radiatorMounts": {
       "front": {
@@ -177,8 +213,51 @@
       "formFactors": [
         "ATX"
       ],
-      "conditionText": "1 HDD tray: 255 mm max; 2 HDD tray: 155 mm max"
+      "lengthLimits": [
+        {
+          "mm": 155,
+          "condition": "2 HDD tray（官方未寫出廠數量，取較嚴格值）",
+          "isDefault": true
+        },
+        {
+          "mm": 255,
+          "condition": "1 HDD tray",
+          "isDefault": false
+        }
+      ]
     },
-    "cableSpaceMm": 30
+    "cableSpaceMm": 30,
+    "additionalSources": [
+      {
+        "url": "https://assets.fractal-design.com/files/uxzbxy2o/production/6f9ccb3a36843c7b3e696a62dfa5e7370db78da7.pdf",
+        "fields": [
+          "cpuCoolerHeightLimits"
+        ]
+      },
+      {
+        "url": "https://assets.fractal-design.com/files/uxzbxy2o/production/23a01a08f4b1cecd7b3efda20f85d8dcee09d891.pdf",
+        "fields": [
+          "radiatorMounts.bottom"
+        ]
+      }
+    ],
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 145,
+        "condition": "With Fan Bracket（Mesh 版出廠狀態，產品頁主表 145 mm）",
+        "isDefault": true
+      },
+      {
+        "mm": 170,
+        "condition": "Without Fan Bracket（手冊）；移除 bracket 也會改變顯卡高度上限",
+        "isDefault": false
+      }
+    ],
+    "includedFans": {
+      "front": {
+        "sizeMm": 140,
+        "count": 2
+      }
+    }
   }
 ]

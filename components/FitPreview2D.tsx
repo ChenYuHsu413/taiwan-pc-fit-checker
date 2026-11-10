@@ -3,6 +3,7 @@ import { STATUS_COLOR } from "@/lib/statusColor";
 import { statusOf } from "@/lib/compatibility";
 import { STATUS_SHORT_LABEL } from "@/lib/compatibility/messages";
 import { VISUAL_FALLBACK_MM } from "@/lib/three/layout";
+import { defaultMm } from "@/lib/data/conditional";
 
 export function FitPreview2D({
   selection,
@@ -30,7 +31,7 @@ export function FitPreview2D({
   const trayX = caseX + caseW - trayW;
 
   const caseMaxGpuLength =
-    overrides.caseMaxGpuLengthMm ?? pcCase.gpuLength.unspecifiedMm ?? VISUAL_FALLBACK_MM.caseMaxGpuLength;
+    overrides.caseMaxGpuLengthMm ?? pcCase.gpuLength.unspecifiedMm ?? pcCase.gpuLength.noFrontMm ?? VISUAL_FALLBACK_MM.caseMaxGpuLength;
   const gpuScale = (caseW - trayW) / caseMaxGpuLength;
 
   const gpuLength = gpu ? overrides.gpuLengthMm ?? gpu.lengthMm ?? VISUAL_FALLBACK_MM.gpuLength : undefined;
@@ -50,7 +51,7 @@ export function FitPreview2D({
   const overlapEnd = Math.min(trayX, caseX + radWpx + gpuWpx);
   const hasOverlap = isFrontAio && gpu && overlapX < overlapEnd;
 
-  const caseMaxPsuLength = pcCase.psu.unspecifiedMm ?? VISUAL_FALLBACK_MM.caseMaxPsuLength;
+  const caseMaxPsuLength = defaultMm(pcCase.psu.lengthLimits) ?? VISUAL_FALLBACK_MM.caseMaxPsuLength;
   const psuScale = (caseW - trayW) / caseMaxPsuLength;
   const psuLength = psu ? overrides.psuLengthMm ?? psu.lengthMm ?? VISUAL_FALLBACK_MM.psuLength : undefined;
   const psuStatus = statusOf(results, "R10") ?? "warning";
@@ -67,7 +68,7 @@ export function FitPreview2D({
   // --- CPU 散熱器高度量規 ---
   const coolerHeight = cooler.kind === "air" ? overrides.cpuCoolerHeightMm ?? cooler.cooler.heightMm : undefined;
   const coolerLimit =
-    overrides.caseMaxCpuCoolerHeightMm ?? pcCase.maxCpuCoolerHeightMm ?? VISUAL_FALLBACK_MM.caseMaxCpuCoolerHeight;
+    overrides.caseMaxCpuCoolerHeightMm ?? defaultMm(pcCase.cpuCoolerHeightLimits) ?? VISUAL_FALLBACK_MM.caseMaxCpuCoolerHeight;
   const coolerStatus = statusOf(results, "R05");
   const coolerRatio = coolerHeight ? Math.min(1.15, coolerHeight / coolerLimit) : 0;
 

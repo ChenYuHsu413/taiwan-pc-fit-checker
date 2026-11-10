@@ -1,6 +1,7 @@
 // BIOS 支援規則表 schema（R27 使用）。
 // 概念：晶片組 + CPU 世代 → 原生支援 / 需更新 BIOS / 不支援。
-// Phase 1 只定格式；真實對照關係在 Phase 2 由官方 CPU 支援清單整理，不憑記憶填寫。
+// 支援等級以「晶片組 × 世代」為準（AMD / Intel 官方通則）；個別主機板的最低版本放 boardOverrides。
+// 不做逐顆 CPU 的最低版本表。
 
 import { z } from "zod";
 import { cpuGenerationSchema, isoDateSchema, partIdSchema } from "./common";
@@ -16,16 +17,18 @@ export const biosSupportEntrySchema = z.object({
   /** 需更新 BIOS 時的補充，例如官方列出的最低 BIOS / AGESA 版本 */
   minBiosNote: z.string().optional(),
   /**
-   * 個別主機板的例外（例如某款板子出廠就已經支援）。
-   * key = motherboard id；value 覆寫 support。
+   * 個別主機板的最低 BIOS 版本（出自主機板廠的 CPU 支援清單）。不覆寫 support 等級。
+   * key = motherboard id。
    */
-  boardOverrides: z.record(partIdSchema, biosSupportLevelSchema).optional(),
+  boardOverrides: z
+    .record(partIdSchema, z.object({ minBios: z.string().min(1), sourceUrl: z.url() }))
+    .optional(),
   sourceUrl: z.url(),
   verifiedAt: isoDateSchema,
 });
 
 export const biosSupportTableSchema = z.object({
-  schemaVersion: z.literal(1),
+  schemaVersion: z.literal(2),
   entries: z.array(biosSupportEntrySchema),
 });
 

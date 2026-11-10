@@ -7,6 +7,7 @@
 // 僅用於讓 3D 示意圖比例合理，不影響 compatibility 判斷邏輯。
 
 import type { BuildSelection } from "@/types/parts";
+import { defaultMm } from "@/lib/data/conditional";
 
 export const MM_TO_UNIT = 0.025;
 
@@ -73,10 +74,10 @@ export function computeLayout(selection: BuildSelection): SceneLayout | null {
   if (!pcCase) return null;
 
   const maxGpu =
-    overrides.caseMaxGpuLengthMm ?? pcCase.gpuLength.unspecifiedMm ?? VISUAL_FALLBACK_MM.caseMaxGpuLength;
-  const maxPsu = pcCase.psu.unspecifiedMm ?? VISUAL_FALLBACK_MM.caseMaxPsuLength;
+    overrides.caseMaxGpuLengthMm ?? pcCase.gpuLength.unspecifiedMm ?? pcCase.gpuLength.noFrontMm ?? VISUAL_FALLBACK_MM.caseMaxGpuLength;
+  const maxPsu = defaultMm(pcCase.psu.lengthLimits) ?? VISUAL_FALLBACK_MM.caseMaxPsuLength;
   const compSideMm =
-    overrides.caseMaxCpuCoolerHeightMm ?? pcCase.maxCpuCoolerHeightMm ?? VISUAL_FALLBACK_MM.caseMaxCpuCoolerHeight;
+    overrides.caseMaxCpuCoolerHeightMm ?? defaultMm(pcCase.cpuCoolerHeightLimits) ?? VISUAL_FALLBACK_MM.caseMaxCpuCoolerHeight;
   const cableSideMm =
     overrides.caseCableManagementSpaceMm ?? pcCase.cableSpaceMm ?? VISUAL_FALLBACK_MM.caseCableSpace;
 

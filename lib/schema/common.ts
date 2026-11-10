@@ -63,6 +63,8 @@ export const CPU_GENERATIONS = [
   "intel-core-14",
   "intel-core-ultra-200s",
   "intel-core-ultra-200s-plus",
+  "amd-ryzen-5000",
+  "amd-ryzen-5000-x3d",
   "amd-ryzen-7000",
   "amd-ryzen-7000-x3d",
   "amd-ryzen-8000",
@@ -71,6 +73,29 @@ export const CPU_GENERATIONS = [
 ] as const;
 export const cpuGenerationSchema = z.enum(CPU_GENERATIONS);
 export type CpuGeneration = z.infer<typeof cpuGenerationSchema>;
+
+/**
+ * 條件值：同一個上限依安裝條件不同而有多個官方數值。必須剛好一筆 isDefault（規則用它判斷，其餘以 Info 顯示）。
+ * 欄位之間的連動（例如同一個支架位置同時改變塔散與顯卡上限）只寫在 condition 文字裡，不另建模式。
+ */
+export const conditionalMmSchema = z
+  .array(
+    z.object({
+      mm: mmSchema,
+      /** 官方條件原文或摘要，例如「含 fan bracket（Mesh 版出廠狀態）」 */
+      condition: z.string().min(1),
+      isDefault: z.boolean(),
+    })
+  )
+  .min(1)
+  .refine((list) => list.filter((v) => v.isDefault).length === 1, "條件值必須剛好一筆 isDefault: true");
+export type ConditionalMm = z.infer<typeof conditionalMmSchema>;
+
+/** 第二來源：sourceUrl 以外的官方頁面（手冊、FAQ、datasheet），fields 列出由此頁取得的欄位路徑 */
+export const additionalSourceSchema = z.object({
+  url: z.url(),
+  fields: z.array(z.string().min(1)).min(1),
+});
 
 /** 所有零件共用欄位 */
 export const basePartShape = {
@@ -84,6 +109,7 @@ export const basePartShape = {
   /** 規格最後一次對照官方頁面的日期；null = 未驗證（mock） */
   specVerifiedAt: isoDateSchema.nullable(),
   notes: z.string().optional(),
+  additionalSources: z.array(additionalSourceSchema).optional(),
 };
 
 export type PcieGen = z.infer<typeof pcieGenSchema>;

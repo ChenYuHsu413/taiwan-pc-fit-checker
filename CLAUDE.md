@@ -4,6 +4,11 @@
 
 台灣版 PC 組裝空間模擬器：使用者選擇機殼、主機板、顯卡、散熱器、電源等零件後，依據**真實官方規格**判斷空間與平台相容性（Safe / Info / Tight / Warning / Incompatible / Unknown），並以 3D/2D 呈現空間關係。目前正從 MVP 骨架（mock 資料）改版為真正可用的工具，進度請見 `docs/roadmap.md`。
 
+## 最高原則
+
+1. **本工具是參考級，不是 CAD。** 只有規則實際會用到的條件，才做成結構化欄位；其餘官方條件寫進 `conditionText`、`condition` 或 `notes`。
+2. **沒有辦法確定的一律不做、不猜。** 資料沒有官方來源就留空；規則的門檻沒有可靠依據就不實作，改列為「尚未檢查」，並寫進 `docs/pending.md`。
+
 ## 技術棧
 
 - Next.js 14（App Router）+ TypeScript（strict）
@@ -42,11 +47,12 @@ npm test
 
 沒通過就不要 commit，並回報錯誤內容。
 
-**Phase 3 完成之前一律不要 push。** 真實資料只填有條件的欄位（例如機殼的 `gpuLength.noFrontMm`）時，現行規則只讀 `unspecifiedMm`，會顯示 Unknown；必須等 Phase 3 改完規則才能部署。
+**push 規則（2026-11-10 起）**：每段通過 Gate 並 commit 後，push 到 `revamp` 分支。**不可 push 到 `main`，也不可 merge 進 `main`**（等使用者確認）。
 
 ## 工作原則
 
-- **遇到不確定的狀況就停下來回報，不要自行假設。** 包括：規格數值、業界門檻、欄位語意、使用者意圖。文件裡標成「待確認」並列入回報。
+- **遇到不確定的狀況不要自行假設**，包括規格數值、業界門檻、欄位語意、使用者意圖。採取保守做法（欄位留空、規則顯示 Unknown 或列為尚未檢查），記錄在 `docs/pending.md`。
+- 長任務的進度記在 `docs/progress.md`，收到「請依 docs/progress.md 繼續」時從那裡接續。
 - 不要編造規格數字或價格。每筆真實零件資料都必須有產品頁 `sourceUrl` 與 `specVerifiedAt`（mock 為 `null`）。
 - 不要在未經同意的情況下抓取網站、寫爬蟲、新增或升級套件。
 - 只修改當前 Phase 範圍內的檔案；發現範圍外的問題就記錄下來，不要順手修。
@@ -69,12 +75,26 @@ npm test
 | 2026-11-09 | 零件 `id` 為全站唯一的 slug（不加類別前綴），發布後不可修改 | 分享 URL 依賴 |
 | 2026-11-09 | 相容性狀態 6 級：safe / info / tight / warning / incompatible / unknown；規則分組 spatial / platform | compatibility-spec §0 |
 | 2026-11-09 | 價格 `source` 多一個 `mock` 值 | 避免把 mock 假價格標成「人工參考價」；Phase 2 移除 |
-| 2026-11-09 | Phase 3 完成前不 push | 真實資料與現行規則不相容（會顯示 Unknown） |
+| 2026-11-09 | ~~Phase 3 完成前不 push~~ | 2026-11-10 改為：每段完成後 push 到 `revamp`，不碰 `main` |
 | 2026-11-09 | 機殼水冷厚度分 `maxTotalThicknessMm`（排＋扇）與 `maxRadiatorThicknessMm`（只算排），官方寫哪個填哪個 | schema.md §3.1 |
-| 2026-11-09 | 塔散高度上限的量測條件寫進 `cpuCoolerHeightConditionText`，不拆欄位 | |
+| 2026-11-09 | ~~塔散高度上限的量測條件寫進 `cpuCoolerHeightConditionText`~~ | 2026-11-10 改用條件值 `cpuCoolerHeightLimits` |
 | 2026-11-09 | 主機板新增 `laneSharing[]`，以及 PCIe / M.2 槽的 `label` | schema.md §3.2 |
 | 2026-11-09 | CPU `generation` 採細分命名 enum（13/14 代分開，X3D 與 APU 另外分），BIOS 規則表共用 | schema.md §3.3 |
 | 2026-11-09 | CPU 新增 `maxMemoryCapacityGb`；`maxPowerW` 只填官方公開數字；`officialMemorySpeedMts` 取官方最高值（通常是 1DPC 條件） | |
 | 2026-11-09 | PSU `pcie8PinCount` = 顯卡端可插的 8-pin 接頭總數（一線兩頭算 2） | |
 | 2026-11-09 | 塔散 L/W/H 換算以風扇氣流方向為準；無法判斷時 width/depth 留空 | schema.md §3.6 |
+| 2026-11-10 | 官方有列水冷支援表的機殼，沒列到的位置視為不支援（`sizes: []`），`conditionText` 寫「官方支援表未列出」 | phase2a-findings C8 |
+| 2026-11-10 | 主機板官方逐槽列出支援模式時，沒列 SATA 就是不支援（`supportsSata: false`） | M7 |
+| 2026-11-10 | Intel ARK 沒有內顯區塊、且型號帶 F 或 KF 時，可填 `hasIntegratedGraphics: false` | P5 |
+| 2026-11-10 | 顯卡尺寸沒標軸向時允許判讀：最大值 = 長度；最接近「槽數 × 20.32 mm」= 厚度；剩下 = 高度。`dimensionsAxisInferred: true`，notes 必須說明 | G1 |
+| 2026-11-10 | PSU 系列頁沒列出某瓦數的 16-pin 數量時留空，不填 0 | S3 |
+| 2026-11-10 | 平台範圍新增 AM4（B550 主機板 1 張、Ryzen 5000 CPU 2 顆，其中 1 顆 X3D）；不收 Core 5 120 與 Ryzen AI 400 | 世代新增 `amd-ryzen-5000`、`amd-ryzen-5000-x3d` |
+| 2026-11-10 | BIOS 規則表：支援等級以晶片組為主；`boardOverrides` 的值改成 `{minBios, sourceUrl}`（不覆寫等級）；主機板新增 optional `pcbRevision`、`cpuSupportListUrl`；不做逐顆 CPU 的最低版本表 | `schemaVersion: 2` |
+| 2026-11-10 | 晶片組字串：B650E 與 B650、X870E 與 X870 分開記錄 | |
+| 2026-11-10 | X870 / B850 搭 Ryzen 9000 記為原生支援，`minBiosNote` 註明「AMD 未明文，依 800 系列為 Ryzen 9000 同期平台判斷」 | |
+| 2026-11-10 | 本輪不填價格，UI 顯示「無參考價」；價格之後由估價單匯入功能提供 | |
+| 2026-11-10 | 新增通用「條件值」`[{mm, condition, isDefault}]`（剛好一個 isDefault）：機殼塔散高度、顯卡高度、PSU 長度上限使用。不做 layoutModes，欄位連動只寫在 condition | 規則用 isDefault，其他條件以 Info 顯示 |
+| 2026-11-10 | 新增顯示晶片參考表 `data/reference/gpu-chips.json`（只用 NVIDIA / AMD 官方頁），板卡廠沒寫的 PCIe / 功耗 / 建議電源由此補 | |
+| 2026-11-10 | 共同欄位新增 `additionalSources[{url, fields[]}]`；官方頁互相矛盾時，規格頁 > PDF 手冊 > 行銷文案，矛盾寫 notes | X1、X2 |
+| 2026-11-10 | 規則狀態：Tight 本輪不實作；Warning 只用在有官方依據時；沒有可靠依據的規則不產生結果，列在「尚未檢查的項目」 | 見 compatibility-spec |
 | （待定） | 相容性門檻數值 | 見 `docs/compatibility-spec.md` §0.2 |

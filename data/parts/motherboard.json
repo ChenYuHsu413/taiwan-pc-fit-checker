@@ -56,8 +56,8 @@
     "model": "ROG STRIX X870E-E GAMING WIFI",
     "twName": "ROG STRIX X870E-E GAMING WIFI",
     "sourceUrl": "https://rog.asus.com/motherboards/rog-strix/rog-strix-x870e-e-gaming-wifi/spec/",
-    "specVerifiedAt": "2026-11-09",
-    "notes": "尺寸原文『12 inch x 9.6 inch (30.5 cm x 24.4 cm)』。槽位規格依 CPU 系列而異：Ryzen 8000 時 PCIEX16(G5) 為 PCIe 4.0 x8/x4、M.2_1 為 PCIe 4.0 x4、M.2_2/M.2_3 停用（schema 無法表達，以 Ryzen 9000/7000 的值填入）。記憶體速度原文『8000+MT/s(OC) with Ryzen 9000/7000, 8400+MT/s(OC) with Ryzen 8000』，依 CPU 而異且為 OC 值，未填。共用通道：規格頁寫 M.2_2 或 M.2_3 單獨使用即降為 x8，手冊 p.9/p.24 只寫兩者都使用時，以規格頁為準、待確認。影像輸出：1 x HDMI + 2 x USB4 Type-C DP。手冊 E26676 V4：https://dlcdnets.asus.com/pub/ASUS/mb/SocketAM5/ROG_STRIX_X870E-E_GAMING_WIFI/E26676_ROG_STRIX_X870E-E_GAMING_WIFI_EM_V4_WEB.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『12 inch x 9.6 inch (30.5 cm x 24.4 cm)』。槽位規格以 Ryzen 9000/7000 填入；Ryzen 8000 的差異用 laneSharing（cpuGeneration）表示：PCIEX16(G5)『1 x PCIe 4.0 x16 slot (supports x8/x4 mode)』、M.2_1『supports PCIe 4.0 x4 mode』、『M.2_2 & M.2_3 will be disabled when using AMD Ryzen 8000 Series』。記憶體速度原文『8000+MT/s(OC) with Ryzen 9000/7000, 8400+MT/s(OC) with Ryzen 8000』，依 CPU 而異且為 OC 值，未填。共用通道：2026-11-10 規格頁原文『When M.2_2 & M.2_3 are occupied with SSD devices, PCIEX16(G5) will run in x8 mode.』（兩者都使用才降 x8，與手冊 p.9/p.24 一致；先前版本規格頁寫法不同）。M.2 槽官方逐槽列出 PCIe 模式且未列 SATA → supportsSata = false（決策：逐槽列模式時沒列 SATA 即不支援）。影像輸出：1 x HDMI + 2 x USB4 Type-C DP。CPU 支援清單官方只指向 download center 總頁，未填 cpuSupportListUrl。",
     "formFactor": "ATX",
     "socket": "AM5",
     "chipset": "X870E",
@@ -92,7 +92,8 @@
           "2260",
           "2280"
         ],
-        "laneSource": "cpu"
+        "laneSource": "cpu",
+        "supportsSata": false
       },
       {
         "label": "M.2_2",
@@ -103,7 +104,8 @@
           "2260",
           "2280"
         ],
-        "laneSource": "cpu"
+        "laneSource": "cpu",
+        "supportsSata": false
       },
       {
         "label": "M.2_3",
@@ -115,7 +117,8 @@
           "2280",
           "22110"
         ],
-        "laneSource": "cpu"
+        "laneSource": "cpu",
+        "supportsSata": false
       },
       {
         "label": "M.2_4",
@@ -124,7 +127,8 @@
         "formFactors": [
           "2280"
         ],
-        "laneSource": "chipset"
+        "laneSource": "chipset",
+        "supportsSata": false
       },
       {
         "label": "M.2_5",
@@ -133,14 +137,24 @@
         "formFactors": [
           "2280"
         ],
-        "laneSource": "chipset"
+        "laneSource": "chipset",
+        "supportsSata": false
       }
     ],
     "laneSharing": [
       {
         "when": {
-          "kind": "m2Slot",
-          "label": "M.2_2",
+          "kind": "allOf",
+          "slots": [
+            {
+              "kind": "m2Slot",
+              "label": "M.2_2"
+            },
+            {
+              "kind": "m2Slot",
+              "label": "M.2_3"
+            }
+          ],
           "condition": "occupied with SSD devices"
         },
         "affects": {
@@ -151,26 +165,85 @@
           "kind": "reducedLanes",
           "lanes": 8
         },
-        "sourceText": "When M.2_2 is enabled, but M.2_3 is not in use, PCIEX16_(G5) will run in x8 mode."
+        "sourceText": "When M.2_2 & M.2_3 are occupied with SSD devices, PCIEX16(G5) will run in x8 mode."
       },
       {
         "when": {
-          "kind": "m2Slot",
-          "label": "M.2_3",
-          "condition": "occupied with SSD devices"
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
         },
         "affects": {
           "kind": "pcieSlot",
           "label": "PCIEX16(G5)"
         },
         "effect": {
-          "kind": "reducedLanes",
+          "kind": "downgraded",
+          "gen": 4,
           "lanes": 8
         },
-        "sourceText": "When M.2_3 is enabled, but M.2_2 is not in use, PCIEX16_(G5) will run in x8 mode."
+        "sourceText": "Ryzen 8000 Series: 1 x PCIe 4.0 x16 slot (supports x8/x4 mode)"
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M.2_1"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4
+        },
+        "sourceText": "Ryzen 8000 Series: M.2_1 slot (Key M), type 2242/2260/2280 (supports PCIe 4.0 x4 mode)"
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M.2_2"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "M.2_2 & M.2_3 will be disabled when using AMD Ryzen 8000 Series Desktop Processors."
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M.2_3"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "M.2_2 & M.2_3 will be disabled when using AMD Ryzen 8000 Series Desktop Processors."
       }
     ],
     "biosFlashback": true,
-    "hasVideoOutput": true
+    "hasVideoOutput": true,
+    "additionalSources": [
+      {
+        "url": "https://dlcdnets.asus.com/pub/ASUS/mb/SocketAM5/ROG_STRIX_X870E-E_GAMING_WIFI/E26676_ROG_STRIX_X870E-E_GAMING_WIFI_EM_V4_WEB.pdf",
+        "fields": [
+          "laneSharing"
+        ]
+      }
+    ]
   }
 ]

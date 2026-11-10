@@ -192,3 +192,65 @@ AMD / Intel 都**沒有**「晶片組 × 世代 × 最低 BIOS」的官方對照
 15. 品牌多樣性：MSI、GIGABYTE、ASRock、Seasonic、be quiet!、NZXT 官網擋自動讀取，要用瀏覽器逐頁查
 16. 全部型號的台灣通路販售狀況與價格（沒查）
 17. Crucial 消費級產品線是否已停止（有印象但沒查證，所以沒有選 Crucial）
+
+## 5. Phase 2b 處置（2026-11-10）
+
+第 4 節「需要你決定」的 1–8 已決定，見 CLAUDE.md 決策紀錄。第 2 節各項處置如下（採用 = 已改 schema 或已定為填資料規則；併入 notes = 寫進 `notes` / `conditionText` / `condition`，不做結構化欄位；延後 = 本輪不做）。原則：只有規則實際會用到的條件才做成欄位。
+
+| # | 處置 | 理由 |
+|---|---|---|
+| X1 | 採用 | `additionalSources[{url, fields[]}]`（未加 `page`，頁碼寫 notes） |
+| X2 | 採用（填資料規則） | 規格頁 > PDF 手冊 > 行銷文案；矛盾寫 notes |
+| X3 | 採用（填資料規則） | 腳位正規化，寫進 schema.md §0 |
+| C1 | 採用 | `includedFans`，R02 用來判斷前置有沒有風扇 |
+| C2 | 採用 | `gpuLength.withFrontRadiator[{radiatorSize, maxGpuMm}]` |
+| C3 | 併入 notes | 寫進 `gpuLength.conditionText`；R02 不會用到這類條件 |
+| C4 | 延後 | 依指示不做 layoutModes，連動寫進條件值的 `condition` 文字 |
+| C5 | 部分採用 | 採用 `gpuMountOrientation`、`maxGpuSlotWidth`；mm 厚度上限併入 notes（R03 以槽數判斷） |
+| C6 | 併入 notes | 依尺寸不同的厚度上限寫進 `radiatorMounts.*.conditionText` |
+| C7 | 併入 notes | 排寬、水箱限制寫進 conditionText；R08 不比對排寬 |
+| C8 | 採用（決策 1） | 有支援表時，未列位置填 `sizes: []` |
+| C9 | 採用 | `psu.lengthLimits` 改用條件值 |
+| C10 | 延後 | 本輪沒有收 SSI-EEB / 背插主機板，規則用不到；寫 notes |
+| C11 | 併入 notes | `expansionSlots` 只填水平槽數，直立槽數寫 notes |
+| C12 | 併入 notes | 外觀尺寸只用於 3D 示意 |
+| C13 | 採用（填資料規則） | 不同版本拆成不同 id |
+| M1 | 採用 | `laneSharing.when.kind = "cpuGeneration"` + effect `downgraded` |
+| M2 | 部分採用 | 新增 `when.kind = "allOf"`；X870E-E 規格頁 2026-11-10 已改為 AND，與手冊一致 |
+| M3 | 併入 notes | 依 CPU 系列不同或只有 OC 值時，`maxMemorySpeedMts` 留空、原文寫 notes |
+| M4 | 延後 | x4 / x1 槽沒有規則使用 |
+| M5 | 採用（接受留空） | 官方沒有 `slotIndex` 就留空，R03 因此列為尚未檢查 |
+| M6 | 採用（填資料規則） | label 以手冊 / 規格頁為準；aliases 延後 |
+| M7 | 採用（決策 2） | 逐槽列模式時沒列 SATA = false |
+| M8 | 併入 notes | DIMM.2 / 擴充卡 M.2 寫 notes，不列入 `m2Slots` |
+| M9 | 延後 | CPU 供電接頭沒有規則使用 |
+| P1 | 採用 | `memorySpeedTable[{memoryType, modulesPerChannel, rank, mts}]`（多了 `memoryType`，Intel CPU 同時支援 DDR4/DDR5 時才能區分） |
+| P2 | 採用 | RAM `rank` |
+| P3 | 併入 notes | JEDEC 與各組 profile 寫 notes，`requiresXmpExpo` 保留 |
+| P4 | 併入 notes | 可拆頂蓋的高度寫 notes，`moduleHeightMm` 填出廠狀態 |
+| P5 | 採用（決策 3） | |
+| P6 | 併入 notes | `pcieGen.gpu/m2` 只在明寫時填 |
+| P7 | 延後 | R27 以 BIOS 表為準，不另用 Supporting Chipsets |
+| P8 | 採用 | enum `PL2` → `MTP`；R15 不估算整機功耗，AMD 缺值不影響 |
+| P9 | 延後 | 本輪沒有收 CUDIMM 套裝 |
+| G1 | 採用（決策 4） | `dimensionsAxisInferred` |
+| G2 | 併入 notes | |
+| G3 | 延後 | 不從厚度推算槽數（沒有可靠換算） |
+| G4 | 併入 notes | 隨附轉接線寫 notes；R33 的「需轉接線」訊息會提醒使用者確認 |
+| G5 | 採用（經晶片參考表） | 板卡廠沒寫通道數時，用 `gpu-chips.json` |
+| G6 | 採用（經晶片參考表） | 公版 TBP 放參考表，不放在板卡資料 |
+| G7 | 併入 notes | R15 一律以官方數字比對，用詞差異寫在晶片表 `psuWording` 與 notes |
+| A1 | 併入 notes | |
+| A2 | 併入 notes | 只填 `ramClearance.defaultMm` |
+| A3 | 延後 | R06 本輪列為尚未檢查（見 compatibility-spec） |
+| A4 | 併入 notes | |
+| A5 | 延後 | 只有合計厚度時 radiator/fan 厚度留空，R08 回 Unknown |
+| A6 | 併入 notes | R17 尚未檢查 |
+| S1 | 延後 | R33 只看接頭數，不區分 12VHPWR / 12V-2x6，類型寫 notes |
+| S2 | 採用（填資料規則） | `lengthMm` = 伸入機殼的深度 |
+| S3 | 採用（決策 5） | 留空 |
+| S4 | 併入 notes | ATX 版本寫 notes；只支援 200–240V 的型號不收 |
+| S5 | 已採用（Phase 2a） | |
+| D1 | 採用 | `interface.modes[]` |
+| D2 | 採用 | 改名 `moduleTotalHeightMm` |
+| D3 | 採用（填資料規則） | id 包含容量；不另加 `capacityGb` 欄位 |

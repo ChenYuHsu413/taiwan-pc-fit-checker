@@ -71,6 +71,14 @@
     ],
     "ramClearance": {
       "defaultMm": 32
-    }
+    },
+    "additionalSources": [
+      {
+        "url": "https://www.noctua.at/en/support/faqs/how-can-i-ensure-both-case-and-ram-compatibility-with-my-nh-d15",
+        "fields": [
+          "ramClearance.defaultMm"
+        ]
+      }
+    ]
   }
 ]

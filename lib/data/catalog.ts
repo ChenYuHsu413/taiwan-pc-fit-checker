@@ -20,7 +20,9 @@ import aioPrices from "@/data/prices/aio.json";
 import psuPrices from "@/data/prices/psu.json";
 import m2SsdPrices from "@/data/prices/m2Ssd.json";
 import biosSupportData from "@/data/rules/bios-support.json";
-import { biosSupportTableSchema } from "@/lib/schema/biosSupport";
+import gpuChipsData from "@/data/reference/gpu-chips.json";
+import { biosSupportTableSchema, type BiosSupportEntry } from "@/lib/schema/biosSupport";
+import { gpuChipTableSchema, type GpuChip } from "@/lib/schema/gpuChips";
 import type { PartByCategory, PartCategory, PriceEntry } from "@/lib/schema/parts";
 import {
   findDuplicateIdsAcrossCategories,
@@ -55,10 +57,16 @@ export const RAW_PRICES: Record<PartCategory, unknown> = {
 };
 
 export const RAW_BIOS_SUPPORT: unknown = biosSupportData;
+export const RAW_GPU_CHIPS: unknown = gpuChipsData;
 
 type Catalog = { [K in PartCategory]: PartByCategory[K][] };
 
-function load(): { parts: Catalog; prices: Map<string, PriceEntry> } {
+function load(): {
+  parts: Catalog;
+  prices: Map<string, PriceEntry>;
+  bios: BiosSupportEntry[];
+  gpuChips: Map<string, GpuChip>;
+} {
   const problems: string[] = [];
   const parts = {} as Catalog;
 
@@ -81,16 +89,32 @@ function load(): { parts: Catalog; prices: Map<string, PriceEntry> } {
 
   const bios = biosSupportTableSchema.safeParse(RAW_BIOS_SUPPORT);
   if (!bios.success) problems.push(`[rules/bios-support] ${bios.error.message}`);
+  const mbIds = new Set(parts.motherboard.map((m) => m.id));
+  bios.data?.entries.forEach((e) =>
+    Object.keys(e.boardOverrides ?? {}).forEach((id) => {
+      if (!mbIds.has(id)) problems.push(`[rules/bios-support] boardOverrides 找不到主機板 id：${id}`);
+    })
+  );
+
+  const chips = gpuChipTableSchema.safeParse(RAW_GPU_CHIPS);
+  if (!chips.success) problems.push(`[reference/gpu-chips] ${chips.error.message}`);
+  const gpuChips = new Map((chips.data?.chips ?? []).map((c) => [c.id, c]));
+  // 已驗證的顯卡必須對應到參考表（mock 顯卡在 Phase 2b 刪除，不檢查）
+  parts.gpu
+    .filter((g) => g.specVerifiedAt !== null && !gpuChips.has(g.gpuChip))
+    .forEach((g) => problems.push(`[parts/gpu] ${g.id} 的 gpuChip「${g.gpuChip}」不在 gpu-chips.json`));
 
   if (problems.length) {
     throw new Error(`內建資料驗證失敗：\n${problems.join("\n")}`);
   }
-  return { parts, prices };
+  return { parts, prices, bios: bios.data?.entries ?? [], gpuChips };
 }
 
 const loaded = load();
 
 export const catalog: Catalog = loaded.parts;
+export const biosSupportEntries: BiosSupportEntry[] = loaded.bios;
+export const gpuChips: ReadonlyMap<string, GpuChip> = loaded.gpuChips;
 
 export function getPrice(partId: string): PriceEntry | undefined {
   return loaded.prices.get(partId);

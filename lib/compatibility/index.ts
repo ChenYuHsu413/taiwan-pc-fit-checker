@@ -12,6 +12,7 @@ import type {
   CompatibilityStatus,
   GpuPart,
 } from "@/types/parts";
+import { defaultMm } from "@/lib/data/conditional";
 import { MSG } from "./messages";
 import type { RuleId } from "./rules";
 
@@ -127,7 +128,7 @@ export function evaluateBuild(selection: BuildSelection): CompatibilityResult[] 
   // R05 CPU 空冷高度
   if (pcCase && cooler.kind === "air") {
     const coolerHeight = overrides.cpuCoolerHeightMm ?? cooler.cooler.heightMm;
-    const limit = overrides.caseMaxCpuCoolerHeightMm ?? pcCase.maxCpuCoolerHeightMm;
+    const limit = overrides.caseMaxCpuCoolerHeightMm ?? defaultMm(pcCase.cpuCoolerHeightLimits);
     if (coolerHeight === undefined || limit === undefined) {
       results.push(missingSpec("R05"));
     } else {
@@ -155,7 +156,7 @@ export function evaluateBuild(selection: BuildSelection): CompatibilityResult[] 
   // R10 PSU 長度（硬碟籠條件屬於 Phase 3，暫用 unspecifiedMm）
   if (pcCase && psu) {
     const psuLength = overrides.psuLengthMm ?? psu.lengthMm;
-    const limit = pcCase.psu.unspecifiedMm;
+    const limit = defaultMm(pcCase.psu.lengthLimits);
     if (psuLength === undefined || limit === undefined) {
       results.push(missingSpec("R10"));
     } else {

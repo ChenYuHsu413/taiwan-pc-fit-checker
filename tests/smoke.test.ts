@@ -66,3 +66,20 @@ describe("驗證函式會逐筆回報錯誤", () => {
     expect(validateParts("gpu", { not: "array" }).errors[0].index).toBeNull();
   });
 });
+
+describe("Phase 2b schema", () => {
+  it("顯示晶片參考表格式正確", async () => {
+    const { gpuChipTableSchema } = await import("@/lib/schema/gpuChips");
+    const { RAW_GPU_CHIPS } = await import("@/lib/data/catalog");
+    expect(gpuChipTableSchema.safeParse(RAW_GPU_CHIPS).success).toBe(true);
+  });
+
+  it("條件值必須剛好一筆 isDefault", async () => {
+    const { conditionalMmSchema } = await import("@/lib/schema/common");
+    const a = { mm: 100, condition: "a", isDefault: true };
+    const b = { mm: 120, condition: "b", isDefault: false };
+    expect(conditionalMmSchema.safeParse([a, b]).success).toBe(true);
+    expect(conditionalMmSchema.safeParse([b]).success).toBe(false);
+    expect(conditionalMmSchema.safeParse([a, { ...b, isDefault: true }]).success).toBe(false);
+  });
+});

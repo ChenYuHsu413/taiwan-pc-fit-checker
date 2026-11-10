@@ -1,5 +1,6 @@
 import type { AnyPart } from "@/types/parts";
 import { getPrice, isPriceStale } from "@/lib/data/catalog";
+import { defaultMm } from "@/lib/data/conditional";
 
 const mm = (v: number | undefined) => (v === undefined ? "—" : `${v}mm`);
 
@@ -8,7 +9,7 @@ const MODULAR_LABEL = { non: "非模組化", semi: "半模組化", full: "全模
 function summarizeDimensions(part: AnyPart): string {
   switch (part.category) {
     case "case":
-      return `顯卡上限 ${mm(part.gpuLength.unspecifiedMm)}／塔散上限 ${mm(part.maxCpuCoolerHeightMm)}／電源上限 ${mm(part.psu.unspecifiedMm)}／走線空間 ${mm(part.cableSpaceMm)}`;
+      return `顯卡上限 ${mm(part.gpuLength.unspecifiedMm ?? part.gpuLength.noFrontMm)}／塔散上限 ${mm(defaultMm(part.cpuCoolerHeightLimits))}／電源上限 ${mm(defaultMm(part.psu.lengthLimits))}／走線空間 ${mm(part.cableSpaceMm)}`;
     case "motherboard":
       return `${part.formFactor}／${part.dimensions.heightMm ?? "—"}×${part.dimensions.depthMm ?? "—"}mm／${part.socket}／${part.chipset}／${part.memoryType ?? "記憶體類型未確認"}`;
     case "cpu":
@@ -29,7 +30,7 @@ function summarizeDimensions(part: AnyPart): string {
     case "psu":
       return `${part.formFactor}／長 ${mm(part.lengthMm)}／${part.modularType ? MODULAR_LABEL[part.modularType] : "—"}／${part.wattage}W`;
     case "m2Ssd":
-      return `${part.formFactor}／${part.interface.kind === "pcie" ? `PCIe ${part.interface.gen}.0 x${part.interface.lanes}` : "SATA"}／${part.hasHeatsink === undefined ? "散熱片未確認" : part.hasHeatsink ? "附散熱片" : "無散熱片"}`;
+      return `${part.formFactor}／${part.interface.kind === "pcie" ? part.interface.modes.map((m) => `PCIe ${m.gen}.0 x${m.lanes}`).join(" / ") : "SATA"}／${part.hasHeatsink === undefined ? "散熱片未確認" : part.hasHeatsink ? "附散熱片" : "無散熱片"}`;
   }
 }
 

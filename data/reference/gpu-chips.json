@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "chips": [
+    {
+      "id": "nvidia-geforce-rtx-5090",
+      "vendor": "NVIDIA",
+      "name": "GeForce RTX 5090",
+      "pcieGen": 5,
+      "tbpW": 575,
+      "recommendedPsuW": 1000,
+      "psuWording": "Required System Power (W)；官方註：Minimum is based on a PC configured with a Ryzen 9 9950X processor（最低值）",
+      "sourceUrl": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+      "verifiedAt": "2026-11-10",
+      "notes": "官方原文『PCI Express Gen 5』，未寫通道數。"
+    },
+    {
+      "id": "nvidia-geforce-rtx-5080",
+      "vendor": "NVIDIA",
+      "name": "GeForce RTX 5080",
+      "pcieGen": 5,
+      "tbpW": 360,
+      "recommendedPsuW": 850,
+      "psuWording": "Required System Power (W)；官方註：Minimum is based on a PC configured with a Ryzen 9 9950X processor（最低值）",
+      "sourceUrl": "https://www.nvidia.com/en-us/geforce/graphics-cards/compare/",
+      "verifiedAt": "2026-11-10",
+      "notes": "官方原文『PCI Express Gen 5』，未寫通道數。"
+    },
+    {
+      "id": "nvidia-geforce-rtx-5070-ti",
+      "vendor": "NVIDIA",
+      "name": "GeForce RTX 5070 Ti",
+      "pcieGen": 5,
+      "tbpW": 300,
+      "recommendedPsuW": 750,
+      "psuWording": "Required System Power (W)；官方註：Minimum is based on a PC configured with a Ryzen 9 9950X processor（最低值）",
+      "sourceUrl": "https://www.nvidia.com/en-us/geforce/graphics-cards/compare/",
+      "verifiedAt": "2026-11-10",
+      "notes": "官方原文『PCI Express Gen 5』，未寫通道數。"
+    },
+    {
+      "id": "nvidia-geforce-rtx-5070",
+      "vendor": "NVIDIA",
+      "name": "GeForce RTX 5070",
+      "pcieGen": 5,
+      "tbpW": 250,
+      "recommendedPsuW": 650,
+      "psuWording": "Required System Power (W)；官方註：Minimum is based on a PC configured with a Ryzen 9 9950X processor（最低值）",
+      "sourceUrl": "https://www.nvidia.com/en-us/geforce/graphics-cards/compare/",
+      "verifiedAt": "2026-11-10",
+      "notes": "官方原文『PCI Express Gen 5』，未寫通道數。"
+    },
+    {
+      "id": "nvidia-geforce-rtx-5060-ti",
+      "vendor": "NVIDIA",
+      "name": "GeForce RTX 5060 Ti",
+      "pcieGen": 5,
+      "tbpW": 180,
+      "recommendedPsuW": 600,
+      "psuWording": "Required System Power (W)；官方註：Minimum is based on a PC configured with a Ryzen 9 9950X processor（最低值）",
+      "sourceUrl": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5060-family/",
+      "verifiedAt": "2026-11-10",
+      "notes": "官方原文『PCI Express Gen 5』，未寫通道數。官方只有一欄，記憶體寫『16 GB / 8 GB GDDR7』，8GB/16GB 未分開列數值。"
+    },
+    {
+      "id": "nvidia-geforce-rtx-5060",
+      "vendor": "NVIDIA",
+      "name": "GeForce RTX 5060",
+      "pcieGen": 5,
+      "tbpW": 145,
+      "recommendedPsuW": 550,
+      "psuWording": "Required System Power (W)；官方註：Minimum is based on a PC configured with a Ryzen 9 9950X processor（最低值）",
+      "sourceUrl": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5060-family/",
+      "verifiedAt": "2026-11-10",
+      "notes": "官方原文『PCI Express Gen 5』，未寫通道數。"
+    },
+    {
+      "id": "nvidia-geforce-rtx-5050",
+      "vendor": "NVIDIA",
+      "name": "GeForce RTX 5050",
+      "pcieGen": 5,
+      "tbpW": 130,
+      "recommendedPsuW": 550,
+      "psuWording": "Required System Power (W)；官方註：Minimum is based on a PC configured with a Ryzen 9 9950X processor（最低值）",
+      "sourceUrl": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5050/",
+      "verifiedAt": "2026-11-10",
+      "notes": "官方原文『PCI Express Gen 5』，未寫通道數。"
+    },
+    {
+      "id": "amd-radeon-rx-9070-xt",
+      "vendor": "AMD",
+      "name": "Radeon RX 9070 XT",
+      "pcieGen": 5,
+      "pcieLanes": 16,
+      "tbpW": 304,
+      "recommendedPsuW": 750,
+      "psuWording": "Minimum PSU Recommendation",
+      "sourceUrl": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9070xt.html",
+      "verifiedAt": "2026-11-10",
+      "notes": "官方原文『Typical Board Power (Desktop) 304W』『Minimum PSU Recommendation 750W』『Bus Type PCIe® 5.0 x16』。以瀏覽器讀取（WebFetch 逾時）。"
+    },
+    {
+      "id": "amd-radeon-rx-9060-xt-16gb",
+      "vendor": "AMD",
+      "name": "Radeon RX 9060 XT (16GB)",
+      "pcieGen": 5,
+      "pcieLanes": 16,
+      "tbpW": 160,
+      "recommendedPsuW": 450,
+      "psuWording": "Minimum PSU Recommendation",
+      "sourceUrl": "https://www.amd.com/en/products/graphics/desktops/radeon/9000-series/amd-radeon-rx-9060xt.html",
+      "verifiedAt": "2026-11-10",
+      "notes": "官方原文『Typical Board Power (Desktop) 160W』『Minimum PSU Recommendation 450W』『Bus Type PCIe® 5.0 x16』『Max Memory Size 16 GB』。"
+    }
+  ]
+}

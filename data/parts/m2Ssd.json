@@ -10,8 +10,12 @@
     "notes": "Phase 1 mock：不含散熱片版本",
     "interface": {
       "kind": "pcie",
-      "gen": 4,
-      "lanes": 4
+      "modes": [
+        {
+          "gen": 4,
+          "lanes": 4
+        }
+      ]
     },
     "formFactor": "2280",
     "hasHeatsink": false
@@ -27,8 +31,12 @@
     "notes": "Phase 1 mock：散熱片版本與否未確認",
     "interface": {
       "kind": "pcie",
-      "gen": 4,
-      "lanes": 4
+      "modes": [
+        {
+          "gen": 4,
+          "lanes": 4
+        }
+      ]
     },
     "formFactor": "2280"
   },
@@ -43,8 +51,12 @@
     "notes": "Phase 1 mock：用於測試 PCIe 5.0 SSD 降速（R30）；散熱片版本與否未確認",
     "interface": {
       "kind": "pcie",
-      "gen": 5,
-      "lanes": 4
+      "modes": [
+        {
+          "gen": 5,
+          "lanes": 4
+        }
+      ]
     },
     "formFactor": "2280"
   },
@@ -56,13 +68,26 @@
     "twName": "9100 PRO PCIe 5.0 NVMe M.2 固態硬碟 2TB (含散熱片)",
     "sourceUrl": "https://download.semiconductor.samsung.com/resources/data-sheet/Samsung_NVMe_SSD_9100_PRO_with_Heatsink_Datasheet_Rev.1.1.pdf",
     "specVerifiedAt": "2026-11-09",
-    "notes": "datasheet：『Interface PCIe 5.0 x4, NVMe 2.0』『Form Factor M.2 (2280)』；尺寸『1TB/2TB/4TB : Max 80.15 x Max 25 x Max 8.88 (mm)』（PCI-SIG D8）。8.88 是含 PCB 的模組總高、不是散熱片高度，寬 25mm 大於標準 22mm，heatsinkHeightMm 依欄位定義留空。台灣頁：https://www.samsung.com/tw/memory-storage/nvme-ssd/9100-pro-2tb-nvme-pcie-gen-5-mz-vap2t0cw/",
+    "notes": "datasheet：『Interface PCIe 5.0 x4, NVMe 2.0』『Form Factor M.2 (2280)』；尺寸『1TB/2TB/4TB : Max 80.15 x Max 25 x Max 8.88 (mm)』（PCI-SIG D8）。8.88 為含 PCB 與散熱片的模組總高；寬 25mm 大於標準 22mm。8TB 版本總高 11.25mm，需另立 id。",
     "interface": {
       "kind": "pcie",
-      "gen": 5,
-      "lanes": 4
+      "modes": [
+        {
+          "gen": 5,
+          "lanes": 4
+        }
+      ]
     },
     "formFactor": "2280",
-    "hasHeatsink": true
+    "hasHeatsink": true,
+    "moduleTotalHeightMm": 8.88,
+    "additionalSources": [
+      {
+        "url": "https://www.samsung.com/tw/memory-storage/nvme-ssd/9100-pro-2tb-nvme-pcie-gen-5-mz-vap2t0cw/",
+        "fields": [
+          "twName"
+        ]
+      }
+    ]
   }
 ]

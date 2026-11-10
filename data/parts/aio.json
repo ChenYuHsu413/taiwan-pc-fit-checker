@@ -60,6 +60,14 @@
       "LGA1700",
       "AM5",
       "AM4"
+    ],
+    "additionalSources": [
+      {
+        "url": "https://www.arctic.de/media/e3/d9/86/1741780098/Spec_Sheet_Liquid_Freezer_III_Pro_360_EN.pdf",
+        "fields": [
+          "fanThicknessMm"
+        ]
+      }
     ]
   }
 ]

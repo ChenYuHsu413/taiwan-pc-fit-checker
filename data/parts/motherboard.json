@@ -7,7 +7,7 @@
     "twName": "ROG STRIX B850-I GAMING WIFI",
     "sourceUrl": "https://rog.asus.com/motherboards/rog-strix/rog-strix-b850-i-gaming-wifi/spec/",
     "specVerifiedAt": "2026-11-10",
-    "notes": "尺寸原文『6.7 inch x 6.7 inch (17 cm x 17 cm)』。記憶體速度原文『8200+MT/s(OC) with Ryzen 9000, 9600+MT/s(OC) with Ryzen 8000, 8000+MT/s(OC) with Ryzen 7000』，依 CPU 而異且為 OC 值，未填。槽位以 Ryzen 9000/7000 填入；Ryzen 8000 差異用 laneSharing（cpuGeneration）：規格頁『Ryzen 8000 Series: 1 x PCIe 4.0 x16 slot』（未寫降通道數，只降世代）、M.2_1/M.2_2『supports PCIe 4.0 x4 mode』。槽位名稱 PCIEX16(G5)、M.2_1、M.2_2 取自手冊 E25172 p.18/p.21。M.2 官方逐槽只列 PCIe 模式 → supportsSata = false。兩個 M.2 都列在 CPU 段落下 → laneSource = cpu。影像輸出：1 x HDMI + 1 x USB Type-C DP。CPU 支援清單 rog.asus.com helpdesk_cpu 頁讀不到表格內容，未填 cpuSupportListUrl。注意：手冊規格摘要 Ryzen 8000 段落把 M.2_1 重複列兩次（應為 M.2_1/M.2_2，p.21 正確）。",
+    "notes": "尺寸原文『6.7 inch x 6.7 inch (17 cm x 17 cm)』。記憶體速度原文『8200+MT/s(OC) with Ryzen 9000, 9600+MT/s(OC) with Ryzen 8000, 8000+MT/s(OC) with Ryzen 7000』，依 CPU 而異且為 OC 值，未填。槽位以 Ryzen 9000/7000 填入；Ryzen 8000 差異用 laneSharing（cpuGeneration）：規格頁『Ryzen 8000 Series: 1 x PCIe 4.0 x16 slot』（未寫降通道數，只降世代）、M.2_1/M.2_2『supports PCIe 4.0 x4 mode』。槽位名稱 PCIEX16(G5)、M.2_1、M.2_2 取自手冊 E25172 p.18/p.21。M.2 官方逐槽只列 PCIe 模式 → supportsSata = false。兩個 M.2 都列在 CPU 段落下 → laneSource = cpu。影像輸出：1 x HDMI + 1 x USB Type-C DP。CPU 支援清單 rog.asus.com helpdesk_cpu 頁讀不到表格內容，未填 cpuSupportListUrl。注意：手冊規格摘要 Ryzen 8000 段落把 M.2_1 重複列兩次（應為 M.2_1/M.2_2，p.21 正確）。 CPU 支援清單取自官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/browser-2026-11-10.md）。",
     "formFactor": "ITX",
     "socket": "AM5",
     "chipset": "B850",
@@ -114,8 +114,15 @@
           "pcieX16Slots[].label",
           "m2Slots[].label"
         ]
+      },
+      {
+        "url": "https://rog.asus.com/tw/motherboards/rog-strix/rog-strix-b850-i-gaming-wifi/helpdesk_cpu/",
+        "fields": [
+          "cpuSupportListUrl"
+        ]
       }
-    ]
+    ],
+    "cpuSupportListUrl": "https://rog.asus.com/tw/motherboards/rog-strix/rog-strix-b850-i-gaming-wifi/helpdesk_cpu/"
   },
   {
     "id": "asus-tuf-gaming-b650m-plus-wifi",
@@ -367,7 +374,7 @@
     "twName": "ROG STRIX X870E-E GAMING WIFI",
     "sourceUrl": "https://rog.asus.com/motherboards/rog-strix/rog-strix-x870e-e-gaming-wifi/spec/",
     "specVerifiedAt": "2026-11-10",
-    "notes": "尺寸原文『12 inch x 9.6 inch (30.5 cm x 24.4 cm)』。槽位規格以 Ryzen 9000/7000 填入；Ryzen 8000 的差異用 laneSharing（cpuGeneration）表示：PCIEX16(G5)『1 x PCIe 4.0 x16 slot (supports x8/x4 mode)』、M.2_1『supports PCIe 4.0 x4 mode』、『M.2_2 & M.2_3 will be disabled when using AMD Ryzen 8000 Series』。記憶體速度原文『8000+MT/s(OC) with Ryzen 9000/7000, 8400+MT/s(OC) with Ryzen 8000』，依 CPU 而異且為 OC 值，未填。共用通道：2026-11-10 規格頁原文『When M.2_2 & M.2_3 are occupied with SSD devices, PCIEX16(G5) will run in x8 mode.』（兩者都使用才降 x8，與手冊 p.9/p.24 一致；先前版本規格頁寫法不同）。M.2 槽官方逐槽列出 PCIe 模式且未列 SATA → supportsSata = false（決策：逐槽列模式時沒列 SATA 即不支援）。影像輸出：1 x HDMI + 2 x USB4 Type-C DP。CPU 支援清單官方只指向 download center 總頁，未填 cpuSupportListUrl。",
+    "notes": "尺寸原文『12 inch x 9.6 inch (30.5 cm x 24.4 cm)』。槽位規格以 Ryzen 9000/7000 填入；Ryzen 8000 的差異用 laneSharing（cpuGeneration）表示：PCIEX16(G5)『1 x PCIe 4.0 x16 slot (supports x8/x4 mode)』、M.2_1『supports PCIe 4.0 x4 mode』、『M.2_2 & M.2_3 will be disabled when using AMD Ryzen 8000 Series』。記憶體速度原文『8000+MT/s(OC) with Ryzen 9000/7000, 8400+MT/s(OC) with Ryzen 8000』，依 CPU 而異且為 OC 值，未填。共用通道：2026-11-10 規格頁原文『When M.2_2 & M.2_3 are occupied with SSD devices, PCIEX16(G5) will run in x8 mode.』（兩者都使用才降 x8，與手冊 p.9/p.24 一致；先前版本規格頁寫法不同）。M.2 槽官方逐槽列出 PCIe 模式且未列 SATA → supportsSata = false（決策：逐槽列模式時沒列 SATA 即不支援）。影像輸出：1 x HDMI + 2 x USB4 Type-C DP。CPU 支援清單官方只指向 download center 總頁，未填 cpuSupportListUrl。 CPU 支援清單取自官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/browser-2026-11-10.md）。",
     "formFactor": "ATX",
     "socket": "AM5",
     "chipset": "X870E",
@@ -553,8 +560,15 @@
         "fields": [
           "laneSharing"
         ]
+      },
+      {
+        "url": "https://rog.asus.com/tw/motherboards/rog-strix/rog-strix-x870e-e-gaming-wifi/helpdesk_qvl_cpu/",
+        "fields": [
+          "cpuSupportListUrl"
+        ]
       }
-    ]
+    ],
+    "cpuSupportListUrl": "https://rog.asus.com/tw/motherboards/rog-strix/rog-strix-x870e-e-gaming-wifi/helpdesk_qvl_cpu/"
   },
   {
     "id": "asus-rog-crosshair-x870e-extreme",
@@ -564,7 +578,7 @@
     "twName": "ROG CROSSHAIR X870E EXTREME",
     "sourceUrl": "https://rog.asus.com/motherboards/rog-crosshair/rog-crosshair-x870e-extreme/spec/",
     "specVerifiedAt": "2026-11-10",
-    "notes": "尺寸原文『12 inch x 10.9 inch (30.5 cm x 27.7 cm)』。記憶體速度原文『8200+MT/s(OC) with Ryzen 9000, 9000+MT/s(OC) with Ryzen 8000, 8000+MT/s(OC) with Ryzen 7000』，未填。PCIe：Ryzen 9000/7000『2 x PCIe 5.0 x16 slots (supports x16 or x8/x8 or x8/x4/x4 modes)』，PCIEX16_2 最高 x8。槽位名稱：規格頁同時出現『PCIEx16(G5)_1』與註腳『PCIEX16_1』，採註腳寫法；未找到本板英文手冊（dlcdnets 搜尋無結果），未以手冊核對。共用通道（規格頁註腳）：『When both PCIEX16_1 and PCIEX16_2 are in use, they will each run in x8 mode.』『When M.2_2 is enabled, but M.2_3 is not in use, PCIEX16_1 will run in x8 mode and PCIEX16_2 will be disabled.』『When M.2_3 is enabled, but M.2_2 is not in use, PCIEX16_1 will run in x8 mode and PCIEX16_2 will run in x4 mode.』『When both M.2_2 and M.2_3 are enabled, PCIEX16_1 will run in x8 mode and PCIEX16_2 will be disabled.』（兩者都用的情況 = 各自規則的聯集）。Ryzen 8000：8700/8600/8400 總頻寬 x8、8500/8300 總頻寬 x4，PCIEX16_2 停用（laneSharing 以 x8 表示，x4 型號見原文）；M.2_1 降為 PCIe 4.0 x4；M.2_2、M.2_3『Not supports』。DIMM.2_1 / DIMM.2_2（ROG Q-DIMM.2 擴充卡，PCIe 4.0 x4，晶片組）與 SlimSAS（PCIe 4.0 x4）不列入 m2Slots。M.2 官方逐槽只列 PCIe 模式 → supportsSata = false。影像輸出：1 x HDMI + 2 x USB4 Type-C DP。",
+    "notes": "尺寸原文『12 inch x 10.9 inch (30.5 cm x 27.7 cm)』。記憶體速度原文『8200+MT/s(OC) with Ryzen 9000, 9000+MT/s(OC) with Ryzen 8000, 8000+MT/s(OC) with Ryzen 7000』，未填。PCIe：Ryzen 9000/7000『2 x PCIe 5.0 x16 slots (supports x16 or x8/x8 or x8/x4/x4 modes)』，PCIEX16_2 最高 x8。槽位名稱：規格頁同時出現『PCIEx16(G5)_1』與註腳『PCIEX16_1』，採註腳寫法；未找到本板英文手冊（dlcdnets 搜尋無結果），未以手冊核對。共用通道（規格頁註腳）：『When both PCIEX16_1 and PCIEX16_2 are in use, they will each run in x8 mode.』『When M.2_2 is enabled, but M.2_3 is not in use, PCIEX16_1 will run in x8 mode and PCIEX16_2 will be disabled.』『When M.2_3 is enabled, but M.2_2 is not in use, PCIEX16_1 will run in x8 mode and PCIEX16_2 will run in x4 mode.』『When both M.2_2 and M.2_3 are enabled, PCIEX16_1 will run in x8 mode and PCIEX16_2 will be disabled.』（兩者都用的情況 = 各自規則的聯集）。Ryzen 8000：8700/8600/8400 總頻寬 x8、8500/8300 總頻寬 x4，PCIEX16_2 停用（laneSharing 以 x8 表示，x4 型號見原文）；M.2_1 降為 PCIe 4.0 x4；M.2_2、M.2_3『Not supports』。DIMM.2_1 / DIMM.2_2（ROG Q-DIMM.2 擴充卡，PCIe 4.0 x4，晶片組）與 SlimSAS（PCIe 4.0 x4）不列入 m2Slots。M.2 官方逐槽只列 PCIe 模式 → supportsSata = false。影像輸出：1 x HDMI + 2 x USB4 Type-C DP。 CPU 支援清單取自官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/browser-2026-11-10.md）。",
     "formFactor": "E-ATX",
     "socket": "AM5",
     "chipset": "X870E",
@@ -789,7 +803,16 @@
       }
     ],
     "biosFlashback": true,
-    "hasVideoOutput": true
+    "hasVideoOutput": true,
+    "cpuSupportListUrl": "https://rog.asus.com/tw/motherboards/rog-crosshair/rog-crosshair-x870e-extreme/helpdesk_qvl_cpu/",
+    "additionalSources": [
+      {
+        "url": "https://rog.asus.com/tw/motherboards/rog-crosshair/rog-crosshair-x870e-extreme/helpdesk_qvl_cpu/",
+        "fields": [
+          "cpuSupportListUrl"
+        ]
+      }
+    ]
   },
   {
     "id": "asus-tuf-gaming-b760m-plus-wifi",
@@ -1109,7 +1132,7 @@
     "twName": "MAG B650 TOMAHAWK WIFI",
     "sourceUrl": "https://storage-asset.msi.com/specSheet/fr/mb/MAG%20B650%20TOMAHAWK%20WIFI.pdf",
     "specVerifiedAt": "2026-11-10",
-    "notes": "msi.com 產品規格頁（含 tw/us 子站）回 403；官方手冊（download.msi.com，35MB 多語版）超過讀取上限。改用 MSI 官方 spec sheet（storage-asset.msi.com，法文版但欄位為英文，2025-06-17）與台灣 datasheet。spec sheet 原文：『PCI-E x16 slot (Qty) 2』『PCI-E x1 slot (Qty) 1』『PCI_E1 Gen PCIe 4.0 / bandwidth x16』『PCI_E2 Gen PCIe 4.0 / bandwidth x2』『PCI_E3 Gen PCIe 3.0 / bandwidth x1』；datasheet『2x PCIe 4.0 x16 slots, 1x PCIe 3.0 x1 slot』→ PCI_E2 為實體 x16、電氣 x2。槽位通道來源（CPU/晶片組）官方未寫，未填。M.2：『M.2_1/M.2_2/M.2_3 (Gen3/Gen4/Gen5) PCIe 4.0 x4』『(SATA mode) N/A』→ supportsSata = false；M.2 長度規格未寫，formFactors 未填。記憶體『4 DIMMs, Dual Channel DDR5 7600+MHz (OC)』，OC 值未填；最大容量 datasheet 未寫。尺寸未寫（只寫 PCB Form Factor ATX）。共用通道、Ryzen 8000 差異官方文件未寫。『Flash BIOS Button』→ biosFlashback true。HDMI 2.1 + DisplayPort 1.4（Requires Processor Graphics）。",
+    "notes": "msi.com 產品規格頁（含 tw/us 子站）回 403；官方手冊（download.msi.com，35MB 多語版）超過讀取上限。改用 MSI 官方 spec sheet（storage-asset.msi.com，法文版但欄位為英文，2025-06-17）與台灣 datasheet。spec sheet 原文：『PCI-E x16 slot (Qty) 2』『PCI-E x1 slot (Qty) 1』『PCI_E1 Gen PCIe 4.0 / bandwidth x16』『PCI_E2 Gen PCIe 4.0 / bandwidth x2』『PCI_E3 Gen PCIe 3.0 / bandwidth x1』；datasheet『2x PCIe 4.0 x16 slots, 1x PCIe 3.0 x1 slot』→ PCI_E2 為實體 x16、電氣 x2。槽位通道來源（CPU/晶片組）官方未寫，未填。M.2：『M.2_1/M.2_2/M.2_3 (Gen3/Gen4/Gen5) PCIe 4.0 x4』『(SATA mode) N/A』→ supportsSata = false；M.2 長度規格未寫，formFactors 未填。記憶體『4 DIMMs, Dual Channel DDR5 7600+MHz (OC)』，OC 值未填；最大容量 datasheet 未寫。尺寸未寫（只寫 PCB Form Factor ATX）。共用通道、Ryzen 8000 差異官方文件未寫。『Flash BIOS Button』→ biosFlashback true。HDMI 2.1 + DisplayPort 1.4（Requires Processor Graphics）。 CPU 支援清單取自官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/browser-2026-11-10.md）。",
     "formFactor": "ATX",
     "socket": "AM5",
     "chipset": "B650",
@@ -1158,8 +1181,15 @@
           "biosFlashback",
           "hasVideoOutput"
         ]
+      },
+      {
+        "url": "https://tw.msi.com/Motherboard/MAG-B650-TOMAHAWK-WIFI/support#cpu",
+        "fields": [
+          "cpuSupportListUrl"
+        ]
       }
-    ]
+    ],
+    "cpuSupportListUrl": "https://tw.msi.com/Motherboard/MAG-B650-TOMAHAWK-WIFI/support#cpu"
   },
   {
     "id": "asrock-b850m-pro-rs-wifi",
@@ -1169,7 +1199,7 @@
     "twName": "B850M Pro RS WiFi",
     "sourceUrl": "https://download.asrock.com/Manual/B850M%20Pro%20RS.pdf",
     "specVerifiedAt": "2026-11-10",
-    "notes": "asrock.com 產品頁 WebFetch 讀回空白（JS 載入），規格取自官方手冊（B850M Pro RS / B850M Pro RS WiFi 共用），sourceUrl 為手冊。手冊未列板子尺寸（只寫『Micro ATX Form Factor』），dimensions 留空。PCIe：『1 x PCIe 5.0 x16 Slot (PCIE1), supports x16 mode』『1 x PCIe 4.0 x4 Slot (PCIE2), supports x4 mode』（CPU；PCIE2 手冊稱 x4 slot，未寫實體長度，不列入 pcieX16Slots）。共用：『If M2_3 is occupied, PCIE2 will be disabled.』Ryzen 8000：PCIE1『Gen4x8 with 8000 (Phoenix 1)… Gen4x4 with 8000 (Phoenix 2)』→ 以 x8 表示；M2_1『Gen4x4 with 8000 (Phoenix 1)… Gen4x2 with 8000 (Phoenix 2)』→ 只結構化世代。M2_3 在 8000 下的行為手冊未寫。M.2：M2_1 CPU Gen5x4、M2_3 CPU Gen4x4、M2_2 Chipset Gen4x4，皆 type 2280，逐槽只列 PCIe → supportsSata = false。記憶體『up to 8000+(OC)』未填。『1 x BIOS Flashback Button』。影像輸出：HDMI 2.1 + DisplayPort 1.4。",
+    "notes": "asrock.com 產品頁 WebFetch 讀回空白（JS 載入），規格取自官方手冊（B850M Pro RS / B850M Pro RS WiFi 共用），sourceUrl 為手冊。手冊未列板子尺寸（只寫『Micro ATX Form Factor』），dimensions 留空。PCIe：『1 x PCIe 5.0 x16 Slot (PCIE1), supports x16 mode』『1 x PCIe 4.0 x4 Slot (PCIE2), supports x4 mode』（CPU；PCIE2 手冊稱 x4 slot，未寫實體長度，不列入 pcieX16Slots）。共用：『If M2_3 is occupied, PCIE2 will be disabled.』Ryzen 8000：PCIE1『Gen4x8 with 8000 (Phoenix 1)… Gen4x4 with 8000 (Phoenix 2)』→ 以 x8 表示；M2_1『Gen4x4 with 8000 (Phoenix 1)… Gen4x2 with 8000 (Phoenix 2)』→ 只結構化世代。M2_3 在 8000 下的行為手冊未寫。M.2：M2_1 CPU Gen5x4、M2_3 CPU Gen4x4、M2_2 Chipset Gen4x4，皆 type 2280，逐槽只列 PCIe → supportsSata = false。記憶體『up to 8000+(OC)』未填。『1 x BIOS Flashback Button』。影像輸出：HDMI 2.1 + DisplayPort 1.4。 CPU 支援清單取自官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/browser-2026-11-10.md）。注意：使用者提供的清單網址為 ASRock『B850M Pro RS』（非 WiFi 版名稱），本筆型號為 B850M Pro RS WiFi，依使用者指示套用，待確認（pending B-10）。",
     "formFactor": "M-ATX",
     "socket": "AM5",
     "chipset": "B850",
@@ -1269,7 +1299,16 @@
       }
     ],
     "biosFlashback": true,
-    "hasVideoOutput": true
+    "hasVideoOutput": true,
+    "cpuSupportListUrl": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS/index.tw.asp#CPU",
+    "additionalSources": [
+      {
+        "url": "https://www.asrock.com/mb/AMD/B850M%20Pro%20RS/index.tw.asp#CPU",
+        "fields": [
+          "cpuSupportListUrl"
+        ]
+      }
+    ]
   },
   {
     "id": "asrock-b550m-pro4",
@@ -1279,7 +1318,7 @@
     "twName": "B550M Pro4",
     "sourceUrl": "https://download.asrock.com/Manual/B550M%20Pro4.pdf",
     "specVerifiedAt": "2026-11-10",
-    "notes": "asrock.com 產品頁 WebFetch 讀回空白，規格取自官方手冊（2020 年版），sourceUrl 為手冊。手冊 CPU 段只寫『3rd Gen AMD AM4 Ryzen / future AMD Ryzen Processors (3000 and 4000 Series)』，未提 Ryzen 5000；PCIe/M.2 世代只分 Matisse（3000）與 Renoir（4000G）：PCIE1『Gen4x16 (Matisse) / Gen3x16 (Renoir)』、M2_1『Gen4x4 (Matisse) or Gen3x4 (Renoir)』→ Ryzen 5000 下的世代官方手冊未寫，PCIE1 gen 與 M2_1 pcieGen 留空。PCIE3『PCIe 3.0 x16 slot … x4 lane width』兩種 CPU 皆 Gen3x4。另有 PCIE2 PCIe 3.0 x1（不列）。通道來源手冊未寫，未填。M2_2『supports M Key type 2280 M.2 SATA3 6.0 Gb/s module and M.2 PCI Express module up to Gen3 x2』→ supportsSata true；M2_1 只列 PCIe → false。共用：『M2_2 and SATA3_5_6 share lanes. If either one of them is in use, the other one will be disabled.』手冊未列板子尺寸（只寫『Micro ATX Form Factor』）。記憶體最高為 OC 值，未填；『Max. capacity of system memory: 128GB』。BIOS Flashback 手冊未提及（只有 Instant Flash），留空。影像輸出：D-Sub + HDMI + DisplayPort 1.4。",
+    "notes": "asrock.com 產品頁 WebFetch 讀回空白，規格取自官方手冊（2020 年版），sourceUrl 為手冊。手冊 CPU 段只寫『3rd Gen AMD AM4 Ryzen / future AMD Ryzen Processors (3000 and 4000 Series)』，未提 Ryzen 5000；PCIe/M.2 世代只分 Matisse（3000）與 Renoir（4000G）：PCIE1『Gen4x16 (Matisse) / Gen3x16 (Renoir)』、M2_1『Gen4x4 (Matisse) or Gen3x4 (Renoir)』→ Ryzen 5000 下的世代官方手冊未寫，PCIE1 gen 與 M2_1 pcieGen 留空。PCIE3『PCIe 3.0 x16 slot … x4 lane width』兩種 CPU 皆 Gen3x4。另有 PCIE2 PCIe 3.0 x1（不列）。通道來源手冊未寫，未填。M2_2『supports M Key type 2280 M.2 SATA3 6.0 Gb/s module and M.2 PCI Express module up to Gen3 x2』→ supportsSata true；M2_1 只列 PCIe → false。共用：『M2_2 and SATA3_5_6 share lanes. If either one of them is in use, the other one will be disabled.』手冊未列板子尺寸（只寫『Micro ATX Form Factor』）。記憶體最高為 OC 值，未填；『Max. capacity of system memory: 128GB』。BIOS Flashback 手冊未提及（只有 Instant Flash），留空。影像輸出：D-Sub + HDMI + DisplayPort 1.4。 CPU 支援清單取自官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/browser-2026-11-10.md）。",
     "formFactor": "M-ATX",
     "socket": "AM4",
     "chipset": "B550",
@@ -1375,7 +1414,16 @@
         "sourceText": "M2_2 and SATA3_5_6 share lanes. If either one of them is in use, the other one will be disabled."
       }
     ],
-    "hasVideoOutput": true
+    "hasVideoOutput": true,
+    "cpuSupportListUrl": "https://www.asrock.com/mb/AMD/B550M%20Pro4/index.tw.asp#CPU",
+    "additionalSources": [
+      {
+        "url": "https://www.asrock.com/mb/AMD/B550M%20Pro4/index.tw.asp#CPU",
+        "fields": [
+          "cpuSupportListUrl"
+        ]
+      }
+    ]
   },
   {
     "id": "gigabyte-b650-aorus-elite-ax",

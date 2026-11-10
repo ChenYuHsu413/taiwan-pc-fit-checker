@@ -436,7 +436,10 @@ function r27(s: BuildSelection, refs: RuleRefs): RuleOutput {
     return board.support === "native"
       ? result("R27", "safe", MSG.R27.boardNative(board.minBios), { link })
       : result("R27", "warning", updateMsg(MSG.R27.boardSubject), {
-          conditions: [MSG.R27.boardMinBios(board.minBios)],
+          conditions: [
+            MSG.R27.boardMinBios(board.minBios),
+            ...(board.bootableSinceBios && board.bootableSinceBios !== board.minBios ? [MSG.R27.bootable(board.bootableSinceBios)] : []),
+          ],
           link,
         });
   }

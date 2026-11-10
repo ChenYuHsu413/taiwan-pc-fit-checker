@@ -31,6 +31,8 @@ export const boardOverrideSchema = z.object({
   support: z.enum(["native", "biosUpdate"]),
   /** 清單上的版本原文，例如 `2613`、`all` */
   minBios: z.string().min(1),
+  /** 這顆 CPU 從哪一版 BIOS 開始可以開機（只有 ASRock 清單有這一欄）；比 minBios 舊時，可裝上後自行更新 */
+  bootableSinceBios: z.string().min(1).optional(),
   sourceUrl: z.url(),
   verifiedAt: isoDateSchema,
 });

@@ -157,6 +157,7 @@ export const MSG = {
     chipsetSubject: (chipset: string) => `${chipset} 晶片組搭配此 CPU 世代`,
     boardSubject: "依主機板官方 CPU 支援清單，此 CPU ",
     boardMinBios: (v: string) => `主機板官方 CPU 支援清單：此 CPU 自 BIOS ${v} 起支援，出廠 BIOS 較舊時需要更新。`,
+    bootable: (v: string) => `此 CPU 可在 BIOS ${v} 開機，裝上後即可自行更新 BIOS。`,
     boardNative: (v: string) => `主機板官方 CPU 支援清單：此 CPU 自 BIOS「${v}」即支援（不需要更新 BIOS）。`,
     chipsetNotListed: (chipset: string, list: string[]) =>
       `CPU 官方支援晶片組為 ${list.join("、")}，不含 ${chipset}，此主機板不支援這顆 CPU。`,

@@ -2,21 +2,19 @@
 
 收到「請依 docs/progress.md 繼續」時，從「下一步」接續。
 
-## 本輪：補 AMD 資料、BIOS 規則修正、小修正
+## 本輪：補主機板 CPU 支援清單與 3 個型號
 
-三段：0 決策紀錄與小修正（L-01 結案、總價顯示）；1 AMD 資料（7 顆 CPU、AMD 晶片表重建）；2 BIOS 規則修正（Z890/B860 × 200S、boardOverrides 優先、支援晶片組 → unsupported、測試）
-
-規則：AMD 數值只用使用者在任務中提供的表（docs/sources/amd-2026-11-10.md），**不可用 WebFetch / curl / 瀏覽器讀取 amd.com**
+資料來源：使用者瀏覽器讀取的官方頁面（docs/sources/browser-2026-11-10.md）。**本輪不讀取任何網站。**
 
 ### 狀態
 
-- 第零段：完成
-- 第一段：完成
-- 第二段：完成
+- 第一段（主機板 CPU 清單、bootableSinceBios、測試）：完成
+- 第二段（GIGABYTE 5090 MASTER、5060 WINDFORCE、be quiet! DARK ROCK PRO 5）：進行中
 
 ### 下一步
 
-- 無（本輪完成）。待使用者處理 pending.md 中未解決的項目
+1. 第二段：data/parts/gpu.json 新增 2 張、airCooler.json 新增 1 款；確認 gpuChip；pending 移除拿不到的紀錄
+2. Gate → commit → push main
 
 ### 未 commit 的變更
 

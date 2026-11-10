@@ -327,6 +327,7 @@ M.2 數量 = `m2Slots.length`（只在 `m2Slots` 有填時才有意義）。
 | `entries[].minBiosNote` | 官方通則原文或判斷依據 |
 | `boardOverrides[].motherboardId` / `cpuId` | 對應零件 id（載入時檢查存在） |
 | `boardOverrides[].support` / `minBios` | 清單原文版本 |
+| `boardOverrides[].bootableSinceBios` | 選填：這顆 CPU 從哪一版 BIOS 可以開機（只有 ASRock 清單有）。比 minBios 舊時，R27 會補充「可在此版開機、裝上後自行更新 BIOS」 |
 | `sourceUrl` / `verifiedAt` | 必填 |
 
 ## 5. 顯示晶片參考表（`data/reference/gpu-chips.json`）

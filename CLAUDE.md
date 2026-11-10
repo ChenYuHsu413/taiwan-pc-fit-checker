@@ -112,6 +112,8 @@ npm test
 | 2026-11-10 | 3D 顯卡方向：橫插 = 長度沿前後、厚度由插槽往下、高度由主機板往玻璃、風扇朝下（與 schema R04 一致）；直立 = 大平面朝玻璃 | 使用者已確認（pending L-01 結案） |
 | 2026-11-10 | 之後的開發直接在 `main` 進行 | |
 | 2026-11-10 | AMD 官方規格來源：amd.com 對自動讀取一律逾時，改由使用者在對話中請 Claude 透過使用者自己的 Chrome 開啟 AMD 官方頁讀取並提供數值；sourceUrl 填 AMD 官方網址，notes 註明「規格由使用者提供，取自 AMD 官方頁面（使用者瀏覽器讀取）」，完整數值存 `docs/sources/amd-2026-11-10.md`。專案的程式與 Agent 不直接讀 amd.com | 沒列到的欄位留空 |
+| 2026-11-10 | 使用者瀏覽器讀取的官方頁面可作為來源：使用者在對話中請 Claude 透過使用者自己的 Chrome 開啟各品牌官方頁面讀取並提供內容；sourceUrl 填官方網址、specVerifiedAt 填讀取日，notes 註明「取自官方頁面（使用者瀏覽器讀取）」，沒列到的欄位留空，完整內容存 `docs/sources/browser-YYYY-MM-DD.md` | 第一份：`docs/sources/browser-2026-11-10.md` |
+| 2026-11-10 | BIOS 表 boardOverrides 新增 optional `bootableSinceBios`（ASRock 清單的「可開機 BIOS」）；比 minBios 舊時 R27 補充「可在此版開機，裝上後即可自行更新 BIOS」 | |
 | 2026-11-10 | CPU 新增 `supportedChipsets`（AMD Supporting Chipsets） | 晶片組不在清單內 → R27 unsupported |
 | 2026-11-10 | BIOS：Z890 / B860 × Ultra 200S 記為原生支援，minBiosNote「Intel 未明文，依 800 系列為 Ultra 200S 同期平台判斷」；Z890 / B860 × Ultra 200S Plus 維持不填（R27 Unknown） | |
 | 2026-11-10 | BIOS：主機板層級優先於晶片組層級。主機板官方 CPU 支援清單明確寫了某顆 CPU 的最低 BIOS 時，記在 `boardOverrides`（逐顆 CPU，`{minBios, sourceUrl}`），R27 以它為準 | BIOS 表 schemaVersion 3 |

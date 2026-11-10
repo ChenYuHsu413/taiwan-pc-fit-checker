@@ -26,12 +26,32 @@ describe("真實資料組合", () => {
     expect(r?.link?.url).toContain("helpdesk_cpu");
   });
 
-  it("AM5 主機板 + 9800X3D：沒有主機板清單時依 BIOS 表（X870E 原生 / B650 需更新）", () => {
-    const x3d = part("cpu", "amd-ryzen-7-9800x3d");
-    const x870e = get({ cpu: x3d, motherboard: part("motherboard", "asus-rog-strix-x870e-e-gaming-wifi") }, "R27");
-    expect(["safe", "info"]).toContain(x870e?.status);
-    const b650 = get({ cpu: x3d, motherboard: part("motherboard", "msi-mag-b650-tomahawk-wifi") }, "R27");
-    expect(b650?.status).toBe("warning");
+  it("ROG STRIX X870E-E + 9800X3D：主機板清單需 BIOS 0505（晶片組層級原生支援，以主機板清單為準）", () => {
+    const r = get({ cpu: part("cpu", "amd-ryzen-7-9800x3d"), motherboard: part("motherboard", "asus-rog-strix-x870e-e-gaming-wifi") }, "R27");
+    expect(r?.status).toBe("warning");
+    expect(r?.conditions?.[0]).toContain("0505");
+    expect(r?.link?.url).toContain("helpdesk_qvl_cpu");
+  });
+
+  it("ROG STRIX B850-I + 9850X3D：需要 BIOS 1063", () => {
+    const r = get({ cpu: part("cpu", "amd-ryzen-7-9850x3d"), motherboard: part("motherboard", "asus-rog-strix-b850-i-gaming-wifi") }, "R27");
+    expect(r?.status).toBe("warning");
+    expect(r?.conditions?.[0]).toContain("1063");
+  });
+
+  it("MSI MAG B650 TOMAHAWK + 9800X3D：需要 7D75v1L", () => {
+    const r = get({ cpu: part("cpu", "amd-ryzen-7-9800x3d"), motherboard: part("motherboard", "msi-mag-b650-tomahawk-wifi") }, "R27");
+    expect(r?.status).toBe("warning");
+    expect(r?.conditions?.[0]).toContain("7D75v1L");
+  });
+
+  it("ASRock B850M Pro RS + 9950X3D2：需要 4.03，可在 3.12 開機；+ 9600X：不需要更新", () => {
+    const mb = part("motherboard", "asrock-b850m-pro-rs-wifi");
+    const r = get({ cpu: part("cpu", "amd-ryzen-9-9950x3d2-dual-edition"), motherboard: mb }, "R27");
+    expect(r?.status).toBe("warning");
+    expect(r?.conditions?.[0]).toContain("4.03");
+    expect(r?.conditions?.join("")).toContain("可在 BIOS 3.12 開機");
+    expect(get({ cpu: part("cpu", "amd-ryzen-5-9600x"), motherboard: mb }, "R27")?.status).toBe("safe");
   });
 
   it("TUF B850-PLUS WIFI：主機板清單優先於晶片組層級", () => {
@@ -49,10 +69,12 @@ describe("真實資料組合", () => {
     expect(r?.status).toBe("incompatible");
   });
 
-  it("B550M Pro4 + Ryzen 7 5700X3D：腳位相容；B550 × 5000X3D 沒有官方依據 → R27 Unknown", () => {
+  it("B550M Pro4 + Ryzen 7 5700X3D：腳位相容；主機板清單需 BIOS P3.20", () => {
     const build = { cpu: part("cpu", "amd-ryzen-7-5700x3d"), motherboard: part("motherboard", "asrock-b550m-pro4") };
     expect(get(build, "R22")?.status).toBe("safe");
-    expect(get(build, "R27")?.status).toBe("unknown");
+    const r27 = get(build, "R27");
+    expect(r27?.status).toBe("warning");
+    expect(r27?.conditions?.[0]).toContain("P3.20");
     const ddr4 = get({ ...build, ram: part("ram", "kingston-fury-beast-kf432c16bbk2-16") }, "R23");
     expect(ddr4?.status).toBe("safe");
   });

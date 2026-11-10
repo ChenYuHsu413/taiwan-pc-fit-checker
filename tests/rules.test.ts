@@ -100,6 +100,8 @@ const REFS: RuleRefs = {
     boardOverrides: [
       { motherboardId: "mb-list", cpuId: "cpu", support: "biosUpdate", minBios: "2613", sourceUrl: "https://x.test/mb", verifiedAt: "2026-11-10" },
       { motherboardId: "mb-native", cpuId: "cpu", support: "native", minBios: "all", sourceUrl: "https://x.test/mb", verifiedAt: "2026-11-10" },
+      { motherboardId: "mb-boot", cpuId: "cpu", support: "biosUpdate", minBios: "4.03", bootableSinceBios: "3.12", sourceUrl: "https://x.test/mb", verifiedAt: "2026-11-10" },
+      { motherboardId: "mb-boot-same", cpuId: "cpu", support: "biosUpdate", minBios: "3.12", bootableSinceBios: "3.12", sourceUrl: "https://x.test/mb", verifiedAt: "2026-11-10" },
     ],
   },
 };
@@ -307,6 +309,10 @@ describe("R27 BIOS", () => {
   });
   it("主機板層級優先：清單寫 all → safe（即使晶片組層級需更新）", () =>
     expect(status({ cpu: cpu(), motherboard: mb({ id: "mb-native", chipset: "B650" }) }, "R27")).toBe("safe"));
+  it("bootableSinceBios 比 minBios 舊時補充「可在該版開機」；相同時不補充", () => {
+    expect(run({ cpu: cpu(), motherboard: mb({ id: "mb-boot" }) }, "R27")?.conditions?.join("")).toContain("可在 BIOS 3.12 開機");
+    expect(run({ cpu: cpu(), motherboard: mb({ id: "mb-boot-same" }) }, "R27")?.conditions?.join("")).not.toContain("開機");
+  });
   it("incompatible：晶片組層級 unsupported", () => expect(status({ cpu: cpu(), motherboard: mb({ chipset: "A520" }) }, "R27")).toBe("incompatible"));
   it("incompatible：晶片組不在 CPU 官方支援晶片組清單內", () =>
     expect(status({ cpu: cpu({ supportedChipsets: ["B650", "X670"] }), motherboard: mb({ chipset: "B850" }) }, "R27")).toBe("incompatible"));

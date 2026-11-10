@@ -1,17 +1,11 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "entries": [
     {
       "chipset": "B650",
       "cpuGeneration": "amd-ryzen-9000",
       "support": "biosUpdate",
       "minBiosNote": "AMD 官方：『A BIOS update may be required for Ryzen 8000 and 9000 series processors on 600 series boards.』最低版本依主機板而異，需查各主機板 CPU 支援清單",
-      "boardOverrides": {
-        "asus-tuf-gaming-b650m-plus-wifi": {
-          "minBios": "9600、9600X、9700X、9900X、9950X 等 2613；9500F、9700F、PRO 9645/9655/9745/9755/9945/9955/9965 等 3263",
-          "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/helpdesk_cpu/"
-        }
-      },
       "sourceUrl": "https://www.amd.com/en/products/processors/chipsets/am5.html",
       "verifiedAt": "2026-11-09"
     },
@@ -20,12 +14,6 @@
       "cpuGeneration": "amd-ryzen-9000-x3d",
       "support": "biosUpdate",
       "minBiosNote": "同 amd-ryzen-9000（AMD 官方未將 X3D 分開說明）。最低版本依主機板與型號而異",
-      "boardOverrides": {
-        "asus-tuf-gaming-b650m-plus-wifi": {
-          "minBios": "9800X3D、9900X3D、9950X3D 等 2613；9850X3D、9950X3D2、PRO 9755X3D/9965X3D 等 3263",
-          "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/helpdesk_cpu/"
-        }
-      },
       "sourceUrl": "https://www.amd.com/en/products/processors/chipsets/am5.html",
       "verifiedAt": "2026-11-09"
     },
@@ -34,12 +22,6 @@
       "cpuGeneration": "amd-ryzen-8000",
       "support": "biosUpdate",
       "minBiosNote": "AMD 官方：『A BIOS update may be required for Ryzen 8000 and 9000 series processors on 600 series boards.』（與 B650 × amd-ryzen-9000 同一句原文；2026-11-10 amd.com 逾時，沿用 2026-11-09 驗證的原文）。最低版本依主機板而異",
-      "boardOverrides": {
-        "asus-tuf-gaming-b650m-plus-wifi": {
-          "minBios": "1807（8300G～8700G、8400F、8700F 等 8000 系列全部）",
-          "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/helpdesk_cpu/"
-        }
-      },
       "sourceUrl": "https://www.amd.com/en/products/processors/chipsets/am5.html",
       "verifiedAt": "2026-11-09"
     },
@@ -48,12 +30,6 @@
       "cpuGeneration": "amd-ryzen-9000",
       "support": "native",
       "minBiosNote": "AMD 未明文，依 800 系列為 Ryzen 9000 同期平台判斷。注意：個別較晚推出的型號在主機板清單上仍需新版 BIOS（見 boardOverrides）",
-      "boardOverrides": {
-        "asus-tuf-gaming-b850-plus-wifi": {
-          "minBios": "9600、9600X、9700X、9900X、9950X：all；9500F、9700F、PRO 9645/9745/9945：1063；PRO 9655/9755/9955/9965：1066",
-          "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850-plus-wifi/helpdesk_cpu/"
-        }
-      },
       "sourceUrl": "https://www.amd.com/en/products/processors/chipsets/am5.html",
       "verifiedAt": "2026-11-09"
     },
@@ -62,12 +38,6 @@
       "cpuGeneration": "amd-ryzen-9000-x3d",
       "support": "native",
       "minBiosNote": "AMD 未明文，依 800 系列為 Ryzen 9000 同期平台判斷；AMD 將 X3D 型號列為 Ryzen 9000 Series，比照 amd-ryzen-9000。注意：9850X3D、9950X3D2 等後出型號在主機板清單上仍需新版 BIOS（見 boardOverrides）",
-      "boardOverrides": {
-        "asus-tuf-gaming-b850-plus-wifi": {
-          "minBios": "9800X3D、9900X3D、9950X3D：all；9850X3D、9950X3D2、PRO 9755X3D/9965X3D：1066",
-          "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850-plus-wifi/helpdesk_cpu/"
-        }
-      },
       "sourceUrl": "https://www.amd.com/en/products/processors/chipsets/am5.html",
       "verifiedAt": "2026-11-09"
     },
@@ -109,6 +79,120 @@
       "support": "biosUpdate",
       "minBiosNote": "AMD 官方新聞稿：『AMD 500 series motherboards are ready for AMD Ryzen 5000 Series desktop processors with a simple BIOS update.』最低版本依主機板而異",
       "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/972/amd-launches-amd-ryzen-5000-series-desktop-processors-the-fastest-gaming-cpus-in-the-world",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "chipset": "Z890",
+      "cpuGeneration": "intel-core-ultra-200s",
+      "support": "native",
+      "minBiosNote": "Intel 未明文，依 800 系列為 Ultra 200S 同期平台判斷（使用者決策 2026-11-10）",
+      "sourceUrl": "https://www.intel.com/content/www/us/en/support/articles/000099798/processors.html",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "chipset": "B860",
+      "cpuGeneration": "intel-core-ultra-200s",
+      "support": "native",
+      "minBiosNote": "Intel 未明文，依 800 系列為 Ultra 200S 同期平台判斷（使用者決策 2026-11-10）",
+      "sourceUrl": "https://www.intel.com/content/www/us/en/support/articles/000099798/processors.html",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "chipset": "X370",
+      "cpuGeneration": "amd-ryzen-5000-x3d",
+      "support": "unsupported",
+      "minBiosNote": "AMD 官方 Ryzen 7 5700X3D 支援晶片組為 X570、X470、B550、B450、A520，未列此晶片組（使用者提供，docs/sources/amd-2026-11-10.md）",
+      "sourceUrl": "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-5000-series/amd-ryzen-7-5700x3d.html",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "chipset": "B350",
+      "cpuGeneration": "amd-ryzen-5000-x3d",
+      "support": "unsupported",
+      "minBiosNote": "AMD 官方 Ryzen 7 5700X3D 支援晶片組為 X570、X470、B550、B450、A520，未列此晶片組（使用者提供，docs/sources/amd-2026-11-10.md）",
+      "sourceUrl": "https://www.amd.com/en/support/downloads/drivers.html/processors/ryzen/ryzen-5000-series/amd-ryzen-7-5700x3d.html",
+      "verifiedAt": "2026-11-10"
+    }
+  ],
+  "boardOverrides": [
+    {
+      "motherboardId": "asus-tuf-gaming-b650m-plus-wifi",
+      "cpuId": "amd-ryzen-5-9600x",
+      "support": "biosUpdate",
+      "minBios": "2613",
+      "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/helpdesk_cpu/",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "asus-tuf-gaming-b650m-plus-wifi",
+      "cpuId": "amd-ryzen-7-9800x3d",
+      "support": "biosUpdate",
+      "minBios": "2613",
+      "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/helpdesk_cpu/",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "asus-tuf-gaming-b650m-plus-wifi",
+      "cpuId": "amd-ryzen-7-9850x3d",
+      "support": "biosUpdate",
+      "minBios": "3263",
+      "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/helpdesk_cpu/",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "asus-tuf-gaming-b650m-plus-wifi",
+      "cpuId": "amd-ryzen-9-9950x3d2-dual-edition",
+      "support": "biosUpdate",
+      "minBios": "3263",
+      "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/helpdesk_cpu/",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "asus-tuf-gaming-b650m-plus-wifi",
+      "cpuId": "amd-ryzen-5-8600g",
+      "support": "biosUpdate",
+      "minBios": "1807",
+      "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/helpdesk_cpu/",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "asus-tuf-gaming-b850-plus-wifi",
+      "cpuId": "amd-ryzen-5-9600x",
+      "support": "native",
+      "minBios": "all",
+      "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850-plus-wifi/helpdesk_cpu/",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "asus-tuf-gaming-b850-plus-wifi",
+      "cpuId": "amd-ryzen-7-9800x3d",
+      "support": "native",
+      "minBios": "all",
+      "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850-plus-wifi/helpdesk_cpu/",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "asus-tuf-gaming-b850-plus-wifi",
+      "cpuId": "amd-ryzen-7-9850x3d",
+      "support": "biosUpdate",
+      "minBios": "1066",
+      "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850-plus-wifi/helpdesk_cpu/",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "asus-tuf-gaming-b850-plus-wifi",
+      "cpuId": "amd-ryzen-9-9950x3d2-dual-edition",
+      "support": "biosUpdate",
+      "minBios": "1066",
+      "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850-plus-wifi/helpdesk_cpu/",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "asus-tuf-gaming-b850-plus-wifi",
+      "cpuId": "amd-ryzen-5-8600g",
+      "support": "native",
+      "minBios": "all",
+      "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850-plus-wifi/helpdesk_cpu/",
       "verifiedAt": "2026-11-10"
     }
   ]

@@ -113,5 +113,8 @@ npm test
 | 2026-11-10 | 之後的開發直接在 `main` 進行 | |
 | 2026-11-10 | AMD 官方規格來源：amd.com 對自動讀取一律逾時，改由使用者在對話中請 Claude 透過使用者自己的 Chrome 開啟 AMD 官方頁讀取並提供數值；sourceUrl 填 AMD 官方網址，notes 註明「規格由使用者提供，取自 AMD 官方頁面（使用者瀏覽器讀取）」，完整數值存 `docs/sources/amd-2026-11-10.md`。專案的程式與 Agent 不直接讀 amd.com | 沒列到的欄位留空 |
 | 2026-11-10 | CPU 新增 `supportedChipsets`（AMD Supporting Chipsets） | 晶片組不在清單內 → R27 unsupported |
+| 2026-11-10 | BIOS：Z890 / B860 × Ultra 200S 記為原生支援，minBiosNote「Intel 未明文，依 800 系列為 Ultra 200S 同期平台判斷」；Z890 / B860 × Ultra 200S Plus 維持不填（R27 Unknown） | |
+| 2026-11-10 | BIOS：主機板層級優先於晶片組層級。主機板官方 CPU 支援清單明確寫了某顆 CPU 的最低 BIOS 時，記在 `boardOverrides`（逐顆 CPU，`{minBios, sourceUrl}`），R27 以它為準 | BIOS 表 schemaVersion 3 |
+| 2026-11-10 | BIOS：CPU 的支援晶片組清單可判定 unsupported（晶片組不在清單內）；在清單內不代表不用更新 BIOS，native / biosUpdate 仍依原規則 | |
 | 2026-11-10 | 新增 Playwright 為 devDependency（使用者要求） | 截圖驗證用 |
 | （待定） | 相容性門檻數值 | 見 `docs/compatibility-spec.md` §0.2 |

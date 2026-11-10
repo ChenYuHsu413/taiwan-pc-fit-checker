@@ -298,35 +298,36 @@ M.2 數量 = `m2Slots.length`（只在 `m2Slots` 有填時才有意義）。
 
 同型號不同容量尺寸不同時，**id 要包含容量**（例如 `samsung-9100-pro-heatsink-2tb`）。
 
-## 4. BIOS 支援規則表（`data/rules/bios-support.json`，schemaVersion 2）
+## 4. BIOS 支援規則表（`data/rules/bios-support.json`，schemaVersion 3）
 
 ```json
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "entries": [
-    {
-      "chipset": "B650",
-      "cpuGeneration": "amd-ryzen-9000",
-      "support": "biosUpdate",
-      "minBiosNote": "官方通則原文",
-      "boardOverrides": { "<motherboard-id>": { "minBios": "2613", "sourceUrl": "https://<該板 CPU 支援清單>" } },
-      "sourceUrl": "https://<AMD / Intel 官方頁>",
-      "verifiedAt": "YYYY-MM-DD"
-    }
+    { "chipset": "B650", "cpuGeneration": "amd-ryzen-9000", "support": "biosUpdate",
+      "minBiosNote": "官方通則原文", "sourceUrl": "https://<AMD / Intel 官方頁>", "verifiedAt": "YYYY-MM-DD" }
+  ],
+  "boardOverrides": [
+    { "motherboardId": "asus-tuf-gaming-b650m-plus-wifi", "cpuId": "amd-ryzen-5-9600x",
+      "support": "biosUpdate", "minBios": "2613", "sourceUrl": "https://<該板 CPU 支援清單>", "verifiedAt": "YYYY-MM-DD" }
   ]
 }
 ```
 
+**R27 判斷順序**：
+1. `boardOverrides`（主機板層級）：主機板官方 CPU 支援清單明確寫了這顆 CPU 的最低 BIOS → 以它為準。`minBios` 為 `all`（或第一版即支援）→ `native`；否則 `biosUpdate`
+2. CPU 的 `supportedChipsets`：主機板晶片組不在清單內 → 不支援（清單只代表支援，不代表不用更新 BIOS）
+3. `entries`（晶片組層級）：AMD / Intel 官方通則
+4. 都沒有 → unknown
+
 | 欄位 | 說明 |
 |---|---|
-| `chipset` | 與 `motherboard.chipset` 完全一致（B650E ≠ B650） |
-| `cpuGeneration` | 與 `cpu.generation` 完全一致 |
-| `support` | `native` / `biosUpdate` / `unsupported`，**以晶片組為準**（AMD / Intel 官方通則） |
-| `minBiosNote` | 官方通則原文或判斷依據 |
-| `boardOverrides` | 個別主機板的最低 BIOS 版本 `{minBios, sourceUrl}`，出自主機板廠 CPU 支援清單；**不覆寫等級**。同世代內不同 CPU 型號要的版本不同時，minBios 寫成文字（例：`9600X 等 2613；9850X3D 3263`） |
+| `entries[].chipset` / `cpuGeneration` | 與 `motherboard.chipset`（B650E ≠ B650）、`cpu.generation` 完全一致 |
+| `entries[].support` | `native` / `biosUpdate` / `unsupported` |
+| `entries[].minBiosNote` | 官方通則原文或判斷依據 |
+| `boardOverrides[].motherboardId` / `cpuId` | 對應零件 id（載入時檢查存在） |
+| `boardOverrides[].support` / `minBios` | 清單原文版本 |
 | `sourceUrl` / `verifiedAt` | 必填 |
-
-查不到對應的 entry → R27 回傳 `unknown`。不做逐顆 CPU 的最低版本表。
 
 ## 5. 顯示晶片參考表（`data/reference/gpu-chips.json`）
 

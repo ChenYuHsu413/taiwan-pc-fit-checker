@@ -21,9 +21,9 @@ import type {
   UncheckedItem,
 } from "@/types/parts";
 import type { ConditionalMm, PcieGen } from "@/lib/schema/common";
-import type { BiosSupportEntry } from "@/lib/schema/biosSupport";
+import type { BiosSupportTable } from "@/lib/schema/biosSupport";
 import type { GpuChip } from "@/lib/schema/gpuChips";
-import { biosSupportEntries, gpuChips } from "@/lib/data/catalog";
+import { biosSupport, gpuChips } from "@/lib/data/catalog";
 import { defaultEntry, otherConditions } from "@/lib/data/conditional";
 import { MSG } from "./messages";
 import { coolerHeightLimitMm, gpuLengthLimit } from "./limits";
@@ -31,11 +31,11 @@ import { RULES, UNCHECKED_RULES, type RuleId } from "./rules";
 
 /** 規則用到的參考表（測試可注入） */
 export interface RuleRefs {
-  bios: readonly BiosSupportEntry[];
+  bios: Pick<BiosSupportTable, "entries" | "boardOverrides">;
   gpuChips: ReadonlyMap<string, GpuChip>;
 }
 
-const DEFAULT_REFS: RuleRefs = { bios: biosSupportEntries, gpuChips };
+const DEFAULT_REFS: RuleRefs = { bios: biosSupport, gpuChips };
 
 type RuleOutput = CompatibilityResult | UncheckedItem | null;
 
@@ -421,31 +421,41 @@ function r27(s: BuildSelection, refs: RuleRefs): RuleOutput {
   const { cpu, motherboard: mb } = s;
   if (!cpu || !mb) return null;
   if (cpu.socket !== mb.socket) return null; // 腳位不同已由 R22 判定
-  const entry = refs.bios.find((e) => e.chipset === mb.chipset && e.cpuGeneration === cpu.generation);
-  const link = mb.cpuSupportListUrl ? { label: MSG.R27.linkLabel, url: mb.cpuSupportListUrl } : undefined;
-  if (!entry) return result("R27", "unknown", MSG.R27.notInTable, { link });
-  const conditions = entry.minBiosNote ? [`官方說明：${entry.minBiosNote}`] : [];
-  const override = entry.boardOverrides?.[mb.id];
-  if (override) conditions.unshift(MSG.R27.minBios(override.minBios));
-  const boardLink = link ?? (override ? { label: MSG.R27.linkLabel, url: override.sourceUrl } : undefined);
+  const listLink = mb.cpuSupportListUrl ? { label: MSG.R27.linkLabel, url: mb.cpuSupportListUrl } : undefined;
+  const updateMsg = (subject: string) =>
+    mb.biosFlashback === true
+      ? MSG.R27.updateFlashback(subject)
+      : mb.biosFlashback === false
+      ? MSG.R27.updateNoFlashback(subject)
+      : MSG.R27.updateFlashbackUnknown(subject);
 
+  // 1. 主機板層級：官方 CPU 支援清單寫了這顆 CPU 的最低 BIOS
+  const board = refs.bios.boardOverrides.find((o) => o.motherboardId === mb.id && o.cpuId === cpu.id);
+  if (board) {
+    const link = listLink ?? { label: MSG.R27.linkLabel, url: board.sourceUrl };
+    return board.support === "native"
+      ? result("R27", "safe", MSG.R27.boardNative(board.minBios), { link })
+      : result("R27", "warning", updateMsg(MSG.R27.boardSubject), {
+          conditions: [MSG.R27.boardMinBios(board.minBios)],
+          link,
+        });
+  }
+
+  // 2. CPU 官方支援晶片組清單：晶片組不在清單內 → 不支援
+  if (cpu.supportedChipsets && !cpu.supportedChipsets.includes(mb.chipset))
+    return result("R27", "incompatible", MSG.R27.chipsetNotListed(mb.chipset, cpu.supportedChipsets), { link: listLink });
+
+  // 3. 晶片組層級
+  const entry = refs.bios.entries.find((e) => e.chipset === mb.chipset && e.cpuGeneration === cpu.generation);
+  if (!entry) return result("R27", "unknown", MSG.R27.notInTable, { link: listLink });
+  const conditions = entry.minBiosNote ? [`官方說明：${entry.minBiosNote}`] : [];
   switch (entry.support) {
     case "native":
-      return result("R27", withConditions("safe", conditions), MSG.R27.native(mb.chipset), {
-        conditions,
-        link: boardLink,
-      });
+      return result("R27", withConditions("safe", conditions), MSG.R27.native(mb.chipset), { conditions, link: listLink });
     case "unsupported":
-      return result("R27", "incompatible", MSG.R27.unsupported(mb.chipset), { conditions, link: boardLink });
-    case "biosUpdate": {
-      const msg =
-        mb.biosFlashback === true
-          ? MSG.R27.updateFlashback(mb.chipset)
-          : mb.biosFlashback === false
-          ? MSG.R27.updateNoFlashback(mb.chipset)
-          : MSG.R27.updateFlashbackUnknown(mb.chipset);
-      return result("R27", "warning", msg, { conditions, link: boardLink });
-    }
+      return result("R27", "incompatible", MSG.R27.unsupported(mb.chipset), { conditions, link: listLink });
+    case "biosUpdate":
+      return result("R27", "warning", updateMsg(MSG.R27.chipsetSubject(mb.chipset)), { conditions, link: listLink });
   }
 }
 

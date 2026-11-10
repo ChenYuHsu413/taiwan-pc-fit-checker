@@ -54,10 +54,13 @@
 |---|---|---|
 | B-01 | B850 × Ryzen 8000、X870E × Ryzen 8000 | AMD 只寫 600 系列可能需更新，沒提 800 系列 × 8000 → **不填**（R27 Unknown） |
 | B-02 | B550 × Ryzen 5000X3D | AMD 新聞稿沒提 500 系列；AM4 頁逾時 → **不填** |
-| B-03 | Z890 / B860 × Core Ultra 200S | Intel 000099798 只寫是新腳位新晶片組，沒有 BIOS 說明 → **不填**。是否比照決策 9 記為 native 需要你決定 |
-| B-04 | Z890 / B860 × Core Ultra 200S Plus | Intel 寫「all existing Intel 800 Series motherboards will support」，未說是否要更新 BIOS → **不填** |
-| B-05 | 800 系列（B850 / X870E）× Ryzen 9000 / 9000X3D 依決策 9 記 native，但 TUF B850-PLUS 官方清單上 9500F / 9700F 需 1063、9850X3D / 9950X3D2 需 1066 | 維持 native；boardOverrides 寫入這些版本，R27 會以 Info 顯示 |
+| B-03 | ✅ **已解決（2026-11-10，使用者決策）**：記為 native，minBiosNote 註明 Intel 未明文。原記錄：Z890 / B860 × Core Ultra 200S | Intel 000099798 只寫是新腳位新晶片組，沒有 BIOS 說明 → **不填**。是否比照決策 9 記為 native 需要你決定 |
+| B-04 | 使用者決策：維持不填（R27 Unknown）。Z890 / B860 × Core Ultra 200S Plus | Intel 寫「all existing Intel 800 Series motherboards will support」，未說是否要更新 BIOS → **不填** |
+| B-05 | ✅ **已解決（2026-11-10）**：主機板層級優先。TUF B850-PLUS 清單上 9850X3D / 9950X3D2 需 1066 → boardOverrides 記 biosUpdate，R27 顯示 Warning；9600X / 9800X3D / 8600G 為 all → native |
 | B-06 | X870E × Ryzen 9000 依據為 AMD 新聞稿（ir.amd.com 1202：Designed to seamlessly integrate with AMD Ryzen 9000 Series） | native |
+| B-07 | 主機板層級 CPU 支援清單只有兩張 ASUS TUF 有 `cpuSupportListUrl`（B650M-PLUS、B850-PLUS）；其他 AM5 / AM4 主機板（ROG STRIX B850-I、ROG STRIX X870E-E、ROG CROSSHAIR X870E EXTREME、MSI MAG B650 TOMAHAWK、ASRock B850M Pro RS WiFi、GIGABYTE B650 AORUS ELITE AX、ASRock B550M Pro4）沒有清單網址 | 這些主機板只依晶片組層級判斷。ASRock B550M Pro4 試讀 asrock.com 的 CPU 清單頁回傳空白，B550 × Ryzen 5000X3D 晶片組層級維持不填（R27 Unknown） |
+| B-08 | X370 / B350 × Ryzen 5000X3D 記為 unsupported，依據是 5700X3D 的官方支援晶片組清單（世代內只收這一顆） | 本專案沒有 X370 / B350 主機板，實際不會觸發；R27 也會直接用 CPU 的 supportedChipsets 判斷 |
+| B-09 | B850 × Ryzen 8000、X870E × Ryzen 8000 晶片組層級仍沒有依據（B-01） | 有主機板清單時（TUF B850-PLUS：8600G all）以清單為準，其他仍 Unknown |
 
 ## 規則
 

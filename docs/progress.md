@@ -12,13 +12,11 @@
 
 - 第零段：完成
 - 第一段：完成
-- 第二段：進行中
+- 第二段：完成
 
 ### 下一步
 
-1. 第零段 Gate → commit → push main
-2. 第一段：docs/sources/amd-2026-11-10.md、cpu.json 新增 7 顆、gpu-chips.json 重建 AMD 兩筆、9060 XT 記憶體版本判斷
-3. 第二段：BIOS 表與 R27
+- 無（本輪完成）。待使用者處理 pending.md 中未解決的項目
 
 ### 未 commit 的變更
 

@@ -91,12 +91,17 @@ const REFS: RuleRefs = {
       { id: "chip-a", vendor: "NVIDIA", name: "A", pcieGen: 5, tbpW: 300, recommendedPsuW: 750, sourceUrl: "https://x.test/a", verifiedAt: "2026-11-10" },
     ],
   ]),
-  bios: [
-    { chipset: "B650", cpuGeneration: "amd-ryzen-9000", support: "biosUpdate", sourceUrl: "https://x.test/b", verifiedAt: "2026-11-10",
-      boardOverrides: { mb: { minBios: "2613", sourceUrl: "https://x.test/mb" } } },
-    { chipset: "B850", cpuGeneration: "amd-ryzen-9000", support: "native", sourceUrl: "https://x.test/b", verifiedAt: "2026-11-10" },
-    { chipset: "A520", cpuGeneration: "amd-ryzen-9000", support: "unsupported", sourceUrl: "https://x.test/b", verifiedAt: "2026-11-10" },
-  ],
+  bios: {
+    entries: [
+      { chipset: "B650", cpuGeneration: "amd-ryzen-9000", support: "biosUpdate", sourceUrl: "https://x.test/b", verifiedAt: "2026-11-10" },
+      { chipset: "B850", cpuGeneration: "amd-ryzen-9000", support: "native", sourceUrl: "https://x.test/b", verifiedAt: "2026-11-10" },
+      { chipset: "A520", cpuGeneration: "amd-ryzen-9000", support: "unsupported", sourceUrl: "https://x.test/b", verifiedAt: "2026-11-10" },
+    ],
+    boardOverrides: [
+      { motherboardId: "mb-list", cpuId: "cpu", support: "biosUpdate", minBios: "2613", sourceUrl: "https://x.test/mb", verifiedAt: "2026-11-10" },
+      { motherboardId: "mb-native", cpuId: "cpu", support: "native", minBios: "all", sourceUrl: "https://x.test/mb", verifiedAt: "2026-11-10" },
+    ],
+  },
 };
 
 function sel(o: Partial<BuildSelection>): BuildSelection {
@@ -287,15 +292,24 @@ describe("R26 記憶體速度", () => {
 
 describe("R27 BIOS", () => {
   it("safe：原生支援", () => expect(status({ cpu: cpu(), motherboard: mb({ chipset: "B850" }) }, "R27")).toBe("safe"));
-  it("warning：需更新 BIOS，訊息依 Flashback 不同，附最低版本與連結", () => {
+  it("warning：晶片組層級需更新 BIOS，訊息依 Flashback 不同，附 CPU 支援清單連結", () => {
     const a = run({ cpu: cpu(), motherboard: mb({ biosFlashback: true, cpuSupportListUrl: "https://x.test/list" }) }, "R27");
     const b = run({ cpu: cpu(), motherboard: mb({ biosFlashback: false }) }, "R27");
     expect(a?.status).toBe("warning");
     expect(a?.message).not.toBe(b?.message);
-    expect(a?.conditions?.[0]).toContain("2613");
     expect(a?.link?.url).toBe("https://x.test/list");
   });
-  it("incompatible", () => expect(status({ cpu: cpu(), motherboard: mb({ chipset: "A520" }) }, "R27")).toBe("incompatible"));
+  it("主機板層級優先：清單寫最低 BIOS → warning 並列出版本", () => {
+    const r = run({ cpu: cpu(), motherboard: mb({ id: "mb-list", chipset: "B850" }) }, "R27"); // 晶片組層級是 native，仍以主機板清單為準
+    expect(r?.status).toBe("warning");
+    expect(r?.conditions?.[0]).toContain("2613");
+    expect(r?.link?.url).toBe("https://x.test/mb");
+  });
+  it("主機板層級優先：清單寫 all → safe（即使晶片組層級需更新）", () =>
+    expect(status({ cpu: cpu(), motherboard: mb({ id: "mb-native", chipset: "B650" }) }, "R27")).toBe("safe"));
+  it("incompatible：晶片組層級 unsupported", () => expect(status({ cpu: cpu(), motherboard: mb({ chipset: "A520" }) }, "R27")).toBe("incompatible"));
+  it("incompatible：晶片組不在 CPU 官方支援晶片組清單內", () =>
+    expect(status({ cpu: cpu({ supportedChipsets: ["B650", "X670"] }), motherboard: mb({ chipset: "B850" }) }, "R27")).toBe("incompatible"));
   it("unknown：表中沒有", () => expect(status({ cpu: cpu({ generation: "amd-ryzen-8000" }), motherboard: mb() }, "R27")).toBe("unknown"));
 });
 

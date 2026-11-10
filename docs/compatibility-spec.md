@@ -41,7 +41,7 @@
 | R17 / R20 / R21 | 尚未檢查 | 機殼內部距離、直立支架、底部風扇距離官方不公開 |
 | R22–R25 | 實作 | 依 §4 |
 | R26 | 實作 | 有 `memorySpeedTable` 且 RAM 有 rank 時依「每通道條數 × rank」查表，否則用 `officialMemorySpeedMts`；超出 CPU / 主機板或需 XMP/EXPO → info |
-| R27 | 實作 | 依 BIOS 表（晶片組 × 世代）；`biosUpdate` 訊息依 `biosFlashback` true / false / 缺值不同；`boardOverrides` 有最低版本時列出；有 `cpuSupportListUrl` 時附連結 |
+| R27 | 實作 | 判斷順序：主機板官方 CPU 清單（`boardOverrides`）→ CPU 支援晶片組（不在清單 → incompatible）→ 晶片組 × 世代（BIOS 表）→ unknown；需更新 BIOS 的訊息依 `biosFlashback` true / false / 缺值不同；有 `cpuSupportListUrl` 時附連結 |
 | R28 | 實作 | 依 §4 |
 | R29 | 實作 | 預設顯卡插 `pcieX16Slots[0]`；套用 laneSharing（CPU 世代觸發、M.2 佔用觸發，含 allOf）；顯卡 PCIe 缺值用晶片表；世代或通道數不同一律 info |
 | R30–R32 | 實作 | M.2 貪婪分配（世代高的 SSD 先挑；先挑能全速的最低世代槽）；CPU 世代停用的槽不列入可用槽 |

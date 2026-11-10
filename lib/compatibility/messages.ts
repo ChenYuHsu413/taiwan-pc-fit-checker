@@ -147,13 +147,19 @@ export const MSG = {
   },
   R27: {
     native: (chipset: string) => `${chipset} 晶片組原生支援此 CPU 世代。`,
-    updateFlashback: (chipset: string) =>
-      `${chipset} 晶片組搭配此 CPU 世代可能需要更新 BIOS。此主機板支援免 CPU 更新 BIOS（Flashback 類功能），可在裝 CPU 前用 USB 隨身碟更新。`,
-    updateNoFlashback: (chipset: string) =>
-      `${chipset} 晶片組搭配此 CPU 世代可能需要更新 BIOS。此主機板沒有免 CPU 更新功能，需要先用舊 CPU 開機更新，或請店家代刷。`,
-    updateFlashbackUnknown: (chipset: string) =>
-      `${chipset} 晶片組搭配此 CPU 世代可能需要更新 BIOS。官方未說明此主機板是否支援免 CPU 更新，請確認或請店家代刷。`,
-    minBios: (v: string) => `此主機板官方 CPU 支援清單的最低 BIOS：${v}`,
+    /** subject：「B650 晶片組搭配此 CPU 世代」或「依主機板官方 CPU 支援清單，此 CPU」 */
+    updateFlashback: (subject: string) =>
+      `${subject}可能需要更新 BIOS。此主機板支援免 CPU 更新 BIOS（Flashback 類功能），可在裝 CPU 前用 USB 隨身碟更新。`,
+    updateNoFlashback: (subject: string) =>
+      `${subject}可能需要更新 BIOS。此主機板沒有免 CPU 更新功能，需要先用舊 CPU 開機更新，或請店家代刷。`,
+    updateFlashbackUnknown: (subject: string) =>
+      `${subject}可能需要更新 BIOS。官方未說明此主機板是否支援免 CPU 更新，請確認或請店家代刷。`,
+    chipsetSubject: (chipset: string) => `${chipset} 晶片組搭配此 CPU 世代`,
+    boardSubject: "依主機板官方 CPU 支援清單，此 CPU ",
+    boardMinBios: (v: string) => `主機板官方 CPU 支援清單：此 CPU 自 BIOS ${v} 起支援，出廠 BIOS 較舊時需要更新。`,
+    boardNative: (v: string) => `主機板官方 CPU 支援清單：此 CPU 自 BIOS「${v}」即支援（不需要更新 BIOS）。`,
+    chipsetNotListed: (chipset: string, list: string[]) =>
+      `CPU 官方支援晶片組為 ${list.join("、")}，不含 ${chipset}，此主機板不支援這顆 CPU。`,
     unsupported: (chipset: string) => `${chipset} 晶片組官方不支援此 CPU 世代。`,
     notInTable: "BIOS 規則表沒有此晶片組與 CPU 世代的官方依據，無法判斷。",
     linkLabel: "官方 CPU 支援清單",

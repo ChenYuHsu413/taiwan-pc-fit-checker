@@ -21,7 +21,7 @@ import psuPrices from "@/data/prices/psu.json";
 import m2SsdPrices from "@/data/prices/m2Ssd.json";
 import biosSupportData from "@/data/rules/bios-support.json";
 import gpuChipsData from "@/data/reference/gpu-chips.json";
-import { biosSupportTableSchema, type BiosSupportEntry } from "@/lib/schema/biosSupport";
+import { biosSupportTableSchema, type BiosSupportTable } from "@/lib/schema/biosSupport";
 import { gpuChipTableSchema, type GpuChip } from "@/lib/schema/gpuChips";
 import type { PartByCategory, PartCategory, PriceEntry } from "@/lib/schema/parts";
 import {
@@ -64,7 +64,7 @@ type Catalog = { [K in PartCategory]: PartByCategory[K][] };
 function load(): {
   parts: Catalog;
   prices: Map<string, PriceEntry>;
-  bios: BiosSupportEntry[];
+  bios: Pick<BiosSupportTable, "entries" | "boardOverrides">;
   gpuChips: Map<string, GpuChip>;
 } {
   const problems: string[] = [];
@@ -90,11 +90,11 @@ function load(): {
   const bios = biosSupportTableSchema.safeParse(RAW_BIOS_SUPPORT);
   if (!bios.success) problems.push(`[rules/bios-support] ${bios.error.message}`);
   const mbIds = new Set(parts.motherboard.map((m) => m.id));
-  bios.data?.entries.forEach((e) =>
-    Object.keys(e.boardOverrides ?? {}).forEach((id) => {
-      if (!mbIds.has(id)) problems.push(`[rules/bios-support] boardOverrides 找不到主機板 id：${id}`);
-    })
-  );
+  const cpuIds = new Set(parts.cpu.map((c) => c.id));
+  bios.data?.boardOverrides.forEach((o) => {
+    if (!mbIds.has(o.motherboardId)) problems.push(`[rules/bios-support] boardOverrides 找不到主機板 id：${o.motherboardId}`);
+    if (!cpuIds.has(o.cpuId)) problems.push(`[rules/bios-support] boardOverrides 找不到 CPU id：${o.cpuId}`);
+  });
 
   const chips = gpuChipTableSchema.safeParse(RAW_GPU_CHIPS);
   if (!chips.success) problems.push(`[reference/gpu-chips] ${chips.error.message}`);
@@ -107,13 +107,13 @@ function load(): {
   if (problems.length) {
     throw new Error(`內建資料驗證失敗：\n${problems.join("\n")}`);
   }
-  return { parts, prices, bios: bios.data?.entries ?? [], gpuChips };
+  return { parts, prices, bios: { entries: bios.data?.entries ?? [], boardOverrides: bios.data?.boardOverrides ?? [] }, gpuChips };
 }
 
 const loaded = load();
 
 export const catalog: Catalog = loaded.parts;
-export const biosSupportEntries: BiosSupportEntry[] = loaded.bios;
+export const biosSupport: Pick<BiosSupportTable, "entries" | "boardOverrides"> = loaded.bios;
 export const gpuChips: ReadonlyMap<string, GpuChip> = loaded.gpuChips;
 
 export function getPrice(partId: string): PriceEntry | undefined {

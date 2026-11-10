@@ -2,7 +2,14 @@
 
 ## 專案目標
 
-台灣版 PC 組裝空間模擬器：使用者選擇機殼、主機板、顯卡、散熱器、電源等零件後，依據**真實官方規格**判斷空間與平台相容性（Safe / Info / Tight / Warning / Incompatible / Unknown），並以 3D/2D 呈現空間關係。目前正從 MVP 骨架（mock 資料）改版為真正可用的工具，進度請見 `docs/roadmap.md`。
+台灣版 PC 組裝空間模擬器：使用者選擇機殼、主機板、顯卡、散熱器、電源等零件後，依據**真實官方規格**判斷空間與平台相容性（Safe / Info / Tight / Warning / Incompatible / Unknown），並以 3D/2D 呈現空間關係。
+
+## 目前狀態（2026-11-10）
+
+- `revamp` 分支已達可上線狀態，**待使用者確認後合併到 `main`**
+- 已完成：Phase 0（盤點）、Phase 1（schema / 資料搬遷）、Phase 2a（試填）、Phase 2b（schema 定案 + 71 筆官方資料、刪除 mock）、Phase 3（相容性規則重寫 + 測試）、上線前收尾（3D/2D 改讀新資料、README、build 驗證）
+- 價格：本輪不填，UI 顯示「無參考價」
+- 所有待確認事項：`docs/pending.md`；長任務進度：`docs/progress.md`；原計畫：`docs/roadmap.md`
 
 ## 最高原則
 
@@ -26,6 +33,8 @@
 - `docs/data-strategy.md` — 資料來源、價格、檔案格式
 - `docs/schema.md` — 資料 schema 逐欄說明（zod，`lib/schema/`）
 - `docs/roadmap.md` — 分階段計畫
+- `docs/pending.md` — 待確認事項（資料、規則、BIOS 表、其他）
+- `docs/progress.md` — 長任務進度
 
 ## 單位約定
 
@@ -47,7 +56,7 @@ npm test
 
 沒通過就不要 commit，並回報錯誤內容。
 
-**push 規則（2026-11-10 起）**：每段通過 Gate 並 commit 後，push 到 `revamp` 分支。**不可 push 到 `main`，也不可 merge 進 `main`**（等使用者確認）。
+**push 規則**：`revamp` 已達可上線狀態，待使用者確認後合併到 `main`。在使用者確認前，commit 只 push 到 `revamp`，不可 push 或 merge 進 `main`。
 
 ## 工作原則
 
@@ -97,4 +106,6 @@ npm test
 | 2026-11-10 | 新增顯示晶片參考表 `data/reference/gpu-chips.json`（只用 NVIDIA / AMD 官方頁），板卡廠沒寫的 PCIe / 功耗 / 建議電源由此補 | |
 | 2026-11-10 | 共同欄位新增 `additionalSources[{url, fields[]}]`；官方頁互相矛盾時，規格頁 > PDF 手冊 > 行銷文案，矛盾寫 notes | X1、X2 |
 | 2026-11-10 | 規則狀態：Tight 本輪不實作；Warning 只用在有官方依據時；沒有可靠依據的規則不產生結果，列在「尚未檢查的項目」 | 見 compatibility-spec |
+| 2026-11-10 | 官網擋自動讀取時只改找同原廠的官方 PDF / 下載頁（可用一般 curl 下載），不用瀏覽器自動化、不偽裝 User-Agent | 拿不到就不收，列進 pending |
+| 2026-11-10 | Next.js 維持 14.2.35（已是 14.2.x 最新 patch，無需升級） | |
 | （待定） | 相容性門檻數值 | 見 `docs/compatibility-spec.md` §0.2 |

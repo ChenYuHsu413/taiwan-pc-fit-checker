@@ -38,7 +38,8 @@ export function AioCoolerMesh({
 
   const radiator = useMemo(() => {
     if (mountLocation === "front") {
-      const lengthMm = Math.min(radiatorLengthMm, layout.caseHeightMm * 0.85);
+      // 照實際長度繪製，不截短（裝不下時會畫出超出機殼的樣子）
+      const lengthMm = radiatorLengthMm;
       const args: [number, number, number] = [
         toUnits(totalThicknessMm),
         toUnits(lengthMm),
@@ -51,7 +52,7 @@ export function AioCoolerMesh({
       ];
       return { args, position, axis: "x" as const };
     }
-    const lengthMm = Math.min(radiatorLengthMm, layout.caseDepthMm * 0.55);
+    const lengthMm = radiatorLengthMm;
     const args: [number, number, number] = [
       toUnits(lengthMm),
       toUnits(totalThicknessMm),

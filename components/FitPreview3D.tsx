@@ -4,7 +4,7 @@ import { Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, OrbitControls } from "@react-three/drei";
 import type { BuildSelection, CompatibilityResult, CompatibilityStatus } from "@/types/parts";
-import { computeLayout, toUnits, VISUAL_FALLBACK_MM } from "@/lib/three/layout";
+import { collectFallbacks, computeLayout, FALLBACK_LABEL, toUnits, VISUAL_FALLBACK_MM } from "@/lib/three/layout";
 import { gpuHighPowerConnector, statusOf } from "@/lib/compatibility";
 import { STATUS_SHORT_LABEL } from "@/lib/compatibility/messages";
 import { STATUS_COLOR, NEUTRAL_COLOR } from "@/lib/statusColor";
@@ -17,7 +17,7 @@ import { PsuMesh } from "./three/PsuMesh";
 import { CableBend } from "./three/CableBend";
 
 function Scene({ selection, results }: { selection: BuildSelection; results: CompatibilityResult[] }) {
-  const layout = computeLayout(selection);
+  const layout = computeLayout(selection, results);
   if (!layout) return null;
 
   const { motherboard, gpu, cooler, psu, overrides } = selection;
@@ -27,8 +27,8 @@ function Scene({ selection, results }: { selection: BuildSelection; results: Com
   const coolerStatus = statusOf(results, "R05");
   const radiatorStatus = statusOf(results, "R08");
   const psuStatus = statusOf(results, "R10");
-  const cableStatus: CompatibilityStatus = statusOf(results, "R11") ?? "safe";
-  const connectorStatus = statusOf(results, "R12");
+  // R11（走線）與 R12（供電彎折）尚未檢查，不上狀態色
+  const cableStatus = undefined;
   const gpuLengthMm = gpu ? overrides.gpuLengthMm ?? gpu.lengthMm ?? VISUAL_FALLBACK_MM.gpuLength : 0;
 
   const center: [number, number, number] = [
@@ -76,7 +76,7 @@ function Scene({ selection, results }: { selection: BuildSelection; results: Com
             gpu={gpu}
             gpuLengthMm={gpuLengthMm}
             layout={layout}
-            color={STATUS_COLOR[connectorStatus ?? "warning"]}
+            color={NEUTRAL_COLOR}
           />
         )}
 
@@ -85,7 +85,7 @@ function Scene({ selection, results }: { selection: BuildSelection; results: Com
             cooler={cooler.cooler}
             heightMm={overrides.cpuCoolerHeightMm ?? cooler.cooler.heightMm ?? VISUAL_FALLBACK_MM.coolerHeight}
             layout={layout}
-            color={STATUS_COLOR[coolerStatus ?? "warning"]}
+            color={STATUS_COLOR[coolerStatus ?? "unknown"]}
           />
         )}
 
@@ -94,7 +94,7 @@ function Scene({ selection, results }: { selection: BuildSelection; results: Com
             cooler={cooler.cooler}
             mountLocation={cooler.mountLocation}
             layout={layout}
-            color={STATUS_COLOR[(cooler.mountLocation === "front" ? radiatorStatus : undefined) ?? "safe"]}
+            color={STATUS_COLOR[radiatorStatus ?? "unknown"]}
           />
         )}
 
@@ -120,7 +120,8 @@ export function FitPreview3D({
   selection: BuildSelection;
   results: CompatibilityResult[];
 }) {
-  const layout = useMemo(() => computeLayout(selection), [selection]);
+  const layout = useMemo(() => computeLayout(selection, results), [selection, results]);
+  const fallbacks = useMemo(() => collectFallbacks(selection, results), [selection, results]);
 
   if (!selection.case || !layout) {
     return (
@@ -137,10 +138,15 @@ export function FitPreview3D({
       <div className="mb-1 px-2 pt-1">
         <h2 className="text-sm font-bold">3D Fit Preview 空間示意（可拖曳旋轉／滾輪縮放）</h2>
         <p className="text-[11px] text-white/40">
-          模型為簡化擬真造型，非精密 CAD 比例，僅供快速判斷空間關係。
+          模型為簡化造型，未依真實主機板佈局精確擺位，僅供示意；判斷結果以右側報告為準。
         </p>
+        {fallbacks.length > 0 && (
+          <p className="text-[11px] text-status-tight">
+            示意尺寸：{fallbacks.map((k) => FALLBACK_LABEL[k]).join("、")}（官方未公開，以預設值繪製）
+          </p>
+        )}
       </div>
-      <div style={{ height: "calc(100% - 40px)" }}>
+      <div style={{ height: fallbacks.length ? "calc(100% - 76px)" : "calc(100% - 56px)" }}>
         <Canvas
           frameloop="demand"
           gl={{ preserveDrawingBuffer: true, antialias: true }}
@@ -160,7 +166,7 @@ export function FitPreview3D({
         </Canvas>
       </div>
       <div className="flex flex-wrap gap-3 px-2 pb-1 pt-2 text-[11px] text-white/50">
-        {(Object.keys(STATUS_COLOR) as CompatibilityStatus[]).map((s) => (
+        {(Object.keys(STATUS_COLOR) as CompatibilityStatus[]).filter((s) => s !== "tight").map((s) => (
           <span key={s} className="flex items-center gap-1">
             <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: STATUS_COLOR[s] }} />
             {STATUS_SHORT_LABEL[s]}

@@ -319,10 +319,6 @@ export const gpuSchema = z.object({
   recommendedPsuW: wattSchema.optional(),
   pcieGen: pcieGenSchema.optional(),
   pcieLanes: pcieLanesSchema.optional(),
-  /**
-   * [mock 遺留欄位] 建議側板彎折淨空。沒有官方來源，Phase 3 的 R12 改寫後會移除。
-   */
-  legacyRecommendedSideClearanceMm: mmSchema.optional(),
 });
 
 // ---------- Air cooler ----------

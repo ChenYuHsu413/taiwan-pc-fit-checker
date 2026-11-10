@@ -23,8 +23,8 @@ export function CableBend({
   const connectorY = toUnits(layout.gpuYMm);
   const connectorZ = toUnits(TRAY_THICKNESS_MM + SLOT_GAP_MM) + toUnits(gpu.heightMm ?? VISUAL_FALLBACK_MM.gpuHeight) * 0.7;
 
-  // legacy mock 欄位；缺值時以 10mm 畫示意線（純視覺）
-  const clearance = toUnits(gpu.legacyRecommendedSideClearanceMm ?? 10);
+  // 純視覺示意線（R12 彎折空間尚未檢查，沒有官方數字）
+  const clearance = toUnits(VISUAL_FALLBACK_MM.cableBendVisual);
 
   const points = useMemo(() => {
     // 線材由接頭往上（+Y）並向側板彎折，示意所需的彎折淨空

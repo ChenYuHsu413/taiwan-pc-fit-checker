@@ -1,6 +1,6 @@
 import { DoubleSide } from "three";
 import { toUnits, TRAY_THICKNESS_MM, type SceneLayout } from "@/lib/three/layout";
-import { STATUS_COLOR } from "@/lib/statusColor";
+import { NEUTRAL_COLOR, STATUS_COLOR } from "@/lib/statusColor";
 import type { CompatibilityStatus } from "@/types/parts";
 
 const PANEL_MM = 4; // 鈑金厚度
@@ -12,7 +12,8 @@ export function CaseFrame({
   cableStatus,
 }: {
   layout: SceneLayout;
-  cableStatus: CompatibilityStatus;
+  /** 走線空間（R11）尚未檢查；缺值時不上狀態色 */
+  cableStatus?: CompatibilityStatus;
 }) {
   const depth = toUnits(layout.caseDepthMm);
   const height = toUnits(layout.caseHeightMm);
@@ -126,11 +127,11 @@ export function CaseFrame({
         </mesh>
       ))}
 
-      {/* 走線側鋼板（依走線空間狀態上色提示） */}
+      {/* 走線側鋼板 */}
       <mesh position={[depth / 2, height / 2, zMin]}>
         <planeGeometry args={[depth, height]} />
         <meshStandardMaterial
-          color={STATUS_COLOR[cableStatus]}
+          color={cableStatus ? STATUS_COLOR[cableStatus] : NEUTRAL_COLOR}
           transparent
           opacity={0.28}
           metalness={0.4}

@@ -1,9 +1,41 @@
 import type { BuildSelection, CompatibilityResult, CompatibilityStatus } from "@/types/parts";
-import { STATUS_COLOR } from "@/lib/statusColor";
+import { STATUS_COLOR, NEUTRAL_COLOR } from "@/lib/statusColor";
 import { statusOf } from "@/lib/compatibility";
 import { STATUS_SHORT_LABEL } from "@/lib/compatibility/messages";
-import { VISUAL_FALLBACK_MM } from "@/lib/three/layout";
+import { caseGpuLimitMm, FALLBACK_LABEL, visualMm, type FallbackKey } from "@/lib/three/layout";
 import { defaultMm } from "@/lib/data/conditional";
+
+const colorOf = (s: CompatibilityStatus | undefined) => STATUS_COLOR[s ?? "unknown"];
+
+/** 長度比較條：上限畫成虛線，實際長度超過上限時照實畫出超出的部分（不截短） */
+function LengthBar({
+  label,
+  measured,
+  limit,
+  status,
+}: {
+  label: string;
+  measured: number;
+  limit: number;
+  status: CompatibilityStatus | undefined;
+}) {
+  const scaleMax = Math.max(measured, limit) * 1.05;
+  const pct = (v: number) => `${(v / scaleMax) * 100}%`;
+  return (
+    <div>
+      <div className="mb-1 flex justify-between text-[11px] text-white/60">
+        <span>{label}</span>
+        <span>
+          {measured} mm / 上限 {limit} mm（{measured <= limit ? `餘裕 ${Math.round((limit - measured) * 10) / 10}` : `超出 ${Math.round((measured - limit) * 10) / 10}`} mm）
+        </span>
+      </div>
+      <div className="relative h-5 w-full rounded bg-white/5">
+        <div className="absolute inset-y-0 left-0 rounded" style={{ width: pct(measured), backgroundColor: colorOf(status), opacity: 0.7 }} />
+        <div className="absolute inset-y-[-3px] border-l-2 border-dashed border-white/70" style={{ left: pct(limit) }} />
+      </div>
+    </div>
+  );
+}
 
 export function FitPreview2D({
   selection,
@@ -22,187 +54,81 @@ export function FitPreview2D({
     );
   }
 
-  // --- 主視圖：機殼俯視示意（前 = 左，主機板/背板 = 右）---
-  const caseX = 20;
-  const caseY = 20;
-  const caseW = 400;
-  const caseH = 200;
-  const trayW = 18;
-  const trayX = caseX + caseW - trayW;
+  const used = new Set<FallbackKey>();
+  const bars: { label: string; measured: number; limit: number; status: CompatibilityStatus | undefined }[] = [];
 
-  const caseMaxGpuLength =
-    overrides.caseMaxGpuLengthMm ?? pcCase.gpuLength.unspecifiedMm ?? pcCase.gpuLength.noFrontMm ?? VISUAL_FALLBACK_MM.caseMaxGpuLength;
-  const gpuScale = (caseW - trayW) / caseMaxGpuLength;
+  if (gpu) {
+    bars.push({
+      label: "顯卡長度 GPU length",
+      measured: visualMm(overrides.gpuLengthMm ?? gpu.lengthMm, "gpuLength", used),
+      limit: visualMm(overrides.caseMaxGpuLengthMm ?? caseGpuLimitMm(selection, results), "caseMaxGpuLength", used),
+      status: statusOf(results, "R02"),
+    });
+  }
+  if (cooler.kind === "air") {
+    bars.push({
+      label: "散熱器高度 Cooler height",
+      measured: visualMm(overrides.cpuCoolerHeightMm ?? cooler.cooler.heightMm, "coolerHeight", used),
+      limit: visualMm(
+        overrides.caseMaxCpuCoolerHeightMm ?? defaultMm(pcCase.cpuCoolerHeightLimits),
+        "caseMaxCpuCoolerHeight",
+        used
+      ),
+      status: statusOf(results, "R05"),
+    });
+  }
+  if (psu) {
+    bars.push({
+      label: "電源長度 PSU length",
+      measured: visualMm(overrides.psuLengthMm ?? psu.lengthMm, "psuLength", used),
+      limit: visualMm(defaultMm(pcCase.psu.lengthLimits), "caseMaxPsuLength", used),
+      status: statusOf(results, "R10"),
+    });
+  }
 
-  const gpuLength = gpu ? overrides.gpuLengthMm ?? gpu.lengthMm ?? VISUAL_FALLBACK_MM.gpuLength : undefined;
-  const gpuStatus = statusOf(results, "R02") ?? "warning";
-  const gpuWpx = gpuLength ? gpuLength * gpuScale : 0;
-  const gpuX = trayX - gpuWpx;
-
-  const isFrontAio = cooler.kind === "aio" && cooler.mountLocation === "front";
-  const radiatorStatus = statusOf(results, "R08");
-  const radWpx = isFrontAio
-    ? ((cooler.cooler.radiatorThicknessMm ?? VISUAL_FALLBACK_MM.radiatorThickness) +
-        (cooler.cooler.fanThicknessMm ?? VISUAL_FALLBACK_MM.fanThickness)) *
-      gpuScale
-    : 0;
-
-  const overlapX = Math.max(caseX + radWpx, gpuX);
-  const overlapEnd = Math.min(trayX, caseX + radWpx + gpuWpx);
-  const hasOverlap = isFrontAio && gpu && overlapX < overlapEnd;
-
-  const caseMaxPsuLength = defaultMm(pcCase.psu.lengthLimits) ?? VISUAL_FALLBACK_MM.caseMaxPsuLength;
-  const psuScale = (caseW - trayW) / caseMaxPsuLength;
-  const psuLength = psu ? overrides.psuLengthMm ?? psu.lengthMm ?? VISUAL_FALLBACK_MM.psuLength : undefined;
-  const psuStatus = statusOf(results, "R10") ?? "warning";
-  const psuWpx = psuLength ? psuLength * psuScale : 0;
-  const psuX = trayX - psuWpx;
-
-  const cableSpace = overrides.caseCableManagementSpaceMm ?? pcCase.cableSpaceMm ?? VISUAL_FALLBACK_MM.caseCableSpace;
-  const cableStatus = statusOf(results, "R11") ?? "safe";
-  const cableStripW = Math.min(40, Math.max(4, cableSpace * 1.2));
-
-  const svgW = caseX + caseW + 20 + cableStripW + 20;
-  const svgH = caseY + caseH + 20;
-
-  // --- CPU 散熱器高度量規 ---
-  const coolerHeight = cooler.kind === "air" ? overrides.cpuCoolerHeightMm ?? cooler.cooler.heightMm : undefined;
-  const coolerLimit =
-    overrides.caseMaxCpuCoolerHeightMm ?? defaultMm(pcCase.cpuCoolerHeightLimits) ?? VISUAL_FALLBACK_MM.caseMaxCpuCoolerHeight;
-  const coolerStatus = statusOf(results, "R05");
-  const coolerRatio = coolerHeight ? Math.min(1.15, coolerHeight / coolerLimit) : 0;
+  const radiator = cooler.kind === "aio" ? statusOf(results, "R08") : undefined;
+  const cableSpace = overrides.caseCableManagementSpaceMm ?? pcCase.cableSpaceMm;
 
   return (
     <div className="flex h-full flex-col gap-4 overflow-y-auto rounded-xl border border-white/10 bg-bg-panel p-4">
       <div>
-        <h2 className="mb-1 text-sm font-bold">2D Fit Preview 空間示意（俯視簡化圖）</h2>
-        <p className="mb-2 text-[11px] text-white/40">
-          示意圖為簡化 bounding box，非精密 CAD 比例，僅供快速判斷空間關係。
+        <h2 className="mb-1 text-sm font-bold">2D Fit Preview 尺寸比較</h2>
+        <p className="text-[11px] text-white/40">
+          色條為零件尺寸、虛線為機殼官方上限（依報告採用的條件）。超出上限時色條會越過虛線。
         </p>
-        <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full" style={{ maxHeight: 260 }}>
-          {/* 機殼外框 */}
-          <rect
-            x={caseX}
-            y={caseY}
-            width={caseW}
-            height={caseH}
-            fill="none"
-            stroke="#64748b"
-            strokeWidth={2}
-            rx={6}
-          />
-          <text x={caseX + 4} y={caseY - 6} fill="#94a3b8" fontSize={10}>
-            前 Front
-          </text>
-          <text x={trayX - 24} y={caseY - 6} fill="#94a3b8" fontSize={10}>
-            後 / 主機板 Back
-          </text>
-
-          {/* 主機板 tray */}
-          <rect x={trayX} y={caseY} width={trayW} height={caseH} fill="#475569" />
-
-          {/* 前置水冷排 */}
-          {isFrontAio && (
-            <rect
-              x={caseX}
-              y={caseY + 8}
-              width={radWpx}
-              height={caseH - 16}
-              fill={STATUS_COLOR[radiatorStatus ?? "warning"]}
-              opacity={0.35}
-              stroke={STATUS_COLOR[radiatorStatus ?? "warning"]}
-              strokeDasharray="4 3"
-            />
-          )}
-
-          {/* GPU */}
-          {gpu && (
-            <rect
-              x={gpuX}
-              y={caseY + 30}
-              width={gpuWpx}
-              height={36}
-              fill={STATUS_COLOR[gpuStatus]}
-              opacity={0.55}
-              stroke={STATUS_COLOR[gpuStatus]}
-              strokeWidth={1.5}
-            />
-          )}
-
-          {/* 衝突區域 */}
-          {hasOverlap && (
-            <rect
-              x={overlapX}
-              y={caseY + 30}
-              width={Math.max(0, overlapEnd - overlapX)}
-              height={36}
-              fill="#ef4444"
-              opacity={0.6}
-            />
-          )}
-
-          {/* PSU */}
-          {psu && (
-            <rect
-              x={psuX}
-              y={caseY + caseH - 26}
-              width={psuWpx}
-              height={18}
-              fill={STATUS_COLOR[psuStatus]}
-              opacity={0.55}
-              stroke={STATUS_COLOR[psuStatus]}
-              strokeWidth={1.5}
-            />
-          )}
-
-          {/* 走線空間 */}
-          <rect
-            x={trayX + trayW + 8}
-            y={caseY}
-            width={cableStripW}
-            height={caseH}
-            fill={STATUS_COLOR[cableStatus === "safe" ? "safe" : "warning"]}
-            opacity={0.3}
-          />
-          <text x={trayX + trayW + 8} y={caseY + caseH + 14} fill="#94a3b8" fontSize={9}>
-            走線 Cable
-          </text>
-
-          <text x={caseX} y={caseY + 26} fill="#cbd5e1" fontSize={10}>
-            GPU
-          </text>
-          <text x={caseX} y={caseY + caseH - 30} fill="#cbd5e1" fontSize={10}>
-            PSU
-          </text>
-        </svg>
+        {used.size > 0 && (
+          <p className="mt-1 text-[11px] text-status-tight">
+            示意尺寸：{[...used].map((k) => FALLBACK_LABEL[k]).join("、")}（官方未公開，以預設值繪製，相關判斷見報告的 Unknown 項目）
+          </p>
+        )}
       </div>
 
-      {cooler.kind === "air" && coolerHeight && (
-        <div>
-          <h3 className="mb-1 text-xs font-bold text-white/70">CPU 空冷高度 Cooler height clearance</h3>
-          <div className="h-4 w-full overflow-hidden rounded bg-white/5">
-            <div
-              className="h-full"
-              style={{
-                width: `${Math.min(100, coolerRatio * 100)}%`,
-                backgroundColor: STATUS_COLOR[coolerStatus ?? "warning"],
-                opacity: 0.7,
-              }}
-            />
-          </div>
-          <p className="mt-1 text-[11px] text-white/40">
-            {coolerHeight} mm / 機殼上限 {coolerLimit} mm
-          </p>
-        </div>
+      {bars.length === 0 && <p className="text-sm text-white/40">選擇顯卡、塔散或電源後顯示尺寸比較。</p>}
+      {bars.map((b) => (
+        <LengthBar key={b.label} {...b} />
+      ))}
+
+      {cooler.kind === "aio" && (
+        <p className="text-xs text-white/60">
+          <span className="mr-2 inline-block h-2 w-2 rounded-full" style={{ backgroundColor: colorOf(radiator) }} />
+          水冷排（{cooler.mountLocation === "front" ? "前置" : "上置"} {cooler.cooler.radiatorSize}）：見報告「水冷排安裝位置」
+        </p>
       )}
 
+      <p className="text-xs text-white/50">
+        <span className="mr-2 inline-block h-2 w-2 rounded-full" style={{ backgroundColor: NEUTRAL_COLOR }} />
+        背板走線空間：{cableSpace !== undefined ? `${cableSpace} mm（官方值，未判斷）` : "官方未公開"}
+      </p>
+
       <div className="flex flex-wrap gap-3 text-[11px] text-white/50">
-        {(Object.keys(STATUS_COLOR) as CompatibilityStatus[]).map((s) => (
-          <span key={s} className="flex items-center gap-1">
-            <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: STATUS_COLOR[s] }} />
-            {STATUS_SHORT_LABEL[s]}
-          </span>
-        ))}
+        {(Object.keys(STATUS_COLOR) as CompatibilityStatus[])
+          .filter((s) => s !== "tight")
+          .map((s) => (
+            <span key={s} className="flex items-center gap-1">
+              <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: STATUS_COLOR[s] }} />
+              {STATUS_SHORT_LABEL[s]}
+            </span>
+          ))}
       </div>
     </div>
   );

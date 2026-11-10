@@ -66,9 +66,10 @@
 | B-10 | ✅ **已解決（2026-11-10）**：使用者提供 WiFi 版官方清單（`B850M%20Pro%20RS%20WiFi`），內容與非 WiFi 版完全相同；cpuSupportListUrl 與 5 筆 boardOverrides 的 sourceUrl 已改為 WiFi 版網址。原記錄：使用者提供的 ASRock 清單是「B850M Pro RS」（網址 `B850M%20Pro%20RS`），資料收的是「B850M Pro RS WiFi」；ASRock 對兩款分別有產品頁與 BIOS | 依使用者指示套用到 `asrock-b850m-pro-rs-wifi`，notes 註明；請確認兩款清單是否相同 |
 | B-11 | ASRock B850M Pro RS 清單中 3.12 是最早出現的版本，視為出廠即支援（9600X、9800X3D、8600G 記為 all / native） | 推論；若出廠 BIOS 早於 3.12，實際需要更新 |
 | B-12 | MSI MAG B650 TOMAHAWK 清單只列最低版本，沒有「出廠即支援」標示；板子早於這些 CPU 上市 | 5 顆 CPU 全部判為需要更新 BIOS（biosUpdate） |
-| B-13 | ⏸ 使用者已提供清單，但因 PCB 版本範圍不符未套用，改見 B-15。原記錄：GIGABYTE B650 AORUS ELITE AX：使用者未取得清單（型號是否為 AX 版、PCB 版本無法在官網支援頁對上） | 維持原狀，只依晶片組層級判斷 |
+| B-13 | ✅ **已解決（2026-11-10）**：拆成兩筆處理，見 B-15。原記錄：GIGABYTE B650 AORUS ELITE AX：使用者未取得清單（型號是否為 AX 版、PCB 版本無法在官網支援頁對上） | 維持原狀，只依晶片組層級判斷 |
 | B-14 | ASRock B550M Pro4：B550 早於 Ryzen 5 5600（P2.30）、5700X3D（P3.20）上市 | 判為需要更新 BIOS |
-| B-15 | GIGABYTE B650 AORUS ELITE AX：使用者提供的官方清單（`B650-AORUS-ELITE-AX-rev-10-11`，F20 / F30 / F40）只適用 PCB Rev. 1.0 / 1.1；但資料的 `pcbRevision` 是「1.x」，規格取自涵蓋 PCB 1.0 / 1.1 / 1.2 的手冊 Rev. 1204。依任務條件（空值或 1.0 / 1.1 才套用），1.x 含清單不涵蓋的 1.2 | **未套用**：沒有填 cpuSupportListUrl、沒有新增 boardOverrides、pcbRevision 維持 1.x，R27 仍依晶片組層級判斷（B650 × 9000 / 9000X3D / 8000 → Warning）。清單內容已存 docs/sources/browser-2026-11-10.md。若要套用，請決定：(a) 把這筆資料的範圍縮小為 rev 1.0 / 1.1（pcbRevision 改為 1.0/1.1），或 (b) 另取 rev 1.2 的清單 |
+| B-15 | ✅ **已解決（2026-11-10，拆成兩筆）**：rev 1.2 使用另一條 BIOS 版本線（FA / FB / FC），與 rev 1.0 / 1.1（F20 / F30 / F40）不能混用。原筆 `gigabyte-b650-aorus-elite-ax`（id 不變）限定 pcbRevision 1.0/1.1、套用 rev 1.0/1.1 清單；新增 `gigabyte-b650-aorus-elite-ax-rev12`（pcbRevision 1.2，規格與來源照抄同一份手冊 Rev. 1204）、套用 rev 1.2 清單。兩筆清單都只列最低版本，比照 MSI 全部判為需要更新 BIOS。原記錄：GIGABYTE B650 AORUS ELITE AX：使用者提供的官方清單（`B650-AORUS-ELITE-AX-rev-10-11`，F20 / F30 / F40）只適用 PCB Rev. 1.0 / 1.1；但資料的 `pcbRevision` 是「1.x」，規格取自涵蓋 PCB 1.0 / 1.1 / 1.2 的手冊 Rev. 1204。依任務條件（空值或 1.0 / 1.1 才套用），1.x 含清單不涵蓋的 1.2 | **未套用**：沒有填 cpuSupportListUrl、沒有新增 boardOverrides、pcbRevision 維持 1.x，R27 仍依晶片組層級判斷（B650 × 9000 / 9000X3D / 8000 → Warning）。清單內容已存 docs/sources/browser-2026-11-10.md。若要套用，請決定：(a) 把這筆資料的範圍縮小為 rev 1.0 / 1.1（pcbRevision 改為 1.0/1.1），或 (b) 另取 rev 1.2 的清單 |
+| B-16 | GIGABYTE B650 AORUS ELITE AX rev 1.2：清單中 8600G 的 FA1 可能就是出廠 BIOS，但無法確認 | 判為需要更新 BIOS（biosUpdate） |
 
 ## 規則
 

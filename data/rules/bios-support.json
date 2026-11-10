@@ -412,6 +412,86 @@
       "minBios": "P3.20",
       "sourceUrl": "https://www.asrock.com/mb/AMD/B550M%20Pro4/index.tw.asp#CPU",
       "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "gigabyte-b650-aorus-elite-ax",
+      "cpuId": "amd-ryzen-5-9600x",
+      "support": "biosUpdate",
+      "minBios": "F30",
+      "sourceUrl": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-10-11/support#support-cpu",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "gigabyte-b650-aorus-elite-ax",
+      "cpuId": "amd-ryzen-7-9800x3d",
+      "support": "biosUpdate",
+      "minBios": "F30",
+      "sourceUrl": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-10-11/support#support-cpu",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "gigabyte-b650-aorus-elite-ax",
+      "cpuId": "amd-ryzen-7-9850x3d",
+      "support": "biosUpdate",
+      "minBios": "F30",
+      "sourceUrl": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-10-11/support#support-cpu",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "gigabyte-b650-aorus-elite-ax",
+      "cpuId": "amd-ryzen-9-9950x3d2-dual-edition",
+      "support": "biosUpdate",
+      "minBios": "F40",
+      "sourceUrl": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-10-11/support#support-cpu",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "gigabyte-b650-aorus-elite-ax",
+      "cpuId": "amd-ryzen-5-8600g",
+      "support": "biosUpdate",
+      "minBios": "F20",
+      "sourceUrl": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-10-11/support#support-cpu",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "gigabyte-b650-aorus-elite-ax-rev12",
+      "cpuId": "amd-ryzen-5-8600g",
+      "support": "biosUpdate",
+      "minBios": "FA1",
+      "sourceUrl": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-12/support#support-cpu",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "gigabyte-b650-aorus-elite-ax-rev12",
+      "cpuId": "amd-ryzen-5-9600x",
+      "support": "biosUpdate",
+      "minBios": "FB1",
+      "sourceUrl": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-12/support#support-cpu",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "gigabyte-b650-aorus-elite-ax-rev12",
+      "cpuId": "amd-ryzen-7-9800x3d",
+      "support": "biosUpdate",
+      "minBios": "FB1",
+      "sourceUrl": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-12/support#support-cpu",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "gigabyte-b650-aorus-elite-ax-rev12",
+      "cpuId": "amd-ryzen-7-9850x3d",
+      "support": "biosUpdate",
+      "minBios": "FB1",
+      "sourceUrl": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-12/support#support-cpu",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "motherboardId": "gigabyte-b650-aorus-elite-ax-rev12",
+      "cpuId": "amd-ryzen-9-9950x3d2-dual-edition",
+      "support": "biosUpdate",
+      "minBios": "FC2",
+      "sourceUrl": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-12/support#support-cpu",
+      "verifiedAt": "2026-11-10"
     }
   ]
 }

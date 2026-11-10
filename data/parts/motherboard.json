@@ -1429,11 +1429,11 @@
     "id": "gigabyte-b650-aorus-elite-ax",
     "category": "motherboard",
     "brand": "GIGABYTE",
-    "model": "B650 AORUS ELITE AX (rev. 1.x)",
-    "twName": "B650 AORUS ELITE AX (rev. 1.x)",
+    "model": "B650 AORUS ELITE AX (Rev. 1.0/1.1)",
+    "twName": "B650 AORUS ELITE AX (Rev. 1.0/1.1)",
     "sourceUrl": "https://download.gigabyte.com/FileList/Manual/mb_manual_b650-aorus-elite-ax_1204_e.pdf",
     "specVerifiedAt": "2026-11-10",
-    "notes": "gigabyte.com 產品頁回 403，規格取自官方英文手冊 Rev. 1204（B650 AORUS ELITE AX / B650 AORUS ELITE 共用；以 curl 下載）。手冊無線模組段落列出 PCB rev. 1.0 / 1.1 / 1.2，故 pcbRevision 填 1.x（同手冊涵蓋 1.0–1.2）。尺寸原文『ATX Form Factor; 30.5cm x 24.4cm』。記憶體原文『Support for DDR5 5200/4800/4400 MT/s memory modules』（無 OC 標示，但手冊另指示依 CPU 與 Memory Support List 而定）→ maxMemorySpeedMts 填 5200 待確認是否保留。PCIe：『1 x PCI Express x16 slot (PCIEX16), integrated in the CPU: Ryzen 9000/7000 support PCIe 4.0 x16 mode; 8000 Series-Phoenix 1 … PCIe 4.0 x8 mode; Phoenix 2 … PCIe 4.0 x4 mode』→ 8000 以 x8 表示；晶片組『2 x PCI Express x16 slots, supporting PCIe 3.0 and running at x1 (PCIEX1_1/2)』（實體 x16、電氣 x1）。M.2：M2A_CPU『PCIe 5.0 x4/x2』（8000 為 4.0）、M2B_CPU『PCIe 4.0 x4/x2』（Phoenix 2 只有 x2，未結構化）、M2C_SB『PCIe 4.0 x4/x2』；長度原文『type 25110/22110/2580/2280』，25110 與 2580 不在 schema enum，只填 22110/2280。手冊 M.2 支援表 M.2 SATA SSD 欄三槽皆未勾 → supportsSata = false。手冊沒有共用通道說明。『1 x Q-Flash Plus button』→ biosFlashback true。影像輸出：1 x DP + 1 x HDMI。CPU 支援清單在 gigabyte.com（403），未填 cpuSupportListUrl / boardOverrides。",
+    "notes": "gigabyte.com 產品頁回 403，規格取自官方英文手冊 Rev. 1204（B650 AORUS ELITE AX / B650 AORUS ELITE 共用；以 curl 下載）。手冊無線模組段落列出 PCB rev. 1.0 / 1.1 / 1.2，規格三個版本相同；因 rev 1.0 / 1.1 與 rev 1.2 的 BIOS 版本線不同（F20 / F30 / F40 vs FA / FB / FC），依決策拆成兩筆，本筆限定 PCB 1.0/1.1，CPU 支援清單只適用此版本。尺寸原文『ATX Form Factor; 30.5cm x 24.4cm』。記憶體原文『Support for DDR5 5200/4800/4400 MT/s memory modules』（無 OC 標示，但手冊另指示依 CPU 與 Memory Support List 而定）→ maxMemorySpeedMts 填 5200 待確認是否保留。PCIe：『1 x PCI Express x16 slot (PCIEX16), integrated in the CPU: Ryzen 9000/7000 support PCIe 4.0 x16 mode; 8000 Series-Phoenix 1 … PCIe 4.0 x8 mode; Phoenix 2 … PCIe 4.0 x4 mode』→ 8000 以 x8 表示；晶片組『2 x PCI Express x16 slots, supporting PCIe 3.0 and running at x1 (PCIEX1_1/2)』（實體 x16、電氣 x1）。M.2：M2A_CPU『PCIe 5.0 x4/x2』（8000 為 4.0）、M2B_CPU『PCIe 4.0 x4/x2』（Phoenix 2 只有 x2，未結構化）、M2C_SB『PCIe 4.0 x4/x2』；長度原文『type 25110/22110/2580/2280』，25110 與 2580 不在 schema enum，只填 22110/2280。手冊 M.2 支援表 M.2 SATA SSD 欄三槽皆未勾 → supportsSata = false。手冊沒有共用通道說明。『1 x Q-Flash Plus button』→ biosFlashback true。影像輸出：1 x DP + 1 x HDMI。CPU 支援清單取自官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/browser-2026-11-10.md），只適用 PCB 1.0/1.1。",
     "formFactor": "ATX",
     "socket": "AM5",
     "chipset": "B650",
@@ -1539,7 +1539,141 @@
     ],
     "biosFlashback": true,
     "hasVideoOutput": true,
-    "pcbRevision": "1.x"
+    "pcbRevision": "1.0/1.1",
+    "cpuSupportListUrl": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-10-11/support#support-cpu",
+    "additionalSources": [
+      {
+        "url": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-10-11/support#support-cpu",
+        "fields": [
+          "cpuSupportListUrl"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gigabyte-b650-aorus-elite-ax-rev12",
+    "category": "motherboard",
+    "brand": "GIGABYTE",
+    "model": "B650 AORUS ELITE AX (Rev. 1.2)",
+    "twName": "B650 AORUS ELITE AX (Rev. 1.2)",
+    "sourceUrl": "https://download.gigabyte.com/FileList/Manual/mb_manual_b650-aorus-elite-ax_1204_e.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "gigabyte.com 產品頁回 403，規格取自官方英文手冊 Rev. 1204（B650 AORUS ELITE AX / B650 AORUS ELITE 共用；以 curl 下載）。手冊無線模組段落列出 PCB rev. 1.0 / 1.1 / 1.2，規格三個版本相同；因 rev 1.0 / 1.1 與 rev 1.2 的 BIOS 版本線不同（F20 / F30 / F40 vs FA / FB / FC），依決策拆成兩筆，本筆限定 PCB 1.2，CPU 支援清單只適用此版本。尺寸原文『ATX Form Factor; 30.5cm x 24.4cm』。記憶體原文『Support for DDR5 5200/4800/4400 MT/s memory modules』（無 OC 標示，但手冊另指示依 CPU 與 Memory Support List 而定）→ maxMemorySpeedMts 填 5200 待確認是否保留。PCIe：『1 x PCI Express x16 slot (PCIEX16), integrated in the CPU: Ryzen 9000/7000 support PCIe 4.0 x16 mode; 8000 Series-Phoenix 1 … PCIe 4.0 x8 mode; Phoenix 2 … PCIe 4.0 x4 mode』→ 8000 以 x8 表示；晶片組『2 x PCI Express x16 slots, supporting PCIe 3.0 and running at x1 (PCIEX1_1/2)』（實體 x16、電氣 x1）。M.2：M2A_CPU『PCIe 5.0 x4/x2』（8000 為 4.0）、M2B_CPU『PCIe 4.0 x4/x2』（Phoenix 2 只有 x2，未結構化）、M2C_SB『PCIe 4.0 x4/x2』；長度原文『type 25110/22110/2580/2280』，25110 與 2580 不在 schema enum，只填 22110/2280。手冊 M.2 支援表 M.2 SATA SSD 欄三槽皆未勾 → supportsSata = false。手冊沒有共用通道說明。『1 x Q-Flash Plus button』→ biosFlashback true。影像輸出：1 x DP + 1 x HDMI。CPU 支援清單取自官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/browser-2026-11-10.md），只適用 PCB 1.2。",
+    "formFactor": "ATX",
+    "socket": "AM5",
+    "chipset": "B650",
+    "dimensions": {
+      "heightMm": 305,
+      "depthMm": 244
+    },
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "maxMemorySpeedMts": 5200,
+    "maxMemoryCapacityGb": 256,
+    "pcieX16Slots": [
+      {
+        "label": "PCIEX16",
+        "gen": 4,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      },
+      {
+        "label": "PCIEX1_1",
+        "gen": 3,
+        "electricalLanes": 1,
+        "laneSource": "chipset"
+      },
+      {
+        "label": "PCIEX1_2",
+        "gen": 3,
+        "electricalLanes": 1,
+        "laneSource": "chipset"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M2A_CPU",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280",
+          "22110"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M2B_CPU",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280",
+          "22110"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M2C_SB",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280",
+          "22110"
+        ],
+        "laneSource": "chipset",
+        "supportsSata": false
+      }
+    ],
+    "laneSharing": [
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4,
+          "lanes": 8
+        },
+        "sourceText": "AMD Ryzen 8000 Series-Phoenix 1 Processors support PCIe 4.0 x8 mode / Phoenix 2 Processors support PCIe 4.0 x4 mode"
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M2A_CPU"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4
+        },
+        "sourceText": "AMD Ryzen 8000 Series-Phoenix 1/Phoenix 2 Processors support PCIe 4.0 x4/x2 SSDs (M2A_CPU)"
+      }
+    ],
+    "biosFlashback": true,
+    "hasVideoOutput": true,
+    "pcbRevision": "1.2",
+    "cpuSupportListUrl": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-12/support#support-cpu",
+    "additionalSources": [
+      {
+        "url": "https://www.gigabyte.com/Motherboard/B650-AORUS-ELITE-AX-rev-12/support#support-cpu",
+        "fields": [
+          "cpuSupportListUrl"
+        ]
+      }
+    ]
   },
   {
     "id": "gigabyte-b760m-aorus-elite-ax",

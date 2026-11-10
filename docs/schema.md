@@ -122,7 +122,7 @@
 | └ `.pcieLanes` / `.supportsSata` / `.formFactors[]` / `.laneSource` / `.hasHeatsink` | | | R30、R31、R13 |
 | `biosFlashback` | bool | `BIOS FlashBack™`、`Q-Flash Plus`、`Flash BIOS Button` | R27 |
 | `hasVideoOutput` | bool | `Display: HDMI / DisplayPort` | R28 |
-| `pcbRevision` | text? | GIGABYTE `rev 1.3` 等；同型號不同 PCB 版本 BIOS 支援不同時填 | R27 |
+| `pcbRevision` | text? | GIGABYTE `rev 1.3` 等；同型號不同 PCB 版本的 BIOS 清單不同時，**拆成不同筆數**（名稱加 Rev.，新 id 加 `-revNN`） | R27 |
 | `cpuSupportListUrl` | URL? | 該主機板的官方 CPU 支援清單頁 | R27（附連結） |
 
 - `chipset`：B650E 與 B650、X870E 與 X870 **分開記錄**

@@ -54,6 +54,22 @@ describe("真實資料組合", () => {
     expect(get({ cpu: part("cpu", "amd-ryzen-5-9600x"), motherboard: mb }, "R27")?.status).toBe("safe");
   });
 
+  it("GIGABYTE B650 AORUS ELITE AX：rev 1.0/1.1 與 rev 1.2 各用自己的 BIOS 清單", () => {
+    const r11 = part("motherboard", "gigabyte-b650-aorus-elite-ax");
+    const r12 = part("motherboard", "gigabyte-b650-aorus-elite-ax-rev12");
+    expect([r11.pcbRevision, r12.pcbRevision]).toEqual(["1.0/1.1", "1.2"]);
+    const check = (mb: typeof r11, cpuId: string, bios: string) => {
+      const r = get({ cpu: part("cpu", cpuId), motherboard: mb }, "R27");
+      expect(r?.status).toBe("warning");
+      expect(r?.conditions?.[0]).toContain(bios);
+      return r;
+    };
+    expect(check(r11, "amd-ryzen-9-9950x3d2-dual-edition", "F40")?.link?.url).toContain("rev-10-11");
+    check(r11, "amd-ryzen-5-8600g", "F20");
+    expect(check(r12, "amd-ryzen-9-9950x3d2-dual-edition", "FC2")?.link?.url).toContain("rev-12");
+    check(r12, "amd-ryzen-7-9800x3d", "FB1");
+  });
+
   it("ASRock B850M Pro RS WiFi：清單連結為 WiFi 版官方頁（B-10）", () => {
     const r = get({ cpu: part("cpu", "amd-ryzen-9-9950x3d2-dual-edition"), motherboard: part("motherboard", "asrock-b850m-pro-rs-wifi") }, "R27");
     expect(r?.link?.url).toContain("B850M%20Pro%20RS%20WiFi");

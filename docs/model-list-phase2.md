@@ -157,7 +157,7 @@
 | 類別 | 筆數 | 品牌 | 與清單的差異 |
 |---|---|---|---|
 | 機殼 | 10 | Lian Li 4、Fractal Design 2、MONTECH、CORSAIR、HYTE、Cooler Master 各 1 | 無 |
-| 主機板 | 15 | ASUS 9、MSI 2、GIGABYTE 2、ASRock 2 | 新增 `msi-mag-b650-tomahawk-wifi`、`msi-pro-b760m-a-wifi`、`gigabyte-b650-aorus-elite-ax`、`gigabyte-b760m-aorus-elite-ax`（取代拿不到的 B760M DS3H AX）、`asrock-b850m-pro-rs-wifi`、`asrock-b550m-pro4`（AM4） |
+| 主機板 | 16 | ASUS 9、MSI 2、GIGABYTE 3（B650 AORUS ELITE AX 依 PCB 版本拆成 rev 1.0/1.1 與 rev 1.2）、ASRock 2 | 新增 `msi-mag-b650-tomahawk-wifi`、`msi-pro-b760m-a-wifi`、`gigabyte-b650-aorus-elite-ax`、`gigabyte-b760m-aorus-elite-ax`（取代拿不到的 B760M DS3H AX）、`asrock-b850m-pro-rs-wifi`、`asrock-b550m-pro4`（AM4） |
 | CPU | 10 | Intel 3、AMD 7 | AMD 7 顆於 2026-11-10 由使用者提供官方規格補上（docs/sources/amd-2026-11-10.md）；AM4 X3D 改收 Ryzen 7 5700X3D（原清單 5800X3D） |
 | RAM | 6 | Kingston 4、CORSAIR 2 | 無 |
 | 顯卡 | 12 | ASUS 6、MSI 2、SAPPHIRE 2、GIGABYTE 2 | GIGABYTE 2 張於 2026-11-10 由使用者提供官方頁內容補上 |

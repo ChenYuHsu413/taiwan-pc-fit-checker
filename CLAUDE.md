@@ -6,8 +6,8 @@
 
 ## 目前狀態（2026-11-10）
 
-- `revamp` 分支已達可上線狀態，**待使用者確認後合併到 `main`**
-- 已完成：Phase 0（盤點）、Phase 1（schema / 資料搬遷）、Phase 2a（試填）、Phase 2b（schema 定案 + 71 筆官方資料、刪除 mock）、Phase 3（相容性規則重寫 + 測試）、上線前收尾（3D/2D 改讀新資料、README、build 驗證）
+- 開發直接在 `main` 分支進行
+- 已完成：Phase 0（盤點）、Phase 1（schema / 資料搬遷）、Phase 2a（試填）、Phase 2b（schema 定案 + 官方資料、刪除 mock）、Phase 3（相容性規則重寫 + 測試）、上線前收尾、Phase 5（3D / 2D 由真實尺寸推導 + 截圖驗證）
 - 價格：本輪不填，UI 顯示「無參考價」
 - 所有待確認事項：`docs/pending.md`；長任務進度：`docs/progress.md`；原計畫：`docs/roadmap.md`
 
@@ -58,7 +58,7 @@ npm test
 
 沒通過就不要 commit，並回報錯誤內容。
 
-**push 規則**：`revamp` 已達可上線狀態，待使用者確認後合併到 `main`。在使用者確認前，commit 只 push 到 `revamp`，不可 push 或 merge 進 `main`。
+**push 規則**：直接在 `main` 開發；每段通過 Gate 後 commit 並 push 到 `main`。
 
 ## 工作原則
 
@@ -86,7 +86,6 @@ npm test
 | 2026-11-09 | 零件 `id` 為全站唯一的 slug（不加類別前綴），發布後不可修改 | 分享 URL 依賴 |
 | 2026-11-09 | 相容性狀態 6 級：safe / info / tight / warning / incompatible / unknown；規則分組 spatial / platform | compatibility-spec §0 |
 | 2026-11-09 | 價格 `source` 多一個 `mock` 值 | 避免把 mock 假價格標成「人工參考價」；Phase 2 移除 |
-| 2026-11-09 | ~~Phase 3 完成前不 push~~ | 2026-11-10 改為：每段完成後 push 到 `revamp`，不碰 `main` |
 | 2026-11-09 | 機殼水冷厚度分 `maxTotalThicknessMm`（排＋扇）與 `maxRadiatorThicknessMm`（只算排），官方寫哪個填哪個 | schema.md §3.1 |
 | 2026-11-09 | ~~塔散高度上限的量測條件寫進 `cpuCoolerHeightConditionText`~~ | 2026-11-10 改用條件值 `cpuCoolerHeightLimits` |
 | 2026-11-09 | 主機板新增 `laneSharing[]`，以及 PCIe / M.2 槽的 `label` | schema.md §3.2 |
@@ -110,6 +109,7 @@ npm test
 | 2026-11-10 | 規則狀態：Tight 本輪不實作；Warning 只用在有官方依據時；沒有可靠依據的規則不產生結果，列在「尚未檢查的項目」 | 見 compatibility-spec |
 | 2026-11-10 | 官網擋自動讀取時只改找同原廠的官方 PDF / 下載頁（可用一般 curl 下載），不用瀏覽器自動化、不偽裝 User-Agent | 拿不到就不收，列進 pending |
 | 2026-11-10 | Next.js 維持 14.2.35（已是 14.2.x 最新 patch，無需升級） | |
-| 2026-11-10 | 3D 橫插顯卡依實際裝機方向：長 = 前後、厚 = 由插槽往下、高 = 由主機板往玻璃、風扇朝下（與 schema R04 一致）；直立安裝才是大平面朝玻璃 | 任務原文的軸向描述與此不同，列 pending L-01 待確認 |
+| 2026-11-10 | 3D 顯卡方向：橫插 = 長度沿前後、厚度由插槽往下、高度由主機板往玻璃、風扇朝下（與 schema R04 一致）；直立 = 大平面朝玻璃 | 使用者已確認（pending L-01 結案） |
+| 2026-11-10 | 之後的開發直接在 `main` 進行 | |
 | 2026-11-10 | 新增 Playwright 為 devDependency（使用者要求） | 截圖驗證用 |
 | （待定） | 相容性門檻數值 | 見 `docs/compatibility-spec.md` §0.2 |

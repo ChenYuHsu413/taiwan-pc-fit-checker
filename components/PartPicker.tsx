@@ -1,5 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import { catalog, getPrice } from "@/lib/data/catalog";
+import { summarizePrices } from "@/lib/priceSummary";
 import type { AnyPart, BuildSelection, DimensionOverrides } from "@/types/parts";
 import { PartCard } from "./PartCard";
 
@@ -97,16 +98,21 @@ export function PartPicker({
     setSelection((prev) => ({ ...prev, overrides: { ...prev.overrides, [key]: value } }));
   };
 
-  const totalTwd = [
-    selection.case,
-    selection.motherboard,
-    selection.cpu,
-    selection.ram,
-    selection.gpu,
-    selection.cooler.kind === "none" ? undefined : selection.cooler.cooler,
-    selection.psu,
-    ...selection.m2Ssds,
-  ].reduce((sum, part) => sum + (part ? getPrice(part.id)?.priceTwd ?? 0 : 0), 0);
+  const priceSummary = summarizePrices(
+    [
+      selection.case,
+      selection.motherboard,
+      selection.cpu,
+      selection.ram,
+      selection.gpu,
+      selection.cooler.kind === "none" ? undefined : selection.cooler.cooler,
+      selection.psu,
+      ...selection.m2Ssds,
+    ]
+      .filter((p) => p !== undefined)
+      .map((p) => p.id),
+    getPrice
+  );
 
   return (
     <div className="h-full overflow-y-auto rounded-xl border border-white/10 bg-bg-panel p-4">
@@ -298,9 +304,18 @@ export function PartPicker({
 
       <div className="mt-2 flex items-center justify-between border-t border-white/10 pt-3">
         <span className="text-xs text-white/50">預估總價（參考價）</span>
-        <span className="text-base font-bold text-accent-cyan">
-          NT$ {totalTwd.toLocaleString("zh-TW")}
-        </span>
+        {priceSummary.totalTwd === undefined ? (
+          <span className="text-xs text-white/30">無參考價</span>
+        ) : (
+          <span className="text-right">
+            <span className="block text-base font-bold text-accent-cyan">
+              NT$ {priceSummary.totalTwd.toLocaleString("zh-TW")}
+            </span>
+            {priceSummary.missingCount > 0 && (
+              <span className="block text-[10px] text-white/40">不含 {priceSummary.missingCount} 項無參考價的零件</span>
+            )}
+          </span>
+        )}
       </div>
     </div>
   );

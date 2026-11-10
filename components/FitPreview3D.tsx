@@ -13,7 +13,7 @@ import { NEUTRAL_COLOR, STATUS_COLOR } from "@/lib/statusColor";
 
 const KIND_STYLE: Record<ItemKind, { color?: string; opacity: number; edges?: boolean }> = {
   shell: { color: "#94a3b8", opacity: 0.04, edges: true },
-  shroud: { color: "#1f2937", opacity: 0.55 },
+  shroud: { color: "#475569", opacity: 0.45, edges: true },
   board: { opacity: 0.95 },
   socket: { color: "#cbd5e1", opacity: 1 },
   pcieSlot: { color: "#020617", opacity: 1 },
@@ -24,16 +24,26 @@ const KIND_STYLE: Record<ItemKind, { color?: string; opacity: number; edges?: bo
   cooler: { opacity: 0.85, edges: true },
   pump: { color: "#475569", opacity: 1 },
   radiator: { opacity: 0.85, edges: true },
-  caseFan: { color: "#1e293b", opacity: 0.9, edges: true },
+  caseFan: { color: "#64748b", opacity: 0.9, edges: true },
   psu: { opacity: 0.9, edges: true },
   limit: { color: "#f8fafc", opacity: 0.22 },
-  conflict: { color: STATUS_COLOR.incompatible, opacity: 0.75, edges: true },
+  conflict: { color: STATUS_COLOR.incompatible, opacity: 0.9, edges: true },
 };
+
+/** 不相容的零件本體用淺灰（紅框），讓超出上限的紅色衝突區看得出來 */
+const INCOMPATIBLE_BODY = "#cbd5e1";
 
 function colorOf(item: SceneItem): string {
   const style = KIND_STYLE[item.kind];
   if (style.color) return style.color;
+  if (item.status === "incompatible") return INCOMPATIBLE_BODY;
   return item.status ? STATUS_COLOR[item.status] : NEUTRAL_COLOR;
+}
+
+function edgeColorOf(item: SceneItem): string {
+  if (item.kind === "shell") return "#64748b";
+  if (item.kind === "conflict" || item.status === "incompatible") return STATUS_COLOR.incompatible;
+  return "#0f172a";
 }
 
 function BoxItem({ item }: { item: SceneItem }) {
@@ -54,7 +64,7 @@ function BoxItem({ item }: { item: SceneItem }) {
         metalness={0.2}
         roughness={0.6}
       />
-      {style.edges && <Edges color={item.kind === "shell" ? "#64748b" : "#0f172a"} />}
+      {(style.edges || item.status === "incompatible") && <Edges color={edgeColorOf(item)} />}
     </mesh>
   );
 }
@@ -73,7 +83,8 @@ export function FitPreview3D({ selection, results }: { selection: BuildSelection
   const { min, max } = layout.bounds;
   const center = [0, 1, 2].map((i) => toSceneUnits((min[i] + max[i]) / 2)) as [number, number, number];
   const span = toSceneUnits(Math.max(max[0] - min[0], max[1] - min[1]));
-  const camera: [number, number, number] = [center[0] - span * 0.15, center[1] + span * 0.2, toSceneUnits(max[2]) + span * 1.5];
+  // 由側透玻璃那一側、略偏前上方看進去（前面板在右），看得出深度
+  const camera: [number, number, number] = [center[0] + span * 0.4, center[1] + span * 0.3, toSceneUnits(max[2]) + span * 1.45];
   const hasConflict = layout.items.some((i) => i.kind === "conflict");
 
   return (

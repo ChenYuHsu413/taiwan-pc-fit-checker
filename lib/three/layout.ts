@@ -82,7 +82,18 @@ export interface SceneLayout {
   boardFrontZ: number;
   gpuOrientation: "horizontal" | "vertical";
   /** 官方上限面的位置（與報告採用的上限一致） */
-  limits: { gpuLengthX?: number; gpuHeightZ?: number; coolerTopZ?: number; psuFrontX?: number };
+  limits: {
+    gpuLengthX?: number;
+    gpuHeightZ?: number;
+    coolerTopZ?: number;
+    /** 電源長度上限面的 x */
+    psuFrontX?: number;
+    /** 電源長度上限值（由電源起點量起） */
+    psuLengthFromStart?: number;
+    /** 電源起點與末端的 x（一般機殼由後往前；ITX 機殼由前往後） */
+    psuStartX?: number;
+    psuEndX?: number;
+  };
   /** 主要零件的 box（測試與 2D 使用） */
   parts: { board?: Box; gpu?: Box; cooler?: Box; psu?: Box; radiator?: Box; frontFans: Box[]; ram: Box[] };
   items: SceneItem[];
@@ -152,8 +163,11 @@ export function computeLayout(selection: BuildSelection, results: CompatibilityR
   const frontX = interior.max[0];
   const topY = interior.max[1];
   const midZ = (interior.min[2] + interior.max[2]) / 2;
+  // 只支援 ITX 的機殼（NR200P、Terra）沒有傳統電源倉：不畫電源倉，電源改放前上方（示意）
+  const itxOnly = c.supportedFormFactors.every((ff) => ff === "ITX");
   items.push({ id: "shell", kind: "shell", box: shell });
-  items.push({ id: "shroud", kind: "shroud", box: box(0, frontX, 0, PSU_SHROUD_HEIGHT_MM, interior.min[2], interior.max[2]) });
+  if (!itxOnly)
+    items.push({ id: "shroud", kind: "shroud", box: box(0, frontX, 0, PSU_SHROUD_HEIGHT_MM, interior.min[2], interior.max[2]) });
 
   // 主機板：後方上緣對齊同一基準點，往下、往前延伸
   const ff: MotherboardFormFactor = mb?.formFactor ?? "ATX";
@@ -248,11 +262,16 @@ export function computeLayout(selection: BuildSelection, results: CompatibilityR
   }
 
   // 顯卡
-  const orientation = c.gpuMountOrientation === "vertical" ? "vertical" : "horizontal";
+  let orientation: "horizontal" | "vertical" = c.gpuMountOrientation === "vertical" ? "vertical" : "horizontal";
   if (gpu) {
     const L = visualMm(overrides.gpuLengthMm ?? gpu.lengthMm, "gpuLength", used);
     const H = visualMm(gpu.heightMm, "gpuHeight", used);
     const T = visualMm(overrides.gpuThicknessMm ?? gpu.thicknessMm, "gpuThickness", used);
+    // 官方沒寫安裝方向、橫插又會超出機殼底面（例如 Terra 的 riser 三明治結構）→ 以直立示意
+    if (orientation === "horizontal" && c.gpuMountOrientation === undefined && slotY - T < 0) {
+      orientation = "vertical";
+      used.add("gpuMount");
+    }
     const n = L > 285 ? 3 : 2;
     const seg = L / n;
     const fanSize = Math.min(seg * 0.85, H * 0.8);
@@ -268,7 +287,7 @@ export function computeLayout(selection: BuildSelection, results: CompatibilityR
       }
     } else {
       // 直立：大平面朝玻璃。長 → x、高 → y（由電源倉頂往上）、厚 → z（由示意支架面往玻璃），風扇朝玻璃
-      const y0 = PSU_SHROUD_HEIGHT_MM + VERTICAL_GPU_BOTTOM_GAP_MM;
+      const y0 = (itxOnly ? 0 : PSU_SHROUD_HEIGHT_MM) + VERTICAL_GPU_BOTTOM_GAP_MM;
       gb = box(0, L, y0, y0 + H, VERTICAL_GPU_Z_MM, VERTICAL_GPU_Z_MM + T);
       const yc = y0 + H / 2;
       for (let i = 0; i < n; i++) {
@@ -329,20 +348,27 @@ export function computeLayout(selection: BuildSelection, results: CompatibilityR
     }
   }
 
-  // 電源：電源倉內，由後方內壁往前
+  // 電源：一般機殼放電源倉內，由後方內壁往前；只支援 ITX 的機殼放前上方，由前面板內側往後（示意）
   if (psu) {
     const len = visualMm(overrides.psuLengthMm ?? psu.lengthMm, "psuLength", used);
     const form = PSU_FORM_MM[psu.formFactor];
-    const pb = box(0, len, 0, form.heightMm, midZ - form.widthMm / 2, midZ + form.widthMm / 2);
+    const dir = itxOnly ? -1 : 1; // 長度延伸方向
+    const start = itxOnly ? frontX : 0; // 電源接線端的對面（長度量測起點）
+    const y0 = itxOnly ? topY - form.heightMm : 0;
+    const pb = box(start, start + dir * len, y0, y0 + form.heightMm, midZ - form.widthMm / 2, midZ + form.widthMm / 2);
     parts.psu = pb;
     items.push({ id: "psu", kind: "psu", box: pb, status: worstOf(results, ["R10", "R15", "R33"]) });
     const lim = psuLengthLimitMm(selection);
     if (lim !== undefined) {
-      limits.psuFrontX = lim;
-      items.push({ id: "limit-psu", kind: "limit", label: "電源長度上限", box: box(lim, lim + 1, 0, form.heightMm + 10, pb.min[2], pb.max[2]) });
-      if (pb.max[0] > lim)
-        items.push({ id: "conflict-psu", kind: "conflict", box: box(lim, pb.max[0], pb.min[1], pb.max[1], pb.min[2], pb.max[2]) });
+      const lx = start + dir * lim;
+      limits.psuFrontX = lx;
+      limits.psuLengthFromStart = lim;
+      items.push({ id: "limit-psu", kind: "limit", label: "電源長度上限", box: box(lx, lx + dir, y0 - 5, y0 + form.heightMm + 5, pb.min[2], pb.max[2]) });
+      if (len > lim)
+        items.push({ id: "conflict-psu", kind: "conflict", box: box(lx, start + dir * len, pb.min[1], pb.max[1], pb.min[2], pb.max[2]) });
     }
+    limits.psuEndX = start + dir * len;
+    limits.psuStartX = start;
   }
 
   return {

@@ -118,7 +118,9 @@ describe("與報告一致", () => {
         const { layout, report } = layoutOf(build({ case: c, psu: p }));
         const r = report.results.find((x) => x.ruleId === "R10");
         if (r?.remainingValue === undefined) continue;
-        expect(Math.abs(layout.limits.psuFrontX! - layout.parts.psu!.max[0] - r.remainingValue)).toBeLessThanOrEqual(1);
+        const used = Math.abs(layout.limits.psuEndX! - layout.limits.psuStartX!);
+        const limit = Math.abs(layout.limits.psuFrontX! - layout.limits.psuStartX!);
+        expect(Math.abs(limit - used - r.remainingValue)).toBeLessThanOrEqual(1);
         checked++;
       }
     expect(checked).toBeGreaterThan(20);
@@ -164,10 +166,28 @@ describe("裝不下時照實畫", () => {
   });
 
   it("電源在電源倉內，長度沿 x 由後方往前", () => {
-    const p = part("psu", "fsp-dagger-pro-atx31-850w");
-    const { layout } = layoutOf(build({ case: part("case", "fractal-design-terra"), psu: p }));
+    const p = part("psu", "cooler-master-mwe-gold-850-v4");
+    const { layout } = layoutOf(build({ case: part("case", "fractal-design-north"), psu: p }));
     expect(layout.parts.psu!.min[0]).toBe(0);
     expect(size(layout.parts.psu!)[0]).toBe(p.lengthMm);
     expect(layout.parts.psu!.min[1]).toBe(0);
+    expect(layout.items.some((i) => i.kind === "shroud")).toBe(true);
+  });
+
+  it("只支援 ITX 的機殼：不畫電源倉，電源在前上方，不與顯卡重疊", () => {
+    const p = part("psu", "fsp-dagger-pro-atx31-850w");
+    for (const id of ["cooler-master-masterbox-nr200p-v2", "fractal-design-terra"]) {
+      const { layout } = layoutOf(
+        build({ case: part("case", id), motherboard: part("motherboard", "asus-rog-strix-b850-i-gaming-wifi"), psu: p, gpu: part("gpu", "asus-dual-rtx-5050-oc") })
+      );
+      expect(layout.items.some((i) => i.kind === "shroud")).toBe(false);
+      expect(size(layout.parts.psu!)[0]).toBe(p.lengthMm);
+      expect(layout.parts.psu!.max[0]).toBe(layout.interior.max[0]);
+      const g = layout.parts.gpu!;
+      const q = layout.parts.psu!;
+      const overlap = [0, 1, 2].every((i) => Math.max(g.min[i], q.min[i]) < Math.min(g.max[i], q.max[i]));
+      expect(overlap).toBe(false);
+      expect(g.min[1]).toBeGreaterThanOrEqual(0);
+    }
   });
 });

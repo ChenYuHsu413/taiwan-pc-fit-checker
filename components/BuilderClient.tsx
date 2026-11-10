@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import type { BuildSelection } from "@/types/parts";
 import { buildCablePlanningSuggestions, evaluateReport } from "@/lib/compatibility";
+import { selectionFromQuery, viewFromQuery } from "@/lib/selectionQuery";
 import { PartPicker } from "./PartPicker";
 import { FitPreview2D } from "./FitPreview2D";
 import { CompatibilityReport } from "./CompatibilityReport";
@@ -29,6 +30,15 @@ type ViewMode = "3d" | "2d";
 export function BuilderClient() {
   const [selection, setSelection] = useState<BuildSelection>(INITIAL_SELECTION);
   const [viewMode, setViewMode] = useState<ViewMode>("3d");
+
+  // 支援以 URL query 預選零件（例如 /builder?case=corsair-3500x&gpu=...）
+  useEffect(() => {
+    const search = window.location.search;
+    if (!search) return;
+    setSelection((prev) => selectionFromQuery(search, prev));
+    const view = viewFromQuery(search);
+    if (view) setViewMode(view);
+  }, []);
 
   const report = useMemo(() => evaluateReport(selection), [selection]);
   const results = report.results;

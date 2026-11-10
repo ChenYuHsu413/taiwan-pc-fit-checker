@@ -63,7 +63,8 @@ export const MSG = {
   },
   R03: {
     overSlotLimit: (slots: number, limit: number) => `顯卡 ${slots} 槽，超過機殼官方顯卡槽數上限 ${limit} 槽。`,
-    fitSlotLimit: (slots: number, limit: number) => `顯卡 ${slots} 槽／機殼官方上限 ${limit} 槽／餘裕 ${limit - slots} 槽`,
+    fitSlotLimit: (slots: number, limit: number) =>
+      `顯卡 ${slots} 槽／機殼官方上限 ${limit} 槽／餘裕 ${Math.round((limit - slots) * 100) / 100} 槽`,
     overExpansion: (slots: number, limit: number) => `顯卡佔用 ${slots} 槽，超過機殼擴充槽總數 ${limit}。`,
     verticalOnly: "此機殼官方設計只能直立安裝顯卡，請確認轉接線（riser）與支架是否隨附。",
     missing: "官方未公開顯卡槽數或機殼擴充槽資料，無法判斷。",

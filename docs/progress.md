@@ -15,14 +15,11 @@
 ### 狀態
 
 - 第一段：完成（Gate 通過），commit 見 git log
-- 第二段：進行中
+- 第二段：完成（Gate 通過；5 組 10 張截圖在 docs/screenshots/）
 
 ### 下一步
 
-1. 安裝 Playwright（devDependency），確認 Chromium WebGL（swiftshader）
-2. BuilderClient 支援 URL query 預選零件
-3. scripts/screenshot-3d.ts（next start → 5 組 → docs/screenshots/）
-4. 逐張看圖、修正、寫 docs/screenshots/README.md
+- 等使用者確認 pending L-01（顯卡軸向）與其他 L 段示意值
 
 ### 未 commit 的變更
 

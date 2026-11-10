@@ -23,6 +23,7 @@
 - three.js + @react-three/fiber + @react-three/drei（3D，`dynamic(ssr:false)` 載入）
 - zod 4（schema 與驗證，型別由 `z.infer` 推導）
 - vitest 3.1（測試；vitest 5 需要 `@types/node ≥20.19`，與現有版本衝突，見決策紀錄）
+- Playwright（devDependency，只用於 `npm run screenshot` 截圖驗證；Chromium 用 SwiftShader 軟體 WebGL）
 - 部署：Vercel
 - 沒有後端與資料庫；資料是 repo 內的靜態 JSON（`data/`），載入時經過 `lib/data/validate.ts` 驗證，失敗會讓 build 中斷
 
@@ -109,4 +110,6 @@ npm test
 | 2026-11-10 | 規則狀態：Tight 本輪不實作；Warning 只用在有官方依據時；沒有可靠依據的規則不產生結果，列在「尚未檢查的項目」 | 見 compatibility-spec |
 | 2026-11-10 | 官網擋自動讀取時只改找同原廠的官方 PDF / 下載頁（可用一般 curl 下載），不用瀏覽器自動化、不偽裝 User-Agent | 拿不到就不收，列進 pending |
 | 2026-11-10 | Next.js 維持 14.2.35（已是 14.2.x 最新 patch，無需升級） | |
+| 2026-11-10 | 3D 橫插顯卡依實際裝機方向：長 = 前後、厚 = 由插槽往下、高 = 由主機板往玻璃、風扇朝下（與 schema R04 一致）；直立安裝才是大平面朝玻璃 | 任務原文的軸向描述與此不同，列 pending L-01 待確認 |
+| 2026-11-10 | 新增 Playwright 為 devDependency（使用者要求） | 截圖驗證用 |
 | （待定） | 相容性門檻數值 | 見 `docs/compatibility-spec.md` §0.2 |

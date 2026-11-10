@@ -144,5 +144,6 @@ export const FALLBACK_LABEL = {
   psuLength: "電源長度",
   ramHeight: "記憶體高度",
   motherboardSize: "主機板尺寸（用板型標準尺寸）",
+  gpuMount: "顯卡安裝方向（官方未寫；橫插會超出機殼底面，改以直立示意，例如 riser 三明治結構）",
 } as const;
 export type FallbackKey = keyof typeof FALLBACK_LABEL;

@@ -41,7 +41,10 @@ npm run dev      # http://localhost:3000
 npm run build    # 產出正式版（同時驗證 data/ 內所有 JSON）
 npm test         # 規則與資料測試
 npx tsc --noEmit # 型別檢查
+npm run screenshot # （需先 build）用 Playwright 截 3D / 2D 驗證圖到 docs/screenshots/
 ```
+
+`/builder` 支援用 URL query 預選零件，例如 `/builder?case=corsair-3500x&mb=asus-rog-strix-b850-i-gaming-wifi&gpu=asus-rog-astral-rtx-5090-oc&view=3d`（參數：case、mb、cpu、ram、gpu、air、aio、mount、psu、ssd、view）。
 
 ## 專案結構
 
@@ -56,7 +59,8 @@ npx tsc --noEmit # 型別檢查
 | `lib/schema/` | zod schema（型別由此推導），欄位說明見 `docs/schema.md` |
 | `lib/data/` | 資料載入與共用驗證 |
 | `lib/compatibility/` | 相容性規則（判斷、規則清單、文案），規格見 `docs/compatibility-spec.md` |
-| `lib/three/layout.ts` | 3D / 2D 尺寸換算與示意尺寸 |
+| `lib/three/layout.ts`、`lib/three/constants.ts` | 3D / 2D 佈局（輸出每個零件的 bounding box）與示意值，規格見 `docs/3d-layout-spec.md` |
+| `scripts/screenshot-3d.ts` | Playwright 截圖驗證；結果見 `docs/screenshots/README.md` |
 | `tests/` | vitest 測試（合成資料規則測試、真實資料組合測試、資料驗證） |
 | `docs/` | 規格、schema、資料策略、待確認事項（`pending.md`）與進度 |
 

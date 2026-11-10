@@ -11,7 +11,7 @@ import { computeLayout, FALLBACK_LABEL, type ItemKind, type SceneItem } from "@/
 const colorOf = (s: CompatibilityStatus | undefined) => STATUS_COLOR[s ?? "unknown"];
 
 const KIND_2D: Partial<Record<ItemKind, { fill?: string; opacity: number; stroke?: string; dash?: string }>> = {
-  shroud: { fill: "#1f2937", opacity: 0.8 },
+  shroud: { fill: "#334155", opacity: 0.8 },
   board: { opacity: 0.6 },
   socket: { fill: "#cbd5e1", opacity: 0.9 },
   pcieSlot: { fill: "#020617", opacity: 1 },
@@ -62,7 +62,7 @@ export function FitPreview2D({ selection, results }: { selection: BuildSelection
 
   // 正視圖：x 往右 = 往前面板；y 往上（SVG 需翻轉）。依 z 由後往前畫，靠近玻璃的蓋在上面
   const { shell, bounds } = layout;
-  const pad = 10;
+  const pad = 30;
   const x0 = Math.min(shell.min[0], bounds.min[0]) - pad;
   const x1 = Math.max(shell.max[0], bounds.max[0]) + pad;
   const y0 = Math.min(shell.min[1], bounds.min[1]) - pad;
@@ -74,7 +74,9 @@ export function FitPreview2D({ selection, results }: { selection: BuildSelection
 
   const rect = (item: SceneItem) => {
     const s = KIND_2D[item.kind]!;
-    const fill = s.fill ?? (item.status ? STATUS_COLOR[item.status] : NEUTRAL_COLOR);
+    // 不相容的零件本體用淺灰（紅框），只有超出上限的衝突區是實心紅色
+    const bad = item.status === "incompatible";
+    const fill = s.fill ?? (bad ? "#cbd5e1" : item.status ? STATUS_COLOR[item.status] : NEUTRAL_COLOR);
     const w = item.box.max[0] - item.box.min[0];
     const h = item.box.max[1] - item.box.min[1];
     return (
@@ -86,8 +88,8 @@ export function FitPreview2D({ selection, results }: { selection: BuildSelection
         height={h}
         fill={fill}
         fillOpacity={item.placeholder ? 0.2 : s.opacity}
-        stroke={s.stroke}
-        strokeWidth={s.stroke ? 0.8 : 0}
+        stroke={bad ? STATUS_COLOR.incompatible : s.stroke}
+        strokeWidth={bad ? 2 : s.stroke ? 0.8 : 0}
         strokeDasharray={s.dash}
       />
     );
@@ -131,10 +133,10 @@ export function FitPreview2D({ selection, results }: { selection: BuildSelection
           strokeWidth={2}
         />
         {drawn.map(rect)}
-        <text x={shell.min[0] + 4} y={toY(shell.max[1]) - 3} fill="#94a3b8" fontSize={12}>
+        <text x={shell.min[0] + 4} y={toY(shell.max[1]) - 3} fill="#94a3b8" fontSize={20}>
           後 Rear / I/O
         </text>
-        <text x={shell.max[0] - 70} y={toY(shell.max[1]) - 3} fill="#94a3b8" fontSize={12}>
+        <text x={shell.max[0] - 90} y={toY(shell.max[1]) - 3} fill="#94a3b8" fontSize={20}>
           前 Front
         </text>
       </svg>

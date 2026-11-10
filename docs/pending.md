@@ -11,7 +11,7 @@
 | D-03 | Fractal North：側面水冷，產品頁寫 `2x 120/140 mm`，手冊不同 | 未填 `radiatorMounts.side` |
 | D-04 | Fractal North：前置排寬 / 排厚（手冊 p.33）對應關係要看圖 | 未填 |
 | D-05 | ROG STRIX X870E-E：官方 CPU 支援清單只指向 download center 總頁 | 未填 `cpuSupportListUrl` |
-| D-06 | be quiet! DARK ROCK PRO 5：bequiet.com 產品頁與 press 頁皆 403，找不到官方 PDF | 不收 |
+| D-06 | ✅ 已解決（2026-11-10，使用者提供官方頁內容，見 D-42）。原記錄：be quiet! DARK ROCK PRO 5：bequiet.com 產品頁與 press 頁皆 403，找不到官方 PDF | 不收 |
 | D-07 | Cooler Master NR200P V2 顯卡長度分「Exceed front bracket 357 / Not exceed 334」，不是前置風扇 / 水冷條件 | 較嚴格的 334 填 `unspecifiedMm`（R02 會顯示 Info），兩個條件寫 conditionText |
 | D-08 | Fractal Terra：官方沒寫 spine 出廠位置；塔散 48 / 77、顯卡高度 131 / 145 隨 spine 位置互斥 | 兩者各取較嚴格值當預設（48、131），注意兩者不會同時成立 |
 | D-09 | Lian Li LANCOOL 217：官方沒寫 PSU 出廠是 Standard 還是 Rotated | 預設 Rotated 180，Standard 220 列為其他條件 |
@@ -27,7 +27,7 @@
 | D-19 | DeepCool AK400：含風扇與不含風扇的 W 差 52 mm（大於單顆風扇 25 mm），原因官方未說明 | 仍依差異判定 W 為氣流方向 |
 | D-20 | Thermalright 兩款塔散氣流方向只畫在圖片 | width / depth 留空 |
 | D-21 | ✅ **已解決（2026-11-10）**：使用者提供 AMD 官方規格（docs/sources/amd-2026-11-10.md），已收 9600X、9800X3D、9850X3D、9950X3D2、8600G、5600，AM4 X3D 改收 5700X3D（取代原清單的 5800X3D）；maxPowerW 官方未列、留空。原記錄：**AMD CPU 全部 7 顆拿不到**（9600X、9800X3D、9850X3D、9950X3D2、8600G、5600、5800X3D）：www.amd.com 對 WebFetch 每次都逾時 60 秒（用一般瀏覽器 User-Agent 才會回應，視為擋自動讀取），找不到其他官方網域的規格 PDF | 不收。AMD 平台（AM5 / AM4）因此沒有 CPU，R22–R28 只能用 Intel 組合驗證；需要你決定是否人工開頁填入 |
-| D-22 | GIGABYTE 顯卡 2 張（AORUS RTX 5090 MASTER、RTX 5060 WINDFORCE OC 8G）：gigabyte.com tw / global / us 皆 403，找不到官方規格 PDF | 不收 |
+| D-22 | ✅ 已解決（2026-11-10，使用者提供官方頁內容，見 D-43）。原記錄：GIGABYTE 顯卡 2 張（AORUS RTX 5090 MASTER、RTX 5060 WINDFORCE OC 8G）：gigabyte.com tw / global / us 皆 403，找不到官方規格 PDF | 不收 |
 | D-23 | MSI 顯卡 2 張：規格頁 403，改用官方 datasheet PDF（storage-asset.msi.com）當 sourceUrl。datasheet 只有「338 x 140 x 50」「227 x 126 x 41」且沒有槽數，無法套用決策 4 判讀厚度 | 只填長度（最大值），高 / 厚 / 槽數留空，原文寫 notes |
 | D-24 | Sapphire 顯卡官方標 L/W/H，W 對應本專案 height、H 對應 thickness | 照標示對應，`dimensionsAxisInferred: false`；官方用詞「Minimum ... Watt Power Supply」填進 recommendedPsuW |
 | D-25 | Corsair DOMINATOR TITANIUM 高度 56.75 mm 出自 Corsair A115 相容性文章，未說明是否含頂蓋（help.corsair.com 尺寸表 403） | 填 56.75（較高值，對淨空判斷較保守）；產品頁 Overview 與 Tech Specs 容量矛盾，以 Tech Specs 為準 |
@@ -47,6 +47,8 @@
 | D-39 | AMD CPU 官方只列單一 PCIe 版本（9000 系列 5.0、8600G 與 AM4 4.0），沒有分顯卡 / M.2 | `pcieGen.gpu` 與 `pcieGen.m2` 都填該版本（與 Intel「5.0 and 4.0」分不出的情況不同） |
 | D-40 | 核心數、CPU PCIe 通道數、ECC、上市日、晶片組額外通道沒有對應欄位 | 寫進 notes |
 | D-41 | SAPPHIRE PULSE RX 9060 XT：官方型號『16GB GDDR6（11350-03-20G）』 | 確認為 16GB 版，對應 `amd-radeon-rx-9060-xt-16gb`，不需另建 8GB 版晶片 |
+| D-42 | be quiet! DARK ROCK PRO 5：官方「Heatsink specifications」只給散熱片本體 L × W × H 119.5 × 136 × 168，沒標氣流方向、沒有含風扇的深度；RAM 淨空官方未列 | heightMm 168；widthMm / depthMm 留空（schema.md §3.6 規則 3）；ramClearance 留空（R06 Unknown） |
+| D-43 | GIGABYTE AORUS RTX 5090 MASTER、RTX 5060 WINDFORCE OC 8G：官方未列槽數、板卡 TBP、PCIe 通道數；5090 MASTER 供電只寫「16 Pin」 | slotWidth、tbpW、pcieLanes 留空（R03 只能以機殼擴充槽判斷，R15 / R29 用晶片參考表）；供電記為 16-pin |
 
 ## BIOS 規則表
 

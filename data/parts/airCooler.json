@@ -180,5 +180,26 @@
       "AM5",
       "AM4"
     ]
+  },
+  {
+    "id": "be-quiet-dark-rock-pro-5",
+    "category": "airCooler",
+    "brand": "be quiet!",
+    "model": "DARK ROCK PRO 5 (BK036)",
+    "twName": "be quiet! DARK ROCK PRO 5",
+    "sourceUrl": "https://www.bequiet.com/en/cpucooler/4466",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "取自官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/browser-2026-11-10.md）。官方「Heatsink specifications」原文『Dimensions (L x W x H) 119.5 x 136 x 168 mm』。heightMm 取 168（官方 heatsink 規格的高度；風扇裝在側面，是否另有含風扇高度官方未寫）。L / W 只是散熱片本體尺寸，沒有標氣流方向、也沒有含風扇的深度，依 schema.md §3.6 規則 3（判斷不出氣流方向就留空），widthMm / depthMm 留空。腳位原文『Intel 1851、1700、1200、1150、1151、1155；AMD AM5、AM4』，正規化為 LGA 前綴。RAM 淨空官方未列（官方只提到前風扇可調高度），留空。",
+    "heightMm": 168,
+    "supportedSockets": [
+      "LGA1851",
+      "LGA1700",
+      "LGA1200",
+      "LGA1150",
+      "LGA1151",
+      "LGA1155",
+      "AM5",
+      "AM4"
+    ]
   }
 ]

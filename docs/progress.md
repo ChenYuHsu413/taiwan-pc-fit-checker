@@ -9,12 +9,11 @@
 ### 狀態
 
 - 第一段（主機板 CPU 清單、bootableSinceBios、測試）：完成
-- 第二段（GIGABYTE 5090 MASTER、5060 WINDFORCE、be quiet! DARK ROCK PRO 5）：進行中
+- 第二段（GIGABYTE 5090 MASTER、5060 WINDFORCE、be quiet! DARK ROCK PRO 5）：完成
 
 ### 下一步
 
-1. 第二段：data/parts/gpu.json 新增 2 張、airCooler.json 新增 1 款；確認 gpuChip；pending 移除拿不到的紀錄
-2. Gate → commit → push main
+- 無（本輪完成）。待使用者確認 pending B-10（ASRock B850M Pro RS 與 WiFi 版清單是否相同）等項目
 
 ### 未 commit 的變更
 

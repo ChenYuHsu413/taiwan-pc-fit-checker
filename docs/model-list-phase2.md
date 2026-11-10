@@ -160,8 +160,8 @@
 | 主機板 | 15 | ASUS 9、MSI 2、GIGABYTE 2、ASRock 2 | 新增 `msi-mag-b650-tomahawk-wifi`、`msi-pro-b760m-a-wifi`、`gigabyte-b650-aorus-elite-ax`、`gigabyte-b760m-aorus-elite-ax`（取代拿不到的 B760M DS3H AX）、`asrock-b850m-pro-rs-wifi`、`asrock-b550m-pro4`（AM4） |
 | CPU | 10 | Intel 3、AMD 7 | AMD 7 顆於 2026-11-10 由使用者提供官方規格補上（docs/sources/amd-2026-11-10.md）；AM4 X3D 改收 Ryzen 7 5700X3D（原清單 5800X3D） |
 | RAM | 6 | Kingston 4、CORSAIR 2 | 無 |
-| 顯卡 | 10 | ASUS 6、MSI 2、SAPPHIRE 2 | GIGABYTE 2 張拿不到（官網 403） |
-| 塔散 | 7 | Noctua 3、DeepCool 2、Thermalright 2 | be quiet! DARK ROCK PRO 5 拿不到（官網 403）。NH-L12Sx77 官方高度 77 mm（不是 93），等於 Terra 上限 |
+| 顯卡 | 12 | ASUS 6、MSI 2、SAPPHIRE 2、GIGABYTE 2 | GIGABYTE 2 張於 2026-11-10 由使用者提供官方頁內容補上 |
+| 塔散 | 8 | Noctua 3、DeepCool 2、Thermalright 2、be quiet! 1 | be quiet! DARK ROCK PRO 5 於 2026-11-10 由使用者提供官方頁內容補上。NH-L12Sx77 官方高度 77 mm（不是 93），等於 Terra 上限 |
 | AIO | 6 | ARCTIC 2、Lian Li 2、CORSAIR、Thermalright 各 1 | 無 |
 | PSU | 8 | FSP 4、Cooler Master 3、Lian Li 1 | 無 |
 | M.2 SSD | 6 | Samsung 3、Kingston 3 | id 一律含容量：`kingston-fury-renegade-g5-2tb`、`samsung-990-pro-heatsink-4tb`、`samsung-990-evo-plus-4tb`、`kingston-nv3-1tb-2280`、`kingston-nv3-1tb-2230` |

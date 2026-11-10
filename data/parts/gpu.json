@@ -239,5 +239,51 @@
     "recommendedPsuW": 450,
     "pcieGen": 5,
     "pcieLanes": 16
+  },
+  {
+    "id": "gigabyte-aorus-rtx-5090-master",
+    "category": "gpu",
+    "brand": "GIGABYTE",
+    "model": "AORUS GeForce RTX 5090 MASTER 32G (GV-N5090AORUS M-32GD)",
+    "twName": "AORUS GeForce RTX™ 5090 MASTER 32G",
+    "sourceUrl": "https://www.gigabyte.com/tw/Graphics-Card/GV-N5090AORUS-M-32GD/sp",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "取自官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/browser-2026-11-10.md）。尺寸原文『L=360 W=150 H=75 mm』，依既有決策 GIGABYTE L → lengthMm、W → heightMm、H → thicknessMm（官方有標軸向，非判讀）。匯流排『PCI-E 5.0』，未寫通道數。建議電源 1000W。供電『16 Pin × 1』。槽數官方未列，留空；板卡 TBP 官方未列，規則改用晶片參考表。是否含擋板未寫。官方只寫『16 Pin』，未區分 12VHPWR / 12V-2x6，type 記為 16-pin。",
+    "gpuChip": "nvidia-geforce-rtx-5090",
+    "dimensionsAxisInferred": false,
+    "lengthMm": 360,
+    "heightMm": 150,
+    "thicknessMm": 75,
+    "powerConnectors": [
+      {
+        "type": "16-pin",
+        "count": 1
+      }
+    ],
+    "recommendedPsuW": 1000,
+    "pcieGen": 5
+  },
+  {
+    "id": "gigabyte-rtx-5060-windforce-oc-8g",
+    "category": "gpu",
+    "brand": "GIGABYTE",
+    "model": "GeForce RTX 5060 WINDFORCE OC 8G (GV-N5060WF2OC-8GD)",
+    "twName": "GeForce RTX™ 5060 WINDFORCE OC 8G",
+    "sourceUrl": "https://www.gigabyte.com/tw/Graphics-Card/GV-N5060WF2OC-8GD/sp",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "取自官方頁面（使用者瀏覽器讀取，2026-11-10，見 docs/sources/browser-2026-11-10.md）。尺寸原文『L=199 W=116 H=40 mm』，依既有決策 GIGABYTE L → lengthMm、W → heightMm、H → thicknessMm（官方有標軸向，非判讀）。匯流排『PCI-E 5.0』，未寫通道數。建議電源 550W。供電『8 Pin × 1』。槽數官方未列，留空；板卡 TBP 官方未列，規則改用晶片參考表。是否含擋板未寫。",
+    "gpuChip": "nvidia-geforce-rtx-5060",
+    "dimensionsAxisInferred": false,
+    "lengthMm": 199,
+    "heightMm": 116,
+    "thicknessMm": 40,
+    "powerConnectors": [
+      {
+        "type": "8-pin",
+        "count": 1
+      }
+    ],
+    "recommendedPsuW": 550,
+    "pcieGen": 5
   }
 ]

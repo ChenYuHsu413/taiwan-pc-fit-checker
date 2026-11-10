@@ -1,47 +1,5 @@
 [
   {
-    "id": "kingston-fury-beast-ddr5-6000-32gb-2x16gb",
-    "category": "ram",
-    "brand": "Kingston",
-    "model": "FURY Beast DDR5-6000 32GB (2x16GB)",
-    "twName": "金士頓 FURY Beast DDR5-6000 32GB(16Gx2)",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "notes": "Phase 1 mock：模組高度未填",
-    "memoryType": "DDR5",
-    "moduleCapacityGb": 16,
-    "moduleCount": 2,
-    "speedMts": 6000
-  },
-  {
-    "id": "g-skill-trident-z5-rgb-ddr5-6400-32gb-2x16gb",
-    "category": "ram",
-    "brand": "G.SKILL",
-    "model": "Trident Z5 RGB DDR5-6400 32GB (2x16GB)",
-    "twName": "芝奇 Trident Z5 RGB DDR5-6400 32GB(16Gx2)",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "notes": "Phase 1 mock：模組高度未填",
-    "memoryType": "DDR5",
-    "moduleCapacityGb": 16,
-    "moduleCount": 2,
-    "speedMts": 6400
-  },
-  {
-    "id": "kingston-fury-beast-ddr4-3200-16gb-2x8gb",
-    "category": "ram",
-    "brand": "Kingston",
-    "model": "FURY Beast DDR4-3200 16GB (2x8GB)",
-    "twName": "金士頓 FURY Beast DDR4-3200 16GB(8Gx2)",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "notes": "Phase 1 mock：用於測試 DDR4/DDR5 不相容（R23）",
-    "memoryType": "DDR4",
-    "moduleCapacityGb": 8,
-    "moduleCount": 2,
-    "speedMts": 3200
-  },
-  {
     "id": "kingston-fury-beast-kf560c30bbek2-32",
     "category": "ram",
     "brand": "Kingston",
@@ -57,5 +15,104 @@
     "requiresXmpExpo": true,
     "moduleHeightMm": 34.9,
     "rank": 1
+  },
+  {
+    "id": "kingston-valueram-kvr56u46bs8-16",
+    "category": "ram",
+    "brand": "Kingston",
+    "model": "ValueRAM DDR5 KVR56U46BS8-16",
+    "twName": "Kingston ValueRAM DDR5-5600 16GB",
+    "sourceUrl": "https://www.kingston.com/datasheets/KVR56U46BS8-16.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "datasheet：『16GB 1Rx8 2G x 64-Bit PC5-5600 CL46 288-Pin DIMM』；『SPD is programmed to JEDEC standard latency DDR5-5600 timing of 46-45-45 at 1.1V』，無 XMP/EXPO → requiresXmpExpo = false。高度原文『PCB: Height 1.23\" (31.25mm)』（無散熱片，為 PCB 高度）。單條販售。",
+    "memoryType": "DDR5",
+    "moduleCapacityGb": 16,
+    "moduleCount": 1,
+    "speedMts": 5600,
+    "rank": 1,
+    "requiresXmpExpo": false,
+    "moduleHeightMm": 31.25
+  },
+  {
+    "id": "kingston-fury-beast-kf556c40bbk4-128",
+    "category": "ram",
+    "brand": "Kingston",
+    "model": "FURY Beast DDR5 KF556C40BBK4-128",
+    "twName": "Kingston FURY Beast DDR5-5600 128GB (32GBx4)",
+    "sourceUrl": "https://www.kingston.com/datasheets/KF556C40BBK4-128.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "datasheet：『kit of four 4G x 64-bit (32GB) DDR5-5600 CL40 SDRAM … 2Rx8』；Default (JEDEC)『DDR5-4800 CL40-39-39 @1.1V』；XMP Profile #1『DDR5-5600 CL40-40-40 @1.25V』、#2 DDR5-5200、#3 DDR5-4800；只寫 Intel XMP 3.0，未列 EXPO。高度原文『Height 1.37\" (34.9mm), w/heatsink』。",
+    "memoryType": "DDR5",
+    "moduleCapacityGb": 32,
+    "moduleCount": 4,
+    "speedMts": 5600,
+    "rank": 2,
+    "requiresXmpExpo": true,
+    "moduleHeightMm": 34.9
+  },
+  {
+    "id": "kingston-fury-beast-kf432c16bbk2-16",
+    "category": "ram",
+    "brand": "Kingston",
+    "model": "FURY Beast DDR4 KF432C16BBK2/16",
+    "twName": "Kingston FURY Beast DDR4-3200 16GB (8GBx2)",
+    "sourceUrl": "https://www.kingston.com/datasheets/KF432C16BBK2_16.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "datasheet：『kit of two 1G x 64-bit (8GB) DDR4-3200 CL16 SDRAM … 1Rx8』；Default (JEDEC)『DDR4-2400 CL17-17-17 @ 1.2V』；XMP Profile #1『DDR4-3200 CL16-18-18 @ 1.35V』、#2 DDR4-3000。高度原文『Height 1.34\" (34mm), w/heatsink』。",
+    "memoryType": "DDR4",
+    "moduleCapacityGb": 8,
+    "moduleCount": 2,
+    "speedMts": 3200,
+    "rank": 1,
+    "requiresXmpExpo": true,
+    "moduleHeightMm": 34
+  },
+  {
+    "id": "corsair-dominator-titanium-rgb-cmp32gx5m2b6000z30w",
+    "category": "ram",
+    "brand": "CORSAIR",
+    "model": "DOMINATOR TITANIUM RGB DDR5 CMP32GX5M2B6000Z30W",
+    "twName": "CORSAIR DOMINATOR TITANIUM RGB DDR5-6000 32GB (16GBx2) 白",
+    "sourceUrl": "https://www.corsair.com/us/en/p/memory/cmp32gx5m2b6000z30w/dominator-titanium-rgb-32gb-2x16gb-ddr5-dram-6000mts-cl30-amd-expo-intel-xmp-memory-kit-white-cmp32gx5m2b6000z30w",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "Tech Specs：『32GB (2 x 16GB)』『Tested Speed 6000 MT/s』『SPD Speed 4800MHz』『Tested Latency 30』『Tested Voltage 1.40V』『AMD EXPO & Intel XMP』→ requiresXmpExpo = true。產品頁 Overview 段落寫『96GB / Two 48GB modules』，與 Tech Specs 及標題（32GB）矛盾，以 Tech Specs 為準。rank 官方未寫。產品頁沒有高度；高度取自 Corsair A115 相容性文章『the Dominator Titanium RGB at 56.75mm』，該文未說明是否含頂蓋（官方 help 文章 RAM Memory Module Dimensions 有分含/不含 top bar，但 WebFetch 回 403，未讀取）。待確認：56.75 是否含頂蓋、是否適用此白色 2x16GB 套裝。",
+    "memoryType": "DDR5",
+    "moduleCapacityGb": 16,
+    "moduleCount": 2,
+    "speedMts": 6000,
+    "requiresXmpExpo": true,
+    "moduleHeightMm": 56.75,
+    "additionalSources": [
+      {
+        "url": "https://www.corsair.com/us/en/explorer/diy-builder/cpu-coolers/corsair-a115-cpu-air-cooler-ram-height-compatibility/",
+        "fields": [
+          "moduleHeightMm"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "corsair-vengeance-lpx-cmk32gx4m4b3200c16",
+    "category": "ram",
+    "brand": "CORSAIR",
+    "model": "VENGEANCE LPX DDR4 CMK32GX4M4B3200C16",
+    "twName": "CORSAIR VENGEANCE LPX DDR4-3200 32GB (8GBx4) 黑",
+    "sourceUrl": "https://www.corsair.com/us/en/p/memory/cmk32gx4m4b3200c16/vengeancea-lpx-32gb-4-x-8gb-ddr4-dram-3200mhz-c16-memory-kit-black-cmk32gx4m4b3200c16",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "Tech Specs：『32GB (4 x 8GB)』『Tested Speed 3200 MT/s』『SPD Speed 2133MHz』『Tested Latency 16』『Tested Voltage 1.35V』『XMP 2.0』→ requiresXmpExpo = true。rank 官方未寫。產品頁無高度（只寫 Low-profile design）；高度取自 Corsair『DDR4 memory module dimensions』頁：『VENGEANCE LPX | CMK | 135mm | 6.64mm | 33.53mm』（Length / Width / Height），為系列共用數值。",
+    "memoryType": "DDR4",
+    "moduleCapacityGb": 8,
+    "moduleCount": 4,
+    "speedMts": 3200,
+    "requiresXmpExpo": true,
+    "moduleHeightMm": 33.53,
+    "additionalSources": [
+      {
+        "url": "https://www.corsair.com/us/en/explorer/diy-builder/memory/ddr4-memory-module-dimensions/",
+        "fields": [
+          "moduleHeightMm"
+        ]
+      }
+    ]
   }
 ]

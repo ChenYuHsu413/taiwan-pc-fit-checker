@@ -1,47 +1,5 @@
 [
   {
-    "id": "thermalright-frozen-warframe-240",
-    "category": "aio",
-    "brand": "利民 Thermalright",
-    "model": "Frozen Warframe 240",
-    "twName": "利民 Frozen Warframe 240 一體式水冷",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "radiatorSize": 240,
-    "radiatorLengthMm": 277,
-    "radiatorWidthMm": 120,
-    "radiatorThicknessMm": 27,
-    "fanThicknessMm": 25
-  },
-  {
-    "id": "deepcool-lt720",
-    "category": "aio",
-    "brand": "九州風神 DeepCool",
-    "model": "LT720",
-    "twName": "DeepCool LT720 360 一體式水冷",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "radiatorSize": 360,
-    "radiatorLengthMm": 397,
-    "radiatorWidthMm": 120,
-    "radiatorThicknessMm": 27,
-    "fanThicknessMm": 25
-  },
-  {
-    "id": "nzxt-kraken-280",
-    "category": "aio",
-    "brand": "NZXT",
-    "model": "Kraken 280",
-    "twName": "NZXT Kraken 280 一體式水冷（含 LCD 顯示器）",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "radiatorSize": 280,
-    "radiatorLengthMm": 316,
-    "radiatorWidthMm": 140,
-    "radiatorThicknessMm": 30,
-    "fanThicknessMm": 26
-  },
-  {
     "id": "arctic-liquid-freezer-iii-pro-360",
     "category": "aio",
     "brand": "ARCTIC",
@@ -68,6 +26,145 @@
           "fanThicknessMm"
         ]
       }
+    ]
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "arctic-liquid-freezer-iii-pro-420",
+    "category": "aio",
+    "brand": "ARCTIC",
+    "model": "Liquid Freezer III Pro 420",
+    "twName": "ARCTIC Liquid Freezer III Pro 420",
+    "sourceUrl": "https://www.arctic.de/en/Liquid-Freezer-III-Pro-420/ACFRE00181A",
+    "additionalSources": [
+      {
+        "url": "https://support.arctic.de/products/liquid-freezer-iii-pro-420/techdocs/LF3%20Pro%20420%202D%20Drawing.pdf",
+        "fields": [
+          "radiatorLengthMm",
+          "radiatorWidthMm",
+          "radiatorThicknessMm",
+          "fanThicknessMm"
+        ]
+      },
+      {
+        "url": "https://www.arctic.de/media/be/ab/cd/1749043600/Spec_Sheet_Liquid_Freezer_III_Pro_420_A-RGB_EN.pdf",
+        "fields": [
+          "radiatorLengthMm"
+        ]
+      },
+      {
+        "url": "https://support.arctic.de/liquid-freezer-iii-pro-420",
+        "fields": [
+          "supportedSockets"
+        ]
+      }
+    ],
+    "notes": "ACFRE00181A（無燈）。產品頁規格區塊無法以文字讀取，改用官方文件：2D Drawing（support 頁該型號文件，第 2 頁標『Liquid Freezer III Pro 420 P/N: ACFRE00185A』）標排 456.0 × 138.0 × 38.0、風扇 27.00、排＋扇 68.0；A-RGB 版 Spec Sheet 寫『Dimensions 458 (L) x 138 (W) x 38 (H) mm』、風扇圖 27mm。長度兩份官方文件差 2mm，取較大的 458（待確認）。腳位取自 support 手冊頁：AM5 / AM4、LGA1851 / LGA1700。",
+    "radiatorSize": 420,
+    "radiatorLengthMm": 458,
+    "radiatorWidthMm": 138,
+    "radiatorThicknessMm": 38,
+    "fanThicknessMm": 27,
+    "supportedSockets": [
+      "LGA1851",
+      "LGA1700",
+      "AM5",
+      "AM4"
+    ]
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "lian-li-galahad-ii-trinity-360",
+    "category": "aio",
+    "brand": "Lian Li",
+    "model": "GALAHAD II Trinity 360",
+    "twName": "聯力 GA II Trinity 360",
+    "sourceUrl": "https://lian-li.com/product/galahad-ii-trinity/",
+    "notes": "GA2T36B / GA2T36W（一般版，非 SL-INF / Performance；240 與 360 同頁）。排尺寸原文『397.5mm x 119.2mm x 27mm』；風扇『120 x 120 x 25mm』。腳位原文『Intel: LGA 1851 / 1700 / 1200 / 115x』『AMD: AM5 / AM4』，115x 展開為 1150/1151/1155/1156（待確認）。",
+    "radiatorSize": 360,
+    "radiatorLengthMm": 397.5,
+    "radiatorWidthMm": 119.2,
+    "radiatorThicknessMm": 27,
+    "fanThicknessMm": 25,
+    "supportedSockets": [
+      "LGA1851",
+      "LGA1700",
+      "LGA1200",
+      "LGA1150",
+      "LGA1151",
+      "LGA1155",
+      "LGA1156",
+      "AM5",
+      "AM4"
+    ]
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "lian-li-galahad-ii-trinity-240",
+    "category": "aio",
+    "brand": "Lian Li",
+    "model": "GALAHAD II Trinity 240",
+    "twName": "聯力 GA II Trinity 240",
+    "sourceUrl": "https://lian-li.com/product/galahad-ii-trinity/",
+    "notes": "GA2T24B / GA2T24W（一般版；240 與 360 同頁）。排尺寸原文『277.5mm x 119.2mm x 27mm』；風扇『120 x 120 x 25mm』（一般版共用一列）。腳位原文『Intel: LGA 1851 / 1700 / 1200 / 115x』『AMD: AM5 / AM4』，115x 展開為 1150/1151/1155/1156（待確認）。",
+    "radiatorSize": 240,
+    "radiatorLengthMm": 277.5,
+    "radiatorWidthMm": 119.2,
+    "radiatorThicknessMm": 27,
+    "fanThicknessMm": 25,
+    "supportedSockets": [
+      "LGA1851",
+      "LGA1700",
+      "LGA1200",
+      "LGA1150",
+      "LGA1151",
+      "LGA1155",
+      "LGA1156",
+      "AM5",
+      "AM4"
+    ]
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "corsair-icue-link-titan-ii-360-rx-rgb",
+    "category": "aio",
+    "brand": "CORSAIR",
+    "model": "iCUE LINK TITAN II 360 RX RGB",
+    "twName": "海盜船 iCUE LINK TITAN II 360 RX RGB",
+    "sourceUrl": "https://www.corsair.com/us/en/p/cpu-coolers/CW-9061037-WW/icue-link-titan-ii-360-rx-rgb-aio-liquid-cpu-cooler-cw-9061037-ww",
+    "notes": "CW-9061037-WW。規格表只有『Radiator Size: 360mm』，沒有排的長 / 寬 / 厚與風扇厚度；另有『Product Length 396 / Product Width 125 / Product Height 125』（無單位，未說明是排或整組），不填。腳位原文『Compatible with AMD® AM5/AM4 and Intel® LGA 1851/1700 CPUs』。Tubing Length 450mm。",
+    "radiatorSize": 360,
+    "supportedSockets": [
+      "AM5",
+      "AM4",
+      "LGA1851",
+      "LGA1700"
+    ]
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "thermalright-aqua-elite-360-argb-black-v6",
+    "category": "aio",
+    "brand": "Thermalright",
+    "model": "Aqua Elite 360 ARGB BLACK V6",
+    "twName": "利民 Aqua Elite 360 ARGB BLACK V6",
+    "sourceUrl": "https://www.thermalright.com/product/aqua-elite-360-argb-black-v6/",
+    "notes": "排尺寸原文『L397 mm x W120 mm x H27 mm』；風扇 TL-N12-R5-S『L120 mm x W120 mm x H25 mm』（H = 厚度）。腳位原文『Intel：LGA115X/1200/1700/1851 AMD：AM4/AM5』，115X 展開為 1150/1151/1155/1156（待確認）。管長未寫。",
+    "radiatorSize": 360,
+    "radiatorLengthMm": 397,
+    "radiatorWidthMm": 120,
+    "radiatorThicknessMm": 27,
+    "fanThicknessMm": 25,
+    "supportedSockets": [
+      "LGA1851",
+      "LGA1700",
+      "LGA1200",
+      "LGA1150",
+      "LGA1151",
+      "LGA1155",
+      "LGA1156",
+      "AM5",
+      "AM4"
     ]
   }
 ]

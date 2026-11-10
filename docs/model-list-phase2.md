@@ -149,3 +149,40 @@
 | 前面板不能裝水冷排的機殼 | O11 VISION COMPACT、LANCOOL 207、LANCOOL 217、3500X、A3-mATX |
 | PCIe x8 顯卡 | RTX 5060 Ti VENTUS 2X（官方明寫 uses x8） |
 | AMD 4 條 2R 降速 | FURY Beast 4×32GB 2Rx8 × Ryzen 9000 |
+
+## Phase 2b 實際收錄結果（2026-11-10）
+
+共 71 筆，全部有官方 `sourceUrl` 與 `specVerifiedAt`；mock 資料與價格已全部刪除。
+
+| 類別 | 筆數 | 品牌 | 與清單的差異 |
+|---|---|---|---|
+| 機殼 | 10 | Lian Li 4、Fractal Design 2、MONTECH、CORSAIR、HYTE、Cooler Master 各 1 | 無 |
+| 主機板 | 15 | ASUS 9、MSI 2、GIGABYTE 2、ASRock 2 | 新增 `msi-mag-b650-tomahawk-wifi`、`msi-pro-b760m-a-wifi`、`gigabyte-b650-aorus-elite-ax`、`gigabyte-b760m-aorus-elite-ax`（取代拿不到的 B760M DS3H AX）、`asrock-b850m-pro-rs-wifi`、`asrock-b550m-pro4`（AM4） |
+| CPU | 3 | Intel 3 | **AMD 7 顆全部拿不到**（www.amd.com 對自動讀取逾時），含 AM4 的 Ryzen 5 5600、Ryzen 7 5800X3D |
+| RAM | 6 | Kingston 4、CORSAIR 2 | 無 |
+| 顯卡 | 10 | ASUS 6、MSI 2、SAPPHIRE 2 | GIGABYTE 2 張拿不到（官網 403） |
+| 塔散 | 7 | Noctua 3、DeepCool 2、Thermalright 2 | be quiet! DARK ROCK PRO 5 拿不到（官網 403）。NH-L12Sx77 官方高度 77 mm（不是 93），等於 Terra 上限 |
+| AIO | 6 | ARCTIC 2、Lian Li 2、CORSAIR、Thermalright 各 1 | 無 |
+| PSU | 8 | FSP 4、Cooler Master 3、Lian Li 1 | 無 |
+| M.2 SSD | 6 | Samsung 3、Kingston 3 | id 一律含容量：`kingston-fury-renegade-g5-2tb`、`samsung-990-pro-heatsink-4tb`、`samsung-990-evo-plus-4tb`、`kingston-nv3-1tb-2280`、`kingston-nv3-1tb-2230` |
+
+拿不到與待確認的細節見 `docs/pending.md`。
+
+### 資料抽查（獨立 Agent，2026-11-10）
+
+隨機抽 10 筆、由未參與收資料的 Agent 重新開官方頁逐欄比對：**57 個欄位 57 個一致，沒有發現錯誤**。`noctua-nh-d15-g2` 規格頁回 429 無法重開，依規則改抽補位。
+
+| id | 比對欄位 / 一致 |
+|---|---|
+| intel-core-ultra-7-270k-plus | 8 / 8 |
+| deepcool-ak620-digital | 4 / 4 |
+| samsung-990-pro-heatsink-4tb | 4 / 4 |
+| lian-li-sp850 | 6 / 6 |
+| fsp-hexa-85-plus-650w | 5 / 5 |
+| noctua-nh-l12sx77 | 2 / 2（只能用官方 infosheet，規格頁 429） |
+| kingston-fury-beast-kf432c16bbk2-16 | 7 / 7 |
+| sapphire-nitro-plus-rx-9070-xt | 10 / 10 |
+| kingston-fury-beast-kf556c40bbk4-128 | 7 / 7 |
+| samsung-990-evo-plus-4tb（補抽） | 4 / 4 |
+
+抽查提出的疑點已併入 `docs/pending.md`（D-17、D-24、R-12、D-38）。

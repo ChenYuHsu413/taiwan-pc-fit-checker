@@ -1,53 +1,363 @@
 [
   {
-    "id": "asus-rog-strix-b650-a-gaming-wifi",
+    "id": "asus-rog-strix-b850-i-gaming-wifi",
     "category": "motherboard",
-    "brand": "華碩 ASUS",
-    "model": "ROG STRIX B650-A GAMING WIFI",
-    "twName": "華碩 ROG STRIX B650-A GAMING WIFI 主機板",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "formFactor": "ATX",
-    "socket": "AM5",
-    "chipset": "B650",
-    "dimensions": {
-      "heightMm": 305,
-      "depthMm": 244
-    },
-    "memoryType": "DDR5"
-  },
-  {
-    "id": "msi-pro-b760m-a-wifi",
-    "category": "motherboard",
-    "brand": "微星 MSI",
-    "model": "PRO B760M-A WIFI",
-    "twName": "微星 PRO B760M-A WIFI 主機板（M-ATX）",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "formFactor": "M-ATX",
-    "socket": "LGA1700",
-    "chipset": "B760",
-    "dimensions": {
-      "heightMm": 244,
-      "depthMm": 244
-    }
-  },
-  {
-    "id": "gigabyte-b650i-aorus-ultra",
-    "category": "motherboard",
-    "brand": "技嘉 GIGABYTE",
-    "model": "B650I AORUS ULTRA",
-    "twName": "技嘉 B650I AORUS ULTRA 主機板（ITX）",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
+    "brand": "ASUS",
+    "model": "ROG STRIX B850-I GAMING WIFI",
+    "twName": "ROG STRIX B850-I GAMING WIFI",
+    "sourceUrl": "https://rog.asus.com/motherboards/rog-strix/rog-strix-b850-i-gaming-wifi/spec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『6.7 inch x 6.7 inch (17 cm x 17 cm)』。記憶體速度原文『8200+MT/s(OC) with Ryzen 9000, 9600+MT/s(OC) with Ryzen 8000, 8000+MT/s(OC) with Ryzen 7000』，依 CPU 而異且為 OC 值，未填。槽位以 Ryzen 9000/7000 填入；Ryzen 8000 差異用 laneSharing（cpuGeneration）：規格頁『Ryzen 8000 Series: 1 x PCIe 4.0 x16 slot』（未寫降通道數，只降世代）、M.2_1/M.2_2『supports PCIe 4.0 x4 mode』。槽位名稱 PCIEX16(G5)、M.2_1、M.2_2 取自手冊 E25172 p.18/p.21。M.2 官方逐槽只列 PCIe 模式 → supportsSata = false。兩個 M.2 都列在 CPU 段落下 → laneSource = cpu。影像輸出：1 x HDMI + 1 x USB Type-C DP。CPU 支援清單 rog.asus.com helpdesk_cpu 頁讀不到表格內容，未填 cpuSupportListUrl。注意：手冊規格摘要 Ryzen 8000 段落把 M.2_1 重複列兩次（應為 M.2_1/M.2_2，p.21 正確）。",
     "formFactor": "ITX",
     "socket": "AM5",
-    "chipset": "B650",
+    "chipset": "B850",
     "dimensions": {
       "heightMm": 170,
       "depthMm": 170
     },
-    "memoryType": "DDR5"
+    "memoryType": "DDR5",
+    "memorySlots": 2,
+    "maxMemoryCapacityGb": 128,
+    "pcieX16Slots": [
+      {
+        "label": "PCIEX16(G5)",
+        "gen": 5,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M.2_1",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_2",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      }
+    ],
+    "laneSharing": [
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16(G5)"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4
+        },
+        "sourceText": "Ryzen 8000 Series: 1 x PCIe 4.0 x16 slot with Q-Release Slim"
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M.2_1"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4
+        },
+        "sourceText": "Ryzen 8000 Series: M.2_1 (Key M), type 2242/2260/2280 (supports PCIe 4.0x4 mode)"
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M.2_2"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4
+        },
+        "sourceText": "Ryzen 8000 Series: M.2_2 (Key M), type 2242/2260/2280 (supports PCIe 4.0 x4 mode)"
+      }
+    ],
+    "biosFlashback": true,
+    "hasVideoOutput": true,
+    "additionalSources": [
+      {
+        "url": "https://dlcdnets.asus.com/pub/ASUS/mb/SocketAM5/ROG_STRIX_B850-I_GAMING_WIFI/E25172_ROG_STRIX_B850-I_GAMING_WIFI_EM_WEB_new.pdf",
+        "fields": [
+          "pcieX16Slots[].label",
+          "m2Slots[].label"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "asus-tuf-gaming-b650m-plus-wifi",
+    "category": "motherboard",
+    "brand": "ASUS",
+    "model": "TUF GAMING B650M-PLUS WIFI",
+    "twName": "TUF GAMING B650M-PLUS WIFI",
+    "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/techspec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『9.6 inch x 9.6 inch (24.4 cm x 24.4 cm)』。記憶體速度原文『7600+(OC)/…/5600(OC)/5200/5000/4800』，最高值為 OC，未填（非 OC 最高為 5200）。槽位以 Ryzen 9000/7000 填入；Ryzen 8000：PCIe『1 x PCIe 4.0 x16 slot (supports x8/x4 mode)』→ downgraded lanes 8（x4 為部分 8000 型號，官方未逐型號說明）；M.2_1『supports PCIe 4.0 x4 mode』；M.2_2『supports PCIe 4.0 x4/x2 mode』→ 依型號 x4 或 x2，無法結構化，未寫入 laneSharing。M.2_2 列在 CPU 段落下 → laneSource cpu。PCIEX16_2 為晶片組『1 x PCIe 4.0 x16 slot (supports x4 mode)』；另有 1 x PCIe 4.0 x1（非 x16 不列）。槽位名稱取自手冊 E20197 p.1-1 佈局圖；佈局圖標示 M.2_1『PCIE 5.0 X4 / SATA X』、M.2_2『PCIE 4.0 X4 / SATA X』→ supportsSata = false。影像輸出：1 x DP + 1 x HDMI。手冊為 2022 首版（只寫 Ryzen 7000），以規格頁為準。",
+    "formFactor": "M-ATX",
+    "socket": "AM5",
+    "chipset": "B650",
+    "dimensions": {
+      "heightMm": 244,
+      "depthMm": 244
+    },
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "maxMemoryCapacityGb": 256,
+    "pcieX16Slots": [
+      {
+        "label": "PCIEX16_1",
+        "gen": 4,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      },
+      {
+        "label": "PCIEX16_2",
+        "gen": 4,
+        "electricalLanes": 4,
+        "laneSource": "chipset"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M.2_1",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_2",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      }
+    ],
+    "laneSharing": [
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16_1"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4,
+          "lanes": 8
+        },
+        "sourceText": "Ryzen 8000 Series: 1 x PCIe 4.0 x16 slot (supports x8/x4 mode)"
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M.2_1"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4
+        },
+        "sourceText": "Ryzen 8000 Series: M.2_1 slot (Key M), type 2242/2260/2280 (supports PCIe 4.0 x4 mode)"
+      }
+    ],
+    "biosFlashback": true,
+    "hasVideoOutput": true,
+    "cpuSupportListUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/helpdesk_cpu/",
+    "additionalSources": [
+      {
+        "url": "https://dlcdnets.asus.com/pub/ASUS/mb/Socket%20AM5/TUF_GAMING_B650M-PLUS_WIFI/E20197_TUF_GAMING_B650M-PLUS_WIFI_UM_WEB.pdf",
+        "fields": [
+          "pcieX16Slots[].label",
+          "m2Slots[].label",
+          "m2Slots[].supportsSata"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "asus-tuf-gaming-b850-plus-wifi",
+    "category": "motherboard",
+    "brand": "ASUS",
+    "model": "TUF GAMING B850-PLUS WIFI",
+    "twName": "TUF GAMING B850-PLUS WIFI",
+    "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850-plus-wifi/techspec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『12 inch x 9.6 inch ( 30.5 cm x 24.4 cm )』。記憶體速度原文『up to 8000+MT/s (OC) with Ryzen 9000 & 8000 & 7000』，OC 值未填。槽位以 Ryzen 9000/7000 填入；Ryzen 8000：『1 x PCIe 4.0 x16 slot (supports x8/x4 mode)』→ downgraded lanes 8（x4 為部分型號）；M.2_1 降為 PCIe 4.0 x4；M.2_2『supports PCIe 4.0 x4/x2 mode』依型號而異，未結構化。共用通道原文『The PCIEX16(G4) shares bandwidth with M.2_3. The PCIEX16(G4) will be disabled when M.2_3 runs.』（手冊 E25809 p.xiv 共用表一致）。另有 2 x PCIe 4.0 x1（非 x16 不列）。M.2 官方逐槽只列 PCIe 模式 → supportsSata = false。槽位名稱取自規格頁與手冊佈局圖。影像輸出：1 x DP + 1 x HDMI。",
+    "formFactor": "ATX",
+    "socket": "AM5",
+    "chipset": "B850",
+    "dimensions": {
+      "heightMm": 305,
+      "depthMm": 244
+    },
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "maxMemoryCapacityGb": 256,
+    "pcieX16Slots": [
+      {
+        "label": "PCIEX16(G5)",
+        "gen": 5,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      },
+      {
+        "label": "PCIEX16(G4)",
+        "gen": 4,
+        "electricalLanes": 4,
+        "laneSource": "chipset"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M.2_1",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_2",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280",
+          "22110"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_3",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280"
+        ],
+        "laneSource": "chipset",
+        "supportsSata": false
+      }
+    ],
+    "laneSharing": [
+      {
+        "when": {
+          "kind": "m2Slot",
+          "label": "M.2_3"
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16(G4)"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "The PCIEX16(G4) shares bandwidth with M.2_3. The PCIEX16(G4) will be disabled when M.2_3 runs."
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16(G5)"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4,
+          "lanes": 8
+        },
+        "sourceText": "AMD Ryzen 8000 Series Desktop Processors: 1 x PCIe 4.0 x16 slot (supports x8/x4 mode)"
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M.2_1"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4
+        },
+        "sourceText": "AMD Ryzen 8000 Series Desktop Processors: M.2_1 slot (Key M), type 2280 (supports PCIe 4.0 x4 mode)"
+      }
+    ],
+    "biosFlashback": true,
+    "hasVideoOutput": true,
+    "cpuSupportListUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850-plus-wifi/helpdesk_cpu/",
+    "additionalSources": [
+      {
+        "url": "https://dlcdnets.asus.com/pub/ASUS/mb/SocketAM5/TUF_GAMING_B850-PLUS_WIFI/E25809_TUF_GAMING_B850-PLUS_WIFI_UM_V2_WEB.pdf",
+        "fields": [
+          "laneSharing",
+          "pcieX16Slots[].label"
+        ]
+      }
+    ]
   },
   {
     "id": "asus-rog-strix-x870e-e-gaming-wifi",
@@ -245,5 +555,1081 @@
         ]
       }
     ]
+  },
+  {
+    "id": "asus-rog-crosshair-x870e-extreme",
+    "category": "motherboard",
+    "brand": "ASUS",
+    "model": "ROG CROSSHAIR X870E EXTREME",
+    "twName": "ROG CROSSHAIR X870E EXTREME",
+    "sourceUrl": "https://rog.asus.com/motherboards/rog-crosshair/rog-crosshair-x870e-extreme/spec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『12 inch x 10.9 inch (30.5 cm x 27.7 cm)』。記憶體速度原文『8200+MT/s(OC) with Ryzen 9000, 9000+MT/s(OC) with Ryzen 8000, 8000+MT/s(OC) with Ryzen 7000』，未填。PCIe：Ryzen 9000/7000『2 x PCIe 5.0 x16 slots (supports x16 or x8/x8 or x8/x4/x4 modes)』，PCIEX16_2 最高 x8。槽位名稱：規格頁同時出現『PCIEx16(G5)_1』與註腳『PCIEX16_1』，採註腳寫法；未找到本板英文手冊（dlcdnets 搜尋無結果），未以手冊核對。共用通道（規格頁註腳）：『When both PCIEX16_1 and PCIEX16_2 are in use, they will each run in x8 mode.』『When M.2_2 is enabled, but M.2_3 is not in use, PCIEX16_1 will run in x8 mode and PCIEX16_2 will be disabled.』『When M.2_3 is enabled, but M.2_2 is not in use, PCIEX16_1 will run in x8 mode and PCIEX16_2 will run in x4 mode.』『When both M.2_2 and M.2_3 are enabled, PCIEX16_1 will run in x8 mode and PCIEX16_2 will be disabled.』（兩者都用的情況 = 各自規則的聯集）。Ryzen 8000：8700/8600/8400 總頻寬 x8、8500/8300 總頻寬 x4，PCIEX16_2 停用（laneSharing 以 x8 表示，x4 型號見原文）；M.2_1 降為 PCIe 4.0 x4；M.2_2、M.2_3『Not supports』。DIMM.2_1 / DIMM.2_2（ROG Q-DIMM.2 擴充卡，PCIe 4.0 x4，晶片組）與 SlimSAS（PCIe 4.0 x4）不列入 m2Slots。M.2 官方逐槽只列 PCIe 模式 → supportsSata = false。影像輸出：1 x HDMI + 2 x USB4 Type-C DP。",
+    "formFactor": "E-ATX",
+    "socket": "AM5",
+    "chipset": "X870E",
+    "dimensions": {
+      "heightMm": 305,
+      "depthMm": 277
+    },
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "maxMemoryCapacityGb": 256,
+    "pcieX16Slots": [
+      {
+        "label": "PCIEX16_1",
+        "gen": 5,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      },
+      {
+        "label": "PCIEX16_2",
+        "gen": 5,
+        "electricalLanes": 8,
+        "laneSource": "cpu"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M.2_1",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280",
+          "22110"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_2",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_3",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280",
+          "22110"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      }
+    ],
+    "laneSharing": [
+      {
+        "when": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16_2"
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16_1"
+        },
+        "effect": {
+          "kind": "reducedLanes",
+          "lanes": 8
+        },
+        "sourceText": "When both PCIEX16_1 and PCIEX16_2 are in use, they will each run in x8 mode."
+      },
+      {
+        "when": {
+          "kind": "m2Slot",
+          "label": "M.2_2"
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16_1"
+        },
+        "effect": {
+          "kind": "reducedLanes",
+          "lanes": 8
+        },
+        "sourceText": "When M.2_2 is enabled, but M.2_3 is not in use, PCIEX16_1 will run in x8 mode and PCIEX16_2 will be disabled."
+      },
+      {
+        "when": {
+          "kind": "m2Slot",
+          "label": "M.2_2"
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16_2"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "When M.2_2 is enabled, but M.2_3 is not in use, PCIEX16_1 will run in x8 mode and PCIEX16_2 will be disabled."
+      },
+      {
+        "when": {
+          "kind": "m2Slot",
+          "label": "M.2_3"
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16_1"
+        },
+        "effect": {
+          "kind": "reducedLanes",
+          "lanes": 8
+        },
+        "sourceText": "When M.2_3 is enabled, but M.2_2 is not in use, PCIEX16_1 will run in x8 mode and PCIEX16_2 will run in x4 mode."
+      },
+      {
+        "when": {
+          "kind": "m2Slot",
+          "label": "M.2_3"
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16_2"
+        },
+        "effect": {
+          "kind": "reducedLanes",
+          "lanes": 4
+        },
+        "sourceText": "When M.2_3 is enabled, but M.2_2 is not in use, PCIEX16_1 will run in x8 mode and PCIEX16_2 will run in x4 mode."
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16_1"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4,
+          "lanes": 8
+        },
+        "sourceText": "AMD Ryzen 8700 & 8600 & 8400 Series: 2 x PCIe 4.0 x16 slots with Q-Release Slim (only supports PCIEx16(G5)_1 & total bandwidth for x8, PCIEx16(G5)_2 will be disabled)"
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16_2"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "AMD Ryzen 8700 & 8600 & 8400 Series: 2 x PCIe 4.0 x16 slots with Q-Release Slim (only supports PCIEx16(G5)_1 & total bandwidth for x8, PCIEx16(G5)_2 will be disabled)"
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M.2_1"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4
+        },
+        "sourceText": "AMD Ryzen 8000 Series: M.2_1 slot (Key M), type 2242/2260/2280/22110 (supports PCIe 4.0 x4 mode)"
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M.2_2"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "AMD Ryzen 8000 Series: M.2_2 slot (Key M), type 2242/2260/2280 (Not supports)"
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M.2_3"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "AMD Ryzen 8000 Series: M.2_3 slot (Key M), type 2242/2260/2280/22110 (Not supports)"
+      }
+    ],
+    "biosFlashback": true,
+    "hasVideoOutput": true
+  },
+  {
+    "id": "asus-tuf-gaming-b760m-plus-wifi",
+    "category": "motherboard",
+    "brand": "ASUS",
+    "model": "TUF GAMING B760M-PLUS WIFI",
+    "twName": "TUF GAMING B760M-PLUS WIFI",
+    "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b760m-plus-wifi/techspec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『9.6inch x 9.6 inch ( 24.4 cm x 24.4 cm )』。記憶體原文『4 x DIMM slots, Max. 192GB, DDR5 7200+(OC)/…/5800(OC)/5600/5400/…/4800』，最高值為 OC，未填（非 OC 最高 5600）。PCIe：CPU『1 x PCIe 5.0 x16 slot』；B760『1 x PCIe 4.0 x16 slot (supports x4 mode)』；另有 1 x PCIe 4.0 x1（非 x16 不列）。規格頁沒有共用通道註腳。槽位名稱取自手冊佈局圖（PCIEX16(G5)、PCIEX16(G4)、M.2_1、M.2_2）；佈局圖標示兩個 M.2『PCIE 4.0 X4 / SATA X』→ supportsSata = false。BIOS FlashBack：規格頁與手冊皆未提及（只有 CrashFree BIOS 3 / EZ Flash 3），留空。影像輸出：1 x DP + 1 x HDMI。CPU 支援清單頁讀不到表格內容（只有分頁標籤）。",
+    "formFactor": "M-ATX",
+    "socket": "LGA1700",
+    "chipset": "B760",
+    "dimensions": {
+      "heightMm": 244,
+      "depthMm": 244
+    },
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "maxMemoryCapacityGb": 192,
+    "pcieX16Slots": [
+      {
+        "label": "PCIEX16(G5)",
+        "gen": 5,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      },
+      {
+        "label": "PCIEX16(G4)",
+        "gen": 4,
+        "electricalLanes": 4,
+        "laneSource": "chipset"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M.2_1",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_2",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "chipset",
+        "supportsSata": false
+      }
+    ],
+    "hasVideoOutput": true,
+    "cpuSupportListUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b760m-plus-wifi/helpdesk_cpu/",
+    "additionalSources": [
+      {
+        "url": "https://dlcdnets.asus.com/pub/ASUS/mb/LGA1700/TUF_GAMING_B760M-PLUS_WIFI/E21633_TUF_GAMING_B760M-PLUS_WIFI_UM_WEB.pdf",
+        "fields": [
+          "pcieX16Slots[].label",
+          "m2Slots[].label",
+          "m2Slots[].supportsSata"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "asus-tuf-gaming-b760m-plus-wifi-d4",
+    "category": "motherboard",
+    "brand": "ASUS",
+    "model": "TUF GAMING B760M-PLUS WIFI D4",
+    "twName": "TUF GAMING B760M-PLUS WIFI D4",
+    "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b760m-plus-wifi-d4/techspec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『9.6inch x 9.6 inch ( 24.4 cm x 24.4 cm )』。記憶體原文『4 x DIMM, Max. 128GB, DDR4 5333(OC)/…/3333(OC)/3200/3000/…/2133』，最高值為 OC，未填（非 OC 最高 3200）。PCIe：CPU『1 x PCIe 5.0 x16 slot』；B760『1 x PCIe 4.0 x16 slot (supports x4 mode)』；另有 1 x PCIe 4.0 x1（非 x16 不列）。規格頁沒有共用通道註腳。槽位名稱取自手冊佈局圖（PCIEX16(G5)、PCIEX16(G4)、M.2_1、M.2_2）；佈局圖標示兩個 M.2『PCIE 4.0 X4 / SATA X』→ supportsSata = false。BIOS FlashBack：規格頁與手冊皆未提及（只有 CrashFree BIOS 3 / EZ Flash 3），留空。影像輸出：1 x DP + 1 x HDMI。CPU 支援清單頁讀不到表格內容（只有分頁標籤）。",
+    "formFactor": "M-ATX",
+    "socket": "LGA1700",
+    "chipset": "B760",
+    "dimensions": {
+      "heightMm": 244,
+      "depthMm": 244
+    },
+    "memoryType": "DDR4",
+    "memorySlots": 4,
+    "maxMemoryCapacityGb": 128,
+    "pcieX16Slots": [
+      {
+        "label": "PCIEX16(G5)",
+        "gen": 5,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      },
+      {
+        "label": "PCIEX16(G4)",
+        "gen": 4,
+        "electricalLanes": 4,
+        "laneSource": "chipset"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M.2_1",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_2",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "chipset",
+        "supportsSata": false
+      }
+    ],
+    "hasVideoOutput": true,
+    "cpuSupportListUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b760m-plus-wifi-d4/helpdesk_cpu/",
+    "additionalSources": [
+      {
+        "url": "https://dlcdnets.asus.com/pub/ASUS/mb/LGA1700/TUF_GAMING_B760M-PLUS_WIFI_D4/E21295_TUF_GAMING_B760M-PLUS_WIFI_D4_UM_WEB.pdf",
+        "fields": [
+          "pcieX16Slots[].label",
+          "m2Slots[].label",
+          "m2Slots[].supportsSata"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "asus-tuf-gaming-z890-plus-wifi",
+    "category": "motherboard",
+    "brand": "ASUS",
+    "model": "TUF GAMING Z890-PLUS WIFI",
+    "twName": "TUF GAMING Z890-PLUS WIFI",
+    "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-z890-plus-wifi/techspec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『12 inch x 9.6 inch ( 30.5 cm x 24.4 cm )』。記憶體速度原文『Support up to 9066+MT/s (OC)』，OC 值未填。PCIe：CPU『1 x PCIe 5.0 x16 slot』；Z890『1 x PCIe 4.0 x16 slot (supports x4 mode)』『1 x PCIe 4.0 x4 slot』（PCIEX4(G4)，非 x16 不列）『2 x PCIe 4.0 x1 slots』。M.2_4『supports PCIe 4.0 x4 & SATA modes』→ supportsSata true；其餘逐槽只列 PCIe → false。規格頁與手冊 E24160 都沒有共用通道說明（只有 Hyper M.2 拆分表）。槽位名稱取自手冊 p.24 佈局。手冊提到部分 M.2 槽無散熱片，但未逐槽列出，hasHeatsink 未填。影像輸出：DP + HDMI + Thunderbolt 4 + USB 20Gbps Type-C DP。CPU 支援清單頁讀不到表格內容。",
+    "formFactor": "ATX",
+    "socket": "LGA1851",
+    "chipset": "Z890",
+    "dimensions": {
+      "heightMm": 305,
+      "depthMm": 244
+    },
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "maxMemoryCapacityGb": 256,
+    "pcieX16Slots": [
+      {
+        "label": "PCIEX16(G5)",
+        "gen": 5,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      },
+      {
+        "label": "PCIEX16(G4)",
+        "gen": 4,
+        "electricalLanes": 4,
+        "laneSource": "chipset"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M.2_1",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_2",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_3",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280",
+          "22110"
+        ],
+        "laneSource": "chipset",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_4",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "chipset",
+        "supportsSata": true
+      }
+    ],
+    "biosFlashback": true,
+    "hasVideoOutput": true,
+    "cpuSupportListUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-z890-plus-wifi/helpdesk_cpu/",
+    "additionalSources": [
+      {
+        "url": "https://dlcdnets.asus.com/pub/ASUS/mb/LGA1851/TUF_GAMING_Z890-PLUS_WIFI/E24160_TUF_GAMING_Z890-PLUS_WIFI_EM_WEB.pdf",
+        "fields": [
+          "pcieX16Slots[].label",
+          "m2Slots[].label"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "asus-tuf-gaming-b860m-plus-wifi",
+    "category": "motherboard",
+    "brand": "ASUS",
+    "model": "TUF GAMING B860M-PLUS WIFI",
+    "twName": "TUF GAMING B860M-PLUS WIFI",
+    "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b860m-plus-wifi/techspec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『9.6inch x 9.6 inch ( 24.4 cm x 24.4 cm )』。記憶體速度原文『Support up to 8800+MT/s (OC)』，OC 值未填；支援 CUDIMM。PCIe：CPU『1 x PCIe 5.0 x16 slot』；B860『1 x PCIe 4.0 x4 slot』（手冊佈局標為 PCIEX4(G4)，非 x16 不列）。規格頁沒有共用通道註腳。M.2 官方逐槽只列 PCIe 模式 → supportsSata = false。槽位名稱取自繁中手冊 T25084 佈局圖（英文手冊搜尋未找到）。BIOS FlashBack：規格頁與手冊皆未提及（只有 EZ Flash），留空。影像輸出：DP + HDMI + USB 20Gbps Type-C DP。CPU 支援清單頁讀不到表格內容。",
+    "formFactor": "M-ATX",
+    "socket": "LGA1851",
+    "chipset": "B860",
+    "dimensions": {
+      "heightMm": 244,
+      "depthMm": 244
+    },
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "maxMemoryCapacityGb": 256,
+    "pcieX16Slots": [
+      {
+        "label": "PCIEX16(G5)",
+        "gen": 5,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M.2_1",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_2",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "chipset",
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_3",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280"
+        ],
+        "laneSource": "chipset",
+        "supportsSata": false
+      }
+    ],
+    "hasVideoOutput": true,
+    "cpuSupportListUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b860m-plus-wifi/helpdesk_cpu/",
+    "additionalSources": [
+      {
+        "url": "https://dlcdnets.asus.com/pub/ASUS/mb/LGA1851/TUF_GAMING_B860M-PLUS/T25084_TUF_GAMING_B860M-PLUS_Series_EM_WEB.pdf",
+        "fields": [
+          "pcieX16Slots[].label",
+          "m2Slots[].label"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "msi-mag-b650-tomahawk-wifi",
+    "category": "motherboard",
+    "brand": "MSI",
+    "model": "MAG B650 TOMAHAWK WIFI",
+    "twName": "MAG B650 TOMAHAWK WIFI",
+    "sourceUrl": "https://storage-asset.msi.com/specSheet/fr/mb/MAG%20B650%20TOMAHAWK%20WIFI.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "msi.com 產品規格頁（含 tw/us 子站）回 403；官方手冊（download.msi.com，35MB 多語版）超過讀取上限。改用 MSI 官方 spec sheet（storage-asset.msi.com，法文版但欄位為英文，2025-06-17）與台灣 datasheet。spec sheet 原文：『PCI-E x16 slot (Qty) 2』『PCI-E x1 slot (Qty) 1』『PCI_E1 Gen PCIe 4.0 / bandwidth x16』『PCI_E2 Gen PCIe 4.0 / bandwidth x2』『PCI_E3 Gen PCIe 3.0 / bandwidth x1』；datasheet『2x PCIe 4.0 x16 slots, 1x PCIe 3.0 x1 slot』→ PCI_E2 為實體 x16、電氣 x2。槽位通道來源（CPU/晶片組）官方未寫，未填。M.2：『M.2_1/M.2_2/M.2_3 (Gen3/Gen4/Gen5) PCIe 4.0 x4』『(SATA mode) N/A』→ supportsSata = false；M.2 長度規格未寫，formFactors 未填。記憶體『4 DIMMs, Dual Channel DDR5 7600+MHz (OC)』，OC 值未填；最大容量 datasheet 未寫。尺寸未寫（只寫 PCB Form Factor ATX）。共用通道、Ryzen 8000 差異官方文件未寫。『Flash BIOS Button』→ biosFlashback true。HDMI 2.1 + DisplayPort 1.4（Requires Processor Graphics）。",
+    "formFactor": "ATX",
+    "socket": "AM5",
+    "chipset": "B650",
+    "dimensions": {},
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "pcieX16Slots": [
+      {
+        "label": "PCI_E1",
+        "gen": 4,
+        "electricalLanes": 16
+      },
+      {
+        "label": "PCI_E2",
+        "gen": 4,
+        "electricalLanes": 2
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M.2_1",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_2",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "supportsSata": false
+      },
+      {
+        "label": "M.2_3",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "supportsSata": false
+      }
+    ],
+    "biosFlashback": true,
+    "hasVideoOutput": true,
+    "additionalSources": [
+      {
+        "url": "https://storage-asset.msi.com/datasheet/mb/tw/MAG-B650-TOMAHAWK-WIFI.pdf",
+        "fields": [
+          "pcieX16Slots",
+          "biosFlashback",
+          "hasVideoOutput"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "asrock-b850m-pro-rs-wifi",
+    "category": "motherboard",
+    "brand": "ASRock",
+    "model": "B850M Pro RS WiFi",
+    "twName": "B850M Pro RS WiFi",
+    "sourceUrl": "https://download.asrock.com/Manual/B850M%20Pro%20RS.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "asrock.com 產品頁 WebFetch 讀回空白（JS 載入），規格取自官方手冊（B850M Pro RS / B850M Pro RS WiFi 共用），sourceUrl 為手冊。手冊未列板子尺寸（只寫『Micro ATX Form Factor』），dimensions 留空。PCIe：『1 x PCIe 5.0 x16 Slot (PCIE1), supports x16 mode』『1 x PCIe 4.0 x4 Slot (PCIE2), supports x4 mode』（CPU；PCIE2 手冊稱 x4 slot，未寫實體長度，不列入 pcieX16Slots）。共用：『If M2_3 is occupied, PCIE2 will be disabled.』Ryzen 8000：PCIE1『Gen4x8 with 8000 (Phoenix 1)… Gen4x4 with 8000 (Phoenix 2)』→ 以 x8 表示；M2_1『Gen4x4 with 8000 (Phoenix 1)… Gen4x2 with 8000 (Phoenix 2)』→ 只結構化世代。M2_3 在 8000 下的行為手冊未寫。M.2：M2_1 CPU Gen5x4、M2_3 CPU Gen4x4、M2_2 Chipset Gen4x4，皆 type 2280，逐槽只列 PCIe → supportsSata = false。記憶體『up to 8000+(OC)』未填。『1 x BIOS Flashback Button』。影像輸出：HDMI 2.1 + DisplayPort 1.4。",
+    "formFactor": "M-ATX",
+    "socket": "AM5",
+    "chipset": "B850",
+    "dimensions": {},
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "maxMemoryCapacityGb": 256,
+    "pcieX16Slots": [
+      {
+        "label": "PCIE1",
+        "gen": 5,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M2_1",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M2_2",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280"
+        ],
+        "laneSource": "chipset",
+        "supportsSata": false
+      },
+      {
+        "label": "M2_3",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      }
+    ],
+    "laneSharing": [
+      {
+        "when": {
+          "kind": "m2Slot",
+          "label": "M2_3"
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIE2"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "If M2_3 is occupied, PCIE2 will be disabled."
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIE1"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4,
+          "lanes": 8
+        },
+        "sourceText": "PCIE1 will run at Gen5x16 with 9000 and 7000 series processors, Gen4x8 with 8000 (Phoenix 1) series processors and Gen4x4 with 8000 (Phoenix 2) series processors."
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M2_1"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4
+        },
+        "sourceText": "M2_1 will run at Gen5x4 with 9000 and 7000 series processors, Gen4x4 with 8000 (Phoenix 1) series processors and Gen4x2 with 8000 (Phoenix 2) series processors."
+      }
+    ],
+    "biosFlashback": true,
+    "hasVideoOutput": true
+  },
+  {
+    "id": "asrock-b550m-pro4",
+    "category": "motherboard",
+    "brand": "ASRock",
+    "model": "B550M Pro4",
+    "twName": "B550M Pro4",
+    "sourceUrl": "https://download.asrock.com/Manual/B550M%20Pro4.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "asrock.com 產品頁 WebFetch 讀回空白，規格取自官方手冊（2020 年版），sourceUrl 為手冊。手冊 CPU 段只寫『3rd Gen AMD AM4 Ryzen / future AMD Ryzen Processors (3000 and 4000 Series)』，未提 Ryzen 5000；PCIe/M.2 世代只分 Matisse（3000）與 Renoir（4000G）：PCIE1『Gen4x16 (Matisse) / Gen3x16 (Renoir)』、M2_1『Gen4x4 (Matisse) or Gen3x4 (Renoir)』→ Ryzen 5000 下的世代官方手冊未寫，PCIE1 gen 與 M2_1 pcieGen 留空。PCIE3『PCIe 3.0 x16 slot … x4 lane width』兩種 CPU 皆 Gen3x4。另有 PCIE2 PCIe 3.0 x1（不列）。通道來源手冊未寫，未填。M2_2『supports M Key type 2280 M.2 SATA3 6.0 Gb/s module and M.2 PCI Express module up to Gen3 x2』→ supportsSata true；M2_1 只列 PCIe → false。共用：『M2_2 and SATA3_5_6 share lanes. If either one of them is in use, the other one will be disabled.』手冊未列板子尺寸（只寫『Micro ATX Form Factor』）。記憶體最高為 OC 值，未填；『Max. capacity of system memory: 128GB』。BIOS Flashback 手冊未提及（只有 Instant Flash），留空。影像輸出：D-Sub + HDMI + DisplayPort 1.4。",
+    "formFactor": "M-ATX",
+    "socket": "AM4",
+    "chipset": "B550",
+    "dimensions": {},
+    "memoryType": "DDR4",
+    "memorySlots": 4,
+    "maxMemoryCapacityGb": 128,
+    "pcieX16Slots": [
+      {
+        "label": "PCIE1",
+        "electricalLanes": 16
+      },
+      {
+        "label": "PCIE3",
+        "gen": 3,
+        "electricalLanes": 4
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M2_1",
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280"
+        ],
+        "supportsSata": false
+      },
+      {
+        "label": "M2_2",
+        "pcieGen": 3,
+        "pcieLanes": 2,
+        "formFactors": [
+          "2280"
+        ],
+        "supportsSata": true
+      }
+    ],
+    "laneSharing": [
+      {
+        "when": {
+          "kind": "m2Slot",
+          "label": "M2_2"
+        },
+        "affects": {
+          "kind": "sataPort",
+          "label": "SATA3_5"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "M2_2 and SATA3_5_6 share lanes. If either one of them is in use, the other one will be disabled."
+      },
+      {
+        "when": {
+          "kind": "m2Slot",
+          "label": "M2_2"
+        },
+        "affects": {
+          "kind": "sataPort",
+          "label": "SATA3_6"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "M2_2 and SATA3_5_6 share lanes. If either one of them is in use, the other one will be disabled."
+      },
+      {
+        "when": {
+          "kind": "sataPort",
+          "label": "SATA3_5"
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M2_2"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "M2_2 and SATA3_5_6 share lanes. If either one of them is in use, the other one will be disabled."
+      },
+      {
+        "when": {
+          "kind": "sataPort",
+          "label": "SATA3_6"
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M2_2"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "M2_2 and SATA3_5_6 share lanes. If either one of them is in use, the other one will be disabled."
+      }
+    ],
+    "hasVideoOutput": true
+  },
+  {
+    "id": "gigabyte-b650-aorus-elite-ax",
+    "category": "motherboard",
+    "brand": "GIGABYTE",
+    "model": "B650 AORUS ELITE AX (rev. 1.x)",
+    "twName": "B650 AORUS ELITE AX (rev. 1.x)",
+    "sourceUrl": "https://download.gigabyte.com/FileList/Manual/mb_manual_b650-aorus-elite-ax_1204_e.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "gigabyte.com 產品頁回 403，規格取自官方英文手冊 Rev. 1204（B650 AORUS ELITE AX / B650 AORUS ELITE 共用；以 curl 下載）。手冊無線模組段落列出 PCB rev. 1.0 / 1.1 / 1.2，故 pcbRevision 填 1.x（同手冊涵蓋 1.0–1.2）。尺寸原文『ATX Form Factor; 30.5cm x 24.4cm』。記憶體原文『Support for DDR5 5200/4800/4400 MT/s memory modules』（無 OC 標示，但手冊另指示依 CPU 與 Memory Support List 而定）→ maxMemorySpeedMts 填 5200 待確認是否保留。PCIe：『1 x PCI Express x16 slot (PCIEX16), integrated in the CPU: Ryzen 9000/7000 support PCIe 4.0 x16 mode; 8000 Series-Phoenix 1 … PCIe 4.0 x8 mode; Phoenix 2 … PCIe 4.0 x4 mode』→ 8000 以 x8 表示；晶片組『2 x PCI Express x16 slots, supporting PCIe 3.0 and running at x1 (PCIEX1_1/2)』（實體 x16、電氣 x1）。M.2：M2A_CPU『PCIe 5.0 x4/x2』（8000 為 4.0）、M2B_CPU『PCIe 4.0 x4/x2』（Phoenix 2 只有 x2，未結構化）、M2C_SB『PCIe 4.0 x4/x2』；長度原文『type 25110/22110/2580/2280』，25110 與 2580 不在 schema enum，只填 22110/2280。手冊 M.2 支援表 M.2 SATA SSD 欄三槽皆未勾 → supportsSata = false。手冊沒有共用通道說明。『1 x Q-Flash Plus button』→ biosFlashback true。影像輸出：1 x DP + 1 x HDMI。CPU 支援清單在 gigabyte.com（403），未填 cpuSupportListUrl / boardOverrides。",
+    "formFactor": "ATX",
+    "socket": "AM5",
+    "chipset": "B650",
+    "dimensions": {
+      "heightMm": 305,
+      "depthMm": 244
+    },
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "maxMemorySpeedMts": 5200,
+    "maxMemoryCapacityGb": 256,
+    "pcieX16Slots": [
+      {
+        "label": "PCIEX16",
+        "gen": 4,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      },
+      {
+        "label": "PCIEX1_1",
+        "gen": 3,
+        "electricalLanes": 1,
+        "laneSource": "chipset"
+      },
+      {
+        "label": "PCIEX1_2",
+        "gen": 3,
+        "electricalLanes": 1,
+        "laneSource": "chipset"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M2A_CPU",
+        "pcieGen": 5,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280",
+          "22110"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M2B_CPU",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280",
+          "22110"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M2C_SB",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280",
+          "22110"
+        ],
+        "laneSource": "chipset",
+        "supportsSata": false
+      }
+    ],
+    "laneSharing": [
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "pcieSlot",
+          "label": "PCIEX16"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4,
+          "lanes": 8
+        },
+        "sourceText": "AMD Ryzen 8000 Series-Phoenix 1 Processors support PCIe 4.0 x8 mode / Phoenix 2 Processors support PCIe 4.0 x4 mode"
+      },
+      {
+        "when": {
+          "kind": "cpuGeneration",
+          "generations": [
+            "amd-ryzen-8000"
+          ]
+        },
+        "affects": {
+          "kind": "m2Slot",
+          "label": "M2A_CPU"
+        },
+        "effect": {
+          "kind": "downgraded",
+          "gen": 4
+        },
+        "sourceText": "AMD Ryzen 8000 Series-Phoenix 1/Phoenix 2 Processors support PCIe 4.0 x4/x2 SSDs (M2A_CPU)"
+      }
+    ],
+    "biosFlashback": true,
+    "hasVideoOutput": true,
+    "pcbRevision": "1.x"
+  },
+  {
+    "id": "gigabyte-b760m-aorus-elite-ax",
+    "category": "motherboard",
+    "brand": "GIGABYTE",
+    "model": "B760M AORUS ELITE AX (rev. 1.x)",
+    "twName": "B760M AORUS ELITE AX (rev. 1.x)",
+    "sourceUrl": "https://download.gigabyte.com/FileList/Manual/mb_manual_b760m-aorus-elite_1304_e.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "替代 gigabyte-b760m-ds3h-ax：DS3H 系列手冊（mb_manual_b760m-ds3h-series_1303_e.pdf）轉址到 download1.gigabyte.com 後回 404，改收同品牌同晶片組的 B760M AORUS ELITE AX（DDR5 版）。gigabyte.com 產品頁回 403，規格取自官方英文手冊 Rev. 1304（AX / 非 AX / DDR4 版共用，此筆為 AX = DDR5）。手冊列 PCB rev. 1.0–1.3（無線模組依版本不同），pcbRevision 填 1.x。尺寸原文『Micro ATX Form Factor; 24.4cm x 24.4cm』。記憶體依 CPU 而異：『14th and 13th Gen i9/i7: DDR5 5600/5200/4800/4400』『13th Gen i5/i3 and 12th Gen: DDR5 4800/4400』→ 未填 maxMemorySpeedMts；『4 x DDR5 DIMM sockets supporting up to 256GB』。PCIe：CPU『1 x PCI Express x16 slot, supporting PCIe 4.0 and running at x16 (PCIEX16)』；晶片組『1 x PCI Express x16 slot, supporting PCIe 4.0 and running at x4 (PCIEX4)』。M.2：M2A_CPU『type 2280 PCIe 4.0 x4/x2』、M2P_SB『type 22110/2280 PCIe 4.0 x4/x2』；手冊 M.2 支援表 M.2 SATA SSD 欄未勾 → supportsSata = false。手冊沒有共用通道說明。『1 x Q-Flash Plus button』→ biosFlashback true。影像輸出：1 x HDMI + 1 x DP。CPU 支援清單在 gigabyte.com（403），未填。",
+    "formFactor": "M-ATX",
+    "socket": "LGA1700",
+    "chipset": "B760",
+    "dimensions": {
+      "heightMm": 244,
+      "depthMm": 244
+    },
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "maxMemoryCapacityGb": 256,
+    "pcieX16Slots": [
+      {
+        "label": "PCIEX16",
+        "gen": 4,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      },
+      {
+        "label": "PCIEX4",
+        "gen": 4,
+        "electricalLanes": 4,
+        "laneSource": "chipset"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M2A_CPU",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M2P_SB",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2280",
+          "22110"
+        ],
+        "laneSource": "chipset",
+        "supportsSata": false
+      }
+    ],
+    "biosFlashback": true,
+    "hasVideoOutput": true,
+    "pcbRevision": "1.x"
+  },
+  {
+    "id": "msi-pro-b760m-a-wifi",
+    "category": "motherboard",
+    "brand": "MSI",
+    "model": "PRO B760M-A WIFI",
+    "twName": "PRO B760M-A WIFI",
+    "sourceUrl": "https://download.msi.com/archive/mnu_exe/mb/PROB760M-AWIFI.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "msi.com 產品頁回 403，規格取自官方多語手冊英文段（Version 2.1, 2023/03；以 curl 下載，轉址至 download-2.msi.com）。手冊 CPU 段只寫『Supports 12th/ 13th Gen Intel Core Processors』（2023 版，未提 14 代；官方 global datasheet 2023-10 版已寫 14th/13th/12th）。DDR5 版（另有 PRO B760M-A WIFI DDR4，為不同型號）。尺寸原文『9.6 in. x 9.6 in. (244 mm x 244 mm)』。記憶體『4x DDR5 memory slots, supporting up to 192GB』『Supports 1R 5600 MHz (by JEDEC & POR)』，OC『1DPC 1R Max speed up to 6800+ MHz』→ maxMemorySpeedMts 填 JEDEC 的 5600，待確認是否保留。PCIe：『PCI_E1: PCIe 4.0 x16 (From CPU)』『PCI_E3: PCIe 4.0 x4 (From B760 chipset)』（『2x PCIe x16 slots』）；PCI_E2 為 PCIe 3.0 x1（不列）。M.2：M2_1『(From CPU) Supports up to PCIe 4.0 x4; 2242/2260/2280』；M2_2『(From B760 chipset) Supports up to PCIe 4.0 x4; Supports SATA 6Gb/s; 2242/2260/2280』。共用：『SATA8 will be unavailable when installing M.2 SATA SSD in the M2_2 slot.』BIOS：手冊只有 M-FLASH（Ctrl+F5），未提 Flash BIOS Button，biosFlashback 留空。影像輸出：2x HDMI 2.1 + 2x DisplayPort 1.4。",
+    "formFactor": "M-ATX",
+    "socket": "LGA1700",
+    "chipset": "B760",
+    "dimensions": {
+      "heightMm": 244,
+      "depthMm": 244
+    },
+    "memoryType": "DDR5",
+    "memorySlots": 4,
+    "maxMemorySpeedMts": 5600,
+    "maxMemoryCapacityGb": 192,
+    "pcieX16Slots": [
+      {
+        "label": "PCI_E1",
+        "gen": 4,
+        "electricalLanes": 16,
+        "laneSource": "cpu"
+      },
+      {
+        "label": "PCI_E3",
+        "gen": 4,
+        "electricalLanes": 4,
+        "laneSource": "chipset"
+      }
+    ],
+    "m2Slots": [
+      {
+        "label": "M2_1",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "cpu",
+        "supportsSata": false
+      },
+      {
+        "label": "M2_2",
+        "pcieGen": 4,
+        "pcieLanes": 4,
+        "formFactors": [
+          "2242",
+          "2260",
+          "2280"
+        ],
+        "laneSource": "chipset",
+        "supportsSata": true
+      }
+    ],
+    "laneSharing": [
+      {
+        "when": {
+          "kind": "m2Slot",
+          "label": "M2_2",
+          "condition": "僅在安裝 M.2 SATA SSD 時"
+        },
+        "affects": {
+          "kind": "sataPort",
+          "label": "SATA8"
+        },
+        "effect": {
+          "kind": "disabled"
+        },
+        "sourceText": "SATA8 will be unavailable when installing M.2 SATA SSD in the M2_2 slot."
+      }
+    ],
+    "hasVideoOutput": true
   }
 ]

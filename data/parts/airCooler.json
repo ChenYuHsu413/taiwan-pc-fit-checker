@@ -1,51 +1,5 @@
 [
   {
-    "id": "thermalright-peerless-assassin-120-se",
-    "category": "airCooler",
-    "brand": "利民 Thermalright",
-    "model": "Peerless Assassin 120 SE",
-    "twName": "利民 Peerless Assassin 120 SE 雙塔散熱器",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "heightMm": 155,
-    "widthMm": 130,
-    "depthMm": 135,
-    "ramClearance": {
-      "defaultMm": 33
-    }
-  },
-  {
-    "id": "deepcool-ak620",
-    "category": "airCooler",
-    "brand": "九州風神 DeepCool",
-    "model": "AK620",
-    "twName": "DeepCool AK620 雙塔散熱器",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "heightMm": 160,
-    "widthMm": 129,
-    "depthMm": 138,
-    "ramClearance": {
-      "defaultMm": 45
-    }
-  },
-  {
-    "id": "noctua-nh-d15-chromax-black",
-    "category": "airCooler",
-    "brand": "Noctua",
-    "model": "NH-D15 chromax.black",
-    "twName": "Noctua NH-D15 chromax.black 雙塔散熱器",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "notes": "雙風扇配置對記憶體高度較敏感，安裝前建議確認記憶體高度",
-    "heightMm": 165,
-    "widthMm": 150,
-    "depthMm": 161,
-    "ramClearance": {
-      "defaultMm": 32
-    }
-  },
-  {
     "id": "noctua-nh-d15-g2",
     "category": "airCooler",
     "brand": "Noctua",
@@ -79,6 +33,152 @@
           "ramClearance.defaultMm"
         ]
       }
+    ]
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "deepcool-ak620-digital",
+    "category": "airCooler",
+    "brand": "DeepCool",
+    "model": "AK620 DIGITAL",
+    "twName": "九州風神 AK620 DIGITAL",
+    "sourceUrl": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-Digital-Performance-CPU-Cooler-With-Status-Display-1851-1700-AM5/2024/17202.shtml",
+    "notes": "原文『Product Dimensions 129×138×162 mm(L×W×H)』『Heatsink Dimensions 127×110×157 mm(L×W×H)』『Fan Dimensions 120×120×25 mm』。含風扇後 W 由 110 增為 138（L 只 127→129），以有無風扇的差異判定 W 為氣流方向（schema §3.6 規則 2）→ depth 138、width 129。官方另列 LGA2011-v3，腳位格式無法表示，未列入。RAM 淨空未寫。",
+    "heightMm": 162,
+    "widthMm": 129,
+    "depthMm": 138,
+    "supportedSockets": [
+      "LGA2066",
+      "LGA2011",
+      "LGA1851",
+      "LGA1700",
+      "LGA1200",
+      "LGA1151",
+      "LGA1150",
+      "LGA1155",
+      "AM5",
+      "AM4"
+    ]
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "deepcool-ak400",
+    "category": "airCooler",
+    "brand": "DeepCool",
+    "model": "AK400",
+    "twName": "九州風神 AK400",
+    "sourceUrl": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Performance-CPU-Cooler-1851-1700-AM5/2024/15222.shtml",
+    "notes": "原文『Product Dimensions 127×97×155 mm(L×W×H)』『Heatsink Dimensions 120×45×152 mm(L×W×H)』『Fan Dimensions 120×120×25 mm』。含風扇後 W 由 45 增為 97（L 只 120→127），判定 W 為氣流方向 → depth 97、width 127（W 增加量 52mm 大於單風扇 25mm，原因官方未說明）。RAM 淨空未寫。",
+    "heightMm": 155,
+    "widthMm": 127,
+    "depthMm": 97,
+    "supportedSockets": [
+      "LGA1851",
+      "LGA1700",
+      "LGA1200",
+      "LGA1151",
+      "LGA1150",
+      "LGA1155",
+      "AM5",
+      "AM4"
+    ]
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "thermalright-peerless-assassin-120-se",
+    "category": "airCooler",
+    "brand": "Thermalright",
+    "model": "Peerless Assassin 120 SE",
+    "twName": "利民 Peerless Assassin 120 SE",
+    "sourceUrl": "https://www.thermalright.com/product/peerless-assassin-120-se/",
+    "notes": "原文『L125 mm x W110 mm x H155 mm』（Heatsink Specifications）；文字未標氣流方向（頁面尺寸圖為圖片無法讀取），width / depth 留空。腳位原文『115X/1200/1700/1851』，115X 展開為 1150/1151/1155/1156（待確認官方實際涵蓋）。RAM 淨空無數字。",
+    "heightMm": 155,
+    "supportedSockets": [
+      "LGA1851",
+      "LGA1700",
+      "LGA1200",
+      "LGA1150",
+      "LGA1151",
+      "LGA1155",
+      "LGA1156",
+      "AM5",
+      "AM4"
+    ]
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "thermalright-phantom-spirit-120-se",
+    "category": "airCooler",
+    "brand": "Thermalright",
+    "model": "Phantom Spirit 120 SE",
+    "twName": "利民 Phantom Spirit 120 SE",
+    "sourceUrl": "https://www.thermalright.com/product/phantom-spirit-120-se/",
+    "notes": "原文『L110 mm x W125 mm x H154 mm』；文字未標氣流方向（尺寸圖為圖片無法讀取），width / depth 留空。腳位原文『LGA115X/1200/1700/1851』，115X 展開為 1150/1151/1155/1156（待確認）。RAM 淨空無數字。",
+    "heightMm": 154,
+    "supportedSockets": [
+      "LGA1851",
+      "LGA1700",
+      "LGA1200",
+      "LGA1150",
+      "LGA1151",
+      "LGA1155",
+      "LGA1156",
+      "AM5",
+      "AM4"
+    ]
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "noctua-nh-l9a-am5",
+    "category": "airCooler",
+    "brand": "Noctua",
+    "model": "NH-L9a-AM5",
+    "twName": "Noctua NH-L9a-AM5",
+    "sourceUrl": "https://www.noctua.at/en/products/nh-l9a-am5/specifications",
+    "additionalSources": [
+      {
+        "url": "https://cdn.noctua.at/media/noctua_nh_l9a-am5_infosheet_en_web.pdf",
+        "fields": [
+          "heightMm",
+          "supportedSockets"
+        ]
+      }
+    ],
+    "notes": "規格頁回 429 無法讀取，數值取自官方 information sheet（cdn.noctua.at）。原文『Dimensions 114x92x23 mm』『Dimensions with NF-A9x14 HS-PWM 114x92x37 mm』，未標軸向；37 與官方內文『At a height of only 37mm』一致 → heightMm 37。下吹式，氣流垂直主機板，§3.6 的沿氣流 depth 不適用，width / depth 留空（114 / 92 待確認）。腳位『AMD AM5』。RAM：官方『neither the heatsink nor the fan overhang the RAM ... fully compatible with tall memory modules』，沒有數字，ramClearance 不填。",
+    "heightMm": 37,
+    "supportedSockets": [
+      "AM5"
+    ]
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "noctua-nh-l12sx77",
+    "category": "airCooler",
+    "brand": "Noctua",
+    "model": "NH-L12Sx77",
+    "twName": "Noctua NH-L12Sx77",
+    "sourceUrl": "https://www.noctua.at/en/products/nh-l12sx77/specifications",
+    "additionalSources": [
+      {
+        "url": "https://cdn.noctua.at/media/noctua_nh_l12sx77_infosheet_en_web.pdf",
+        "fields": [
+          "heightMm",
+          "supportedSockets"
+        ]
+      }
+    ],
+    "notes": "規格頁回 429 無法讀取，數值取自官方 information sheet（cdn.noctua.at）。原文『Dimensions 77x128x131 mm』『Dimensions with NF-A12x15 PWM 77x128x131 mm』（含 15mm 風扇仍為 77），內文『at a height of 77mm』→ heightMm 77。注意：model-list 寫 93mm，與官方 information sheet 不符（93 可能是改裝 25mm 風扇等情況，官方 sheet 未寫），以 sheet 為準（待確認）。下吹式，width / depth 留空（128 / 131）。腳位『Intel LGA1851, LGA1700, LGA1200, LGA1156, LGA1155, LGA1151, LGA1150 and AMD AM5, AM4』。風扇相容 120x120x15 / 120x120x25。RAM 淨空沒有數字（只說比 NH-L12S 改善）。",
+    "heightMm": 77,
+    "supportedSockets": [
+      "LGA1851",
+      "LGA1700",
+      "LGA1200",
+      "LGA1156",
+      "LGA1155",
+      "LGA1151",
+      "LGA1150",
+      "AM5",
+      "AM4"
     ]
   }
 ]

@@ -37,7 +37,7 @@ export default function PartsPage() {
     <main className="mx-auto max-w-6xl px-6 py-10">
       <h1 className="mb-2 text-2xl font-bold">零件資料庫 Local Parts Database</h1>
       <p className="mb-8 text-sm text-white/50">
-        本頁目前為本地 mock data（規格未驗證、尚無官方來源），價格為參考價，超過 30 天會標示「可能過時」。實際貨況與價格請以通路現場公告為準。
+        每筆零件附原廠官方規格來源與查證日期，官方未公開的欄位顯示「—」。目前沒有價格資料。實際規格與貨況請以原廠與通路公告為準。
       </p>
 
       <CategorySection title="機殼 Case" parts={catalog.case} />

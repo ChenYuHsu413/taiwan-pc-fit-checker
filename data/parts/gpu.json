@@ -1,69 +1,5 @@
 [
   {
-    "id": "msi-geforce-rtx-4070-super-gaming-x-slim",
-    "category": "gpu",
-    "brand": "微星 MSI",
-    "model": "GeForce RTX 4070 SUPER GAMING X SLIM",
-    "twName": "微星 RTX 4070 SUPER GAMING X SLIM 顯示卡",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "gpuChip": "nvidia-geforce-rtx-4070-super",
-    "lengthMm": 302,
-    "heightMm": 128,
-    "thicknessMm": 51,
-    "slotWidth": 2,
-    "powerConnectors": [
-      {
-        "type": "12V-2x6",
-        "count": 1
-      }
-    ],
-    "legacyRecommendedSideClearanceMm": 10
-  },
-  {
-    "id": "asus-tuf-gaming-rtx-4080-super-oc",
-    "category": "gpu",
-    "brand": "華碩 ASUS",
-    "model": "TUF Gaming RTX 4080 SUPER OC",
-    "twName": "華碩 TUF Gaming RTX 4080 SUPER OC 顯示卡",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "notes": "使用 12VHPWR 供電線，注意側板彎折空間",
-    "gpuChip": "nvidia-geforce-rtx-4080-super",
-    "lengthMm": 348,
-    "heightMm": 150,
-    "thicknessMm": 63,
-    "slotWidth": 3,
-    "powerConnectors": [
-      {
-        "type": "12VHPWR",
-        "count": 1
-      }
-    ],
-    "legacyRecommendedSideClearanceMm": 15
-  },
-  {
-    "id": "gigabyte-radeon-rx-7800-xt-gaming-oc",
-    "category": "gpu",
-    "brand": "技嘉 GIGABYTE",
-    "model": "Radeon RX 7800 XT GAMING OC",
-    "twName": "技嘉 Radeon RX 7800 XT GAMING OC 顯示卡",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "gpuChip": "amd-radeon-rx-7800-xt",
-    "lengthMm": 328,
-    "heightMm": 138,
-    "thicknessMm": 55,
-    "slotWidth": 3,
-    "powerConnectors": [
-      {
-        "type": "8-pin",
-        "count": 2
-      }
-    ],
-    "legacyRecommendedSideClearanceMm": 10
-  },
-  {
     "id": "asus-rog-astral-rtx-5090-oc",
     "category": "gpu",
     "brand": "ASUS",
@@ -86,5 +22,222 @@
     ],
     "recommendedPsuW": 1000,
     "pcieGen": 5
+  },
+  {
+    "id": "msi-rtx-5080-16g-gaming-trio-oc",
+    "category": "gpu",
+    "brand": "MSI",
+    "model": "GeForce RTX 5080 16G GAMING TRIO OC (G5080-16GTC)",
+    "twName": "MSI GeForce RTX 5080 16G GAMING TRIO OC",
+    "sourceUrl": "https://storage-asset.msi.com/datasheet/vga/global/GeForce-RTX-5080-16G-GAMING-TRIO-OC.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "tw.msi.com / www.msi.com 規格頁 WebFetch 回 403，改用 MSI 官方 datasheet PDF（Generated 2026-09-24）。原文：Interface『PCI Express® Gen 5』（未寫通道數）；Power consumption『360 W』→ tbpW；Power connectors『16-pin x 1 (ATX 3.1 PSU recommended)』；Recommended PSU『850 W』；Card Dimension (mm)『338 x 140 x 50 mm』，未標軸向；Weight 1362 g。datasheet 沒有槽數，無法依決策 4 用「槽數 × 20.32」判讀厚度，因此只依「最大值 = 長度」填 lengthMm = 338；140 / 50 未填（直覺上 140 = 高度、50 = 厚度，待人工確認是否可填）。slotWidth 官方未寫。",
+    "gpuChip": "nvidia-geforce-rtx-5080",
+    "dimensionsAxisInferred": true,
+    "lengthMm": 338,
+    "powerConnectors": [
+      {
+        "type": "16-pin",
+        "count": 1
+      }
+    ],
+    "tbpW": 360,
+    "recommendedPsuW": 850,
+    "pcieGen": 5
+  },
+  {
+    "id": "asus-tuf-gaming-rtx-5070-ti-oc",
+    "category": "gpu",
+    "brand": "ASUS",
+    "model": "TUF Gaming GeForce RTX 5070 Ti 16GB GDDR7 OC Edition",
+    "twName": "ASUS TUF Gaming GeForce RTX™ 5070 Ti 16GB GDDR7 OC 超頻版",
+    "sourceUrl": "https://www.asus.com/tw/motherboards-components/graphics-cards/tuf-gaming/tuf-rtx5070ti-o16g-gaming/techspec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『329 x 140 x 62.5 mm』（12.95 x 5.51 x 2.46 inch），未標軸向，依決策 4 判讀：最大值 329 = 長度；槽數 3.125 × 20.32 = 63.5，最接近的 62.5 = 厚度；剩下 140 = 高度。是否含擋板未寫。Slot『3.125 Slot』；匯流排『PCI Express 5.0』，未寫通道數；電源接頭『1 x 16-pin』；建議電源『850W』。TBP 板卡廠未寫。附『1 x Adpater Cable (1 to 3)』。",
+    "gpuChip": "nvidia-geforce-rtx-5070-ti",
+    "dimensionsAxisInferred": true,
+    "lengthMm": 329,
+    "heightMm": 140,
+    "thicknessMm": 62.5,
+    "slotWidth": 3.125,
+    "powerConnectors": [
+      {
+        "type": "16-pin",
+        "count": 1
+      }
+    ],
+    "recommendedPsuW": 850,
+    "pcieGen": 5
+  },
+  {
+    "id": "asus-prime-rtx-5070-oc",
+    "category": "gpu",
+    "brand": "ASUS",
+    "model": "PRIME GeForce RTX 5070 12GB GDDR7 OC Edition",
+    "twName": "ASUS PRIME GeForce RTX™ 5070 12GB GDDR7 OC 超頻版",
+    "sourceUrl": "https://www.asus.com/tw/motherboards-components/graphics-cards/prime/prime-rtx5070-o12g/techspec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『304 x 126 x 50 mm』（12 x 5 x 2 inch），未標軸向，依決策 4 判讀：最大值 304 = 長度；槽數 2.5 × 20.32 = 50.8，最接近的 50 = 厚度；剩下 126 = 高度。是否含擋板未寫。Slot『2.5 Slot』；匯流排『PCI Express 5.0』，未寫通道數；電源接頭『1 x 16-pin』；建議電源『750W』。TBP 板卡廠未寫。附『1 x Adapter Cable (1 to 2)』。",
+    "gpuChip": "nvidia-geforce-rtx-5070",
+    "dimensionsAxisInferred": true,
+    "lengthMm": 304,
+    "heightMm": 126,
+    "thicknessMm": 50,
+    "slotWidth": 2.5,
+    "powerConnectors": [
+      {
+        "type": "16-pin",
+        "count": 1
+      }
+    ],
+    "recommendedPsuW": 750,
+    "pcieGen": 5
+  },
+  {
+    "id": "msi-rtx-5060-ti-16g-ventus-2x-oc-plus",
+    "category": "gpu",
+    "brand": "MSI",
+    "model": "GeForce RTX 5060 Ti 16G VENTUS 2X OC PLUS (G506T-16V2CP)",
+    "twName": "MSI GeForce RTX 5060 Ti 16G VENTUS 2X OC PLUS",
+    "sourceUrl": "https://storage-asset.msi.com/datasheet/vga/global/GeForce-RTX-5060-Ti-16G-VENTUS-2X-OC-PLUS.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "tw.msi.com 規格頁 WebFetch 回 403，改用 MSI 官方 datasheet PDF（Generated 2026-09-24）。原文：Interface『PCI Express® Gen 5 x16 (uses x8)』→ pcieGen 5、pcieLanes 8；Power consumption『180 W』→ tbpW；Power connectors『8-pin x1』；Recommended PSU『600 W』；Card Dimension (mm)『227 x 126 x 41 mm』，未標軸向；Weight 600 g。datasheet 沒有槽數，無法依決策 4 判讀厚度，只依「最大值 = 長度」填 lengthMm = 227；126 / 41 未填（待人工確認）。slotWidth 官方未寫。",
+    "gpuChip": "nvidia-geforce-rtx-5060-ti",
+    "dimensionsAxisInferred": true,
+    "lengthMm": 227,
+    "powerConnectors": [
+      {
+        "type": "8-pin",
+        "count": 1
+      }
+    ],
+    "tbpW": 180,
+    "recommendedPsuW": 600,
+    "pcieGen": 5,
+    "pcieLanes": 8
+  },
+  {
+    "id": "asus-dual-rtx-5060-oc",
+    "category": "gpu",
+    "brand": "ASUS",
+    "model": "Dual GeForce RTX 5060 8GB GDDR7 OC Edition",
+    "twName": "ASUS Dual GeForce RTX™ 5060 8GB GDDR7 OC 超頻版",
+    "sourceUrl": "https://www.asus.com/tw/motherboards-components/graphics-cards/dual/dual-rtx5060-o8g/techspec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『228 x 123 x 50 mm』（8.98 x 4.84 x 1.97 inches），未標軸向，依決策 4 判讀：最大值 228 = 長度；槽數 2.5 × 20.32 = 50.8，最接近的 50 = 厚度；剩下 123 = 高度。是否含擋板未寫。Slot『2.5 Slot』；匯流排『PCI Express 5.0』，未寫通道數；電源接頭『1 x 8-pin』；建議電源『550W』。TBP 板卡廠未寫。",
+    "gpuChip": "nvidia-geforce-rtx-5060",
+    "dimensionsAxisInferred": true,
+    "lengthMm": 228,
+    "heightMm": 123,
+    "thicknessMm": 50,
+    "slotWidth": 2.5,
+    "powerConnectors": [
+      {
+        "type": "8-pin",
+        "count": 1
+      }
+    ],
+    "recommendedPsuW": 550,
+    "pcieGen": 5
+  },
+  {
+    "id": "asus-dual-rtx-5050-oc",
+    "category": "gpu",
+    "brand": "ASUS",
+    "model": "Dual GeForce RTX 5050 8GB GDDR6 OC Edition",
+    "twName": "ASUS Dual GeForce RTX™ 5050 8GB GDDR6 OC 超頻版",
+    "sourceUrl": "https://www.asus.com/tw/motherboards-components/graphics-cards/dual/dual-rtx5050-o8g/techspec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『203 x 120.2 x 40 mm』（7.99 x 4.73 x 1.58 inches），未標軸向，依決策 4 判讀：最大值 203 = 長度；槽數 2.0 × 20.32 = 40.6，最接近的 40 = 厚度；剩下 120.2 = 高度。是否含擋板未寫。Slot『2.0 插槽』；匯流排『PCI Express 5.0』，未寫通道數；電源接頭『1 x 8-pin』；建議電源『550W』，條件為 fully overclocked GPU and CPU system configuration。TBP 板卡廠未寫。",
+    "gpuChip": "nvidia-geforce-rtx-5050",
+    "dimensionsAxisInferred": true,
+    "lengthMm": 203,
+    "heightMm": 120.2,
+    "thicknessMm": 40,
+    "slotWidth": 2,
+    "powerConnectors": [
+      {
+        "type": "8-pin",
+        "count": 1
+      }
+    ],
+    "recommendedPsuW": 550,
+    "pcieGen": 5
+  },
+  {
+    "id": "sapphire-nitro-plus-rx-9070-xt",
+    "category": "gpu",
+    "brand": "SAPPHIRE",
+    "model": "NITRO+ AMD Radeon RX 9070 XT OC 16GB GDDR6 (11348-01-20G)",
+    "twName": "SAPPHIRE NITRO+ AMD Radeon™ RX 9070 XT OC 16GB",
+    "sourceUrl": "https://www.sapphiretech.com/en/consumer/nitro-radeon-rx-9070-xt-16g-gddr6",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "原文：『PCI-Express 5.0 x16』；『3.2 slot, ATX』；尺寸『330.8(L)X 128.5(W)X 65.68 (H)mm』；『12V-2x6(H++) External Power Connector』（另附 3x8-pin 轉接線）；『330W Typical Board Power』→ tbpW；『Minimum 850 Watt Power Supply』→ recommendedPsuW（官方用詞為 Minimum）。軸向有標示，但 Sapphire 的 W/H 與本專案命名相反：Sapphire H = 65.68 ≈ 3.2 × 20.32 = 65.0，為垂直 PCB 的厚度 → thicknessMm；Sapphire W = 128.5 為由 PCIe 槽往側板方向 → heightMm。是否含擋板未寫。",
+    "gpuChip": "amd-radeon-rx-9070-xt",
+    "dimensionsAxisInferred": false,
+    "lengthMm": 330.8,
+    "heightMm": 128.5,
+    "thicknessMm": 65.68,
+    "slotWidth": 3.2,
+    "powerConnectors": [
+      {
+        "type": "12V-2x6",
+        "count": 1
+      }
+    ],
+    "tbpW": 330,
+    "recommendedPsuW": 850,
+    "pcieGen": 5,
+    "pcieLanes": 16
+  },
+  {
+    "id": "asus-tuf-gaming-rx-9070-xt-oc",
+    "category": "gpu",
+    "brand": "ASUS",
+    "model": "TUF Gaming Radeon RX 9070 XT 16GB GDDR6 OC Edition",
+    "twName": "ASUS TUF Gaming Radeon™ RX 9070 XT 16GB GDDR6 OC 超頻版",
+    "sourceUrl": "https://www.asus.com/tw/motherboards-components/graphics-cards/tuf-gaming/tuf-rx9070xt-o16g-gaming/techspec/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "尺寸原文『330 x 140 x 62.5 mm』（13 x 5.5 x 2.5 inch），未標軸向，依決策 4 判讀：最大值 330 = 長度；槽數 3.125 × 20.32 = 63.5，最接近的 62.5 = 厚度；剩下 140 = 高度。是否含擋板未寫。Slot『3.125 Slot』；匯流排『PCI Express 5.0』，未寫通道數；電源接頭『3 x 8-pin』；建議電源『850W』，條件為 fully overclocked GPU and CPU system configuration。TBP 板卡廠未寫。",
+    "gpuChip": "amd-radeon-rx-9070-xt",
+    "dimensionsAxisInferred": true,
+    "lengthMm": 330,
+    "heightMm": 140,
+    "thicknessMm": 62.5,
+    "slotWidth": 3.125,
+    "powerConnectors": [
+      {
+        "type": "8-pin",
+        "count": 3
+      }
+    ],
+    "recommendedPsuW": 850,
+    "pcieGen": 5
+  },
+  {
+    "id": "sapphire-pulse-rx-9060-xt-16g",
+    "category": "gpu",
+    "brand": "SAPPHIRE",
+    "model": "PULSE AMD Radeon RX 9060 XT OC 16GB GDDR6 (11350-03-20G)",
+    "twName": "SAPPHIRE PULSE AMD Radeon™ RX 9060 XT OC 16GB",
+    "sourceUrl": "https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-9060-xt-16g-gddr6",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "原文：『PCI-Express 5.0 x16』；『2.3 slot, ATX』；尺寸『240(L) X 111.25(W) X 46.08(H)mm』；『1 x 8-pin Power Connector』；『170W Typical Board Power』→ tbpW；『Minimum 450 Watt Power Supply』→ recommendedPsuW（官方用詞為 Minimum）。軸向有標示，但 Sapphire 的 W/H 與本專案命名相反：Sapphire H = 46.08 ≈ 2.3 × 20.32 = 46.7，為厚度 → thicknessMm；Sapphire W = 111.25 → heightMm。是否含擋板未寫。",
+    "gpuChip": "amd-radeon-rx-9060-xt-16gb",
+    "dimensionsAxisInferred": false,
+    "lengthMm": 240,
+    "heightMm": 111.25,
+    "thicknessMm": 46.08,
+    "slotWidth": 2.3,
+    "powerConnectors": [
+      {
+        "type": "8-pin",
+        "count": 1
+      }
+    ],
+    "tbpW": 170,
+    "recommendedPsuW": 450,
+    "pcieGen": 5,
+    "pcieLanes": 16
   }
 ]

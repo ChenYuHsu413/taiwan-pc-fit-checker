@@ -1,155 +1,5 @@
 [
   {
-    "id": "antec-p20c-argb",
-    "category": "case",
-    "brand": "安鈦克 Antec",
-    "model": "P20C ARGB",
-    "twName": "Antec P20C ARGB 中塔機殼（玻璃側板）",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "external": {},
-    "supportedFormFactors": [
-      "ATX",
-      "M-ATX",
-      "ITX"
-    ],
-    "gpuLength": {
-      "unspecifiedMm": 400
-    },
-    "radiatorMounts": {
-      "front": {
-        "sizes": [
-          240,
-          280,
-          360
-        ]
-      },
-      "top": {
-        "sizes": [
-          240,
-          280
-        ]
-      }
-    },
-    "psu": {
-      "lengthLimits": [
-        {
-          "mm": 200,
-          "condition": "mock（未註明條件）",
-          "isDefault": true
-        }
-      ]
-    },
-    "cableSpaceMm": 25,
-    "cpuCoolerHeightLimits": [
-      {
-        "mm": 172,
-        "condition": "mock（未註明條件）",
-        "isDefault": true
-      }
-    ]
-  },
-  {
-    "id": "jonsbo-d31-mesh",
-    "category": "case",
-    "brand": "喬思伯 Jonsbo",
-    "model": "D31 Mesh",
-    "twName": "Jonsbo D31 Mesh 中塔網孔機殼",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "notes": "背板走線空間偏窄，建議搭配全模組化電源",
-    "external": {},
-    "supportedFormFactors": [
-      "ATX",
-      "M-ATX",
-      "ITX"
-    ],
-    "gpuLength": {
-      "unspecifiedMm": 355
-    },
-    "radiatorMounts": {
-      "front": {
-        "sizes": [
-          240,
-          280
-        ]
-      },
-      "top": {
-        "sizes": [
-          240
-        ]
-      }
-    },
-    "psu": {
-      "lengthLimits": [
-        {
-          "mm": 160,
-          "condition": "mock（未註明條件）",
-          "isDefault": true
-        }
-      ]
-    },
-    "cableSpaceMm": 18,
-    "cpuCoolerHeightLimits": [
-      {
-        "mm": 165,
-        "condition": "mock（未註明條件）",
-        "isDefault": true
-      }
-    ]
-  },
-  {
-    "id": "lian-li-lancool-216",
-    "category": "case",
-    "brand": "聯力 Lian Li",
-    "model": "LANCOOL 216",
-    "twName": "Lian Li LANCOOL 216 中塔機殼（雙面網孔）",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "external": {},
-    "supportedFormFactors": [
-      "ATX",
-      "M-ATX",
-      "ITX"
-    ],
-    "gpuLength": {
-      "unspecifiedMm": 384
-    },
-    "radiatorMounts": {
-      "front": {
-        "sizes": [
-          240,
-          280,
-          360
-        ]
-      },
-      "top": {
-        "sizes": [
-          240,
-          280,
-          360
-        ]
-      }
-    },
-    "psu": {
-      "lengthLimits": [
-        {
-          "mm": 220,
-          "condition": "mock（未註明條件）",
-          "isDefault": true
-        }
-      ]
-    },
-    "cableSpaceMm": 28,
-    "cpuCoolerHeightLimits": [
-      {
-        "mm": 181,
-        "condition": "mock（未註明條件）",
-        "isDefault": true
-      }
-    ]
-  },
-  {
     "id": "fractal-design-north",
     "category": "case",
     "brand": "Fractal Design",
@@ -258,6 +108,757 @@
         "sizeMm": 140,
         "count": 2
       }
+    }
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "lian-li-o11-vision-compact",
+    "category": "case",
+    "brand": "Lian Li",
+    "model": "O11 VISION COMPACT",
+    "twName": "聯力 O11 VISION COMPACT",
+    "sourceUrl": "https://lian-li.com/product/o11-vision-compact/",
+    "notes": "外觀原文『(D)447.5mm x (W)287.5mm x (H)446.4mm』。主機板原文『Back-Connect ATX/ E-ATX (Under 280mm) / ATX / Micro-ATX / Mini-ITX』，280 未說明量測方向，依 schema 慣例填 maxMotherboardDepthMm（待確認）。GPU『408mm (Max.)』無條件；anti-sag bracket 支援 278–408mm。塔散『167mm (Max.)』。擴充槽原文『6+1』，+1 意義官方未說明，暫填 6（待確認）。官方未提直立顯卡、未寫內附風扇，留空。水冷：Top 240/280/360、Side 240/360、Bottom 240/360，前/後未列；厚度未寫；『GALAHAD II Trinity Performance is not compatible with side bracket due to its wider design』。PSU『ATX (Under 220mm)』。背板走線深度未寫（只寫 PSU 支架突出機殼後方 15mm）。",
+    "external": {
+      "depthMm": 447.5,
+      "widthMm": 287.5,
+      "heightMm": 446.4
+    },
+    "supportedFormFactors": [
+      "E-ATX",
+      "ATX",
+      "M-ATX",
+      "ITX"
+    ],
+    "maxMotherboardDepthMm": 280,
+    "gpuLength": {
+      "unspecifiedMm": 408,
+      "conditionText": "408mm (Max.)"
+    },
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 167,
+        "condition": "官方未註明條件",
+        "isDefault": true
+      }
+    ],
+    "expansionSlots": 6,
+    "radiatorMounts": {
+      "front": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      },
+      "top": {
+        "sizes": [
+          240,
+          280,
+          360
+        ],
+        "conditionText": "240mm x 1 or 280mm x 1 or 360mm x 1"
+      },
+      "side": {
+        "sizes": [
+          240,
+          360
+        ],
+        "conditionText": "240mm x 1 or 360mm x 1；GALAHAD II Trinity Performance 因較寬不相容側面支架"
+      },
+      "bottom": {
+        "sizes": [
+          240,
+          360
+        ],
+        "conditionText": "240mm x 1 or 360mm x 1"
+      },
+      "rear": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      }
+    },
+    "psu": {
+      "formFactors": [
+        "ATX"
+      ],
+      "lengthLimits": [
+        {
+          "mm": 220,
+          "condition": "官方未註明條件（ATX Under 220mm）",
+          "isDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "lian-li-lancool-207",
+    "category": "case",
+    "brand": "Lian Li",
+    "model": "LANCOOL 207",
+    "twName": "聯力 LANCOOL 207",
+    "sourceUrl": "https://lian-li.com/product/lancool-207/",
+    "notes": "外觀原文『(D) 455.6mm x (W) 219mm x (H) 456mm』。主機板『Standard ATX ( Width Max 244mm ) /Micro-ATX/Mini-ITX』，不支援 E-ATX。GPU『375mm (Max.)』無條件（anti-sag bracket 分 285~315 / 316~345 / 346~375mm）。塔散『180mm (Max.)』。選購 Vertical GPU Kit VG4-4-V2X / VG4-4-V2W → both。內附：前置『2 x 140mm ARGB fan』、PSU 罩上方『2 x 120mm PWM fan』（PSU 罩上方記為 bottom）。前置風扇位 140mm x 2，但水冷支援表只列 Top 360/280/240，前置等位置依決策填 sizes: []；厚度未寫。PSU『ATX (Under 160mm)』。走線深度未寫。",
+    "external": {
+      "depthMm": 455.6,
+      "widthMm": 219,
+      "heightMm": 456
+    },
+    "supportedFormFactors": [
+      "ATX",
+      "M-ATX",
+      "ITX"
+    ],
+    "gpuLength": {
+      "unspecifiedMm": 375,
+      "conditionText": "375mm (Max.)"
+    },
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 180,
+        "condition": "官方未註明條件",
+        "isDefault": true
+      }
+    ],
+    "expansionSlots": 7,
+    "gpuMountOrientation": "both",
+    "includedFans": {
+      "front": {
+        "sizeMm": 140,
+        "count": 2
+      },
+      "bottom": {
+        "sizeMm": 120,
+        "count": 2
+      }
+    },
+    "radiatorMounts": {
+      "front": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      },
+      "top": {
+        "sizes": [
+          240,
+          280,
+          360
+        ],
+        "conditionText": "Top: 360/280/240mm"
+      },
+      "rear": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      },
+      "bottom": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      },
+      "side": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      }
+    },
+    "psu": {
+      "formFactors": [
+        "ATX"
+      ],
+      "lengthLimits": [
+        {
+          "mm": 160,
+          "condition": "官方未註明條件（ATX Under 160mm）",
+          "isDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "lian-li-lancool-217",
+    "category": "case",
+    "brand": "Lian Li",
+    "model": "LANCOOL 217",
+    "twName": "聯力 LANCOOL 217",
+    "sourceUrl": "https://lian-li.com/product/lancool-217/",
+    "notes": "外觀原文『(D)482mm x (W)238mm x (H)503mm』。主機板：SSI-EEB (Width Max 330mm)、E-ATX（Width Max 280mm）、ATX、Micro-ATX、Mini-ITX；背插只支援 ATX / Micro-ATX。schema 沒有 SSI-EEB，maxMotherboardDepthMm 填 E-ATX 的 280。GPU『380mm (Max.)』無條件。塔散『180mm (Max.)』。『The PCIe slot bracket can be turned 90 degrees to support vertical GPU mounting』→ both。內附：前置 2×170mm、後 1×140mm、PSU 罩上方 2×120mm（記為 bottom）。水冷支援表只列『Top: 360 / 280 / 240mm』，其他位置填 sizes: []；厚度未寫。PSU：Standard 模式 ATX ≤220mm（接頭朝前）、Rotated 模式 ≤180mm（轉 90°），官方未寫出廠模式，預設取較嚴格的 180（待確認）。走線深度未寫。",
+    "external": {
+      "depthMm": 482,
+      "widthMm": 238,
+      "heightMm": 503
+    },
+    "supportedFormFactors": [
+      "E-ATX",
+      "ATX",
+      "M-ATX",
+      "ITX"
+    ],
+    "maxMotherboardDepthMm": 280,
+    "gpuLength": {
+      "unspecifiedMm": 380,
+      "conditionText": "380mm (Max.)"
+    },
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 180,
+        "condition": "官方未註明條件",
+        "isDefault": true
+      }
+    ],
+    "expansionSlots": 7,
+    "gpuMountOrientation": "both",
+    "includedFans": {
+      "front": {
+        "sizeMm": 170,
+        "count": 2
+      },
+      "rear": {
+        "sizeMm": 140,
+        "count": 1
+      },
+      "bottom": {
+        "sizeMm": 120,
+        "count": 2
+      }
+    },
+    "radiatorMounts": {
+      "front": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      },
+      "top": {
+        "sizes": [
+          240,
+          280,
+          360
+        ],
+        "conditionText": "Top: 360 / 280 / 240mm"
+      },
+      "rear": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      },
+      "bottom": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      },
+      "side": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      }
+    },
+    "psu": {
+      "formFactors": [
+        "ATX"
+      ],
+      "lengthLimits": [
+        {
+          "mm": 180,
+          "condition": "Rotated mode（PSU 轉 90°、接頭朝右）；官方未寫出廠模式，取較嚴格值",
+          "isDefault": true
+        },
+        {
+          "mm": 220,
+          "condition": "Standard mode（接頭朝前）",
+          "isDefault": false
+        }
+      ]
+    }
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "montech-air-903-max",
+    "category": "case",
+    "brand": "MONTECH",
+    "model": "AIR 903 MAX",
+    "twName": "MONTECH AIR 903 MAX",
+    "sourceUrl": "https://www.montechpc.com/air-903-max",
+    "notes": "外觀原文『Dimensions (L*W*H) 478*230*493mm (Case)』，L 對應 depth。主機板『E-ATX / ATX / Micro-ATX / Mini-ITX』，E-ATX 寬度上限未寫。GPU『400mm』無條件。塔散『180mm』。『Vertical GPU Mounting Compatible』（直立支架另購）→ both。內附『Front: 140mm*3 (HP140 ARGB PWM)』『Rear: 140mm*1』。水冷支援表只列 Top / Front（120/140/240/280/360mm），其他位置填 sizes: []；厚度未寫。PSU 原文『240mm ATX』。走線深度 27mm 取自行銷文案『a spacious 27mm cable route』，規格表無此列。",
+    "external": {
+      "depthMm": 478,
+      "widthMm": 230,
+      "heightMm": 493
+    },
+    "supportedFormFactors": [
+      "E-ATX",
+      "ATX",
+      "M-ATX",
+      "ITX"
+    ],
+    "gpuLength": {
+      "unspecifiedMm": 400,
+      "conditionText": "GPU length (maximum): 400mm"
+    },
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 180,
+        "condition": "官方未註明條件",
+        "isDefault": true
+      }
+    ],
+    "expansionSlots": 7,
+    "gpuMountOrientation": "both",
+    "includedFans": {
+      "front": {
+        "sizeMm": 140,
+        "count": 3
+      },
+      "rear": {
+        "sizeMm": 140,
+        "count": 1
+      }
+    },
+    "radiatorMounts": {
+      "front": {
+        "sizes": [
+          120,
+          140,
+          240,
+          280,
+          360
+        ],
+        "conditionText": "120 / 140 / 240 / 280 / 360mm"
+      },
+      "top": {
+        "sizes": [
+          120,
+          140,
+          240,
+          280,
+          360
+        ],
+        "conditionText": "120 / 140 / 240 / 280 / 360mm"
+      },
+      "rear": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      },
+      "bottom": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      },
+      "side": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      }
+    },
+    "psu": {
+      "formFactors": [
+        "ATX"
+      ],
+      "lengthLimits": [
+        {
+          "mm": 240,
+          "condition": "官方未註明條件（240mm ATX）",
+          "isDefault": true
+        }
+      ]
+    },
+    "cableSpaceMm": 27
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "corsair-3500x",
+    "category": "case",
+    "brand": "CORSAIR",
+    "model": "3500X",
+    "twName": "海盜船 3500X",
+    "sourceUrl": "https://www.corsair.com/us/en/p/pc-cases/cc-9011276-ww/3500x-mid-tower-pc-case-cc-9011276-ww",
+    "notes": "CC-9011276-WW。外觀規格表『Case Height 506 / Case Length 460 / Case Width 240』（頁面未標單位，依數量級為 mm）。主機板『Mini-ITX,Micro-ATX,ATX,E-ATX (305mm x 277mm)』→ maxMotherboardDepthMm 277。GPU『425mm』無條件。塔散『170mm』。擴充槽『7 Horizontal (or 4 Vertical)』；直立『Supported (Riser Card Sold Separately)』→ both。『No Fans Included』→ {}。水冷：Top / Side 360/280/240、Rear 1x 120mm、Front『None』、Bottom『None』；厚度未寫。PSU『ATX』『Maximum PSU Length 180mm』。走線：規格表『Cable Routing Space 45mm』，內文寫『roomy 38mm behind the motherboard』，矛盾，依規格表 45。",
+    "external": {
+      "depthMm": 460,
+      "widthMm": 240,
+      "heightMm": 506
+    },
+    "supportedFormFactors": [
+      "E-ATX",
+      "ATX",
+      "M-ATX",
+      "ITX"
+    ],
+    "maxMotherboardDepthMm": 277,
+    "gpuLength": {
+      "unspecifiedMm": 425,
+      "conditionText": "Maximum GPU Length 425mm"
+    },
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 170,
+        "condition": "官方未註明條件",
+        "isDefault": true
+      }
+    ],
+    "expansionSlots": 7,
+    "gpuMountOrientation": "both",
+    "includedFans": {},
+    "radiatorMounts": {
+      "front": {
+        "sizes": [],
+        "conditionText": "Radiator Support - Front: None"
+      },
+      "top": {
+        "sizes": [
+          240,
+          280,
+          360
+        ],
+        "conditionText": "360mm, 280mm, 240mm"
+      },
+      "side": {
+        "sizes": [
+          240,
+          280,
+          360
+        ],
+        "conditionText": "360mm, 280mm, 240mm"
+      },
+      "rear": {
+        "sizes": [
+          120
+        ],
+        "conditionText": "1x 120mm"
+      },
+      "bottom": {
+        "sizes": [],
+        "conditionText": "Radiator Support - Bottom: None"
+      }
+    },
+    "psu": {
+      "formFactors": [
+        "ATX"
+      ],
+      "lengthLimits": [
+        {
+          "mm": 180,
+          "condition": "官方未註明條件",
+          "isDefault": true
+        }
+      ]
+    },
+    "cableSpaceMm": 45
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "hyte-y70",
+    "category": "case",
+    "brand": "HYTE",
+    "model": "Y70",
+    "twName": "HYTE Y70",
+    "sourceUrl": "https://hyte.com/store/y70/cs-hyte-y70-ww",
+    "notes": "外觀原文『Exterior Dimensions 470 x 320 x 470 mm』未標軸向，留空（待確認）。主機板『ITX, mATX, ATX, EATX』，E-ATX 寬度上限未寫。顯卡只能直立安裝（附 PCIe 4.0 x16 riser，『4 slot vertical graphics』）→ vertical、maxGpuSlotWidth 4；『Max Video Card Thickness 105 mm』（顯卡厚度上限，schema 無對應欄位）。GPU 長度『422 mm』無條件。塔散『180 mm』。擴充槽原文『7 half + 4 full height』：expansionSlots 填 7（半高橫向），4 個全高為直立顯卡用（待確認）。官方頁未寫內附風扇，留空。水冷：Top『120-360, 140-280 @ 68 mm thick』、Side『120-360, 140-280 @ 125 mm thick』、Rear『1x 120/140 mm』；厚度未說明是排＋扇或只算排，只寫進 conditionText；前置 / 底部未列。Bottom 風扇『3x 120 mm / 2x 140 mm @ 32 mm thick』。PSU 只有『Max PSU Length 235 mm』，規格未寫 PSU 規格（ATX 等），formFactors 留空。走線深度未寫。",
+    "external": {},
+    "supportedFormFactors": [
+      "E-ATX",
+      "ATX",
+      "M-ATX",
+      "ITX"
+    ],
+    "gpuLength": {
+      "unspecifiedMm": 422,
+      "conditionText": "Max Video Card Length 422 mm"
+    },
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 180,
+        "condition": "官方未註明條件",
+        "isDefault": true
+      }
+    ],
+    "expansionSlots": 7,
+    "gpuMountOrientation": "vertical",
+    "maxGpuSlotWidth": 4,
+    "radiatorMounts": {
+      "front": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      },
+      "top": {
+        "sizes": [
+          120,
+          140,
+          240,
+          280,
+          360
+        ],
+        "conditionText": "120-360, 140-280 @ 68 mm thick（未說明是否含風扇）"
+      },
+      "side": {
+        "sizes": [
+          120,
+          140,
+          240,
+          280,
+          360
+        ],
+        "conditionText": "120-360, 140-280 @ 125 mm thick（未說明是否含風扇）"
+      },
+      "rear": {
+        "sizes": [
+          120,
+          140
+        ],
+        "conditionText": "1x 120/140 mm"
+      },
+      "bottom": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      }
+    },
+    "psu": {
+      "lengthLimits": [
+        {
+          "mm": 235,
+          "condition": "官方未註明條件",
+          "isDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "cooler-master-masterbox-nr200p-v2",
+    "category": "case",
+    "brand": "Cooler Master",
+    "model": "MasterBox NR200P V2",
+    "twName": "酷碼 MasterBox NR200P V2",
+    "sourceUrl": "https://www.coolermaster.com/en-global/products/masterbox-nr200p-v2.html",
+    "notes": "外觀原文『Dimensions (L x W x H) 372 x 185 x 292mm (incl. Protrusions), 360 x 185 x 274mm (excl. Protrusions)』，取含突出物。主機板『Mini-ITX, Max. size: 170 x180mm』。顯卡原文『Exceed front bracket: L: 357mm (incl. power connector), H: 160mm, W: 73mm (triple slot); Not exceed front bracket: L: 334mm, H: 160mm, W: 80mm (triple slot)』；條件不是前置風扇 / 水冷，schema 無對應欄位，暫填較嚴格的 334 為 unspecifiedMm（待確認）；W 為顯卡厚度 73 / 80mm；行銷文案另寫『up to 356mm』與 357 不一致。塔散『Clearance - CPU Cooler 67mm』。附直立安裝選項、PCIe 4.0 riser → both。內附『Bottom 1x 120mm ... SickleFlow』，Top / Front / Rear N/A。水冷：Top 120/140/240/280，Side / Rear / Bottom N/A，Front 未列；厚度未寫。PSU『SFX, SFX-L』；只有『Clearance - PSU 130mm』，未明說為長度上限，留空（待確認）。說明書：https://coolermaster.egnyte.com/dl/rmkEobMvtT（未讀）。",
+    "external": {
+      "depthMm": 372,
+      "widthMm": 185,
+      "heightMm": 292
+    },
+    "supportedFormFactors": [
+      "ITX"
+    ],
+    "gpuLength": {
+      "unspecifiedMm": 334,
+      "conditionText": "Exceed front bracket: L: 357mm (incl. power connector); Not exceed front bracket: L: 334mm (incl. power connector)"
+    },
+    "gpuHeightLimits": [
+      {
+        "mm": 160,
+        "condition": "H: 160mm (incl. power connector)，兩種 front bracket 配置相同",
+        "isDefault": true
+      }
+    ],
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 67,
+        "condition": "官方未註明條件",
+        "isDefault": true
+      }
+    ],
+    "expansionSlots": 3,
+    "gpuMountOrientation": "both",
+    "maxGpuSlotWidth": 3,
+    "includedFans": {
+      "bottom": {
+        "sizeMm": 120,
+        "count": 1
+      }
+    },
+    "radiatorMounts": {
+      "front": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      },
+      "top": {
+        "sizes": [
+          120,
+          140,
+          240,
+          280
+        ],
+        "conditionText": "120 / 140 / 240 / 280mm"
+      },
+      "side": {
+        "sizes": [],
+        "conditionText": "N/A"
+      },
+      "rear": {
+        "sizes": [],
+        "conditionText": "N/A"
+      },
+      "bottom": {
+        "sizes": [],
+        "conditionText": "N/A"
+      }
+    },
+    "psu": {
+      "formFactors": [
+        "SFX",
+        "SFX-L"
+      ],
+      "conditionText": "官方只寫『Clearance - PSU 130mm』"
+    }
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "fractal-design-terra",
+    "category": "case",
+    "brand": "Fractal Design",
+    "model": "Terra",
+    "twName": "Fractal Design Terra",
+    "sourceUrl": "https://www.fractal-design.com/products/cases/terra-series/terra/terra-jade/",
+    "additionalSources": [
+      {
+        "url": "https://assets.fractal-design.com/files/uxzbxy2o/production/391efea65d814bee3d8774ce5cab5d10d8719c7c.pdf",
+        "fields": [
+          "cpuCoolerHeightLimits",
+          "gpuHeightLimits",
+          "radiatorMounts",
+          "includedFans"
+        ]
+      }
+    ],
+    "notes": "Jade 版 FD-C-TER1N-03（Graphite / Silver 規格相同）。外觀原文『Product dimensions (L × W × H) 343 x 153 x 218 mm』。中央 spine 可滑動 30mm：Product Sheet 分兩欄『Configured for Max GPU』（GPU 寬 72mm〔GPU 高 <131mm〕/ 62mm〔131–145mm〕、GPU 高 145mm、塔散 48mm）與『Configured for Max CPU-Cooler』（GPU 寬 43 / 33mm、GPU 高 131mm、塔散 77mm）；Fractal 的 GPU width = 本專案顯卡厚度。官方未寫出廠 spine 位置，兩個條件值各自取較嚴格值（塔散 48、GPU 高 131），兩者不會同時成立（待確認）。GPU 長度『322 mm』。顯卡經附贈 PCIe 4.0 riser 安裝，官方未寫方向，gpuMountOrientation 留空。水冷：Side『1x 120mm (121 mm wide if 200 mm GPU and no SSDs)』，Front / Top / Rear / Bottom radiator 皆為 0。內附風扇：Product Sheet 包裝內容只有 Case / Accessory box / Manual，未明寫『不附風扇』，留空。PSU『SFX, SFX-L』『PSU max length 130 mm』。",
+    "external": {
+      "depthMm": 343,
+      "widthMm": 153,
+      "heightMm": 218
+    },
+    "supportedFormFactors": [
+      "ITX"
+    ],
+    "gpuLength": {
+      "unspecifiedMm": 322,
+      "conditionText": "GPU max length 322 mm"
+    },
+    "gpuHeightLimits": [
+      {
+        "mm": 131,
+        "condition": "Configured for Max CPU-Cooler（官方未寫出廠 spine 位置，取較嚴格值）",
+        "isDefault": true
+      },
+      {
+        "mm": 145,
+        "condition": "Configured for Max GPU（此時塔散上限 48mm）",
+        "isDefault": false
+      }
+    ],
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 48,
+        "condition": "Configured for Max GPU（官方未寫出廠 spine 位置，取較嚴格值）",
+        "isDefault": true
+      },
+      {
+        "mm": 77,
+        "condition": "Configured for Max CPU-Cooler（此時 GPU 厚度上限 43 / 33mm）",
+        "isDefault": false
+      }
+    ],
+    "expansionSlots": 2,
+    "radiatorMounts": {
+      "front": {
+        "sizes": [],
+        "conditionText": "Front radiator: 0（Product Sheet）"
+      },
+      "top": {
+        "sizes": [],
+        "conditionText": "Top radiator: 0（Product Sheet）"
+      },
+      "rear": {
+        "sizes": [],
+        "conditionText": "Rear radiator: 0（Product Sheet）"
+      },
+      "bottom": {
+        "sizes": [],
+        "conditionText": "Bottom radiator: 0（Product Sheet）"
+      },
+      "side": {
+        "sizes": [
+          120
+        ],
+        "conditionText": "1x 120mm (121 mm wide if 200 mm GPU and no SSDs)"
+      }
+    },
+    "psu": {
+      "formFactors": [
+        "SFX",
+        "SFX-L"
+      ],
+      "lengthLimits": [
+        {
+          "mm": 130,
+          "condition": "官方未註明條件",
+          "isDefault": true
+        }
+      ]
+    }
+  },
+  {
+    "specVerifiedAt": "2026-11-10",
+    "id": "lian-li-a3-matx",
+    "category": "case",
+    "brand": "Lian Li",
+    "model": "A3-mATX",
+    "twName": "聯力 A3-mATX",
+    "sourceUrl": "https://lian-li.com/product/a3-matx/",
+    "notes": "外觀原文『(D) 443mm x (W) 194mm x (H) 321.5mm』（不含腳 306mm）。主機板『M-ATX/ITX』。GPU『Max 415mm』無條件；『with a 25mm thick fan installed at the bottom, the GPU thickness will be limited to 61mm』、裝排＋扇組合時沒有顯卡空間。塔散『Max 165mm』。擴充槽 4。選購 Vertical GPU Kit（A3-1X/A3-1W，直立最多 3 槽）→ both。官方未寫內附風扇，留空。水冷：Top 1 x 360/240、Side 1 x 360/280/240、Bottom『1 x 240mm (360mm with fan at the bottom)』（360 的條件意義不明，待確認），前 / 後未列；厚度未寫。PSU『ATX/SFX/SFX-L (Max 220mm)』。走線深度未寫。頁面註記『Compatibility are subject to change based on configuration』。",
+    "external": {
+      "depthMm": 443,
+      "widthMm": 194,
+      "heightMm": 321.5
+    },
+    "supportedFormFactors": [
+      "M-ATX",
+      "ITX"
+    ],
+    "gpuLength": {
+      "unspecifiedMm": 415,
+      "conditionText": "Max 415mm"
+    },
+    "cpuCoolerHeightLimits": [
+      {
+        "mm": 165,
+        "condition": "官方未註明條件",
+        "isDefault": true
+      }
+    ],
+    "expansionSlots": 4,
+    "gpuMountOrientation": "both",
+    "radiatorMounts": {
+      "front": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      },
+      "top": {
+        "sizes": [
+          240,
+          360
+        ],
+        "conditionText": "1 x 360/240mm"
+      },
+      "side": {
+        "sizes": [
+          240,
+          280,
+          360
+        ],
+        "conditionText": "1 x 360/280/240mm"
+      },
+      "bottom": {
+        "sizes": [
+          240
+        ],
+        "conditionText": "官方原文『1 x 240mm (360mm with fan at the bottom)』，360 的條件意思不明，保守只列 240；裝底部排＋扇時沒有顯卡空間"
+      },
+      "rear": {
+        "sizes": [],
+        "conditionText": "官方支援表未列出"
+      }
+    },
+    "psu": {
+      "formFactors": [
+        "ATX",
+        "SFX",
+        "SFX-L"
+      ],
+      "lengthLimits": [
+        {
+          "mm": 220,
+          "condition": "官方未註明條件（Max 220mm）",
+          "isDefault": true
+        }
+      ]
     }
   }
 ]

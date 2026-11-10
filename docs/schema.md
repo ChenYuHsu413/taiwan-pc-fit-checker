@@ -220,7 +220,6 @@ M.2 數量 = `m2Slots.length`（只在 `m2Slots` 有填時才有意義）。
 | `tbpW` | W | `Total Board Power`／`Typical Board Power` | R15 |
 | `recommendedPsuW` | W | `Recommended PSU: 750W` | R15 |
 | `pcieGen` / `pcieLanes` | | `Bus: PCI Express 5.0 x16`；部分入門卡是 x8。板卡廠沒寫時，規則用晶片參考表 | R29 |
-| `legacyRecommendedSideClearanceMm` | mm | **mock 遺留，沒有官方來源**；R12 在 Phase 3 改寫後移除 | R12（舊） |
 
 ### 3.6 Air cooler（`airCooler`）
 

@@ -81,9 +81,8 @@ export default function HomePage() {
         <div className="rounded-xl border border-white/10 bg-bg-panel p-8">
           <h2 className="text-lg font-bold">關於資料來源</h2>
           <p className="mt-3 text-sm leading-relaxed text-white/60">
-            本工具第一版使用本地 mock data／參考級尺寸資料，不含即時爬蟲。所有價格皆標示為「參考價」並附上
-            <span className="text-white/80">updatedAt</span> 更新時間與資料來源（例如原價屋參考、品牌官網、手動輸入）。
-            實際價格與貨況請以通路現場公告為準。
+            零件規格逐筆取自原廠官方規格頁、說明書或 datasheet，每筆附官方來源連結與查證日期；官方沒有公開的數值一律留空，
+            相關檢查會顯示「資料不足」。本工具不含爬蟲，目前沒有價格資料（顯示「無參考價」）。實際規格與貨況請以原廠與通路公告為準。
           </p>
         </div>
       </section>

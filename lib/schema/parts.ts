@@ -426,11 +426,8 @@ export const priceSchema = z.object({
   partId: partIdSchema,
   priceTwd: z.number().int().positive(),
   updatedAt: isoDateSchema,
-  /**
-   * manual = 人工查詢的參考價；userImport = 使用者貼估價單覆蓋；
-   * mock = Phase 1 搬遷的假資料（Phase 2 全部換掉）
-   */
-  source: z.enum(["manual", "userImport", "mock"]),
+  /** manual = 人工查詢的參考價；userImport = 使用者貼估價單覆蓋 */
+  source: z.enum(["manual", "userImport"]),
   note: z.string().optional(),
 });
 export type PriceEntry = z.infer<typeof priceSchema>;

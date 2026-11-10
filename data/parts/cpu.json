@@ -1,54 +1,5 @@
 [
   {
-    "id": "amd-ryzen-5-9600x",
-    "category": "cpu",
-    "brand": "AMD",
-    "model": "Ryzen 5 9600X",
-    "twName": "AMD Ryzen 5 9600X 處理器",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "notes": "Phase 1 mock：僅填腳位等確定欄位，其餘待 Phase 2 由官方頁補齊",
-    "socket": "AM5",
-    "generation": "amd-ryzen-9000",
-    "hasIntegratedGraphics": true,
-    "memoryTypes": [
-      "DDR5"
-    ]
-  },
-  {
-    "id": "amd-ryzen-7-9800x3d",
-    "category": "cpu",
-    "brand": "AMD",
-    "model": "Ryzen 7 9800X3D",
-    "twName": "AMD Ryzen 7 9800X3D 處理器",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "notes": "Phase 1 mock：僅填腳位等確定欄位，其餘待 Phase 2 由官方頁補齊",
-    "socket": "AM5",
-    "generation": "amd-ryzen-9000-x3d",
-    "hasIntegratedGraphics": true,
-    "memoryTypes": [
-      "DDR5"
-    ]
-  },
-  {
-    "id": "mock-intel-core-i5-14400f",
-    "category": "cpu",
-    "brand": "Intel",
-    "model": "Core i5-14400F",
-    "twName": "Intel Core i5-14400F 處理器（無內顯）",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "notes": "Phase 1 mock：F 型號無內顯；其餘待 Phase 2 由官方頁補齊",
-    "socket": "LGA1700",
-    "generation": "intel-core-14",
-    "hasIntegratedGraphics": false,
-    "memoryTypes": [
-      "DDR4",
-      "DDR5"
-    ]
-  },
-  {
     "id": "intel-core-i5-14400f",
     "category": "cpu",
     "brand": "Intel",
@@ -72,5 +23,51 @@
     "maxPowerDefinition": "MTP",
     "maxMemoryCapacityGb": 192,
     "hasIntegratedGraphics": false
+  },
+  {
+    "id": "intel-core-ultra-7-270k-plus",
+    "category": "cpu",
+    "brand": "Intel",
+    "model": "Core Ultra 7 270K Plus",
+    "twName": "Intel Core Ultra 7 270K Plus",
+    "sourceUrl": "https://www.intel.com/content/www/us/en/products/sku/245692/intel-core-ultra-7-processor-270k-plus-36m-cache-up-to-5-50-ghz/specifications.html",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "ARK：Sockets Supported『FCLGA1851』；Memory Types『Up To DDR5 7200 MT/s』，未註明 DPC 條件、未列 DDR4；Max Memory Size『256 GB』（dependent on memory type）；Processor Base Power『125 W』；Maximum Turbo Power『250 W』；GPU Name『Intel® Graphics』（4 Xe-cores）→ 有內顯。PCIe Revision『5.0 and 4.0』、Configurations『Up to 1x16+2x4, 2x8+2x4, 1x8+4x4』、Max lanes『24』，未明寫顯卡/M.2 各用哪個世代，pcieGen 未填。",
+    "socket": "LGA1851",
+    "generation": "intel-core-ultra-200s-plus",
+    "hasIntegratedGraphics": true,
+    "memoryTypes": [
+      "DDR5"
+    ],
+    "officialMemorySpeedMts": {
+      "DDR5": 7200
+    },
+    "tdpW": 125,
+    "maxPowerW": 250,
+    "maxPowerDefinition": "MTP",
+    "maxMemoryCapacityGb": 256
+  },
+  {
+    "id": "intel-core-ultra-9-285k",
+    "category": "cpu",
+    "brand": "Intel",
+    "model": "Core Ultra 9 285K",
+    "twName": "Intel Core Ultra 9 285K",
+    "sourceUrl": "https://www.intel.com/content/www/us/en/products/sku/241060/intel-core-ultra-9-processor-285k-36m-cache-up-to-5-70-ghz/specifications.html",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "ARK：Sockets Supported『FCLGA1851』；Memory Types『Up to DDR5 6400 MT/s』，未註明 DPC 條件、未列 DDR4；Max Memory Size『256 GB』（dependent on memory type）；Processor Base Power『125 W』；Maximum Turbo Power『250 W』；GPU Name『Intel® Graphics』（4 Xe-cores）→ 有內顯。PCIe Revision『5.0 and 4.0』、Configurations『Up to 1x16+2x4, 2x8+2x4, 1x8+4x4』、Max lanes『24』，未明寫顯卡/M.2 各用哪個世代，pcieGen 未填。",
+    "socket": "LGA1851",
+    "generation": "intel-core-ultra-200s",
+    "hasIntegratedGraphics": true,
+    "memoryTypes": [
+      "DDR5"
+    ],
+    "officialMemorySpeedMts": {
+      "DDR5": 6400
+    },
+    "tdpW": 125,
+    "maxPowerW": 250,
+    "maxPowerDefinition": "MTP",
+    "maxMemoryCapacityGb": 256
   }
 ]

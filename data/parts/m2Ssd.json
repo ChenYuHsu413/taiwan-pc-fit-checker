@@ -1,66 +1,5 @@
 [
   {
-    "id": "samsung-990-pro-2tb",
-    "category": "m2Ssd",
-    "brand": "Samsung",
-    "model": "990 PRO 2TB",
-    "twName": "三星 990 PRO 2TB M.2 PCIe 4.0 SSD",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "notes": "Phase 1 mock：不含散熱片版本",
-    "interface": {
-      "kind": "pcie",
-      "modes": [
-        {
-          "gen": 4,
-          "lanes": 4
-        }
-      ]
-    },
-    "formFactor": "2280",
-    "hasHeatsink": false
-  },
-  {
-    "id": "wd-black-sn850x-1tb",
-    "category": "m2Ssd",
-    "brand": "WD",
-    "model": "WD_BLACK SN850X 1TB",
-    "twName": "WD_BLACK SN850X 1TB M.2 PCIe 4.0 SSD",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "notes": "Phase 1 mock：散熱片版本與否未確認",
-    "interface": {
-      "kind": "pcie",
-      "modes": [
-        {
-          "gen": 4,
-          "lanes": 4
-        }
-      ]
-    },
-    "formFactor": "2280"
-  },
-  {
-    "id": "crucial-t705-2tb",
-    "category": "m2Ssd",
-    "brand": "Crucial",
-    "model": "T705 2TB",
-    "twName": "美光 Crucial T705 2TB M.2 PCIe 5.0 SSD",
-    "sourceUrl": null,
-    "specVerifiedAt": null,
-    "notes": "Phase 1 mock：用於測試 PCIe 5.0 SSD 降速（R30）；散熱片版本與否未確認",
-    "interface": {
-      "kind": "pcie",
-      "modes": [
-        {
-          "gen": 5,
-          "lanes": 4
-        }
-      ]
-    },
-    "formFactor": "2280"
-  },
-  {
     "id": "samsung-9100-pro-heatsink-2tb",
     "category": "m2Ssd",
     "brand": "Samsung",
@@ -89,5 +28,127 @@
         ]
       }
     ]
+  },
+  {
+    "id": "kingston-fury-renegade-g5-2tb",
+    "category": "m2Ssd",
+    "brand": "Kingston",
+    "model": "FURY Renegade G5 2TB (SFYR2S/2T0)",
+    "twName": "Kingston FURY Renegade G5 PCIe 5.0 NVMe M.2 SSD 2TB",
+    "sourceUrl": "https://www.kingston.com/datasheets/SFYR2S_us.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "datasheet：『Form factor M.2 2280』『Interface PCIe 5.0 x4 NVMe』；尺寸『1024GB - 4096GB - 80mm x 22mm x 2.3mm』（8192GB 為 3.65mm，需另立 id）。2.3mm 為模組總厚。此型號（SFYR2S）datasheet 未提及散熱片，依厚度 2.3mm 填 hasHeatsink = false。",
+    "interface": {
+      "kind": "pcie",
+      "modes": [
+        {
+          "gen": 5,
+          "lanes": 4
+        }
+      ]
+    },
+    "formFactor": "2280",
+    "hasHeatsink": false,
+    "moduleTotalHeightMm": 2.3
+  },
+  {
+    "id": "samsung-990-pro-heatsink-4tb",
+    "category": "m2Ssd",
+    "brand": "Samsung",
+    "model": "990 PRO with Heatsink 4TB (MZ-V9P4T0CW)",
+    "twName": "990 PRO PCIe 4.0 NVMe M.2 固態硬碟 4TB (含散熱片)",
+    "sourceUrl": "https://www.samsung.com/tw/memory-storage/nvme-ssd/nvme-pcie-gen-4-4tb-mz-v9p4t0cw/",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "台灣官方產品頁：介面『PCIe Gen 4.0 x4, NVMe 2.0』、類型『M.2 (2280)』、尺寸（寬 X 長 X 高）『80.15 x 25 x 8.88 (含散熱片)』、重量約 28.0g。官方 datasheet（Rev 1.0 / Rev 2.0）只列 1TB / 2TB，沒有 4TB，因此以產品頁為來源。注意兩版 datasheet 尺寸不同：Rev 1.0『Max 80.0 x Max 24.3 x Max 8.2』、Rev 2.0『Max 80.15 x Max 25 x Max 8.88』；4TB 產品頁與 Rev 2.0 一致。寬 25mm 大於標準 22mm。",
+    "interface": {
+      "kind": "pcie",
+      "modes": [
+        {
+          "gen": 4,
+          "lanes": 4
+        }
+      ]
+    },
+    "formFactor": "2280",
+    "hasHeatsink": true,
+    "moduleTotalHeightMm": 8.88
+  },
+  {
+    "id": "samsung-990-evo-plus-4tb",
+    "category": "m2Ssd",
+    "brand": "Samsung",
+    "model": "990 EVO Plus 4TB (MZ-V9S4T0BW)",
+    "twName": "990 EVO Plus PCIe 4.0 NVMe M.2 固態硬碟 4TB",
+    "sourceUrl": "https://download.semiconductor.samsung.com/resources/data-sheet/samsung_nvme_ssd_990_evo_plus_datasheet_rev.1.0.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "datasheet Rev 1.0（2024-10）：『Interface PCIe® 4.0 x4 / 5.0 x2 NVMe™ 2.0』→ 兩種模式，第一筆為 4.0 x4；『Form Factor M.2 (2280)』；尺寸 1/2/4TB 共用『Max 80.15 x Max 22.15 x Max 2.38 (mm)』。註 2 原文『990 EVO Plus is backward compatible with PCIe 4.0 x4 and 3.0 x4』。無散熱片版本（型號後綴 BW），2.38mm 為模組總厚。台灣產品頁尺寸『約 80.15 x 22.15 x 2.38 mm』一致。",
+    "interface": {
+      "kind": "pcie",
+      "modes": [
+        {
+          "gen": 4,
+          "lanes": 4
+        },
+        {
+          "gen": 5,
+          "lanes": 2
+        }
+      ]
+    },
+    "formFactor": "2280",
+    "hasHeatsink": false,
+    "moduleTotalHeightMm": 2.38,
+    "additionalSources": [
+      {
+        "url": "https://www.samsung.com/tw/memory-storage/nvme-ssd/990-evo-plus-4tb-nvme-pcie-gen-4-mz-v9s4t0bw/",
+        "fields": [
+          "twName"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "kingston-nv3-1tb-2280",
+    "category": "m2Ssd",
+    "brand": "Kingston",
+    "model": "NV3 1TB M.2 2280 (SNV3S/1000G)",
+    "twName": "Kingston NV3 PCIe 4.0 NVMe M.2 2280 SSD 1TB",
+    "sourceUrl": "https://www.kingston.com/datasheets/SNV3S_us.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "datasheet『Specifications M.2 2280』：『Form factor M.2 2280』『Interface PCIe 4.0 x4 NVMe』；容量 500GB / 1TB / 2TB / 4TB；尺寸『22mm x 80mm x 2.3mm』（未分容量）；單面（single-sided）。無散熱片。",
+    "interface": {
+      "kind": "pcie",
+      "modes": [
+        {
+          "gen": 4,
+          "lanes": 4
+        }
+      ]
+    },
+    "formFactor": "2280",
+    "hasHeatsink": false,
+    "moduleTotalHeightMm": 2.3
+  },
+  {
+    "id": "kingston-nv3-1tb-2230",
+    "category": "m2Ssd",
+    "brand": "Kingston",
+    "model": "NV3 1TB M.2 2230 (SNV3SM3/1T0)",
+    "twName": "Kingston NV3 PCIe 4.0 NVMe M.2 2230 SSD 1TB",
+    "sourceUrl": "https://www.kingston.com/datasheets/SNV3S_us.pdf",
+    "specVerifiedAt": "2026-11-10",
+    "notes": "datasheet『M.2 2230』段：『Form factor M.2 2230』『Interface PCIe 4.0 x4 NVMe』；容量 500GB / 1TB / 2TB（料號 SNV3SM3/1T0 存在，id 維持 1tb）；尺寸『22mm x 30mm x 2.3mm』。無散熱片。",
+    "interface": {
+      "kind": "pcie",
+      "modes": [
+        {
+          "gen": 4,
+          "lanes": 4
+        }
+      ]
+    },
+    "formFactor": "2230",
+    "hasHeatsink": false,
+    "moduleTotalHeightMm": 2.3
   }
 ]

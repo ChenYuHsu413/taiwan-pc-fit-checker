@@ -99,9 +99,9 @@ function load(): {
   const chips = gpuChipTableSchema.safeParse(RAW_GPU_CHIPS);
   if (!chips.success) problems.push(`[reference/gpu-chips] ${chips.error.message}`);
   const gpuChips = new Map((chips.data?.chips ?? []).map((c) => [c.id, c]));
-  // 已驗證的顯卡必須對應到參考表（mock 顯卡在 Phase 2b 刪除，不檢查）
+  // 顯卡必須對應到參考表
   parts.gpu
-    .filter((g) => g.specVerifiedAt !== null && !gpuChips.has(g.gpuChip))
+    .filter((g) => !gpuChips.has(g.gpuChip))
     .forEach((g) => problems.push(`[parts/gpu] ${g.id} 的 gpuChip「${g.gpuChip}」不在 gpu-chips.json`));
 
   if (problems.length) {

@@ -6,6 +6,12 @@
       "cpuGeneration": "amd-ryzen-9000",
       "support": "biosUpdate",
       "minBiosNote": "AMD 官方：『A BIOS update may be required for Ryzen 8000 and 9000 series processors on 600 series boards.』最低版本依主機板而異，需查各主機板 CPU 支援清單",
+      "boardOverrides": {
+        "asus-tuf-gaming-b650m-plus-wifi": {
+          "minBios": "9600、9600X、9700X、9900X、9950X 等 2613；9500F、9700F、PRO 9645/9655/9745/9755/9945/9955/9965 等 3263",
+          "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/helpdesk_cpu/"
+        }
+      },
       "sourceUrl": "https://www.amd.com/en/products/processors/chipsets/am5.html",
       "verifiedAt": "2026-11-09"
     },
@@ -14,16 +20,80 @@
       "cpuGeneration": "amd-ryzen-9000-x3d",
       "support": "biosUpdate",
       "minBiosNote": "同 amd-ryzen-9000（AMD 官方未將 X3D 分開說明）。最低版本依主機板與型號而異",
+      "boardOverrides": {
+        "asus-tuf-gaming-b650m-plus-wifi": {
+          "minBios": "9800X3D、9900X3D、9950X3D 等 2613；9850X3D、9950X3D2、PRO 9755X3D/9965X3D 等 3263",
+          "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/helpdesk_cpu/"
+        }
+      },
       "sourceUrl": "https://www.amd.com/en/products/processors/chipsets/am5.html",
       "verifiedAt": "2026-11-09"
+    },
+    {
+      "chipset": "B650",
+      "cpuGeneration": "amd-ryzen-8000",
+      "support": "biosUpdate",
+      "minBiosNote": "AMD 官方：『A BIOS update may be required for Ryzen 8000 and 9000 series processors on 600 series boards.』（與 B650 × amd-ryzen-9000 同一句原文；2026-11-10 amd.com 逾時，沿用 2026-11-09 驗證的原文）。最低版本依主機板而異",
+      "boardOverrides": {
+        "asus-tuf-gaming-b650m-plus-wifi": {
+          "minBios": "1807（8300G～8700G、8400F、8700F 等 8000 系列全部）",
+          "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b650m-plus-wifi/helpdesk_cpu/"
+        }
+      },
+      "sourceUrl": "https://www.amd.com/en/products/processors/chipsets/am5.html",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "chipset": "B850",
+      "cpuGeneration": "amd-ryzen-9000",
+      "support": "native",
+      "minBiosNote": "AMD 未明文，依 800 系列為 Ryzen 9000 同期平台判斷。注意：個別較晚推出的型號在主機板清單上仍需新版 BIOS（見 boardOverrides）",
+      "boardOverrides": {
+        "asus-tuf-gaming-b850-plus-wifi": {
+          "minBios": "9600、9600X、9700X、9900X、9950X：all；9500F、9700F、PRO 9645/9745/9945：1063；PRO 9655/9755/9955/9965：1066",
+          "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850-plus-wifi/helpdesk_cpu/"
+        }
+      },
+      "sourceUrl": "https://www.amd.com/en/products/processors/chipsets/am5.html",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "chipset": "B850",
+      "cpuGeneration": "amd-ryzen-9000-x3d",
+      "support": "native",
+      "minBiosNote": "AMD 未明文，依 800 系列為 Ryzen 9000 同期平台判斷；AMD 將 X3D 型號列為 Ryzen 9000 Series，比照 amd-ryzen-9000。注意：9850X3D、9950X3D2 等後出型號在主機板清單上仍需新版 BIOS（見 boardOverrides）",
+      "boardOverrides": {
+        "asus-tuf-gaming-b850-plus-wifi": {
+          "minBios": "9800X3D、9900X3D、9950X3D：all；9850X3D、9950X3D2、PRO 9755X3D/9965X3D：1066",
+          "sourceUrl": "https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b850-plus-wifi/helpdesk_cpu/"
+        }
+      },
+      "sourceUrl": "https://www.amd.com/en/products/processors/chipsets/am5.html",
+      "verifiedAt": "2026-11-09"
+    },
+    {
+      "chipset": "X870E",
+      "cpuGeneration": "amd-ryzen-9000",
+      "support": "native",
+      "minBiosNote": "AMD 未明文是否需要更新 BIOS，依 800 系列為 Ryzen 9000 同期平台判斷（X870E 同屬 800 系列，比照 X870 / B850）。AMD 新聞稿原文：『Designed to seamlessly integrate with AMD Ryzen™ 9000 Series desktop processors, the new AMD X870E and X870 chipsets boast support for the latest technologies』",
+      "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1202/amd-unveils-next-gen-zen-5-ryzen-processors-to-power-advanced-ai-experiences",
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "chipset": "X870E",
+      "cpuGeneration": "amd-ryzen-9000-x3d",
+      "support": "native",
+      "minBiosNote": "同 X870E × amd-ryzen-9000：AMD 未明文，依 800 系列為 Ryzen 9000 同期平台判斷；AMD 將 X3D 型號列為 Ryzen 9000 Series，比照辦理。9800X3D 晚於首批 X870E 主機板上市，後出型號（9850X3D、9950X3D2）在各主機板清單上可能需新版 BIOS",
+      "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/1202/amd-unveils-next-gen-zen-5-ryzen-processors-to-power-advanced-ai-experiences",
+      "verifiedAt": "2026-11-10"
     },
     {
       "chipset": "B760",
       "cpuGeneration": "intel-core-14",
       "support": "biosUpdate",
-      "minBiosNote": "Intel 官方：『Intel 600 Series and Intel 700 Series chipset-based motherboards require a BIOS update to boot the Intel Core desktop processors (13th and 14th gen)』。最低版本依主機板而異",
+      "minBiosNote": "Intel 官方：『Intel 600 Series and Intel 700 Series chipset-based motherboards require a BIOS update to boot the Intel Core desktop processors (13th and 14th gen)』；000096847：『Intel 600 Series and Intel 700 Series require a BIOS update when upgrading from Intel Core Desktop Processors 12th or 13th to a 14th gen.』最低版本依主機板而異",
       "sourceUrl": "https://www.intel.com/content/www/us/en/support/articles/000092294/processors.html",
-      "verifiedAt": "2026-11-09"
+      "verifiedAt": "2026-11-10"
     },
     {
       "chipset": "B660",
@@ -31,7 +101,15 @@
       "support": "biosUpdate",
       "minBiosNote": "同上 Intel 官方說明（600 系列）。最低版本依主機板而異",
       "sourceUrl": "https://www.intel.com/content/www/us/en/support/articles/000092294/processors.html",
-      "verifiedAt": "2026-11-09"
+      "verifiedAt": "2026-11-10"
+    },
+    {
+      "chipset": "B550",
+      "cpuGeneration": "amd-ryzen-5000",
+      "support": "biosUpdate",
+      "minBiosNote": "AMD 官方新聞稿：『AMD 500 series motherboards are ready for AMD Ryzen 5000 Series desktop processors with a simple BIOS update.』最低版本依主機板而異",
+      "sourceUrl": "https://ir.amd.com/news-events/press-releases/detail/972/amd-launches-amd-ryzen-5000-series-desktop-processors-the-fastest-gaming-cpus-in-the-world",
+      "verifiedAt": "2026-11-10"
     }
   ]
 }
